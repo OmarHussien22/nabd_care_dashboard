@@ -1,0 +1,51 @@
+* OverView
+          This Service depends on [flutter_blue_plus] => https://pub.dev/packages/flutter_blue_plus
+* Configuration
+         A- Android :
+                  1. It's compatible only from version 19 of Android SDK so in : android/app/build.gradle:
+       ---------------------------------
+          Android {
+            defaultConfig {
+               minSdkVersion: 19
+      ---------------------------------
+                  2. Add the following permissions to : android/app/src/main/AndroidManifest.xml:
+        ---------------------------------
+                  	 <uses-permission android:name="android.permission.BLUETOOTH" />
+                  	 <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+                  	 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+        ---------------------------------
+
+            B- iOS :
+                     Add the following permissions to : ios/Runner/Info.plist:
+                    <dict>
+                    	    <key>NSBluetoothAlwaysUsageDescription</key>
+                    	    <string>Need BLE permission</string>
+                    	    <key>NSBluetoothPeripheralUsageDescription</key>
+                    	    <string>Need BLE permission</string>
+                    	    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+                    	    <string>Need Location permission</string>
+                    	    <key>NSLocationAlwaysUsageDescription</key>
+                    	    <string>Need Location permission</string>
+                    	    <key>NSLocationWhenInUseUsageDescription</key>
+                    	    <string>Need Location permission</string>
+
+
+      * HINT :
+                This package must be tested on a real device.
+
+
+      * Usage
+
+          FlutterBluetoothService bluetooth = FlutterBluetoothService.instance;
+          bluetooth.discovery.startScan();
+          var devices = [];
+          bluetooth.discovery.devicesListener.onData((data) {
+            devices.forEach((device) async {
+              bluetooth.connection.connectToDevice(device);
+              print(" Device Connected");
+              final services = await bluetooth.connection.deviceServices(device);
+              for (var service in services) {
+               final op =  bluetooth.connection.serviceOperation(service);
+              }
+            });
+          })

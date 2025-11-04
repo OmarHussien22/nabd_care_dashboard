@@ -1,0 +1,4 @@
+enum  AppSource {
+  prod,
+  dev,
+}

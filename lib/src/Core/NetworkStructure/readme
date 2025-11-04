@@ -1,0 +1,8 @@
+//* Hello everyone
+
+To use this structure you have to pass through some of the main steps as following :
+1- add these packages in the pubspec.yaml :
+   -- Dio
+   -- Equatable
+   -- GetXController (or any suitable StateManagement you prefer)
+   -- flutter_toast

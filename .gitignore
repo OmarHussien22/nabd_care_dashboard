@@ -1,0 +1,20 @@
+# Flutter
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+.dart_tool/
+
+# FVM
+.fvm/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# Others
+*.log
+*.lock

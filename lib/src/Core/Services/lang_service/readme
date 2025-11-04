@@ -1,0 +1,35 @@
+Configuration :
+⚠️ Note on iOS
+For translation to work on iOS you need to add supported locales to ios/Runner/Info.plist
+
+Example:
+
+<key>CFBundleLocalizations</key>
+<array>
+	<string>en</string>
+	<string>nb</string>
+</array>
+
+==============================================
+
+how To use EasyLocalization :
+1-
+await EasyLocalization.ensureInitialized();
+
+
+
+2- wrap My App With :
+    EasyLocalization(
+    path: 'assets/l10n',
+     // startLocale: L10n.all[0], @override device lang
+      supportedLocales: L10n.all,
+      fallbackLocale:L10n.all[0] ,
+
+
+      child: const MyApp()));
+
+3- add This in Material App :
+    localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+
