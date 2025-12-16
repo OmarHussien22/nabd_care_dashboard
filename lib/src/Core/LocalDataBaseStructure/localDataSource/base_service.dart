@@ -1,5 +1,5 @@
-import 'package:getx_base_code/Src/core/NetworkStructure/Params/params.dart';
-import 'package:getx_base_code/src/Core/params/pagination_params.dart';
+import 'package:care_desk/Src/core/NetworkStructure/Params/params.dart';
+import 'package:care_desk/src/Core/params/pagination_params.dart';
 
 abstract class BaseService<T> {
   //to get item by id

@@ -1,5 +1,5 @@
-import 'package:getx_base_code/src/Core/NetworkStructure/Resources/Errors/error_model.dart';
-import 'package:getx_base_code/src/Shared/Entities/pagination.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Resources/Errors/error_model.dart';
+import 'package:care_desk/src/Shared/Entities/pagination.dart';
 
 abstract class DataState<T> {
   final T? data;

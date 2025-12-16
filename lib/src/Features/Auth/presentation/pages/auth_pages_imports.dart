@@ -1,7 +1,7 @@
-import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
-import 'package:getx_base_code/src/Features/Auth/presentation/manger/fetch_basic_education_types_controller.dart';
-import 'package:getx_base_code/src/Features/Auth/presentation/manger/fetch_university_education_types_controller.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/DataBuilder/imports_data_builder.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Features/Auth/presentation/manger/fetch_basic_education_types_controller.dart';
+import 'package:care_desk/src/Features/Auth/presentation/manger/fetch_university_education_types_controller.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/DataBuilder/imports_data_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

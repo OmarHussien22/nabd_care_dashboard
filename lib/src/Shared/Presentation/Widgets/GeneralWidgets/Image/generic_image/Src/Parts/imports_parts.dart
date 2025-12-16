@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getx_base_code/src/Core/Constants/Strings/Assets/app_images.dart';
+import 'package:care_desk/src/Core/Constants/Strings/Assets/app_images.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../../Core/Utils/Extensions/screen_spaces_extension.dart';

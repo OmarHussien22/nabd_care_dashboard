@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:getx_base_code/src/Core/App/app_layout.dart';
-import 'package:getx_base_code/src/Core/LocalDataBaseStructure/helper/data_base_helper.dart';
-import 'package:getx_base_code/src/Core/NetworkStructure/Networking/network_service.dart';
-import 'package:getx_base_code/src/Core/Services/Storage/storage_service.dart';
+import 'package:care_desk/src/Core/App/app_layout.dart';
+import 'package:care_desk/src/Core/LocalDataBaseStructure/helper/data_base_helper.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Networking/network_service.dart';
+import 'package:care_desk/src/Core/Services/Storage/storage_service.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import '../../Shared/Presentation/Widgets/Error/app_error_builder.dart';

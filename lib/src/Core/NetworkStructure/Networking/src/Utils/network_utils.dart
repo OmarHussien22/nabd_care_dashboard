@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Dialogs/app_dialogs.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Dialogs/app_dialogs.dart';
 
 class NetworkUtils {
   NetworkUtils._();

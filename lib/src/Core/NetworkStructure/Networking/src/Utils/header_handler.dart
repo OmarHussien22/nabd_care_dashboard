@@ -1,5 +1,5 @@
-import 'package:getx_base_code/src/Core/Services/Storage/storage_service.dart';
-import 'package:getx_base_code/src/Core/Utils/utils.dart';
+import 'package:care_desk/src/Core/Services/Storage/storage_service.dart';
+import 'package:care_desk/src/Core/Utils/utils.dart';
 
 import '../../../../../Shared/Managers/user_controller.dart';
 import '../../../../Constants/Strings/app_strings.dart';

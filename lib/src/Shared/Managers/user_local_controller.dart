@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:getx_base_code/src/Core/Services/Storage/src/storage_constants.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/data/models/local_user_model.dart';
-import 'package:getx_base_code/src/Shared/Caches/user_cache_local.dart';
+import 'package:care_desk/src/Core/Services/Storage/src/storage_constants.dart';
+import 'package:care_desk/src/Features/LocalAuth/data/models/local_user_model.dart';
+import 'package:care_desk/src/Shared/Caches/user_cache_local.dart';
 
 import '../../Core/Services/Storage/storage_service.dart';
 import '../../Super/Controllers/Resources/get/get_controller_interface.dart';

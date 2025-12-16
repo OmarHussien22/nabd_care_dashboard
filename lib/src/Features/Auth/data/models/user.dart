@@ -1,6 +1,6 @@
-// import 'package:getx_base_code/src/Core/Utils/Extensions/json_parsing_extension.dart';
-// import 'package:getx_base_code/src/Core/Utils/Extensions/parser_extension.dart';
-// import 'package:getx_base_code/src/Features/Auth/data/models/user_info.dart';
+// import 'package:care_desk/src/Core/Utils/Extensions/json_parsing_extension.dart';
+// import 'package:care_desk/src/Core/Utils/Extensions/parser_extension.dart';
+// import 'package:care_desk/src/Features/Auth/data/models/user_info.dart';
 // import 'package:equatable/equatable.dart';
 
 // class User with EquatableMixin {

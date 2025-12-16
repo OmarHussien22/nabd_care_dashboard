@@ -1,10 +1,10 @@
 // import 'package:flutter/material.dart';
-// import 'package:getx_base_code/src/Core/Styles/Colors/app_colors.dart';
-// import 'package:getx_base_code/src/Core/Utils/general_utils.dart';
-// import 'package:getx_base_code/src/Core/Utils/utils.dart';
-// import 'package:getx_base_code/src/Shared/Presentation/Widgets/Animation/animated_wrapper.dart';
-//  import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Spaces&Dividers/spaces.dart';
-// import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
+// import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+// import 'package:care_desk/src/Core/Utils/general_utils.dart';
+// import 'package:care_desk/src/Core/Utils/utils.dart';
+// import 'package:care_desk/src/Shared/Presentation/Widgets/Animation/animated_wrapper.dart';
+//  import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Spaces&Dividers/spaces.dart';
+// import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 // import 'package:get/get.dart';
 // Offset position = const Offset(20.0, 20.0);
 // class DraggableFloatingActionButton extends StatelessWidget {

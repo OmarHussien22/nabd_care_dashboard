@@ -1,7 +1,7 @@
 // import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:getx_base_code/src/Features/Splash/presentation/pages/splash_imports.dart';
+import 'package:care_desk/src/Features/Splash/presentation/pages/splash_imports.dart';
 
 class ChangeLangService {
   ChangeLangService._();

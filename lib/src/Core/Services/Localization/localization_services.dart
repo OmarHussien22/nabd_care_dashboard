@@ -1,5 +1,5 @@
-import 'package:getx_base_code/src/Core/Services/Localization/en_US.dart';
-import 'package:getx_base_code/src/Core/Utils/utils.dart';
+import 'package:care_desk/src/Core/Services/Localization/en_US.dart';
+import 'package:care_desk/src/Core/Utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

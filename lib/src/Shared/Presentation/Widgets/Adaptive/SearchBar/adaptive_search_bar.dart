@@ -1,7 +1,7 @@
-import 'package:getx_base_code/src/Core/Constants/strings/app_strings.dart';
-import 'package:getx_base_code/src/Core/Styles/Colors/app_colors.dart';
-import 'package:getx_base_code/src/Core/utils/Extensions/screen_spaces_extension.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
+import 'package:care_desk/src/Core/Constants/strings/app_strings.dart';
+import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+import 'package:care_desk/src/Core/utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

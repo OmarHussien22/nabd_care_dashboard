@@ -1,13 +1,13 @@
-import 'package:getx_base_code/Src/core/LocalDataBaseStructure/constants/tables_names.dart';
-import 'package:getx_base_code/Src/core/LocalDataBaseStructure/enum/crud_opertion_enum.dart';
-import 'package:getx_base_code/Src/core/LocalDataBaseStructure/localDataSource/interfaces/data_base_service_caller.dart';
-import 'package:getx_base_code/Src/core/LocalDataBaseStructure/localDataSource/methods/close_data_base_method.dart';
-import 'package:getx_base_code/Src/core/LocalDataBaseStructure/localDataSource/methods/get_data_base_method.dart';
-import 'package:getx_base_code/Src/core/LocalDataBaseStructure/localDataSource/methods/insert_data_base_method.dart';
-import 'package:getx_base_code/Src/core/NetworkStructure/Networking/src/Utils/network_utils.dart';
-import 'package:getx_base_code/src/Core/LocalDataBaseStructure/localDataSource/methods/update_data_base_method.dart';
-import 'package:getx_base_code/src/Core/LocalDataBaseStructure/localDataSource/respons/respons_local_data_base.dart';
-import 'package:getx_base_code/src/Core/params/local_params.dart';
+import 'package:care_desk/Src/core/LocalDataBaseStructure/constants/tables_names.dart';
+import 'package:care_desk/Src/core/LocalDataBaseStructure/enum/crud_opertion_enum.dart';
+import 'package:care_desk/Src/core/LocalDataBaseStructure/localDataSource/interfaces/data_base_service_caller.dart';
+import 'package:care_desk/Src/core/LocalDataBaseStructure/localDataSource/methods/close_data_base_method.dart';
+import 'package:care_desk/Src/core/LocalDataBaseStructure/localDataSource/methods/get_data_base_method.dart';
+import 'package:care_desk/Src/core/LocalDataBaseStructure/localDataSource/methods/insert_data_base_method.dart';
+import 'package:care_desk/Src/core/NetworkStructure/Networking/src/Utils/network_utils.dart';
+import 'package:care_desk/src/Core/LocalDataBaseStructure/localDataSource/methods/update_data_base_method.dart';
+import 'package:care_desk/src/Core/LocalDataBaseStructure/localDataSource/respons/respons_local_data_base.dart';
+import 'package:care_desk/src/Core/params/local_params.dart';
 
 abstract class DataBaseServiceInterface<T>
     with TablesNames

@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Core/NetworkStructure/api_names.dart';
+import 'package:care_desk/src/Core/NetworkStructure/api_names.dart';
 
 abstract class Networking<R, E> with ApiNames {
   final String _baseUrl = ApiNames.baseUrl;

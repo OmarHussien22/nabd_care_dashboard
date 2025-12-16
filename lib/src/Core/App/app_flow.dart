@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:getx_base_code/src/Core/Services/Storage/storage_service.dart';
-import 'package:getx_base_code/src/Core/Utils/general_utils.dart';
-import 'package:getx_base_code/src/Features/Auth/presentation/pages/imports_auth.dart';
-import 'package:getx_base_code/src/Features/Base/presentation/pages/base_page.dart';
+import 'package:care_desk/src/Core/Services/Storage/storage_service.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Features/Auth/presentation/pages/imports_auth.dart';
+import 'package:care_desk/src/Features/Base/presentation/pages/base_page.dart';
 
 import '../Constants/Enums/app_source.dart';
 

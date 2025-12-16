@@ -1,8 +1,8 @@
-import 'package:getx_base_code/src/Core/Utils/SnackUtils/src/Constants/snack_constants.dart';
-import 'package:getx_base_code/src/Core/Utils/SnackUtils/src/Factory/snack_factory.dart';
-import 'package:getx_base_code/src/Core/Utils/SnackUtils/src/Interface/snack_interface.dart';
-import 'package:getx_base_code/src/Core/Utils/SnackUtils/src/Object/snack_object.dart';
-import 'package:getx_base_code/src/Core/Utils/SnackUtils/src/Resources/Snack/snackbar_imp.dart';
+import 'package:care_desk/src/Core/Utils/SnackUtils/src/Constants/snack_constants.dart';
+import 'package:care_desk/src/Core/Utils/SnackUtils/src/Factory/snack_factory.dart';
+import 'package:care_desk/src/Core/Utils/SnackUtils/src/Interface/snack_interface.dart';
+import 'package:care_desk/src/Core/Utils/SnackUtils/src/Object/snack_object.dart';
+import 'package:care_desk/src/Core/Utils/SnackUtils/src/Resources/Snack/snackbar_imp.dart';
 import 'package:flutter/material.dart';
 
 // AppSnacks.showSnack(); // snap snack - - native snack

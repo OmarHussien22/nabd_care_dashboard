@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:getx_base_code/src/Core/Styles/Colors/app_colors.dart';
-import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
+import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 
 class CustomTable extends StatefulWidget {
   final List<String> columnNames;
   final List<List<dynamic>> data;
   final List<Widget Function(dynamic data)>? customRowActions;
+  final int maxLines;
+  final double? minWidth;
 
   const CustomTable({
     super.key,
     required this.columnNames,
     required this.data,
     this.customRowActions,
+    this.maxLines = 2,
+    this.minWidth,
   });
 
   @override
@@ -100,7 +104,9 @@ class _CustomTableState extends State<CustomTable> {
                           columnName,
                           fontWeight: FW.semiBold,
                           fontSize: 4.2,
-                          maxLines: 2,
+                          fontWeight: FW.semiBold,
+                          fontSize: 4.2,
+                          maxLines: widget.maxLines,
                           isOverFlow: true,
                           // overflow: TextOverflow.ellipsis,
                         ),
@@ -140,12 +146,12 @@ class _CustomTableState extends State<CustomTable> {
                                 horizontal: 6.toW(), vertical: 4.toH()),
                             child: ConstrainedBox(
                               constraints:
-                                  BoxConstraints(maxWidth: 140.toW()),
+                                  BoxConstraints(maxWidth: widget.minWidth ?? 140.toW()),
                               child: CustomText(
                                 cellData.toString(),
                                 fontSize: 4,
                                 textAlign: TextAlign.start,
-                                maxLines: 2,
+                                maxLines: widget.maxLines,
                                 isOverFlow: true,
                               ),
                             ),

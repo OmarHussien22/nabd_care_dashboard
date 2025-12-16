@@ -1,5 +1,5 @@
-import 'package:getx_base_code/Src/core/LocalDataBaseStructure/constants/tables_names.dart';
-import 'package:getx_base_code/src/Core/LocalDataBaseStructure/localDataSource/interfaces/create_table_data_base.dart';
+import 'package:care_desk/Src/core/LocalDataBaseStructure/constants/tables_names.dart';
+import 'package:care_desk/src/Core/LocalDataBaseStructure/localDataSource/interfaces/create_table_data_base.dart';
 
 class CreateSalesTable extends CreateTableDataBase {
   @override

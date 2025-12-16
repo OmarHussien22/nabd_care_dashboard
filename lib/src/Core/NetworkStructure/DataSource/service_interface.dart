@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:getx_base_code/src/Core/NetworkStructure/Constants/exception_constants.dart';
-import 'package:getx_base_code/src/Core/NetworkStructure/DataSource/service_caller.dart';
-import 'package:getx_base_code/src/Core/NetworkStructure/Networking/network_service.dart';
-import 'package:getx_base_code/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Constants/exception_constants.dart';
+import 'package:care_desk/src/Core/NetworkStructure/DataSource/service_caller.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Networking/network_service.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
 
 import '../Exceptions/failure.dart';
 import '../Params/params.dart';

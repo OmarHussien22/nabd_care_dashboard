@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Core/Services/lang_service/translate_extension.dart';
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 
 import '../../Abstract/validator_imp.dart';
 

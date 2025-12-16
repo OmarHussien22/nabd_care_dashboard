@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Core/Libraries/snap/src/snap_router/Src/Constants/imports_constants.dart';
+import 'package:care_desk/src/Core/Libraries/snap/src/snap_router/Src/Constants/imports_constants.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../Factory/transition_creator.dart';

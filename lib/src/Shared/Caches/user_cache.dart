@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Shared/Models/user_model.dart';
+import 'package:care_desk/src/Shared/Models/user_model.dart';
 
 import '../../Core/Services/Storage/storage_service.dart';
 import '../../Core/Services/storage/src/storage_constants.dart';

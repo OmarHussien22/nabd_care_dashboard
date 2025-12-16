@@ -1,5 +1,5 @@
-import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/src/Default/Components/render_interface.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/src/Default/Components/render_interface.dart';
 import 'package:flutter/material.dart';
 
 abstract class SuffixImp extends RenderInterface {

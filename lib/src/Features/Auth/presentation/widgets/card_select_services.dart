@@ -1,4 +1,4 @@
-// import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
+// import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 //
 // import '../../../../Core/Utils/Extensions/basic_op_extensions.dart';
 // import '../../../../Core/Utils/Extensions/screen_spaces_extension.dart';

@@ -1,7 +1,7 @@
-import 'package:getx_base_code/src/Core/LocalDataBaseStructure/localDataSource/interfaces/data_base_service_interface.dart';
-import 'package:getx_base_code/src/Core/LocalDataBaseStructure/localRepository/local_repository_interface.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/data/data_sources/get_roles_local_service.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/domain/entities/roles_entity.dart';
+import 'package:care_desk/src/Core/LocalDataBaseStructure/localDataSource/interfaces/data_base_service_interface.dart';
+import 'package:care_desk/src/Core/LocalDataBaseStructure/localRepository/local_repository_interface.dart';
+import 'package:care_desk/src/Features/LocalAuth/data/data_sources/get_roles_local_service.dart';
+import 'package:care_desk/src/Features/LocalAuth/domain/entities/roles_entity.dart';
 
 class GetRolesLocalRepo extends LocalRepoInterface<List<RolesModel>> {
   GetRolesLocalRepo._();

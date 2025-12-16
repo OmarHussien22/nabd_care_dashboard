@@ -1,5 +1,5 @@
-import 'package:getx_base_code/src/Shared/Entities/pagination.dart';
-import 'package:getx_base_code/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Shared/Entities/pagination.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
 
 class PaginationModel extends Pagination {
   PaginationModel({

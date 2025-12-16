@@ -1,7 +1,7 @@
-import 'package:getx_base_code/src/Core/LocalDataBaseStructure/localDataSource/interfaces/data_base_service_interface.dart';
-import 'package:getx_base_code/src/Core/LocalDataBaseStructure/localRepository/local_repository_interface.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/data/data_sources/login_user_local_service.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/data/models/local_user_model.dart';
+import 'package:care_desk/src/Core/LocalDataBaseStructure/localDataSource/interfaces/data_base_service_interface.dart';
+import 'package:care_desk/src/Core/LocalDataBaseStructure/localRepository/local_repository_interface.dart';
+import 'package:care_desk/src/Features/LocalAuth/data/data_sources/login_user_local_service.dart';
+import 'package:care_desk/src/Features/LocalAuth/data/models/local_user_model.dart';
 
 class LoginUserLocalRepo extends LocalRepoInterface<LocalUserModel> {
   LoginUserLocalRepo._();

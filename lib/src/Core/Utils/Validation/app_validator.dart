@@ -1,7 +1,7 @@
-import 'package:getx_base_code/src/Core/Utils/Validation/Implementation/DefaultValidator/default_validator.dart';
-import 'package:getx_base_code/src/Core/Utils/Validation/Implementation/NoneValidator/none_validator.dart';
-import 'package:getx_base_code/src/Core/Utils/Validation/Implementation/PasswordValidator/password_validator.dart';
-import 'package:getx_base_code/src/Core/Utils/Validation/Implementation/PhoneValidator/phone_validator.dart';
+import 'package:care_desk/src/Core/Utils/Validation/Implementation/DefaultValidator/default_validator.dart';
+import 'package:care_desk/src/Core/Utils/Validation/Implementation/NoneValidator/none_validator.dart';
+import 'package:care_desk/src/Core/Utils/Validation/Implementation/PasswordValidator/password_validator.dart';
+import 'package:care_desk/src/Core/Utils/Validation/Implementation/PhoneValidator/phone_validator.dart';
 import 'package:flutter/material.dart';
 
 import 'Implementation/AgeValidator/age_validator.dart';

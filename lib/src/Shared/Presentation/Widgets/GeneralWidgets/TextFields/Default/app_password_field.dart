@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:getx_base_code/src/Core/Services/lang_service/translate_extension.dart';
-import 'package:getx_base_code/src/Core/Utils/Validation/Implementation/PasswordValidator/password_validator.dart';
-import 'package:getx_base_code/src/Core/Utils/general_utils.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/default_text_field.dart';
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
+import 'package:care_desk/src/Core/Utils/Validation/Implementation/PasswordValidator/password_validator.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/default_text_field.dart';
 
 import '../../../../../../Core/Constants/Strings/Assets/app_icons.dart';
 import '../../../../../../Core/Styles/Colors/app_colors.dart';

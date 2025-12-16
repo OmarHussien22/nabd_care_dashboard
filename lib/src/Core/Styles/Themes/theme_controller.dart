@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:getx_base_code/src/Super/Controllers/Resources/get/get_controller_interface.dart';
+import 'package:care_desk/src/Super/Controllers/Resources/get/get_controller_interface.dart';
 import 'package:get/get.dart';
 class ThemeController extends GetControllerInterface {
 

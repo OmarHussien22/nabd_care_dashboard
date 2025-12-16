@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Features/Home/presentation/pages/home_page.dart';
+import 'package:care_desk/src/Features/Home/presentation/pages/home_page.dart';
 import 'package:get/get.dart';
 
 import '../Interfaces/notification_type.dart';

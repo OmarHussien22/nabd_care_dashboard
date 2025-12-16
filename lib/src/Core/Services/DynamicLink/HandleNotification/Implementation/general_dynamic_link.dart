@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Core/Services/DynamicLink/HandleNotification/Interfaces/dynamic_link_type.dart';
+import 'package:care_desk/src/Core/Services/DynamicLink/HandleNotification/Interfaces/dynamic_link_type.dart';
 
 class GeneralDynamicLink extends DynamicLinkType {
   GeneralDynamicLink._();

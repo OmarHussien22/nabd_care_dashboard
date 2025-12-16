@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Core/utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Core/utils/Extensions/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
 
 /// Creates a Divider with different styles : faded ,semi ,normal

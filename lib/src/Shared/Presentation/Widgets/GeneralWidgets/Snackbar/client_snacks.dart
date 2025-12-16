@@ -1,6 +1,6 @@
-import 'package:getx_base_code/src/Core/Services/lang_service/translate_extension.dart';
-import 'package:getx_base_code/src/Core/Utils/SnackUtils/src/Constants/snack_constants.dart';
-import 'package:getx_base_code/src/Core/Utils/SnackUtils/src/app_snacks.dart';
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
+import 'package:care_desk/src/Core/Utils/SnackUtils/src/Constants/snack_constants.dart';
+import 'package:care_desk/src/Core/Utils/SnackUtils/src/app_snacks.dart';
 
 class ClientSnacks {
   ClientSnacks._();

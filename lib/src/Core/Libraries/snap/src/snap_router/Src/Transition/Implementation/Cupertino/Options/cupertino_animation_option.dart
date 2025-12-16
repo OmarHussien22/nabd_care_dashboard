@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Core/Libraries/snap/src/snap_router/Src/Helper/Interfaces/helper_imports.dart';
+import 'package:care_desk/src/Core/Libraries/snap/src/snap_router/Src/Helper/Interfaces/helper_imports.dart';
 
 class CupertinoAnimationOptions extends AnimationOption {
   final bool isFullscreenDialog;

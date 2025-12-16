@@ -1,6 +1,6 @@
-// import 'package:getx_base_code/src/Core/Services/QR/interface/qr_interface.dart';
-// import 'package:getx_base_code/src/Core/Services/QR/qr_enum.dart';
-// import 'package:getx_base_code/src/Core/Services/lang_service/translate_extension.dart';
+// import 'package:care_desk/src/Core/Services/QR/interface/qr_interface.dart';
+// import 'package:care_desk/src/Core/Services/QR/qr_enum.dart';
+// import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 // import 'package:flutter/foundation.dart';
 // import 'package:flutter/services.dart';
 // import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';

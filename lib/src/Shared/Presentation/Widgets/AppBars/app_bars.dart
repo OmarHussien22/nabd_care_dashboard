@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:getx_base_code/src/Core/Constants/Decorations/app_Insets.dart';
-import 'package:getx_base_code/src/Core/Constants/Strings/Assets/app_basic_icons.dart';
-import 'package:getx_base_code/src/Core/Services/lang_service/translate_extension.dart';
-import 'package:getx_base_code/src/Core/Styles/Colors/app_colors.dart';
-import 'package:getx_base_code/src/Core/Styles/Themes/theme_switch_button.dart';
-import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
-import 'package:getx_base_code/src/Features/Auth/presentation/pages/imports_auth.dart';
-import 'package:getx_base_code/src/Shared/Caches/user_cache_local.dart';
-import 'package:getx_base_code/src/Shared/Managers/user_local_controller.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Image/generic_image/generic_image.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/default_text_field.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/app_text_field.dart';
+import 'package:care_desk/src/Core/Constants/Decorations/app_Insets.dart';
+import 'package:care_desk/src/Core/Constants/Strings/Assets/app_basic_icons.dart';
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
+import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+import 'package:care_desk/src/Core/Styles/Themes/theme_switch_button.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Features/Auth/presentation/pages/imports_auth.dart';
+import 'package:care_desk/src/Shared/Caches/user_cache_local.dart';
+import 'package:care_desk/src/Shared/Managers/user_local_controller.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Image/generic_image/generic_image.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/default_text_field.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/app_text_field.dart';
 
 import '../GeneralWidgets/Buttons/Customizable/imports_customizable.dart';
 

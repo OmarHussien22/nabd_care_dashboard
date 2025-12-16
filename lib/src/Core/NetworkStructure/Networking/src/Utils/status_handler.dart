@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:getx_base_code/src/Core/NetworkStructure/Exceptions/failure.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Exceptions/failure.dart';
 
 class StatusHandler {
   StatusHandler._();

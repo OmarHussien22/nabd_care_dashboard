@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_base_code/src/Core/Utils/Validation/app_validator.dart';
-import 'package:getx_base_code/src/Features/Auth/presentation/pages/imports_auth.dart';
-import 'package:getx_base_code/src/Shared/Models/user_model.dart';
+import 'package:care_desk/src/Core/Utils/Validation/app_validator.dart';
+import 'package:care_desk/src/Features/Auth/presentation/pages/imports_auth.dart';
+import 'package:care_desk/src/Shared/Models/user_model.dart';
 
 import '../../../../Core/NetworkStructure/Resources/DataState/data_state.dart';
 import '../../../../Core/Utils/general_utils.dart';

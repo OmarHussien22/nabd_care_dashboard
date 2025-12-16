@@ -4,9 +4,9 @@ import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:getx_base_code/src/Core/Services/Storage/storage_service.dart';
-import 'package:getx_base_code/src/Core/Services/lang_service/translate_extension.dart';
-import 'package:getx_base_code/src/Shared/Entities/language.dart';
+import 'package:care_desk/src/Core/Services/Storage/storage_service.dart';
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
+import 'package:care_desk/src/Shared/Entities/language.dart';
 
 //import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dar';
 import '../Services/storage/src/storage_constants.dart';

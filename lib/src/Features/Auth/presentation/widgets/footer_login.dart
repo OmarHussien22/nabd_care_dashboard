@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_base_code/src/Features/Auth/presentation/pages/imports_auth.dart';
+import 'package:care_desk/src/Features/Auth/presentation/pages/imports_auth.dart';
 
 import '../../../../Core/Styles/Colors/app_colors.dart';
 import '../../../../Core/Utils/Extensions/screen_spaces_extension.dart';

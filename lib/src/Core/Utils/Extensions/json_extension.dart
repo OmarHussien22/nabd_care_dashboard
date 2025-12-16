@@ -1,5 +1,5 @@
-import 'package:getx_base_code/src/Core/Utils/general_utils.dart';
-import 'package:getx_base_code/src/Core/Utils/utils.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Core/Utils/utils.dart';
 
 extension FromJsonExtension on String {
   String get response {

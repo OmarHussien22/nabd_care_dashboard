@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:getx_base_code/src/Features/category/presentation/pages/category_table_page.dart';
-import 'package:getx_base_code/src/Features/product/presentation/pages/product_table_page.dart';
-import 'package:getx_base_code/src/Features/sales/presentation/pages/sales_table_page.dart';
-import 'package:getx_base_code/src/Features/settings/presentation/pages/settings_page.dart';
-import 'package:getx_base_code/src/Features/sub_category/presentation/pages/sub_category_table_page.dart';
+import 'package:care_desk/src/Features/settings/presentation/pages/settings_page.dart';
 import '../../../../Core/Services/Storage/storage_service.dart';
 import '../../../../Core/Services/storage/src/storage_constants.dart';
 import '../../../../Super/Controllers/Resources/get/get_controller_interface.dart';
@@ -35,10 +31,6 @@ class BaseController extends GetControllerInterface {
 
     pages = [
       const HomePage(),
-      const CategoryTablePage(),
-      const SubCategoryTablePage(),
-      const ProductTablePage(),
-      const SalesTablePage(),
       const SettingsPage(),
     ];
 

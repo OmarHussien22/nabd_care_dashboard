@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:getx_base_code/src/Core/App/app_material.dart';
-import 'package:getx_base_code/src/Core/Constants/Decorations/app_sizes.dart';
-import 'package:getx_base_code/src/Features/Splash/presentation/pages/splash_imports.dart';
+import 'package:care_desk/src/Core/App/app_material.dart';
+import 'package:care_desk/src/Core/Constants/Decorations/app_sizes.dart';
+import 'package:care_desk/src/Features/Splash/presentation/pages/splash_imports.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_base_code/src/Features/Auth/presentation/pages/imports_auth.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/domain/use_cases/register_user_local_use_case.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/presentation/manager/get_roles_local_controller.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/register_user_params.dart';
+import 'package:care_desk/src/Features/Auth/presentation/pages/imports_auth.dart';
+import 'package:care_desk/src/Features/LocalAuth/domain/use_cases/register_user_local_use_case.dart';
+import 'package:care_desk/src/Features/LocalAuth/presentation/manager/get_roles_local_controller.dart';
+import 'package:care_desk/src/Features/LocalAuth/register_user_params.dart';
 
 import '../../../../Core/NetworkStructure/Resources/DataState/data_state.dart';
 import '../../../../Core/Utils/general_utils.dart';

@@ -1,8 +1,8 @@
-import 'package:getx_base_code/src/Core/LocalDataBaseStructure/localDataSource/respons/respons_local_data_base.dart';
-import 'package:getx_base_code/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
-import 'package:getx_base_code/src/Core/NetworkStructure/Resources/Errors/error_model.dart';
-import 'package:getx_base_code/src/Core/Utils/general_utils.dart';
-import 'package:getx_base_code/src/Core/params/local_params.dart';
+import 'package:care_desk/src/Core/LocalDataBaseStructure/localDataSource/respons/respons_local_data_base.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Resources/Errors/error_model.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Core/params/local_params.dart';
 
 import '../localDataSource/interfaces/data_base_service_interface.dart';
 

@@ -1,5 +1,5 @@
-import 'package:getx_base_code/src/Core/Styles/Colors/Interface/color_interface.dart';
-import 'package:getx_base_code/src/Core/Styles/Colors/Parts/imports_colors.dart';
+import 'package:care_desk/src/Core/Styles/Colors/Interface/color_interface.dart';
+import 'package:care_desk/src/Core/Styles/Colors/Parts/imports_colors.dart';
 
 class AppColors {
   AppColors._();

@@ -1,14 +1,14 @@
 import 'dart:io';
 
-import 'package:getx_base_code/src/Core/NetworkStructure/Constants/exception_constants.dart';
-import 'package:getx_base_code/src/Core/NetworkStructure/DataSource/service_interface.dart';
-import 'package:getx_base_code/src/Core/NetworkStructure/Exceptions/failure.dart';
-import 'package:getx_base_code/src/Core/NetworkStructure/Params/params.dart';
-import 'package:getx_base_code/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
-import 'package:getx_base_code/src/Core/NetworkStructure/Resources/Errors/error_model.dart';
-import 'package:getx_base_code/src/Core/Utils/general_utils.dart';
-import 'package:getx_base_code/src/Shared/Entities/pagination.dart';
-import 'package:getx_base_code/src/Shared/Models/pagination_model.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Constants/exception_constants.dart';
+import 'package:care_desk/src/Core/NetworkStructure/DataSource/service_interface.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Exceptions/failure.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Params/params.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Resources/Errors/error_model.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Shared/Entities/pagination.dart';
+import 'package:care_desk/src/Shared/Models/pagination_model.dart';
 
 enum ResponseType {
   withData,

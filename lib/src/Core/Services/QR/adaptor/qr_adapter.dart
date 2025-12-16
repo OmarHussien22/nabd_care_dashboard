@@ -1,5 +1,5 @@
-import 'package:getx_base_code/src/Core/Services/QR/interface/qr_interface.dart';
-import 'package:getx_base_code/src/Core/Services/QR/qr_enum.dart';
+import 'package:care_desk/src/Core/Services/QR/interface/qr_interface.dart';
+import 'package:care_desk/src/Core/Services/QR/qr_enum.dart';
 
 class QrAdapter {
   final QrInterface _resource;

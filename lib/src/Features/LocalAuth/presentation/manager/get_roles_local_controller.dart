@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:getx_base_code/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
-import 'package:getx_base_code/src/Core/Utils/general_utils.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/domain/entities/roles_entity.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/domain/use_cases/get_roles_local_use_case.dart';
-import 'package:getx_base_code/src/Super/Controllers/Resources/get/get_controller_interface.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Features/LocalAuth/domain/entities/roles_entity.dart';
+import 'package:care_desk/src/Features/LocalAuth/domain/use_cases/get_roles_local_use_case.dart';
+import 'package:care_desk/src/Super/Controllers/Resources/get/get_controller_interface.dart';
 
 class GetRolesLocalController extends GetControllerInterface<List<RolesModel>> {
   // List<RolesModel> rolesUser = [];

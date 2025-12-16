@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:getx_base_code/src/Core/Constants/Decorations/app_durations.dart';
+import 'package:care_desk/src/Core/Constants/Decorations/app_durations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

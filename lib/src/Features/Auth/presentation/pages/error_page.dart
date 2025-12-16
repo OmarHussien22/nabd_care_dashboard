@@ -1,7 +1,7 @@
-import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/Illustrations/imports_illustrations.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/Illustrations/imports_illustrations.dart';
 
 import '../../../../Core/Constants/Decorations/app_Insets.dart';
 import '../../../../Shared/Presentation/Widgets/GeneralWidgets/Buttons/Basic/custom_rounded_button.dart';

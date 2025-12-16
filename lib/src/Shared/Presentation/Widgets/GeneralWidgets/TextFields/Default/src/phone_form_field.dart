@@ -1,6 +1,6 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:getx_base_code/src/Core/Services/lang_service/translate_extension.dart';
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 
 import '../../../../../../../Core/Constants/Strings/Assets/app_icons.dart';
 import '../../../../../../../Core/Styles/Colors/app_colors.dart';

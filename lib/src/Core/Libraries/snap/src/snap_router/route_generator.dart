@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:getx_base_code/src/Core/Libraries/snap/src/snap_router/named_routes.dart';
-import 'package:getx_base_code/src/Features/home/presentation/pages/home_page.dart';
+import 'package:care_desk/src/Core/Libraries/snap/src/snap_router/named_routes.dart';
+import 'package:care_desk/src/Features/home/presentation/pages/home_page.dart';
 
 import 'Src/Constants/imports_constants.dart';
 import 'Src/Helper/Interfaces/helper_imports.dart';

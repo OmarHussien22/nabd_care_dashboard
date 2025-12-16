@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:intl/intl.dart';
 

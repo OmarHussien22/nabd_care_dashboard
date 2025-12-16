@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:getx_base_code/src/Core/Utils/Extensions/json_parsing_extension.dart';
-import 'package:getx_base_code/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/json_parsing_extension.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
 
 class UserModel with EquatableMixin {
   int? id;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
-import 'package:getx_base_code/src/Features/home/presentation/widgets/home_sales_graph_widget.dart';
-import 'package:getx_base_code/src/Features/home/presentation/widgets/home_statics_grid_widget.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Features/home/presentation/widgets/home_sales_graph_widget.dart';
+import 'package:care_desk/src/Features/home/presentation/widgets/home_statics_grid_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

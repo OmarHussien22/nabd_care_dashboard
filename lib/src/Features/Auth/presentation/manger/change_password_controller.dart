@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:getx_base_code/src/Core/Services/lang_service/translate_extension.dart';
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 
 import '../../../../Core/Utils/SnackUtils/snack_utils.dart';
 import '../../../../Core/Utils/Validation/app_validator.dart';

@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Core/params/local_params.dart';
+import 'package:care_desk/src/Core/params/local_params.dart';
 
 class LoginUserParams extends LocalParams {
   final String phone;

@@ -1,5 +1,5 @@
-// import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
-// import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Image/generic_image/Src/options/image_options.dart';
+// import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+// import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Image/generic_image/Src/options/image_options.dart';
 // import 'package:flutter/material.dart';
 // import 'package:lottie/lottie.dart';
 //

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/domain/entities/roles_entity.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/presentation/manager/get_roles_local_controller.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Sheets/general_select_sheet.dart';
+import 'package:care_desk/src/Features/LocalAuth/domain/entities/roles_entity.dart';
+import 'package:care_desk/src/Features/LocalAuth/presentation/manager/get_roles_local_controller.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Sheets/general_select_sheet.dart';
 
 class SelectRolesSheet extends StatelessWidget {
   const SelectRolesSheet({super.key});

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:getx_base_code/src/Core/Constants/Decorations/app_Insets.dart';
-import 'package:getx_base_code/src/Core/Constants/Strings/Assets/app_basic_icons.dart';
-import 'package:getx_base_code/src/Core/Styles/Colors/app_colors.dart';
-import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
-import 'package:getx_base_code/src/Features/Base/presentation/manager/base_controller.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Image/generic_image/generic_image.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Spaces&Dividers/custom_divider.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
+import 'package:care_desk/src/Core/Constants/Decorations/app_Insets.dart';
+import 'package:care_desk/src/Core/Constants/Strings/Assets/app_basic_icons.dart';
+import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Features/Base/presentation/manager/base_controller.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Image/generic_image/generic_image.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Spaces&Dividers/custom_divider.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 
 class NavigationSideBar extends StatelessWidget {
   const NavigationSideBar({super.key});

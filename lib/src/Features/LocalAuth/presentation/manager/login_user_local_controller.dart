@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_base_code/src/Features/Base/presentation/pages/base_page.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/data/models/local_user_model.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/domain/use_cases/login_user_local_use_case.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/login_user_params.dart';
-import 'package:getx_base_code/src/Shared/Caches/user_cache_local.dart';
-import 'package:getx_base_code/src/Shared/Managers/user_local_controller.dart';
+import 'package:care_desk/src/Features/Base/presentation/pages/base_page.dart';
+import 'package:care_desk/src/Features/LocalAuth/data/models/local_user_model.dart';
+import 'package:care_desk/src/Features/LocalAuth/domain/use_cases/login_user_local_use_case.dart';
+import 'package:care_desk/src/Features/LocalAuth/login_user_params.dart';
+import 'package:care_desk/src/Shared/Caches/user_cache_local.dart';
+import 'package:care_desk/src/Shared/Managers/user_local_controller.dart';
 
 import '../../../../Core/NetworkStructure/Resources/DataState/data_state.dart';
 import '../../../../Core/Utils/Validation/app_validator.dart';
