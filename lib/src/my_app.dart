@@ -1,10 +1,12 @@
-import 'dart:developer';
 
+import 'package:care_desk/ai_app/ai_page.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Features/Auth/presentation/pages/imports_auth.dart';
+import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:getx_base_code/src/Core/App/app_material.dart';
-import 'package:getx_base_code/src/Core/Constants/Decorations/app_sizes.dart';
-import 'package:getx_base_code/src/Features/Splash/presentation/pages/splash_imports.dart';
+import 'package:care_desk/src/Core/App/app_material.dart';
+import 'package:care_desk/src/Core/Constants/Decorations/app_sizes.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -29,8 +31,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    log('state: $state', name: 'AppLifecycleState');
-    // TODO: logic - implement didChangeAppLifecycleState
+    printDM('state: $state', name: 'AppLifecycleState');
   }
 
   @override
@@ -45,7 +46,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         designSize: AppSizes.screenSize,
         minTextAdapt: true,
         builder: (context, child) {
-          child = AppMaterial(home: SplashPage());
+          child = AppMaterial(home:const AiPage());
           return child;
         },
       ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_base_code/src/Features/Auth/presentation/pages/imports_auth.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/domain/use_cases/register_user_local_use_case.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/presentation/manager/get_roles_local_controller.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/register_user_params.dart';
+import 'package:care_desk/src/Features/Auth/presentation/pages/imports_auth.dart';
+import 'package:care_desk/src/Features/LocalAuth/domain/use_cases/register_user_local_use_case.dart';
+import 'package:care_desk/src/Features/LocalAuth/presentation/manager/get_roles_local_controller.dart';
+import 'package:care_desk/src/Features/LocalAuth/register_user_params.dart';
 
 import '../../../../Core/NetworkStructure/Resources/DataState/data_state.dart';
 import '../../../../Core/Utils/general_utils.dart';
@@ -14,7 +14,9 @@ class RegisterUserLocalController extends GetControllerInterface<int> {
   late TextEditingController phoneController;
   late TextEditingController passwordController;
   late TextEditingController nameController;
-  late TextEditingController email;
+  late TextEditingController clinicNameController;
+  late TextEditingController
+      emailController; // Renamed from 'email' to 'emailController'
   final GlobalKey<FormState> globalKey = GlobalKey<FormState>();
 
   final GetRolesLocalController getRolesLocalController =
@@ -25,10 +27,11 @@ class RegisterUserLocalController extends GetControllerInterface<int> {
     state = await useCase.call(
         params: RegisterUserParams(
       phone: phoneController.text,
-      email: email.text,
+      email: emailController.text, // Using emailController.text
       roleId: getRolesLocalController.roleId,
       password: passwordController.text,
       name: nameController.text,
+      clinicName: clinicNameController.text,
       isActive: true,
     ));
     emit(state);
@@ -41,36 +44,6 @@ class RegisterUserLocalController extends GetControllerInterface<int> {
       printDM("error when insert");
       ClientSnacks.requestError(error: state.message ?? "");
     }
-    // if (state is DataSuccess) {
-    //   final RegisterUserParams newUser = RegisterUserParams(
-    //     phone: phoneController.text,
-    //     email: email.text,
-    //     roleId: getRolesLocalController.roleId,
-    //     password: passwordController.text,
-    //     name: nameController.text,
-    //     isActive: true,
-    //   );
-    // // إذا كانت البيانات سليمة، نقوم بإدخال المستخدم الجديد في قاعدة البيانات
-    // final insertState = await GetDataBaseMethod.instance.fetch(
-    //   tableName:
-    //       TablesNames.usersTable, // اسم الجدول الذي سيتم إدخال البيانات فيه
-    //
-    //   whereArgs: newUser,
-    // );
-    //   if (insertState is DataSuccess) {
-    //     if (insertState.data != null) {
-    //       UserLocalController.get.updateUser(insertState.data!);
-    //       ClientSnacks.registerSuccess();
-    //       Get.offAll(() => HomePage());
-    //     }
-    //   } else if (insertState is DataFailed) {
-    //     printDM("error is=> ${insertState.statusMessage}");
-    //     ClientSnacks.requestError(error: insertState.statusMessage);
-    //   }
-    // } else if (state is DataFailed) {
-    //   printDM("error is=> ${state.statusMessage}");
-    //   ClientSnacks.requestError(error: state.statusMessage);
-    // }
   }
 
   bool _isButtonDisabled = false;
@@ -78,9 +51,10 @@ class RegisterUserLocalController extends GetControllerInterface<int> {
 
   void _changeButtonState() {
     if (phoneController.text.isNotEmpty &&
-        email.text.isNotEmpty &&
+        emailController.text.isNotEmpty && // Using emailController.text
         passwordController.text.isNotEmpty &&
-        nameController.text.isNotEmpty) {
+        nameController.text.isNotEmpty &&
+        clinicNameController.text.isNotEmpty) {
       _isButtonDisabled = false;
     } else {
       _isButtonDisabled = true;
@@ -94,10 +68,7 @@ class RegisterUserLocalController extends GetControllerInterface<int> {
     phoneController = TextEditingController();
     passwordController = TextEditingController();
     nameController = TextEditingController();
-    email = TextEditingController();
-    phoneController.addListener(_changeButtonState);
-    passwordController.addListener(_changeButtonState);
-    nameController.addListener(_changeButtonState);
-    email.addListener(_changeButtonState);
+    clinicNameController = TextEditingController();
+    emailController = TextEditingController(); // Initialized emailController
   }
 }

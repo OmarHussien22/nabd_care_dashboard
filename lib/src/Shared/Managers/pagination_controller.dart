@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Super/Controllers/Resources/get/get_controller_interface.dart';
+import 'package:care_desk/src/Super/Controllers/Resources/get/get_controller_interface.dart';
 import 'package:flutter/cupertino.dart';
 
 abstract class PaginationController<T> extends GetControllerInterface<T> {

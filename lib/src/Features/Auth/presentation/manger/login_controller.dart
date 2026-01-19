@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_base_code/src/Core/App/app_flow.dart';
-import 'package:getx_base_code/src/Shared/Caches/user_cache.dart';
-import 'package:getx_base_code/src/Shared/Models/user_model.dart';
+import 'package:care_desk/src/Core/App/app_flow.dart';
+import 'package:care_desk/src/Shared/Caches/user_cache.dart';
+import 'package:care_desk/src/Shared/Models/user_model.dart';
 
 import '../../../../Core/Constants/Enums/app_source.dart';
 import '../../../../Core/Constants/Strings/app_strings.dart';

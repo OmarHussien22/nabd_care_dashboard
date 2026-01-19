@@ -1,5 +1,5 @@
-import 'package:getx_base_code/src/Core/Utils/Extensions/basic_op_extensions.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Choice/Components/choice_multi_circle.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/basic_op_extensions.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Choice/Components/choice_multi_circle.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../Core/Styles/Colors/app_colors.dart';

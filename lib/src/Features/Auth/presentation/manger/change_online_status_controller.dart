@@ -1,7 +1,7 @@
-import 'package:getx_base_code/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
-import 'package:getx_base_code/src/Features/Auth/core/params/cahnge_online_status_params.dart';
-import 'package:getx_base_code/src/Features/Auth/domain/use_cases/change_online_status_use_case.dart';
-import 'package:getx_base_code/src/Shared/Caches/user_cache.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
+import 'package:care_desk/src/Features/Auth/core/params/cahnge_online_status_params.dart';
+import 'package:care_desk/src/Features/Auth/domain/use_cases/change_online_status_use_case.dart';
+import 'package:care_desk/src/Shared/Caches/user_cache.dart';
 
 import '../../../../Core/Utils/general_utils.dart';
 import '../../../../Super/Controllers/Resources/get/get_controller_interface.dart';

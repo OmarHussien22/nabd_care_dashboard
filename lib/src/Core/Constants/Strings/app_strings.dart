@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:getx_base_code/src/Core/Services/lang_service/translate_extension.dart';
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 
 String kDummyData = Platform.isAndroid
     ? ""
@@ -9,9 +9,9 @@ String kDummyData = Platform.isAndroid
 
 class AppStrings {
   AppStrings._();
-  static const String appName = 'Pos System';
-  static const String appDescription = 'System';
-  static const String appLegalese = 'Ⓒ2023 $appName ';
+  static const String appName = 'CareDesk';
+  static const String appDescription = 'CareDesk Clinic Management System';
+  static const String appLegalese = 'Ⓒ2025 $appName ';
   static const String androidIconPath = '@mipmap/ic_launcher';
   static const String fontFamily = "Cairo";
   static const String fontFamilySecondary = "";
@@ -21,12 +21,12 @@ class AppStrings {
   static const String appIOSVersion = "1.0.0";
   static const String appVersion = '1.0.0 +1';
   static const String appBuildNumber = '1';
-  static const String _appStoreId = 'com.crazyidea.$appName';
+  static const String _appStoreId = 'com.example.care_desk';
   static const String playStoreUrl =
       'https://play.google.com/store/apps/details?id=$appName';
   static const String appStoreUrl =
       'https://apps.apple.com/us/app/$appName/id$_appStoreId';
-  static const String appID = 'com.crazyidea.$appName';
+  static const String appID = 'com.example.care_desk';
   static const String mapKey = '';
   static const String fcnToken = '';
   static const String appStoreID = '';

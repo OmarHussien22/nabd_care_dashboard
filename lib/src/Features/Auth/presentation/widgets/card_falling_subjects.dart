@@ -1,7 +1,7 @@
-// import 'package:getx_base_code/src/Core/Utils/Extensions/basic_op_extensions.dart';
-// import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
-// import 'package:getx_base_code/src/Features/Auth/data/models/educational_information.dart';
-// import 'package:getx_base_code/src/Features/Auth/presentation/manger/subjects_controller.dart';
+// import 'package:care_desk/src/Core/Utils/Extensions/basic_op_extensions.dart';
+// import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+// import 'package:care_desk/src/Features/Auth/data/models/educational_information.dart';
+// import 'package:care_desk/src/Features/Auth/presentation/manger/subjects_controller.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 

@@ -1,8 +1,8 @@
-import 'package:getx_base_code/src/Core/Styles/Colors/app_colors.dart';
-import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/Builders/conditional_builder.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/src/Default/Components/Prefix/Abstract/prefix_imp.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/src/Options/imports_options.dart';
+import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/Builders/conditional_builder.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/src/Default/Components/Prefix/Abstract/prefix_imp.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/src/Options/imports_options.dart';
 import 'package:flutter/material.dart';
 part 'prefix_none.dart';
 part 'prefix_with_icon_data.dart';

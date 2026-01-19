@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/src/gestures/tap.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:getx_base_code/src/Core/Utils/SnackUtils/src/Constants/snack_constants.dart';
-import 'package:getx_base_code/src/Core/Utils/SnackUtils/src/Object/snack_object.dart';
+import 'package:care_desk/src/Core/Utils/SnackUtils/src/Constants/snack_constants.dart';
+import 'package:care_desk/src/Core/Utils/SnackUtils/src/Object/snack_object.dart';
 
 import '../../Interface/snack_interface.dart';
 

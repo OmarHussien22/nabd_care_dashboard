@@ -1,7 +1,7 @@
-import 'package:getx_base_code/Src/core/NetworkStructure/Networking/src/Utils/network_utils.dart';
-import 'package:getx_base_code/src/Core/LocalDataBaseStructure/helper/data_base_helper.dart';
-import 'package:getx_base_code/src/Core/Utils/general_utils.dart';
-import 'package:getx_base_code/src/Core/params/local_params.dart';
+import 'package:care_desk/Src/core/NetworkStructure/Networking/src/Utils/network_utils.dart';
+import 'package:care_desk/src/Core/LocalDataBaseStructure/helper/data_base_helper.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Core/params/local_params.dart';
 
 class GetDataTestBaseMethod<T> {
   final _utils = NetworkUtils.instance;

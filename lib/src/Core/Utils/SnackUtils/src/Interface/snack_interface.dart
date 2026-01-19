@@ -1,5 +1,5 @@
-import 'package:getx_base_code/src/Core/Utils/SnackUtils/src/Constants/snack_constants.dart';
-import 'package:getx_base_code/src/Core/Utils/SnackUtils/src/Object/snack_object.dart';
+import 'package:care_desk/src/Core/Utils/SnackUtils/src/Constants/snack_constants.dart';
+import 'package:care_desk/src/Core/Utils/SnackUtils/src/Object/snack_object.dart';
 import 'package:flutter/material.dart';
 
 abstract class SnackInterface {

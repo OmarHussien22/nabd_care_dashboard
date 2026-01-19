@@ -1,6 +1,6 @@
 part of 'imports_themes.dart';
 
-// import 'package:getx_base_code/src/Core/Styles/Colors/app_colors.dart';
+// import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 // import 'package:flutter/material.dart';
 
 final ThemeData _defaultTheme = ThemeData(
@@ -14,7 +14,7 @@ final ThemeData _defaultTheme = ThemeData(
     textTheme: ButtonTextTheme.primary,
   ),
   tooltipTheme: getTooltipTheme(),
-  tabBarTheme: TabBarTheme(
+  tabBarTheme: TabBarThemeData(
     indicator: BoxDecoration(
       color: Colors.transparent,
       border: Border(

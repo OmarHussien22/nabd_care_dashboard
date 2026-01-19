@@ -1,9 +1,9 @@
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:getx_base_code/src/Core/Constants/Strings/Assets/app_icons.dart';
-import 'package:getx_base_code/src/Core/Styles/Colors/app_colors.dart';
-import 'package:getx_base_code/src/Core/Utils/Validation/app_validator.dart';
-import 'package:getx_base_code/src/Core/Utils/general_utils.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/default_text_field.dart';
+import 'package:care_desk/src/Core/Constants/Strings/Assets/app_icons.dart';
+import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+import 'package:care_desk/src/Core/Utils/Validation/app_validator.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/default_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';

@@ -1,4 +1,4 @@
-// import 'package:getx_base_code/src/Core/Libraries/snap/snap.dart';
+// import 'package:care_desk/src/Core/Libraries/snap/snap.dart';
 
 // extension SnapPut on SnapInterface {
 //   T put<T>(

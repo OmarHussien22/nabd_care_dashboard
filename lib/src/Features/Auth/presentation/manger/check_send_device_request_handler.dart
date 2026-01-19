@@ -1,11 +1,11 @@
 // import 'dart:io';
 
-// import 'package:getx_base_code/src/Core/Utils/general_utils.dart';
-// import 'package:getx_base_code/src/Features/Auth/presentation/widgets/Dialogs/dialog_pending_send_request_device.dart';
-// import 'package:getx_base_code/src/Features/Auth/presentation/widgets/Dialogs/dialog_reject_send_request_device.dart';
-// import 'package:getx_base_code/src/Features/Auth/presentation/widgets/Dialogs/dialog_send_request_device.dart';
-// import 'package:getx_base_code/src/Shared/Caches/user_cache.dart';
-// import 'package:getx_base_code/src/Shared/Managers/user_controller.dart';
+// import 'package:care_desk/src/Core/Utils/general_utils.dart';
+// import 'package:care_desk/src/Features/Auth/presentation/widgets/Dialogs/dialog_pending_send_request_device.dart';
+// import 'package:care_desk/src/Features/Auth/presentation/widgets/Dialogs/dialog_reject_send_request_device.dart';
+// import 'package:care_desk/src/Features/Auth/presentation/widgets/Dialogs/dialog_send_request_device.dart';
+// import 'package:care_desk/src/Shared/Caches/user_cache.dart';
+// import 'package:care_desk/src/Shared/Managers/user_controller.dart';
 // import 'package:get/get.dart';
 
 // class CheckSendDeviceRequestHandler {

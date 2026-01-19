@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Core/Utils/Extensions/basic_op_extensions.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/basic_op_extensions.dart';
 
 import '../../../../Core/NetworkStructure/Params/params.dart';
 

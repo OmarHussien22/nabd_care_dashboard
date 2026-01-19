@@ -1,7 +1,7 @@
-import 'package:getx_base_code/src/Core/LocalDataBaseStructure/helper/data_base_helper.dart';
-import 'package:getx_base_code/src/Core/LocalDataBaseStructure/localDataSource/respons/respons_local_data_base.dart';
-import 'package:getx_base_code/src/Core/Utils/general_utils.dart';
-import 'package:getx_base_code/src/Core/params/local_params.dart';
+import 'package:care_desk/src/Core/LocalDataBaseStructure/helper/data_base_helper.dart';
+import 'package:care_desk/src/Core/LocalDataBaseStructure/localDataSource/respons/respons_local_data_base.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Core/params/local_params.dart';
 import 'package:sqflite/sqflite.dart';
 
 class InsertDataBaseMethod {

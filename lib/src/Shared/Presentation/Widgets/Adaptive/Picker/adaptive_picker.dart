@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:getx_base_code/src/Core/Constants/strings/app_strings.dart';
-import 'package:getx_base_code/src/Core/Styles/Colors/app_colors.dart';
-import 'package:getx_base_code/src/Core/Utils/Extensions/navigation_extension.dart';
-import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Spaces&Dividers/custom_divider.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
+import 'package:care_desk/src/Core/Constants/strings/app_strings.dart';
+import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/navigation_extension.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Spaces&Dividers/custom_divider.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';

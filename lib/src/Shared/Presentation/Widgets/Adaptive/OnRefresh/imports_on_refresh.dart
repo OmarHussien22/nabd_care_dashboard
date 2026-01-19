@@ -1,10 +1,10 @@
-import 'package:getx_base_code/src/Core/Constants/strings/app_strings.dart';
-import 'package:getx_base_code/src/Core/Constants/strings/assets.dart';
-import 'package:getx_base_code/src/Core/Services/helper.dart';
-import 'package:getx_base_code/src/Core/Styles/Colors/app_colors.dart';
-import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
-import 'package:getx_base_code/src/Core/constants/decorations/app_physics.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/Builders/conditional_builder.dart';
+import 'package:care_desk/src/Core/Constants/strings/app_strings.dart';
+import 'package:care_desk/src/Core/Constants/strings/assets.dart';
+import 'package:care_desk/src/Core/Services/helper.dart';
+import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Core/constants/decorations/app_physics.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/Builders/conditional_builder.dart';
 import 'package:flutter/cupertino.dart' as cupertino;
 import 'package:flutter/material.dart';
 

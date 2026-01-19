@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:flutter/material.dart';
 
 class StackedWaterMarkBuilder extends StatelessWidget {

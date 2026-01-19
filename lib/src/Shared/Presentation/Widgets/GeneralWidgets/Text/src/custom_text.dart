@@ -23,7 +23,7 @@ class CustomText extends StatelessWidget {
     this.label, {
     super.key,
     this.color,
-    this.fontSize = 6,
+    this.fontSize = 14, // Updated for desktop
     this.fontWeight = FW.regular,
     this.isBold = false,
     this.isOverFlow = false,
@@ -50,7 +50,7 @@ class CustomText extends StatelessWidget {
     bool isUpperCase = false,
     bool isBold = false,
     CustomTextDecoration decoration = CustomTextDecoration.none,
-    double fontSize = 4.0,
+    double fontSize = 12.0, // Updated for desktop
     int? maxLines,
     bool isOverFlow = false,
     EdgeInsetsGeometry padding = EdgeInsets.zero,
@@ -84,7 +84,7 @@ class CustomText extends StatelessWidget {
     bool isUpperCase = false,
     bool isBold = false,
     CustomTextDecoration decoration = CustomTextDecoration.none,
-    double fontSize = 5.0,
+    double fontSize = 12.0, // Updated for desktop
     int? maxLines,
     bool isOverFlow = false,
     EdgeInsetsGeometry padding = EdgeInsets.zero,
@@ -113,7 +113,7 @@ class CustomText extends StatelessWidget {
   factory CustomText.header(
     String label, {
     Key? key,
-    double fontSize = 10.0,
+    double fontSize = 24.0, // Updated for desktop
     FW fontWeight = FW.semiBold,
     Color? color,
     Color? backgroundColor,
@@ -145,6 +145,21 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    double finalFontSize = fontSize ?? 16;
+
+    if (screenWidth >= 1024) {
+      // Desktop && Web
+      finalFontSize = (fontSize ?? 16) * 1.2;
+    } else if (screenWidth >= 600) {
+      // Tablet
+      finalFontSize = (fontSize ?? 16) * 1.1;
+    } else {
+      // Mobile
+
+      finalFontSize = fontSize ?? 16;
+    }
     return Padding(
       padding: padding ?? EdgeInsets.zero,
       child: Text(
@@ -152,11 +167,11 @@ class CustomText extends StatelessWidget {
           label: label,
           isUpperCase: isUpperCase,
         ),
-        textScaleFactor: 1,
+        textScaler: TextScaler.noScaling,
         style: Theme.of(context).textTheme.titleMedium?.copyWith(
               color: color,
               backgroundColor: backgroundColor,
-              fontSize: (fontSize ?? 6).toFS(),
+              fontSize: finalFontSize.toFS(), // Use calculated font size
               fontWeight: customTextFw(fontWeight),
               decoration: customTextDecoration(decoration),
               //TextDecoration.combine(Decorations),

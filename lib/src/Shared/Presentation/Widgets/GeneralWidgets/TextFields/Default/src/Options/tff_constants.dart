@@ -4,41 +4,42 @@ abstract class TFFConstants {
   static ColorInterface get color => AppColors.get;
 
 //<editor-fold desc="input">
-  static const double inputFontSize = 5.0;
+  static const double inputFontSize = 16.0;
   static const FontWeight inputFontWeight = FontWeight.w300;
 //</editor-fold>
 //<editor-fold desc="hint">
-  static const double hintFontSize = 6.0;
+  static const double hintFontSize = 16.0;
   static const FontWeight hintFontWeight = FontWeight.w300;
 
 //</editor-fold>
 //<editor-fold desc="Header">
-  static const double headerFontSize = 6.0;
+  static const double headerFontSize = 16.0;
   static const FontWeight headerFontWeight = FontWeight.w300;
 
 //</editor-fold>
 //<editor-fold desc="label">
-  static const double labelFontSize = 6.0;
+  static const double labelFontSize = 1.0;
   static const FontWeight labelFontWeight = FontWeight.w300;
 
 //</editor-fold>
 //<editor-fold desc="error">
-  static const double errorFontSize = 5.0;
+  static const double errorFontSize = 15.0;
   static const FontWeight errorFontWeight = FontWeight.w300;
 
 //</editor-fold>
 //<editor-fold desc="upper">
   static const FontWeight upperFontWeight = FontWeight.w300;
-  static const double upperFontSize = 6.0;
+  static const double upperFontSize = 16.0;
 
 //</editor-fold>
 //<editor-fold desc="prefix">
-  static const double prefixFontSize = 6.0;
+  static const double prefixFontSize = 16.0;
   static const FontWeight prefixFontWeight = FontWeight.w300;
-  static const double prefixIconSize = 6.0;
-  static const double prefixIconScale = .3;
-  static const double prefixImageScale = 3.5;
-  static const double prefixImageSize = 14.0;
+  static const double prefixIconSize = 12.0;
+  static const double prefixIconScale = .2;
+  static const double prefixImageScale = 1.5;
+
+  static const double prefixImageSize = 12.0;
 
 //</editor-fold>
 //<editor-fold desc="suffix">

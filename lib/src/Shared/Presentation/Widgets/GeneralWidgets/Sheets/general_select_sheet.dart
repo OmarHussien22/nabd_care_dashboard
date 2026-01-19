@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_base_code/src/Core/Constants/Strings/Assets/app_icons.dart';
-import 'package:getx_base_code/src/Core/Services/lang_service/translate_extension.dart';
-import 'package:getx_base_code/src/Core/Utils/SnackUtils/snack_utils.dart';
-import 'package:getx_base_code/src/Core/utils/Extensions/screen_spaces_extension.dart';
-import 'package:getx_base_code/src/Shared/Entities/title_interface.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Dialogs/app_dialogs.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Sheets/app_Sheet.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Sheets/src/Resources/sheet_single_select.dart';
+import 'package:care_desk/src/Core/Constants/Strings/Assets/app_icons.dart';
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
+import 'package:care_desk/src/Core/Utils/SnackUtils/snack_utils.dart';
+import 'package:care_desk/src/Core/utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Shared/Entities/title_interface.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Dialogs/app_dialogs.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Sheets/app_Sheet.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Sheets/src/Resources/sheet_single_select.dart';
 
 import '../../../../../Core/Styles/Colors/app_colors.dart';
 import '../../../../../Core/Utils/Validation/Implementation/DefaultValidator/default_validator.dart';

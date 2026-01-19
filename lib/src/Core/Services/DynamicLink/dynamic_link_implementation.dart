@@ -1,6 +1,6 @@
 // import 'dart:convert';
 
-// import 'package:getx_base_code/src/Core/Services/DynamicLink/dynamic_link_interface.dart';
+// import 'package:care_desk/src/Core/Services/DynamicLink/dynamic_link_interface.dart';
 // import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 // import 'package:flutter/material.dart';
 // import 'package:share_plus/share_plus.dart';

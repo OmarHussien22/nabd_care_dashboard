@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:getx_base_code/src/Core/Constants/strings/app_strings.dart';
-import 'package:getx_base_code/src/Core/Styles/Colors/app_colors.dart';
-import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Core/Constants/strings/app_strings.dart';
+import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';

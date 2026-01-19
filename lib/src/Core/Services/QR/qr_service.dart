@@ -1,4 +1,4 @@
-// import 'package:getx_base_code/src/Core/Services/QR/qr_enum.dart';
+// import 'package:care_desk/src/Core/Services/QR/qr_enum.dart';
 
 // import 'adaptor/qr_adapter.dart';
 // import 'resource/barcode_scanner/qr_barcode_scanner.dart';

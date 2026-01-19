@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/Loading/pagination_loading.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/Loading/pagination_loading.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../Core/Utils/Extensions/screen_spaces_extension.dart';

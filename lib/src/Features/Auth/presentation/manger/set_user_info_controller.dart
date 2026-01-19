@@ -1,8 +1,8 @@
-// import 'package:getx_base_code/src/Core/Utils/SnackUtils/snack_utils.dart';
-// import 'package:getx_base_code/src/Features/Auth/core/params/set_user_info_params.dart';
-// import 'package:getx_base_code/src/Features/Statics/presentation/controller/log_out_controller.dart';
-// import 'package:getx_base_code/src/Shared/Caches/user_cache.dart';
-// import 'package:getx_base_code/src/Shared/Managers/user_controller.dart';
+// import 'package:care_desk/src/Core/Utils/SnackUtils/snack_utils.dart';
+// import 'package:care_desk/src/Features/Auth/core/params/set_user_info_params.dart';
+// import 'package:care_desk/src/Features/Statics/presentation/controller/log_out_controller.dart';
+// import 'package:care_desk/src/Shared/Caches/user_cache.dart';
+// import 'package:care_desk/src/Shared/Managers/user_controller.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 

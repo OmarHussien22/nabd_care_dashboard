@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_base_code/src/Core/Styles/Colors/app_colors.dart';
-import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
-import 'package:getx_base_code/src/Features/Base/presentation/widgets/navigation_side_bar.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/AppBars/app_bars.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Spaces&Dividers/custom_divider.dart';
+import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Features/Base/presentation/widgets/navigation_side_bar.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/AppBars/app_bars.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Spaces&Dividers/custom_divider.dart';
 import '../manager/base_controller.dart';
 
 class BasePage extends StatelessWidget {

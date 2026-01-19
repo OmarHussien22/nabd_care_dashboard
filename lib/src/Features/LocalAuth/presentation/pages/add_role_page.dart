@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/presentation/manager/add_role_controller.dart';
+import 'package:care_desk/src/Features/LocalAuth/presentation/manager/add_role_controller.dart';
 
 class AddRolePage extends StatelessWidget {
   const AddRolePage({super.key});

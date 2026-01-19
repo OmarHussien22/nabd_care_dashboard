@@ -1,7 +1,7 @@
-// import 'package:getx_base_code/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
-// import 'package:getx_base_code/src/Core/Utils/SnackUtils/snack_utils.dart';
-// import 'package:getx_base_code/src/Features/Auth/core/params/send_request_device_params.dart';
-// import 'package:getx_base_code/src/Features/Auth/domain/use_cases/send_request_device_use_case.dart';
+// import 'package:care_desk/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
+// import 'package:care_desk/src/Core/Utils/SnackUtils/snack_utils.dart';
+// import 'package:care_desk/src/Features/Auth/core/params/send_request_device_params.dart';
+// import 'package:care_desk/src/Features/Auth/domain/use_cases/send_request_device_use_case.dart';
 
 // import '../../../Super/Controllers/Resources/get/get_controller_interface.dart';
 

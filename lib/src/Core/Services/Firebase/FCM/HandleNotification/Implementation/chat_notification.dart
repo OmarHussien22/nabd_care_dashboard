@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Features/Home/presentation/pages/home_page.dart';
+import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout.dart';
 import 'package:get/get.dart';
 
 import '../Interfaces/notification_type.dart';
@@ -18,7 +18,7 @@ class ChatNotification extends NotificationType {
 
   @override
   void onMessageTaped(NotificationMessage message) {
-    Get.offAll(const HomePage());
+    Get.offAll(const MainLayout());
     // Snap.to(ChatsPage());
     // Snap.to(MessagesPage(chat: message.chat!));
   }

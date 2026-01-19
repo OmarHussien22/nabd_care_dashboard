@@ -1,8 +1,8 @@
-import 'package:getx_base_code/Src/core/LocalDataBaseStructure/constants/tables_names.dart';
-import 'package:getx_base_code/Src/core/LocalDataBaseStructure/enum/crud_opertion_enum.dart';
-import 'package:getx_base_code/src/Core/LocalDataBaseStructure/localDataSource/interfaces/data_base_service_interface.dart';
-import 'package:getx_base_code/src/Core/LocalDataBaseStructure/localDataSource/respons/respons_local_data_base.dart';
-import 'package:getx_base_code/src/Core/params/local_params.dart';
+import 'package:care_desk/Src/core/LocalDataBaseStructure/constants/tables_names.dart';
+import 'package:care_desk/Src/core/LocalDataBaseStructure/enum/crud_opertion_enum.dart';
+import 'package:care_desk/src/Core/LocalDataBaseStructure/localDataSource/interfaces/data_base_service_interface.dart';
+import 'package:care_desk/src/Core/LocalDataBaseStructure/localDataSource/respons/respons_local_data_base.dart';
+import 'package:care_desk/src/Core/params/local_params.dart';
 
 class AddRolesLocalService extends DataBaseServiceInterface {
   static final AddRolesLocalService instance = AddRolesLocalService._();

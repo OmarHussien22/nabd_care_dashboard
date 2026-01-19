@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Core/Constants/Strings/Assets/app_images.dart';
+import 'package:care_desk/src/Core/Constants/Strings/Assets/app_images.dart';
 
 
 import '../../../../Core/Styles/Colors/app_colors.dart';

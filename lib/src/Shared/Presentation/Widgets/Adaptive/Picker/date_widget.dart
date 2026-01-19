@@ -1,5 +1,5 @@
-// import 'package:getx_base_code/src/Core/Styles/Colors/app_colors.dart';
-// import 'package:getx_base_code/src/Core/utils/Extensions/screen_spaces_extension.dart';
+// import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+// import 'package:care_desk/src/Core/utils/Extensions/screen_spaces_extension.dart';
 // import 'package:flutter/material.dart';
 // import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 

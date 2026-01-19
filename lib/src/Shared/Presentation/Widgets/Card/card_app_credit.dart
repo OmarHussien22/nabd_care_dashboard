@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Core/utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Core/utils/Extensions/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../Core/Constants/Strings/app_strings.dart';

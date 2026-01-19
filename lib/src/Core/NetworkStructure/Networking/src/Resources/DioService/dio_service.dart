@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:getx_base_code/src/Core/NetworkStructure/Networking/src/Interfaces/networking.dart';
-import 'package:getx_base_code/src/Core/NetworkStructure/Networking/src/Resources/DioService/Handler/dio_response_handler.dart';
-import 'package:getx_base_code/src/Core/NetworkStructure/Networking/src/Resources/DioService/Methods/imports_methods.dart';
-import 'package:getx_base_code/src/Core/NetworkStructure/Networking/src/Utils/network_constants.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Networking/src/Interfaces/networking.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Networking/src/Resources/DioService/Handler/dio_response_handler.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Networking/src/Resources/DioService/Methods/imports_methods.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Networking/src/Utils/network_constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 

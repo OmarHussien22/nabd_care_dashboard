@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Shared/Models/user_model.dart';
+import 'package:care_desk/src/Shared/Models/user_model.dart';
 
 
 import '../../../../Core/NetworkStructure/Resources/DataState/data_state.dart';

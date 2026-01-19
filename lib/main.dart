@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:getx_base_code/src/Core/App/app_initializer.dart';
+import 'package:care_desk/src/Core/App/app_initializer.dart';
 
 import 'src/my_app.dart';
 

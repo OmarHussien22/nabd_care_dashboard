@@ -1,4 +1,4 @@
-// import 'package:getx_base_code/src/Core/Services/Bluetooth/Component/imports_bluetooth_service.dart';
+// import 'package:care_desk/src/Core/Services/Bluetooth/Component/imports_bluetooth_service.dart';
 //
 // class FlutterBluetoothService {
 //   FlutterBluetoothService._();

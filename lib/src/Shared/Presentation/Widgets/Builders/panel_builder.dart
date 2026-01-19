@@ -1,9 +1,9 @@
-import 'package:getx_base_code/src/Core/Constants/decorations/app_physics.dart';
-import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
-import 'package:getx_base_code/src/Core/Utils/general_utils.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/Animation/animated_wrapper.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/Builders/conditional_builder.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/Builders/row_show_all_builder.dart';
+import 'package:care_desk/src/Core/Constants/decorations/app_physics.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/Animation/animated_wrapper.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/Builders/conditional_builder.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/Builders/row_show_all_builder.dart';
 import 'package:flutter/material.dart';
 
 typedef PanelItemBuilder<T> = Widget Function(BuildContext context, T element);

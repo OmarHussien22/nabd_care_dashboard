@@ -1,73 +1,140 @@
 part of 'imports_auth.dart';
 
 class RegisterPage extends StatelessWidget {
-  final String? phone;
-
-  const RegisterPage({
-    super.key,
-    this.phone,
-  });
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-
+    // Put the controller
+    Get.put(RegisterUserLocalController());
     final node = FocusScope.of(context);
 
-    Get.put(RegisterUserLocalController());
-
     return Scaffold(
-      backgroundColor: AppColors.get.primary,
+      backgroundColor: AppColors.get.background,
       body: GetBuilder<RegisterUserLocalController>(
         builder: (logic) {
-          return SafeArea(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final bool isWide = constraints.maxWidth > 800;
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              final isWide = constraints.maxWidth > 900;
+              final width = constraints.maxWidth;
 
+              if (!isWide) {
+                // Mobile/Tablet View
                 return Center(
                   child: SingleChildScrollView(
-                    padding: EdgeInsets.all(20.toW()),
-                    child: Container(
-                      padding: AppInsets.defaultScreenHorizontal,
-                      margin: AppInsets.defaultScreenOnly(
-                          left: 18, right: 18, bottom: 30),
-                      decoration: BoxDecoration(
-                        color: AppColors.get.white,
-                        borderRadius: BorderRadius.circular(20.toRad()),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.get.shadow,
-                            blurRadius: 8,
-                            offset: const Offset(0, 2),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 40),
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 200),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // Logo for mobile view
+                          Container(
+                            padding: const EdgeInsets.all(16),
+                            margin: const EdgeInsets.only(bottom: 32),
+                            decoration: BoxDecoration(
+                              color: AppColors.get.primary.withOpacity(0.1),
+                              shape: BoxShape.circle,
+                            ),
+                            // child: Icon(
+                            //   Icons.app_registration_rounded,
+                            //   size: 48,
+                            //   color: AppColors.get.primary,
+                            // ),
                           ),
+                          _RegisterForm(logic: logic, node: node),
                         ],
-                      ),
-                      child: AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 300),
-                        child: isWide
-                            ? Row(
-                                children: [
-                                  Expanded(
-                                    flex: 5,
-                                    child: _RegisterForm(logic: logic, node: node),
-                                  ),
-                                  const SizedBox(width: 20),
-                                  const Expanded(flex: 4, child: _WelcomeSection()),
-                                ],
-                              )
-                            : Column(
-                                children: [
-                                  const _WelcomeSection(),
-                                  SizedBox(height: 20.toH()),
-                                  _RegisterForm(logic: logic, node: node),
-                                ],
-                              ),
                       ),
                     ),
                   ),
                 );
-              },
-            ),
+              }
+
+              // Desktop View (Split Screen)
+              return Row(
+                children: [
+                  // Left Side: Register Form
+                  Expanded(
+                    flex: width > 1200 ? 7 : 6,
+                    child: Center(
+                      child: SingleChildScrollView(
+                        // padding: const EdgeInsets.symmetric(
+
+                        //     horizontal: 64, vertical: 48),
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 550),
+                          child: _RegisterForm(logic: logic, node: node),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  // Right Side: Branding
+                  Expanded(
+                    flex: width > 1200 ? 7 : 6,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.get.primary,
+                        gradient: LinearGradient(
+                          begin: Alignment.bottomRight,
+                          end: Alignment.topLeft,
+                          colors: [
+                            AppColors.get.primary,
+                            AppColors.get.primaryDarker,
+                          ],
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 10,
+                            offset: const Offset(-4, 0),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(32),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.1),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Colors.white.withOpacity(0.2),
+                                width: 3,
+                              ),
+                            ),
+                            child: Icon(
+                              Icons.app_registration_rounded,
+                              size: 100,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 48),
+                          CustomText(
+                            "Join CareDesk Today",
+                            fontSize: 32,
+                            fontWeight: FW.bold,
+                            color: Colors.white,
+                          ),
+                          const SizedBox(height: 24),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 80),
+                            child: CustomText(
+                              "Create an account to start managing your clinic, appointments, and patients with ease.",
+                              fontSize: 16,
+                              textAlign: TextAlign.center,
+                              color: Colors.white.withOpacity(0.9),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
           );
         },
       ),
@@ -86,127 +153,119 @@ class _RegisterForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-
-    return Column(
+    return Form(
       key: const ValueKey("RegisterForm"),
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        CustomText(
-          "register".toTr(),
-          fontSize: 9,
-          fontWeight: FW.bold,
-          color: isDark ? AppColors.get.white : AppColors.get.primary,
-        ),
-        20.ESH(),
-        AppFillTextFieldField(
-          controller: logic.nameController,
-          hint: "enter_full_name".toTr(),
-          header: "user_name".toTr(),
-          prefixAsset: AppIcons.user,
-          keyboardType: TextInputType.name,
-          validation: AppValidator.defaultValidator.validate,
-          onComplete: node.nextFocus,
-        ),
-        10.ESH(),
-        AppFillTextFieldField(
-          controller: logic.email,
-          hint: "enter_email".toTr(),
-          header: "email".toTr(),
-          prefixAsset: AppIcons.user,
-          keyboardType: TextInputType.emailAddress,
-          validation: AppValidator.emailValidator.validate,
-          onComplete: node.nextFocus,
-        ),
-        10.ESH(),
-        PhoneFormField(
-          controller: logic.phoneController,
-          hasCountryCode: false,
-          onComplete: node.nextFocus,
-        ),
-        10.ESH(),
-        SelectRolesSheet(),
-        10.ESH(),
-        AppPasswordField(
-          controller: logic.passwordController,
-          onComplete: node.unfocus,
-        ),
-        20.ESH(),
-        ButtonDefault(
-          height: 56.toH(),
-          width: double.infinity,
-          isDisabled: logic.isButtonDisabled,
-          title: "register_now",
-          onPressed: logic.register,
-        ),
-        15.ESH(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomText(
-              "have_account".toTr(),
-              color: AppColors.get.title,
-              fontWeight: FW.regular,
-            ),
-            InkWell(
-              onTap: () => Get.offAll(const LoginPage(), transition: Transition.fadeIn, duration: const Duration(milliseconds: 300),),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CustomText(
+            "Create Account",
+            fontSize: 28,
+            fontWeight: FW.bold,
+            color: AppColors.get.title,
+          ),
+          const SizedBox(height: 12),
+          CustomText(
+            "Please fill in the details below to register.",
+            fontSize: 14,
+            color: AppColors.get.subTitle,
+          ),
+          const SizedBox(height: 48),
+
+          // Name
+          AppFillTextFieldField(
+            width: 500,
+            controller: logic.nameController,
+            hint: "John Doe",
+            header: "Full Name",
+            prefixAsset: AppIcons.user,
+            keyboardType: TextInputType.name,
+            validation: AppValidator.defaultValidator.validate,
+            onComplete: node.nextFocus,
+          ),
+          const SizedBox(height: 20),
+
+          // Clinic Name
+          AppFillTextFieldField(
+            width: 500,
+            controller: logic.clinicNameController,
+            hint: "My Clinic",
+            header: "Clinic Name",
+            prefixAsset: AppIcons.user, // Verify icon
+            keyboardType: TextInputType.text,
+            validation: AppValidator.defaultValidator.validate,
+            onComplete: node.nextFocus,
+          ),
+          const SizedBox(height: 20),
+
+          // Email
+          AppFillTextFieldField(
+            width: 500,
+            controller: logic.emailController,
+            hint: "john@example.com",
+            header: "Email Address",
+            prefixAsset: AppIcons.user,
+            keyboardType: TextInputType.emailAddress,
+            validation: AppValidator.emailValidator.validate,
+            onComplete: node.nextFocus,
+          ),
+          const SizedBox(height: 20),
+
+          // Phone
+          PhoneFormField(
+            width: 500,
+            controller: logic.phoneController,
+            hasCountryCode: false,
+            onComplete: node.nextFocus,
+          ),
+          const SizedBox(height: 20),
+
+          // Role Selection
+          SelectRolesSheet(),
+          const SizedBox(height: 20),
+
+          // Password
+          AppPasswordField(
+            width: 500,
+            controller: logic.passwordController,
+            onComplete: node.unfocus,
+          ),
+          const SizedBox(height: 48),
+
+          // Register Button
+          ButtonDefault(
+            height: 56,
+            width: double.infinity,
+            isDisabled: logic.isButtonDisabled,
+            title: "Register",
+            onPressed: logic.register,
+          ),
+          const SizedBox(height: 32),
+
+          // Login Link
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomText(
+                "Already have an account?",
+                fontSize: 14,
+                color: AppColors.get.subTitle,
+              ),
+              TextButton(
+                onPressed: () => Get.off(() => const LoginPage(),
+                    transition: Transition.noTransition),
                 child: CustomText(
-                  "login".toTr(),
-                  color: AppColors.get.primary,
+                  "Login",
+                  fontSize: 14,
                   fontWeight: FW.bold,
+                  color: AppColors.get.primary,
                 ),
               ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class _WelcomeSection extends StatelessWidget {
-  const _WelcomeSection();
-
-  @override
-  Widget build(BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-
-    return Container(
-      key: const ValueKey("WelcomeSection"),
-      height: 400.toH(),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.toRad()),
-        image: DecorationImage(
-          image: AssetImage(AppImages.noImage),
-          fit: BoxFit.cover,
-          colorFilter: ColorFilter.mode(
-            isDark ? Colors.black.withOpacity(0.4) : Colors.white.withOpacity(0.3),
-            BlendMode.darken,
+            ],
           ),
-        ),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.storefront_rounded,
-              size: 64.toW(),
-              color: Colors.white.withOpacity(0.9),
-            ),
-            20.ESH(),
-            CustomText(
-              "welcome_to_register_page".toTr(),
-              fontSize: 10,
-              color: Colors.white,
-              fontWeight: FW.bold,
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
+          const SizedBox(height: 32),
+        ],
       ),
     );
   }

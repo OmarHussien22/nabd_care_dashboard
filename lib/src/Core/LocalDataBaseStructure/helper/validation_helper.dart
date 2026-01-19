@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Core/LocalDataBaseStructure/helper/data_base_helper.dart';
+import 'package:care_desk/src/Core/LocalDataBaseStructure/helper/data_base_helper.dart';
 
 class ValidationHelper {
   static final ValidationHelper instance = ValidationHelper._();

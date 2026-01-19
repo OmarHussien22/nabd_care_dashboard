@@ -1,5 +1,5 @@
-import 'package:getx_base_code/src/Core/Libraries/snap/snap.dart';
-import 'package:getx_base_code/src/Core/Libraries/snap/src/snap_overlay/src/Sheet/snap_bottom_sheet.dart';
+import 'package:care_desk/src/Core/Libraries/snap/snap.dart';
+import 'package:care_desk/src/Core/Libraries/snap/src/snap_overlay/src/Sheet/snap_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 
 extension ExtensionBottomSheet on SnapInterface {

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_base_code/src/Core/Constants/Strings/Assets/app_basic_icons.dart';
-import 'package:getx_base_code/src/Core/Constants/Strings/Assets/app_images.dart';
-import 'package:getx_base_code/src/Core/Services/lang_service/translate_extension.dart';
-import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/presentation/manager/login_user_local_controller.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/presentation/manager/register_user_local_controller.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/presentation/pages/add_role_page.dart';
-import 'package:getx_base_code/src/Features/LocalAuth/presentation/widgets/select_roles_sheet.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/Animation/animated_wrapper.dart';
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Features/LocalAuth/presentation/manager/login_user_local_controller.dart';
+import 'package:care_desk/src/Features/LocalAuth/presentation/manager/register_user_local_controller.dart';
+import 'package:care_desk/src/Features/LocalAuth/presentation/pages/add_role_page.dart';
+import 'package:care_desk/src/Features/LocalAuth/presentation/widgets/select_roles_sheet.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/Animation/animated_wrapper.dart';
 
 import '../../../../Core/Constants/Decorations/app_Insets.dart';
 import '../../../../Core/Constants/Decorations/app_physics.dart';

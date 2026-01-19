@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 
 import '../../../../Core/Styles/Colors/app_colors.dart';
 import '../../../../Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';

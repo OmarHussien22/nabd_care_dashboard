@@ -1,5 +1,5 @@
-// import 'package:getx_base_code/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
-// import 'package:getx_base_code/src/Super/Controllers/Interface/master_controller.dart';
+// import 'package:care_desk/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
+// import 'package:care_desk/src/Super/Controllers/Interface/master_controller.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 
 // abstract class CubitControllerInterface<T> extends Cubit<DataState<T>>

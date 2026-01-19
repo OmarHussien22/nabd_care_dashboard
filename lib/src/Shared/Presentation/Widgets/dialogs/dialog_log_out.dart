@@ -1,12 +1,12 @@
-// import 'package:getx_base_code/src/Core/Constants/Decorations/app_shapes.dart';
-// import 'package:getx_base_code/src/Core/Constants/Strings/Assets/app_icons.dart';
-// import 'package:getx_base_code/src/Core/Libraries/snap/snap.dart';
-// import 'package:getx_base_code/src/Core/Styles/Colors/app_colors.dart';
-// import 'package:getx_base_code/src/Core/utils/Extensions/screen_spaces_extension.dart';
-// import 'package:getx_base_code/src/Features/Auth/presentation/manger/logout_controller.dart';
-// import 'package:getx_base_code/src/Features/Auth/presentation/pages/auth_pages_imports.dart';
-// import 'package:getx_base_code/src/Shared/Caches/user_cache.dart';
-// import 'package:getx_base_code/src/Shared/Presentation/Widgets/GeneralWidgets/Buttons/Basic/custom_rounded_button.dart';
+// import 'package:care_desk/src/Core/Constants/Decorations/app_shapes.dart';
+// import 'package:care_desk/src/Core/Constants/Strings/Assets/app_icons.dart';
+// import 'package:care_desk/src/Core/Libraries/snap/snap.dart';
+// import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+// import 'package:care_desk/src/Core/utils/Extensions/screen_spaces_extension.dart';
+// import 'package:care_desk/src/Features/Auth/presentation/manger/logout_controller.dart';
+// import 'package:care_desk/src/Features/Auth/presentation/pages/auth_pages_imports.dart';
+// import 'package:care_desk/src/Shared/Caches/user_cache.dart';
+// import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Buttons/Basic/custom_rounded_button.dart';
 // import 'package:flutter/material.dart';
 //
 // import 'package:get/get.dart';

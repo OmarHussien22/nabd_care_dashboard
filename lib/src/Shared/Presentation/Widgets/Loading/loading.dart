@@ -1,6 +1,6 @@
-import 'package:getx_base_code/src/Core/Constants/decorations/app_sizes.dart';
-import 'package:getx_base_code/src/Core/Styles/Colors/app_colors.dart';
-import 'package:getx_base_code/src/Shared/Presentation/Widgets/Builders/conditional_builder.dart';
+import 'package:care_desk/src/Core/Constants/decorations/app_sizes.dart';
+import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/Builders/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';

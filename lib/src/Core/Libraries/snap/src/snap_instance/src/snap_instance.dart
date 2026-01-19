@@ -1,6 +1,6 @@
-// import 'package:getx_base_code/src/Core/Utils/general_utils.dart';
-// import 'package:getx_base_code/src/Super/Controllers/Interface/master_controller.dart';
-// import 'package:getx_base_code/src/Super/Controllers/Resources/cubit/cubit_controller_interface.dart';
+// import 'package:care_desk/src/Core/Utils/general_utils.dart';
+// import 'package:care_desk/src/Super/Controllers/Interface/master_controller.dart';
+// import 'package:care_desk/src/Super/Controllers/Resources/cubit/cubit_controller_interface.dart';
 
 // class InstanceInfo<T> {
 //   final T dependency;

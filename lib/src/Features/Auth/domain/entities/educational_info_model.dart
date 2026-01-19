@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Core/Utils/Extensions/json_parsing_extension.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/json_parsing_extension.dart';
 
 import '../../data/models/educational_information.dart';
 

@@ -1,5 +1,5 @@
-import 'package:getx_base_code/src/Core/Constants/Decorations/app_Insets.dart';
-import 'package:getx_base_code/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Core/Constants/Decorations/app_Insets.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
 
 

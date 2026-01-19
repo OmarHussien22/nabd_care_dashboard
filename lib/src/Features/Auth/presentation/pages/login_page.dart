@@ -7,144 +7,233 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(LoginUserLocalController());
     final node = FocusScope.of(context);
-    final isWide = MediaQuery.of(context).size.width > 800;
 
+    // Using LayoutBuilder to get responsive constraints
     return Scaffold(
-      backgroundColor: AppColors.get.primary,
+      backgroundColor: AppColors.get.background,
       body: GetBuilder<LoginUserLocalController>(
         builder: (logic) {
-          return Center(
-            child: Container(
-              margin: EdgeInsets.all(24.toH()),
-              padding: EdgeInsets.all(12.toH()),
-              decoration: BoxDecoration(
-                color: AppColors.get.white,
-                borderRadius: BorderRadius.circular(24.toRad()),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.get.shadow,
-                    blurRadius: 10,
-                    offset: const Offset(0, 4),
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              final isWide = constraints.maxWidth > 900;
+
+              if (!isWide) {
+                // Mobile/Tablet View (Vertical)
+                return Center(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(24),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width * 0.6),
+                      child: _LoginForm(logic: logic, node: node),
+                    ),
                   ),
-                ],
-              ),
-              child: Flex(
-                direction: isWide ? Axis.horizontal : Axis.vertical,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                );
+              }
+
+              // Desktop View (Split Screen)
+              return Row(
                 children: [
-                  /// LEFT SIDE — Login Form
+                  // Left Side: Login Form
                   Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 32.toH(),
-                        vertical: 24.toH(),
-                      ),
-                      child: Form(
-                        key: logic.globalKey,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CustomText(
-                              "login",
-                              fontSize: 10,
-                              fontWeight: FW.bold,
-                              color: AppColors.get.primary,
-                            ),
-                            20.ESH(),
-
-                            /// Phone Field
-                            PhoneFormField(
-                              controller: logic.phoneController,
-                              hasCountryCode: false,
-                              onComplete: node.nextFocus,
-                            ),
-                            20.ESH(),
-
-                            /// Password Field
-                            AppPasswordField(
-                              hint: "password".toTr(),
-                              controller: logic.passwordController!,
-                              onComplete: () {
-                                node.unfocus();
-                                logic.login();
-                              },
-                            ),
-                            32.ESH(),
-
-                            /// Login Button
-                            ButtonDefault(
-                              height: 56.toH(),
-                              width: double.infinity,
-                              isDisabled: logic.isButtonDisabled,
-                              title: "login",
-                              onPressed: logic.login,
-                            ),
-                            20.ESH(),
-
-                            const FooterLogin(),
-                          ],
+                    flex: 3,
+                    child: Center(
+                      child: SingleChildScrollView(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 48, vertical: 24),
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                              maxWidth:
+                                  MediaQuery.of(context).size.width * 0.6),
+                          child: _LoginForm(logic: logic, node: node),
                         ),
                       ),
                     ),
                   ),
 
-                  /// RIGHT SIDE — Logo & Description
+                  // Right Side: Branding / Hero
                   Expanded(
-                    flex: 1,
+                    flex: 2,
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.toRad()),
-                        color: AppColors.get.white,
+                        color: AppColors.get.primary,
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            AppColors.get.primary,
+                            AppColors.get.primaryDarker,
+                          ],
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 10,
+                            offset: const Offset(-4, 0),
+                          ),
+                        ],
+                        // image: DecorationImage(
+                        //   image: AssetImage("assets/images/login_bg.png"), // Placeholder if you have an image
+                        //   fit: BoxFit.cover,
+                        //   opacity: 0.1,
+                        // ),
                       ),
-                      padding: EdgeInsets.all(32.toH()),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          /// Logo
+                          // Logo Container
                           Container(
-                            width: isWide ? 180.toH() : 120.toH(),
-                            height: isWide ? 180.toH() : 120.toH(),
+                            padding: const EdgeInsets.all(24),
                             decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.1),
                               shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppColors.get.shadow,
-                                  blurRadius: 6,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                              image: DecorationImage(
-                                image: AssetImage(AppBasicIcons.logo),
-                                fit: BoxFit.cover,
+                              border: Border.all(
+                                color: Colors.white.withOpacity(0.2),
+                                width: 2,
                               ),
                             ),
+                            child: Icon(
+                              Icons.medical_services_rounded,
+                              size: 80,
+                              color: Colors.white,
+                            ),
                           ),
-                          24.ESH(),
-
-                          /// Description
+                          const SizedBox(height: 32),
+                          // Title
                           CustomText(
-                            "welcome_to_your_store".toTr(),
-                            fontSize: 8,
-                            textAlign: TextAlign.center,
-                            color: AppColors.get.title,
+                            "CareDesk System",
+                            fontSize: 18,
+                            fontWeight: FW.bold,
+                            color: Colors.white,
                           ),
-                          8.ESH(),
-                          CustomText(
-                            "login_to_manage_your_business_easily".toTr(),
-                            fontSize: 6.5,
-                            textAlign: TextAlign.center,
-                            color: AppColors.get.amber,
+                          const SizedBox(height: 16),
+                          // Subtitle
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 64),
+                            child: CustomText(
+                              "Manage your clinic efficiently with our comprehensive desktop solution.",
+                              fontSize: 12,
+                              textAlign: TextAlign.center,
+                              color: Colors.white.withOpacity(0.9),
+                            ),
                           ),
                         ],
                       ),
                     ),
                   ),
                 ],
-              ),
-            ),
+              );
+            },
           );
         },
+      ),
+    );
+  }
+}
+
+class _LoginForm extends StatelessWidget {
+  final LoginUserLocalController logic;
+  final FocusScopeNode node;
+
+  const _LoginForm({required this.logic, required this.node});
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: logic.globalKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Header
+          CustomText(
+            "Welcome Back",
+            fontSize: 22,
+            fontWeight: FW.bold,
+            color: AppColors.get.title,
+          ),
+          const SizedBox(height: 8),
+          CustomText(
+            "Please enter your account to sign in.",
+            fontSize: 18,
+            color: AppColors.get.subTitle,
+          ),
+          const SizedBox(height: 48),
+          // Phone Field
+          // CustomText(
+          //   "Phone Number",
+          //   fontSize: 16,
+          //   fontWeight: FW.semiBold,
+          //   color: AppColors.get.title,
+          // ),
+          // const SizedBox(height: 8),
+          PhoneFormField(
+            width: MediaQuery.of(context).size.width * .4,
+            controller: logic.phoneController,
+            hasCountryCode: false,
+            onComplete: node.nextFocus,
+          ),
+          const SizedBox(height: 24),
+
+          // Password Field
+          // CustomText(
+          //   "Password",
+          //   fontSize: 16,
+          //   fontWeight: FW.semiBold,
+          //   color: AppColors.get.title,
+          // ),
+          // const SizedBox(height: 8),
+          AppPasswordField(
+            width: MediaQuery.of(context).size.width * .4,
+            hint: "Enter your password",
+            controller: logic.passwordController!,
+            onComplete: () {
+              node.unfocus();
+              logic.login();
+            },
+          ),
+
+          const SizedBox(height: 42),
+
+          // Login Button
+          Center(
+            child: ButtonDefault(
+              height: 54,
+              width: 350,
+              isDisabled: logic.isButtonDisabled,
+              title: "Sign In",
+              titleSize: 16,
+              onPressed: logic.login,
+            ),
+          ),
+
+          const SizedBox(height: 24),
+
+          // // Register Link
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     CustomText(
+          //       "Don't have an account?",
+          //       //fontSize: 4.5,
+          //       color: AppColors.get.subTitle,
+          //     ),
+          //     TextButton(
+          //       onPressed: () => Get.off(() => const RegisterPage(),
+          //           transition: Transition.noTransition),
+          //       child: CustomText(
+          //         "Sign up",
+          //         // fontSize: 4.5,
+          //         fontWeight: FW.bold,
+          //         color: AppColors.get.primary,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+
+          const SizedBox(height: 24),
+          //  const Center(child: FooterLogin()),
+        ],
       ),
     );
   }

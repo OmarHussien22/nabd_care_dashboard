@@ -1,4 +1,4 @@
-import 'package:getx_base_code/src/Shared/Entities/title_interface.dart';
+import 'package:care_desk/src/Shared/Entities/title_interface.dart';
 
 class RolesModel extends TitleInterface {
   @override
