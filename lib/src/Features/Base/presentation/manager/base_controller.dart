@@ -1,9 +1,9 @@
+import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout_page.dart';
 import 'package:flutter/material.dart';
 import 'package:care_desk/src/Features/settings/presentation/pages/settings_page.dart';
 import '../../../../Core/Services/Storage/storage_service.dart';
 import '../../../../Core/Services/storage/src/storage_constants.dart';
 import '../../../../Super/Controllers/Resources/get/get_controller_interface.dart';
-import '../../../Home/presentation/pages/home_page.dart';
 
 class BaseController extends GetControllerInterface {
   final StorageService<int> _box = StorageService<int>();
@@ -30,7 +30,7 @@ class BaseController extends GetControllerInterface {
     _selectedSubIndex = _box.read(stgBNBIndex) ?? 0;
 
     pages = [
-      const HomePage(),
+      const MainLayoutPage(),
       const SettingsPage(),
     ];
 

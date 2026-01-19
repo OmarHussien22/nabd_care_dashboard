@@ -1,4 +1,4 @@
-import 'package:care_desk/src/Core/Errors/failures.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Exceptions/failure.dart';
 import 'package:care_desk/src/Features/Clinic/data/datasources/clinic_local_datasource.dart';
 import 'package:care_desk/src/Features/Clinic/domain/entities/booking.dart';
 import 'package:care_desk/src/Features/Clinic/domain/entities/doctor.dart';
@@ -71,3 +71,5 @@ class ClinicRepositoryImpl implements ClinicRepository {
     }
   }
 }
+
+

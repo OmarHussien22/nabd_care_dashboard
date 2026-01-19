@@ -21,6 +21,7 @@ class AppFillTextFieldField extends StatelessWidget {
   final bool isSheet;
   final double? fontSizeHint;
   final double? fontSizeHeader;
+  final double? width;
   const AppFillTextFieldField({
     super.key,
     this.controller,
@@ -28,7 +29,7 @@ class AppFillTextFieldField extends StatelessWidget {
     this.hint,
     this.header,
     this.prefixAsset,
-    this.prefixScale = 4.5,
+    this.prefixScale = 2.5,
     this.onTap,
     this.keyboardType,
     this.readOnly = false,
@@ -37,12 +38,13 @@ class AppFillTextFieldField extends StatelessWidget {
     this.fontSizeHint,
     this.fontSizeHeader,
     this.maxLines = 1,
+    this.width,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFieldDefault(
-      width: 180,
+      width: width ?? 180,
       keyboardType: keyboardType,
       fillColor: AppColors.get.greyLight,
       inputDecoration: InputDecorationWithBorder(

@@ -8,12 +8,15 @@ class RegisterUserParams extends LocalParams {
   int roleId;
   bool isActive;
 
+  String clinicName;
+
   RegisterUserParams({
     required this.password,
     required this.name,
     required this.email,
     required this.phone,
     required this.roleId,
+    required this.clinicName,
     this.isActive = true,
   });
 
@@ -21,9 +24,10 @@ class RegisterUserParams extends LocalParams {
   Map<String, dynamic> toJson() => {
         'name': name,
         'email': email,
-        'phone': phone, // ✅ تمت إضافة phone هنا
-        'password': password, // هنشفرها لاحقًا
+        'phone': phone,
+        'password': password,
         'role_id': roleId,
         'is_active': isActive ? 1 : 0,
+        // clinicName is NOT part of user table, handled separately in UseCase
       };
 }

@@ -104,8 +104,7 @@ class _CustomTableState extends State<CustomTable> {
                           columnName,
                           fontWeight: FW.semiBold,
                           fontSize: 4.2,
-                          fontWeight: FW.semiBold,
-                          fontSize: 4.2,
+
                           maxLines: widget.maxLines,
                           isOverFlow: true,
                           // overflow: TextOverflow.ellipsis,
@@ -118,7 +117,7 @@ class _CustomTableState extends State<CustomTable> {
                 rows: List.generate(widget.data.length, (index) {
                   final rowData = widget.data[index];
                   final isSelected = selectedRows[index];
-              
+
                   return DataRow(
                     color: WidgetStateProperty.resolveWith<Color?>(
                       (Set<WidgetState> states) {
@@ -145,8 +144,8 @@ class _CustomTableState extends State<CustomTable> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 6.toW(), vertical: 4.toH()),
                             child: ConstrainedBox(
-                              constraints:
-                                  BoxConstraints(maxWidth: widget.minWidth ?? 140.toW()),
+                              constraints: BoxConstraints(
+                                  maxWidth: widget.minWidth ?? 140.toW()),
                               child: CustomText(
                                 cellData.toString(),
                                 fontSize: 4,
@@ -164,8 +163,8 @@ class _CustomTableState extends State<CustomTable> {
                             children: [
                               for (var action in widget.customRowActions!)
                                 Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 3.toW()),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 3.toW()),
                                   child: action(rowData),
                                 ),
                             ],

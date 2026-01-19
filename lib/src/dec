@@ -1,8 +1,0 @@
-pay_cache  => post  =>auth
-
-      - input =>{
-                - trip_id     int
-                - money       String
-                }
-
-      - output

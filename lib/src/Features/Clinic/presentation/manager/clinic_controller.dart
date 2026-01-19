@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/NetworkStructure/Exceptions/failure.dart';
 import 'package:care_desk/src/Features/Clinic/data/datasources/clinic_local_datasource.dart';
 import 'package:care_desk/src/Features/Clinic/data/repositories/clinic_repository_impl.dart';
 import 'package:care_desk/src/Features/Clinic/domain/entities/booking.dart';
@@ -64,7 +65,7 @@ class ClinicController extends GetxController {
   Future<void> addDoctor(Doctor doctor) async {
     final result = await addDoctorUseCase(doctor);
     result.fold(
-      (failure) => Get.snackbar('Error', failure.message),
+      (failure) => Get.snackbar('Error',LocalFailure.getMessage()),
       (id) => getDoctors(),
     );
   }
@@ -72,7 +73,7 @@ class ClinicController extends GetxController {
   Future<void> getDoctors() async {
     final result = await getDoctorsUseCase();
     result.fold(
-      (failure) => Get.snackbar('Error', failure.message),
+      (failure) => Get.snackbar('Error',LocalFailure.getMessage()),
       (data) => doctors.assignAll(data),
     );
   }
@@ -80,7 +81,7 @@ class ClinicController extends GetxController {
   Future<void> addPatient(Patient patient) async {
     final result = await addPatientUseCase(patient);
     result.fold(
-      (failure) => Get.snackbar('Error', failure.message),
+      (failure) => Get.snackbar('Error',LocalFailure.getMessage()),
       (id) => getPatients(),
     );
   }
@@ -88,7 +89,7 @@ class ClinicController extends GetxController {
   Future<void> getPatients() async {
     final result = await getPatientsUseCase();
     result.fold(
-      (failure) => Get.snackbar('Error', failure.message),
+      (failure) => Get.snackbar('Error',LocalFailure.getMessage()),
       (data) => patients.assignAll(data),
     );
   }
@@ -96,7 +97,7 @@ class ClinicController extends GetxController {
   Future<void> addBooking(Booking booking) async {
     final result = await addBookingUseCase(booking);
     result.fold(
-      (failure) => Get.snackbar('Error', failure.message),
+      (failure) => Get.snackbar('Error',LocalFailure.getMessage()),
       (id) => getBookings(),
     );
   }
@@ -104,7 +105,7 @@ class ClinicController extends GetxController {
   Future<void> getBookings() async {
     final result = await getBookingsUseCase();
     result.fold(
-      (failure) => Get.snackbar('Error', failure.message),
+      (failure) => Get.snackbar('Error',LocalFailure.getMessage()),
       (data) => bookings.assignAll(data),
     );
   }

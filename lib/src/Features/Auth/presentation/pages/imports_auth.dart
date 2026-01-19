@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:care_desk/src/Core/Constants/Strings/Assets/app_basic_icons.dart';
-import 'package:care_desk/src/Core/Constants/Strings/Assets/app_images.dart';
 import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Features/LocalAuth/presentation/manager/login_user_local_controller.dart';

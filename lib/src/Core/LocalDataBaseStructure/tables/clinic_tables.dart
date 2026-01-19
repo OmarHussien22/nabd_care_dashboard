@@ -1,9 +1,26 @@
 import 'package:care_desk/src/Core/LocalDataBaseStructure/localDataSource/interfaces/create_table_data_base.dart';
 
 class ClinicTables {
+  static const String clinicsTable = 'clinics';
   static const String doctorsTable = 'doctors';
   static const String patientsTable = 'patients';
   static const String bookingsTable = 'bookings';
+}
+
+class CreateClinicTable extends CreateTableDataBase {
+  @override
+  Map<String, String> createTable() => {
+        ClinicTables.clinicsTable: '''
+        CREATE TABLE ${ClinicTables.clinicsTable} (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          owner_id INTEGER NOT NULL,
+          name TEXT NOT NULL,
+          created_at TEXT NOT NULL,
+          settings TEXT,
+          FOREIGN KEY (owner_id) REFERENCES users(id)
+        )
+      ''',
+      };
 }
 
 class CreateDoctorsTable extends CreateTableDataBase {

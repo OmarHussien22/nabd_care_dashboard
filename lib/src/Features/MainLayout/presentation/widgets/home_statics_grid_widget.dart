@@ -1,6 +1,6 @@
+import 'package:care_desk/src/Features/MainLayout/presentation/widgets/home_statics_card.dart';
 import 'package:flutter/material.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
-import 'package:care_desk/src/Features/home/presentation/widgets/home_statics_card.dart';
 
 class HomeStaticsGridWidget extends StatelessWidget {
   const HomeStaticsGridWidget({

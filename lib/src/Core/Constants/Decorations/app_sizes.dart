@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppSizes {
   AppSizes._();
-  static const Size screenSize = Size(375, 812);
+  static const Size screenSize = Size(1440, 900);
   static const double loaderRadius = 25.0;
   static const double radius = 15;
   static const double cardRadius = 15;

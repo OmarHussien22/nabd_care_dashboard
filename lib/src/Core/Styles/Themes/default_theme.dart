@@ -14,7 +14,7 @@ final ThemeData _defaultTheme = ThemeData(
     textTheme: ButtonTextTheme.primary,
   ),
   tooltipTheme: getTooltipTheme(),
-  tabBarTheme: TabBarTheme(
+  tabBarTheme: TabBarThemeData(
     indicator: BoxDecoration(
       color: Colors.transparent,
       border: Border(

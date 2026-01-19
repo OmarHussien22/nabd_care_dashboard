@@ -15,7 +15,6 @@ class AppInitializer {
   static Future<void> initializeApp() async {
     WidgetsFlutterBinding.ensureInitialized();
 
-
     ErrorWidget.builder =
         (FlutterErrorDetails details) => AppErrorBuilder(details);
 
@@ -23,7 +22,7 @@ class AppInitializer {
     await StorageService().init();
 
     /// * Http Client Configuratio
-    
+
     //HttpOverrides.global = MyHttpOverrides();
 
     /// * ScreenShot Configuration
@@ -32,12 +31,14 @@ class AppInitializer {
     /// * Network Service Initialization
     ///
     /// ✅ **Initialize sqflite_common_ffi (for Windows, Linux, and MacOS)**
-    sqfliteFfiInit();
-    databaseFactory = databaseFactoryFfi;
+
+    // sqfliteFfiInit();
+    // databaseFactory = databaseFactoryFfi;
+    // await DatabaseHelper.instance.database;
 
     //* delete existing database for testing
     // await DatabaseHelper.instance.deleteDatabase();
-    await DatabaseHelper.instance.database;
+
     NetworkService().init();
 
     /// * App Orientation Configuration

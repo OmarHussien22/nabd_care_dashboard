@@ -17,6 +17,7 @@ class AppPasswordField extends StatefulWidget {
     this.onComplete,
     this.hint = 'enter_password',
     this.headerText,
+    this.width,
   });
 
   final TextEditingController controller;
@@ -26,6 +27,7 @@ class AppPasswordField extends StatefulWidget {
   final Function()? onComplete;
   final String? hint;
   final String? headerText;
+  final double? width;
 
   @override
   State<AppPasswordField> createState() => _AppPasswordFieldState();
@@ -40,17 +42,18 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
       header: TFFHeader(
         title: (widget.headerText ?? 'password').toTr(),
       ),
-      width: 180,
+      width: widget.width ?? 180,
       isRequired: false,
       controller: widget.controller,
-      prefix: PrefixWithIconImage(
-        iconImage: AppIcons.password,
-        scale: 4.5,
-      ),
+      // prefix: PrefixWithIconImage(
+      //   iconImage: AppIcons.password,
+      //   scale: 4.5,
+      // ),
       suffix: SuffixPassword(
         showPassword: isPasswordVisible,
-        constraintsHeight: 20,
-        constraintsWidth: 20,
+        constraintsHeight: MediaQuery.of(context).size.height * .1,
+        constraintsWidth: MediaQuery.of(context).size.width * .1,
+        size: 20,
         onTap: () {
           setState(() {
             isPasswordVisible = !isPasswordVisible;

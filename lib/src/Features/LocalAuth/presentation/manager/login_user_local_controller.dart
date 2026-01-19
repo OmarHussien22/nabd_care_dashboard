@@ -30,7 +30,7 @@ class LoginUserLocalController extends GetControllerInterface<LocalUserModel> {
         final LoginUserLocalUseCase useCase = LoginUserLocalUseCase();
         state = await useCase(
           params: LoginUserParams(
-            phone: phoneController!.text,
+            emailOrPhone: phoneController!.text,
             password: passwordController!.text,
           ),
         );
@@ -41,8 +41,10 @@ class LoginUserLocalController extends GetControllerInterface<LocalUserModel> {
             UserCacheLocal().saveUser(state.data!);
             UserCacheLocal().loginUser();
             printDM("login success ${state.data}");
-           // ClientSnacks.loginSuccess();
-            Get.offAll(const BasePage(),transition: Transition.fadeIn, duration: const Duration(milliseconds: 300));
+            // ClientSnacks.loginSuccess();
+            Get.offAll(const BasePage(),
+                transition: Transition.fadeIn,
+                duration: const Duration(milliseconds: 300));
           }
         } else if (state is DataFailed) {
           printDM("error is=> ${state.error?.title}");

@@ -92,6 +92,30 @@ class _TextFieldDefaultState extends State<TextFieldDefault> {
   bool secureState = true;
   @override
   Widget build(BuildContext context) {
+    // Get screen size
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Adjust width based on screen type
+    double finalWidth = widget.width ?? double.infinity;
+    if (screenWidth >= 1024) {
+      // Desktop
+      finalWidth = widget.width ?? screenWidth * 0.5;
+    } else if (screenWidth >= 600) {
+      // Tablet
+      finalWidth = widget.width ?? screenWidth * 0.75;
+    } else {
+      // Mobile
+      finalWidth = widget.width ?? screenWidth * 0.9;
+    }
+
+    // Adjust height (vertical padding) if حابب
+    double verticalPadding = widget.verticalPadding;
+    if (screenWidth >= 1024) {
+      verticalPadding = widget.verticalPadding * 1.5; // Desktop
+    } else if (screenWidth >= 600) {
+      verticalPadding = widget.verticalPadding * 1.2; // Tablet
+    }
+
     return Stack(
       children: [
         Padding(
@@ -106,7 +130,7 @@ class _TextFieldDefaultState extends State<TextFieldDefault> {
                 ],
               ),
               SizedBox(
-                width: (widget.width)?.toW() ?? double.infinity,
+                width: finalWidth, // Use calculated width
                 child: TextFormField(
                   autocorrect: true,
                   focusNode: widget.focusNode,
@@ -147,21 +171,15 @@ class _TextFieldDefaultState extends State<TextFieldDefault> {
                         ? widget.fillColor ?? AppColors.get.tFFFillColor
                         : null,
                     filled: widget.isFilled,
-                    // HINT TEXT WITH STYLE
-                    // hintText: widget.hint,
                     hintText: widget.hint.title.noneNull.toTr(),
                     hintStyle: widget.hint.getTextStyle,
-                    // LABEL TEXT WITH STYLE
                     labelText: widget.label.title,
                     labelStyle: widget.label.getTextStyle,
-                    // ERROR TEXT STYLE
                     errorStyle: widget.error.getTextStyle,
-                    // PADDING
                     contentPadding: EdgeInsets.symmetric(
-                      vertical: widget.verticalPadding.toH(),
+                      vertical: verticalPadding.toH(),
                       horizontal: widget.horizontalPadding.toW(),
                     ),
-                    //<editor-fold desc="prefix">
                     prefixIcon: widget.prefix.render(context),
                     prefixText: widget.prefix is PrefixWithText
                         ? widget.prefix.title ?? ""
@@ -174,8 +192,6 @@ class _TextFieldDefaultState extends State<TextFieldDefault> {
                           )
                         : null,
                     prefixIconConstraints: widget.prefix.getBoxConstraints,
-                    //</editor-fold>
-                    //<editor-fold desc="Suffix">
                     suffixIcon: widget.suffix.render(context),
                     suffixText: widget.suffix is SuffixWithText
                         ? widget.suffix.title ?? ""
@@ -188,8 +204,6 @@ class _TextFieldDefaultState extends State<TextFieldDefault> {
                           )
                         : null,
                     suffixIconConstraints: widget.suffix.getBoxConstraints,
-                    //</editor-fold>
-                    //<editor-fold desc="Borders">
                     border: TffBorders.getBorder(
                       inputDecoration: widget.inputDecoration,
                       type: BorderType.border,
@@ -210,14 +224,12 @@ class _TextFieldDefaultState extends State<TextFieldDefault> {
                       inputDecoration: widget.inputDecoration,
                       type: BorderType.error,
                     ),
-                    //</editor-fold>
                   ),
                 ),
               ),
             ],
           ),
         ),
-        // if (widget.isRequired) const TFFRequiredBuilder(),
       ],
     );
   }

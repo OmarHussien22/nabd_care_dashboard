@@ -1,9 +1,12 @@
-import 'package:care_desk/src/Core/Errors/failures.dart';
+import 'package:care_desk/src/Core/NetworkStructure/Exceptions/failure.dart';
 import 'package:care_desk/src/Features/Clinic/domain/entities/booking.dart';
 import 'package:care_desk/src/Features/Clinic/domain/entities/doctor.dart';
 import 'package:care_desk/src/Features/Clinic/domain/entities/patient.dart';
 import 'package:care_desk/src/Features/Clinic/domain/repositories/clinic_repository.dart';
 import 'package:dartz/dartz.dart';
+
+
+
 
 class AddDoctorUseCase {
   final ClinicRepository repository;

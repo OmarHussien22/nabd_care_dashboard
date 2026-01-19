@@ -10,7 +10,16 @@ class Failure implements Exception {
     return "$_prefix$_message";
   }
 }
+class LocalFailure extends Failure {
+  LocalFailure({required String message}) : super(message, "Local Failure: ");
+  
 
+ static String getMessage() {
+  
+   return "An error occurred while processing your request locally.";
+  }
+
+}
 class BadRequestException extends Failure {
   BadRequestException([String? message]) : super(message, "Invalid Request: ");
 }

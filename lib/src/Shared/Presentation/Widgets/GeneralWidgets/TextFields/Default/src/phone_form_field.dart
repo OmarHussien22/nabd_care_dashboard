@@ -16,7 +16,7 @@ class PhoneFormField extends StatelessWidget {
   final String? header;
   final bool isEnabled;
   final bool hasCountryCode;
-
+  final double? width;
   const PhoneFormField({
     super.key,
     this.controller,
@@ -27,26 +27,26 @@ class PhoneFormField extends StatelessWidget {
     this.isEnabled = true,
     this.onCountryCodeChanged,
     this.hasCountryCode = false,
+    this.width,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFieldDefault(
-      width: 180,
+      width: width ?? 180,
       keyboardType: TextInputType.phone,
-      header: TFFHeader(
-        title: header ?? 'phone_number'.toTr(),
-      ),
+      header: TFFHeader(title: header ?? 'phone_number'.toTr(), fontSize: 16),
       hint: TFFHint(title: 'enter_phone_number'.toTr()),
       enable: isEnabled,
       controller: controller,
       onChanged: onChanged,
-      validation: AppValidator.phoneValidator.validate,
+
+      validation: validation,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      prefix: PrefixWithIconImage(
-        iconImage: AppIcons.phone,
-        scale: 4.5,
-      ),
+      // prefix: PrefixWithIconImage(
+      //   iconImage: AppIcons.phone,
+      //   scale: 2.5,
+      // ),
       suffix: hasCountryCode
           ? SuffixWithWidget(
               constraintsWidth: 100,

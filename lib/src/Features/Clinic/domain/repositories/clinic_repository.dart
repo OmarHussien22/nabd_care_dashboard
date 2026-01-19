@@ -1,8 +1,8 @@
+import 'package:care_desk/src/Core/NetworkStructure/Exceptions/failure.dart';
 import 'package:care_desk/src/Features/Clinic/domain/entities/booking.dart';
 import 'package:care_desk/src/Features/Clinic/domain/entities/doctor.dart';
 import 'package:care_desk/src/Features/Clinic/domain/entities/patient.dart';
 import 'package:dartz/dartz.dart';
-import 'package:care_desk/src/Core/Errors/failures.dart';
 
 abstract class ClinicRepository {
   Future<Either<Failure, int>> addDoctor(Doctor doctor);
