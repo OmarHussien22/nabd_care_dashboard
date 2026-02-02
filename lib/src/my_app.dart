@@ -2,6 +2,7 @@
 import 'package:care_desk/ai_app/ai_page.dart';
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:care_desk/src/Features/Auth/presentation/pages/imports_auth.dart';
+import 'package:care_desk/src/Features/Base/presentation/pages/base_page.dart';
 import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,7 +47,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         designSize: AppSizes.screenSize,
         minTextAdapt: true,
         builder: (context, child) {
-          child = AppMaterial(home:const AiPage());
+          child = AppMaterial(home:const BasePage());
           return child;
         },
       ),

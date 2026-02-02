@@ -13,24 +13,22 @@ class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BaseController controller = Get.put(BaseController());
-
     return Scaffold(
-   //   backgroundColor: AppColors.get.primary,
       body: SafeArea(
         child: GetBuilder<BaseController>(
           init: controller,
           builder: (cnt) {
             return Row(
               children: [
-                const NavigationSideBar(),
+                 const NavigationSideBar(),
                 //.5.ESW(),
                 Expanded(
                   child: Column(
                     children: [
                       // ✅ AppBar ثابت
-                      const FixedAppBar(),
+                        const FixedAppBar(),
                       10.ESH(),
-                      XDivider.normal( color: AppColors.get.primary),
+                      XDivider.normal(color: AppColors.get.primary),
                       // ✅ محتوى الصفحة
                       Expanded(
                         child: Container(
@@ -38,8 +36,7 @@ class BasePage extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: AppColors.get.activeBackground,
 
-
-                           // borderRadius: const BorderRadius.all(Radius.circular(12)),
+                            // borderRadius: const BorderRadius.all(Radius.circular(12)),
                             // boxShadow: [
                             //   BoxShadow(
                             //     color: Colors.black12,
