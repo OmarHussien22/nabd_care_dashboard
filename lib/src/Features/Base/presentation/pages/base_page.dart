@@ -20,30 +20,19 @@ class BasePage extends StatelessWidget {
           builder: (cnt) {
             return Row(
               children: [
-                 const NavigationSideBar(),
-                //.5.ESW(),
                 Expanded(
                   child: Column(
                     children: [
                       // ✅ AppBar ثابت
-                        const FixedAppBar(),
-                      10.ESH(),
-                      XDivider.normal(color: AppColors.get.primary),
+                      //   const FixedAppBar(),
+                      // 10.ESH(),
+                      // XDivider.normal(color: AppColors.get.primary),
                       // ✅ محتوى الصفحة
                       Expanded(
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: AppColors.get.activeBackground,
-
-                            // borderRadius: const BorderRadius.all(Radius.circular(12)),
-                            // boxShadow: [
-                            //   BoxShadow(
-                            //     color: Colors.black12,
-                            //     blurRadius: 5,
-                            //     offset: Offset(0, 2),
-                            //   ),
-                            // ],
                           ),
                           child: IndexedStack(
                             index: cnt.selectedMainIndex,

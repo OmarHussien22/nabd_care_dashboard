@@ -2,9 +2,42 @@ import 'package:flutter/material.dart';
 
 abstract class ColorInterface {
   // TODO 6 : Add Basic Colors here !
+
+  // Primary - Medical Teal
+  Color get primary => Color(0xFF0D9488); // Teal 600
+  Color get primaryLight => Color(0xFF2DD4BF); // Teal 400
+  Color get primaryDark => Color(0xFF0F766E); // Teal 700
+
+  // Secondary - Soft Green
+  Color get secondary => Color(0xFF10B981); // Emerald 500
+  Color get secondaryLight => Color(0xFF34D399); // Emerald 400
+
+  // Neutrals - Light
+  Color get background => Color(0xFFF8FAFC); // Slate 50
+  Color get surface => Color(0xFFFFFFFF);
+  Color get surfaceContainer => Color(0xFFF1F5F9); // Slate 100
+
+  // Text
+  Color get textPrimary => Color(0xFF1E293B); // Slate 800
+  Color get textSecondary => Color(0xFF64748B); // Slate 500
+  Color get textDisabled => Color(0xFF94A3B8); // Slate 400
+
+  // Status
+  Color get error => Color(0xFFEF4444); // Red 500
+  Color get success => Color(0xFF22C55E); // Green 500
+  Color get warning => Color(0xFFF59E0B); // Amber 500
+  Color get info => Color(0xFF3B82F6); // Blue 500
+
+  // Borders & Dividers
+  Color get border => Color(0xFFE2E8F0); // Slate 200
+  Color get divider => Color(0xFFE2E8F0);
+
+  // Offline State
+  Color get offline => Color(0xFF64748B); // Slate 500
+  Color get syncing => Color(0xFF3B82F6); // Blue 500
+
   Color get primarySwatch => const Color(0xff3F44DC);
 
-  Color get primary => const Color(0xff48736F);
   Color get redAccent => const Color(0xffEA513F);
   Color get secondRed => const Color(0xffA63916);
 
@@ -13,8 +46,6 @@ abstract class ColorInterface {
   Color get lightCard => const Color(0xffF8F3F8);
 
   Color get primaryDarker => const Color(0xff4E0049);
-
-  Color get secondary => const Color(0xffF9EBCC);
 
   Color get third => const Color(0xff9CA0BC);
 
@@ -42,7 +73,7 @@ abstract class ColorInterface {
 
   Color get black => Colors.black87;
 
-  Color get background;
+  // Color get background;
 
   Color get tabBar;
 
@@ -85,7 +116,7 @@ abstract class ColorInterface {
   Color get transparent => Colors.transparent;
 
   Color get red => const Color(0xffFF2C2C);
-  Color get error => red;
+  // Color get error => red;
 
   Color get caution => const Color(0xffFF2D55);
 

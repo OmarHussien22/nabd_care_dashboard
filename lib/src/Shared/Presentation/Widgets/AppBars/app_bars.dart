@@ -1,3 +1,6 @@
+import 'package:care_desk/src/Core/Styles/Colors/app_palette.dart';
+import 'package:care_desk/src/Features/MainLayout/presentation/controller/main_layout_controller.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/sync_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -157,57 +160,106 @@ class AppBars extends StatelessWidget implements PreferredSizeWidget {
 
 //// Custom fixed AppBar System for all pages in the app
 
+// class FixedAppBar extends StatelessWidget implements PreferredSizeWidget {
+//   const FixedAppBar({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: 70,
+//       padding: const EdgeInsets.symmetric(horizontal: 20),
+//       decoration: BoxDecoration(
+//         color: AppColors.get.white,
+//         borderRadius: BorderRadius.circular(12),
+//         boxShadow: [
+//           BoxShadow(
+//             color: AppColors.get.shadow.withOpacity(0.1),
+//             blurRadius: 5,
+//             offset: const Offset(0, 2),
+//           ),
+//         ],
+//       ),
+//       child: Row(
+//         children: [
+//           // حقل بحث بسيط
+//           SizedBox(
+//             width: 75.toW(),
+//             child: Padding(
+//               padding: AppInsets.defaultScreenOnly(top: 12.toH()),
+//               child: TextFieldDefault(
+//                 hint: TFFHint(title: "search..".toTr(), fontSize: 5),
+//                 prefix: PrefixWithIconData(
+//                   iconData: Icons.search,
+//                   color: AppColors.get.tTFPrefixColor,
+//                   size: 15,
+//                 ),
+//                 controller: TextEditingController(),
+//                 inputDecoration: InputDecorationWithBorder(
+//                   enableBorderColor: AppColors.get.greyLight,
+//                 ),
+//               ),
+//             ),
+//           ),
+//           // const SizedBox(width: 20),
+//           const Spacer(),
+//           // زر الوضع الليلي
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.start,
+//             children: [
+//               4.ESW(),
+//               ThemeSwitchButton(),
+//             ],
+//           ),
+
+//           const SizedBox(width: 15),
+
+//           // أيقونة المستخدم
+//           CircleAvatar(
+//             backgroundColor: AppColors.get.primary.withOpacity(0.1),
+//             child: Icon(Icons.person, color: AppColors.get.primary),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+
+//   @override
+//   Size get preferredSize => const Size.fromHeight(70);
+// }
+
 class FixedAppBar extends StatelessWidget implements PreferredSizeWidget {
   const FixedAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cnt = Get.find<MainLayoutController>();
+
     return Container(
-      height: 70,
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      decoration: BoxDecoration(
-        color: AppColors.get.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.get.shadow.withOpacity(0.1),
-            blurRadius: 5,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
+      height: 64,
+      color: AppPalette.surface,
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Row(
         children: [
-          // شعار النظام
-          // Row(
-          //   children: [
-          //     ImageGeneric.asset(
-          //       url: AppBasicIcons.logo,
-
-          //     ),
-          //     const SizedBox(width: 10),
-          //     CustomText(
-          //       "Dreams POS",
-          //       fontSize: 5,
-          //       color: AppColors.get.title,
-          //       fontWeight: FW.bold,
-          //     ),
-          //   ],
-          // ),
-
-          // حقل بحث بسيط
-
-          SizedBox( 
-            width: 75.toW(),
+          // Path / Breadcrumb (Simple Title for now)
+          CustomText(
+            cnt.getPageTitle(cnt.selectedIndex),
+            fontSize: 18,
+            fontWeight: FW.bold,
+            color: AppPalette.textPrimary,
+          ),
+          const Spacer(),
+          SizedBox(
+            width: MediaQuery.sizeOf(context).width * 0.3,
             child: Padding(
-              padding: AppInsets.defaultScreenOnly(top: 12.toH()),
+              padding: AppInsets.defaultScreenALL,
               child: TextFieldDefault(
-                
-                hint: TFFHint(title: "search..".toTr(), fontSize: 5),
+                hint:
+                    TFFHint(title: "search for patient..".toTr(), fontSize: 15),
                 prefix: PrefixWithIconData(
                   iconData: Icons.search,
                   color: AppColors.get.tTFPrefixColor,
-                  size: 15,
+                  scale: 1,
+                  size: 25,
                 ),
                 controller: TextEditingController(),
                 inputDecoration: InputDecorationWithBorder(
@@ -216,47 +268,62 @@ class FixedAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
           ),
-          // const SizedBox(width: 20),
-          const Spacer(),
-          // زر الوضع الليلي
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  const CustomText(
-                    "hello,",
-                    fontSize: 5,
-                  ),
-                  CustomText(
-                    UserLocalController.get.user!.name ?? "",
-                    fontSize: 5,
-                  ),
-                ],
-              ),
-              4.ESW(),
-              IconButton(
-                icon: const Icon(Icons.logout, color: Colors.red),
-                onPressed: () {
-                  UserCacheLocal.instance.logout();
-                  Get.offAll(() => LoginPage(),
-                      duration: const Duration(milliseconds: 500),
-                      transition: Transition.fadeIn);
-                  // ClientSnacks.logoutSuccess();
-                },
-              ),
-              4.ESW(),
-              ThemeSwitchButton(),
-            ],
+
+          // Mock Controls for Demo
+          // IconButton(
+          //   icon: Icon(cnt.isOffline ? Icons.wifi_off : Icons.wifi,
+          //       color: AppPalette.textSecondary),
+          //   tooltip: "Toggle Mock Offline Mode",
+          //   onPressed: () => cnt.toggleNetworkStatus,
+          // ),
+          // const SizedBox(width: 16),
+
+          // Doctor Selector
+          // Container(
+          //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          //   decoration: BoxDecoration(
+          //     color: AppPalette.background,
+          //     borderRadius: BorderRadius.circular(8),
+          //     border: Border.all(color: AppPalette.border),
+          //   ),
+          //   child: Row(
+          //     children: const [
+          //       CircleAvatar(
+          //           radius: 10,
+          //           backgroundColor: AppPalette.primary,
+          //           child: Icon(Icons.person, size: 12, color: Colors.white)),
+          //       SizedBox(width: 8),
+          //       CustomText("Dr. Sarah Bennett",
+          //           fontSize: 13, fontWeight: FW.medium),
+          //       SizedBox(width: 8),
+          //       Icon(Icons.keyboard_arrow_down,
+          //           size: 16, color: AppPalette.textSecondary)
+          //     ],
+          //   ),
+          // ),
+
+          // const SizedBox(width: 16),
+
+          // Sync Indicator
+          SyncIndicator(
+            state: cnt.isOffline ? SyncState.offline : SyncState.online,
+            lastSyncTime: DateTime.now(),
           ),
 
-          const SizedBox(width: 15),
-
-          // أيقونة المستخدم
-          CircleAvatar(
-            backgroundColor: AppColors.get.primary.withOpacity(0.1),
-            child: Icon(Icons.person, color: AppColors.get.primary),
+          const SizedBox(width: 16),
+// Mock Controls for Demo
+          IconButton(
+            icon: Icon(cnt.isOffline ? Icons.wifi_off : Icons.wifi,
+                color: AppPalette.textSecondary),
+            tooltip: "Toggle Mock Offline Mode",
+            onPressed: () => cnt.toggleNetworkStatus,
           ),
+          // Profile
+          // const CircleAvatar(
+          //   radius: 16,
+          //   backgroundColor: AppPalette.surfaceContainer,
+          //   child: Icon(Icons.person_outline, color: AppPalette.textPrimary),
+          // ),
         ],
       ),
     );
