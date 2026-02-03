@@ -1,5 +1,6 @@
 import 'package:care_desk/src/Core/Styles/Colors/app_palette.dart';
 import 'package:care_desk/src/Features/MainLayout/presentation/controller/main_layout_controller.dart';
+import 'package:care_desk/src/Features/common/widgets/custom_search_field.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/sync_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,15 +9,9 @@ import 'package:care_desk/src/Core/Constants/Decorations/app_Insets.dart';
 import 'package:care_desk/src/Core/Constants/Strings/Assets/app_basic_icons.dart';
 import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
-import 'package:care_desk/src/Core/Styles/Themes/theme_switch_button.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
-import 'package:care_desk/src/Features/Auth/presentation/pages/imports_auth.dart';
-import 'package:care_desk/src/Shared/Caches/user_cache_local.dart';
-import 'package:care_desk/src/Shared/Managers/user_local_controller.dart';
-import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Image/generic_image/generic_image.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/default_text_field.dart';
-import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/app_text_field.dart';
 
 import '../GeneralWidgets/Buttons/Customizable/imports_customizable.dart';
 
@@ -158,75 +153,6 @@ class AppBars extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-//// Custom fixed AppBar System for all pages in the app
-
-// class FixedAppBar extends StatelessWidget implements PreferredSizeWidget {
-//   const FixedAppBar({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       height: 70,
-//       padding: const EdgeInsets.symmetric(horizontal: 20),
-//       decoration: BoxDecoration(
-//         color: AppColors.get.white,
-//         borderRadius: BorderRadius.circular(12),
-//         boxShadow: [
-//           BoxShadow(
-//             color: AppColors.get.shadow.withOpacity(0.1),
-//             blurRadius: 5,
-//             offset: const Offset(0, 2),
-//           ),
-//         ],
-//       ),
-//       child: Row(
-//         children: [
-//           // حقل بحث بسيط
-//           SizedBox(
-//             width: 75.toW(),
-//             child: Padding(
-//               padding: AppInsets.defaultScreenOnly(top: 12.toH()),
-//               child: TextFieldDefault(
-//                 hint: TFFHint(title: "search..".toTr(), fontSize: 5),
-//                 prefix: PrefixWithIconData(
-//                   iconData: Icons.search,
-//                   color: AppColors.get.tTFPrefixColor,
-//                   size: 15,
-//                 ),
-//                 controller: TextEditingController(),
-//                 inputDecoration: InputDecorationWithBorder(
-//                   enableBorderColor: AppColors.get.greyLight,
-//                 ),
-//               ),
-//             ),
-//           ),
-//           // const SizedBox(width: 20),
-//           const Spacer(),
-//           // زر الوضع الليلي
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.start,
-//             children: [
-//               4.ESW(),
-//               ThemeSwitchButton(),
-//             ],
-//           ),
-
-//           const SizedBox(width: 15),
-
-//           // أيقونة المستخدم
-//           CircleAvatar(
-//             backgroundColor: AppColors.get.primary.withOpacity(0.1),
-//             child: Icon(Icons.person, color: AppColors.get.primary),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-
-//   @override
-//   Size get preferredSize => const Size.fromHeight(70);
-// }
-
 class FixedAppBar extends StatelessWidget implements PreferredSizeWidget {
   const FixedAppBar({super.key});
 
@@ -235,7 +161,7 @@ class FixedAppBar extends StatelessWidget implements PreferredSizeWidget {
     final cnt = Get.find<MainLayoutController>();
 
     return Container(
-      height: 64,
+      height: 80.toH(),
       color: AppPalette.surface,
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Row(
@@ -248,27 +174,8 @@ class FixedAppBar extends StatelessWidget implements PreferredSizeWidget {
             color: AppPalette.textPrimary,
           ),
           const Spacer(),
-          SizedBox(
-            width: MediaQuery.sizeOf(context).width * 0.3,
-            child: Padding(
-              padding: AppInsets.defaultScreenALL,
-              child: TextFieldDefault(
-                hint:
-                    TFFHint(title: "search for patient..".toTr(), fontSize: 15),
-                prefix: PrefixWithIconData(
-                  iconData: Icons.search,
-                  color: AppColors.get.tTFPrefixColor,
-                  scale: 1,
-                  size: 25,
-                ),
-                controller: TextEditingController(),
-                inputDecoration: InputDecorationWithBorder(
-                  enableBorderColor: AppColors.get.greyLight,
-                ),
-              ),
-            ),
-          ),
-
+          CustomSearchField(),
+          const Spacer(),
           // Mock Controls for Demo
           // IconButton(
           //   icon: Icon(cnt.isOffline ? Icons.wifi_off : Icons.wifi,
@@ -311,7 +218,7 @@ class FixedAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
 
           const SizedBox(width: 16),
-// Mock Controls for Demo
+          // Mock Controls for Demo
           IconButton(
             icon: Icon(cnt.isOffline ? Icons.wifi_off : Icons.wifi,
                 color: AppPalette.textSecondary),

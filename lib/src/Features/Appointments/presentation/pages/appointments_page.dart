@@ -1,4 +1,5 @@
 import 'package:care_desk/src/Core/Styles/Colors/app_palette.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/Animation/animated_wrapper.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/General/dynamic_table.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/Inputs/desktop_input.dart';
@@ -82,78 +83,81 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
       const TableColumn(label: "Status", width: 120),
     ];
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  CustomText("Today's Appointments",
-                      fontSize: 24,
-                      fontWeight: FW.bold,
-                      color: AppPalette.textPrimary),
-                  SizedBox(height: 4),
-                  CustomText("Manage your daily schedule",
-                      color: AppPalette.textSecondary),
-                ],
-              ),
-              ElevatedButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.add),
-                label: const CustomText("New Appointment"),
-              ),
-            ],
-          ),
-          const SizedBox(height: 5),
-
-          // Filters
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: 250,
-                child: DesktopInput(
-                    label: "",
-                    hint: "Search patients...",
-                    prefixIcon: const Icon(Icons.search, size: 20)),
-              ),
-              const SizedBox(width: 16),
-              OutlinedButton.icon(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(
-                  // side: const BorderSide(color: AppPalette.border),
-                  // alignment: Alignment.centerLeft,
-                  fixedSize: const Size(100, 42),
+    return AnimatedWrapper(
+      styles: WrapAnimationStyles.slide,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    CustomText("Today's Appointments",
+                        fontSize: 24,
+                        fontWeight: FW.bold,
+                        color: AppPalette.textPrimary),
+                    SizedBox(height: 4),
+                    CustomText("Manage your daily schedule",
+                        color: AppPalette.textSecondary),
+                  ],
                 ),
-                icon: const Icon(Icons.filter_list, size: 18),
-                label: const CustomText("Filter"),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-
-          // Table
-          Expanded(
-            child: DynamicTable(
-              columns: columns,
-              rows: _rows,
-              currentPage: _currentPage,
-              totalPages: _totalPages,
-              onPageChanged: (page) {
-                _fetchAppointments(page);
-              },
-              onEdit: (id) {},
-              onDelete: (id) {},
-              onView: (id) {},
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.add),
+                  label: const CustomText("New Appointment"),
+                ),
+              ],
             ),
-          ),
-        ],
+            const SizedBox(height: 5),
+
+            // Filters
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 250,
+                  child: DesktopInput(
+                      label: "",
+                      hint: "Search patients...",
+                      prefixIcon: const Icon(Icons.search, size: 20)),
+                ),
+                const SizedBox(width: 16),
+                OutlinedButton.icon(
+                  onPressed: () {},
+                  style: OutlinedButton.styleFrom(
+                    // side: const BorderSide(color: AppPalette.border),
+                    // alignment: Alignment.centerLeft,
+                    fixedSize: const Size(100, 42),
+                  ),
+                  icon: const Icon(Icons.filter_list, size: 18),
+                  label: const CustomText("Filter"),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+
+            // Table
+            Expanded(
+              child: DynamicTable(
+                columns: columns,
+                rows: _rows,
+                currentPage: _currentPage,
+                totalPages: _totalPages,
+                onPageChanged: (page) {
+                  _fetchAppointments(page);
+                },
+                onEdit: (id) {},
+                onDelete: (id) {},
+                onView: (id) {},
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

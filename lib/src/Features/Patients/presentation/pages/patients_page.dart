@@ -1,4 +1,5 @@
 import 'package:care_desk/src/Core/Styles/Colors/app_palette.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/Animation/animated_wrapper.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/General/dynamic_table.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/Inputs/desktop_input.dart';
@@ -121,62 +122,67 @@ class PatientsPage extends StatelessWidget {
       );
     });
 
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const CustomText("Patients Directory",
-              fontSize: 24, fontWeight: FW.bold, color: AppPalette.textPrimary),
-          const SizedBox(height: 16),
+    return AnimatedWrapper(
+      styles: WrapAnimationStyles.slide,
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const CustomText("Patients Directory",
+                fontSize: 24,
+                fontWeight: FW.bold,
+                color: AppPalette.textPrimary),
+            const SizedBox(height: 16),
 
-          // Filters
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: 300,
-                child: DesktopInput(
-                    label: "",
-                    hint: "Search by name or ID...",
-                    prefixIcon: const Icon(Icons.search, size: 20)),
-              ),
-              const SizedBox(width: 16),
-              OutlinedButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.filter_list, size: 18),
-                style: OutlinedButton.styleFrom(
-                  fixedSize: const Size(120, 42),
+            // Filters
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 300,
+                  child: DesktopInput(
+                      label: "",
+                      hint: "Search by name or ID...",
+                      prefixIcon: const Icon(Icons.search, size: 20)),
                 ),
-                label: const CustomText("Filter"),
-              ),
-              const Spacer(),
-              ElevatedButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.add),
-                label: const CustomText("Add Patient"),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
+                const SizedBox(width: 16),
+                OutlinedButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.filter_list, size: 18),
+                  style: OutlinedButton.styleFrom(
+                    fixedSize: const Size(120, 42),
+                  ),
+                  label: const CustomText("Filter"),
+                ),
+                const Spacer(),
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.add),
+                  label: const CustomText("Add Patient"),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
 
-          Expanded(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: DynamicTable(
-                columns: columns,
-                rows: rows,
-                currentPage: 1,
-                totalPages: 8,
-                onPageChanged: (p) {},
-                onView: (id) {},
-                onEdit: (id) {},
-                onDelete: (id) {},
+            Expanded(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: DynamicTable(
+                  columns: columns,
+                  rows: rows,
+                  currentPage: 1,
+                  totalPages: 8,
+                  onPageChanged: (p) {},
+                  onView: (id) {},
+                  onEdit: (id) {},
+                  onDelete: (id) {},
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:care_desk/src/Core/Styles/Colors/app_palette.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +20,8 @@ class Sidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 200),
-      width: isCollapsed ? 70 : 260,
+      duration: const Duration(milliseconds: 450),
+      width: isCollapsed ? 70 : 220,
       decoration: BoxDecoration(
         color: AppPalette.surface,
         border: const Border(right: BorderSide(color: AppPalette.border)),
@@ -28,31 +29,39 @@ class Sidebar extends StatelessWidget {
       child: Column(
         children: [
           // Header / Logo
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
+          // 10.ESW(),
+          Container(
+            height: 80.toH(),
             alignment: isCollapsed ? Alignment.center : Alignment.centerLeft,
-            child: Container(
-              height: 64,
-              padding: EdgeInsets.symmetric(horizontal: isCollapsed ? 12 : 24),
-              alignment: isCollapsed ? Alignment.center : Alignment.centerLeft,
-              child: Row(
-                mainAxisAlignment: isCollapsed
-                    ? MainAxisAlignment.center
-                    : MainAxisAlignment.start,
-                children: [
-                  const Icon(Icons.local_hospital_rounded,
-                      color: AppPalette.primary, size: 28),
-                  if (!isCollapsed) ...[
-                    const SizedBox(width: 12),
-                    const CustomText(
-                      "CareDesk",
-                      fontWeight: FW.bold,
-                      fontSize: 20,
-                      color: AppPalette.textPrimary,
-                    ),
-                  ]
-                ],
-              ),
+            child: Row(
+              mainAxisAlignment: isCollapsed
+                  ? MainAxisAlignment.center
+                  : MainAxisAlignment.start,
+              children: [
+                isCollapsed ? 14.ESW() : 18.ESW(),
+                const Icon(
+                  Icons.local_hospital_rounded,
+                  color: AppPalette.primary,
+                  size: 28,
+                ),
+                const SizedBox(width: 12),
+                AnimatedSize(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  child: AnimatedOpacity(
+                    duration: const Duration(milliseconds: 200),
+                    opacity: isCollapsed ? 0 : 1,
+                    child: isCollapsed
+                        ? const SizedBox.shrink()
+                        : const CustomText(
+                            "CareDesk",
+                            fontWeight: FW.bold,
+                            fontSize: 20,
+                            color: AppPalette.textPrimary,
+                          ),
+                  ),
+                ),
+              ],
             ),
           ),
           const Divider(height: 1),
@@ -123,42 +132,49 @@ class Sidebar extends StatelessWidget {
                     : Colors.transparent,
               ),
             ),
-            child: isCollapsed
-                ? Icon(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                // Show only icon when width is too small (during animation or collapsed)
+                final bool showOnlyIcon = constraints.maxWidth < 80;
+
+                if (showOnlyIcon) {
+                  return Icon(
                     icon,
                     size: 18,
                     color: isSelected
                         ? AppPalette.primary
                         : AppPalette.textSecondary,
-                  )
-                : Row(
-                    mainAxisAlignment: isCollapsed
-                        ? MainAxisAlignment.center
-                        : MainAxisAlignment.start,
-                    children: [
-                      Icon(
-                        icon,
-                        size: 22,
-                        color: isSelected
-                            ? AppPalette.primary
-                            : AppPalette.textSecondary,
-                      ),
-                      if (!isCollapsed) ...[
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: CustomText(
-                            label,
-                            color: isSelected
-                                ? AppPalette.primary
-                                : AppPalette.textPrimary,
-                            fontWeight: isSelected ? FW.semiBold : FW.medium,
-                            fontSize: 14,
-                            isOverFlow: true,
-                          ),
+                  );
+                }
+
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Icon(
+                      icon,
+                      size: 22,
+                      color: isSelected
+                          ? AppPalette.primary
+                          : AppPalette.textSecondary,
+                    ),
+                    if (!showOnlyIcon) ...[
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: CustomText(
+                          label,
+                          color: isSelected
+                              ? AppPalette.primary
+                              : AppPalette.textPrimary,
+                          fontWeight: isSelected ? FW.semiBold : FW.medium,
+                          fontSize: 14,
+                          isOverFlow: true,
                         ),
-                      ]
+                      ),
                     ],
-                  ),
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),
