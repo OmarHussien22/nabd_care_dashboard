@@ -57,45 +57,47 @@ class _DynamicTableState extends State<DynamicTable> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: double.infinity,
-      decoration: BoxDecoration(
-        border: Border.all(color: AppPalette.border),
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildHeader(),
-          // Table Body with Scroll
-          Expanded(
-            child: SingleChildScrollView(
-              // scrollDirection: Axis.horizontal,
+    return Material(
+      child: Container(
+        height: double.infinity,
+        decoration: BoxDecoration(
+          border: Border.all(color: AppPalette.border),
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildHeader(),
+            // Table Body with Scroll
+            Expanded(
+              child: SingleChildScrollView(
+                // scrollDirection: Axis.horizontal,
 
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Sticky Header (in scroll view for horizontal sync, sticky not easy horizontally without SyncScroll, so keeping simple Header first)
-                  // Note: For true sticky header with horizontal scroll, we ideally use specific packages or TwoScrollViews.
-                  // For simplicity in this task, we'll put the header inside the scroll view.
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Sticky Header (in scroll view for horizontal sync, sticky not easy horizontally without SyncScroll, so keeping simple Header first)
+                    // Note: For true sticky header with horizontal scroll, we ideally use specific packages or TwoScrollViews.
+                    // For simplicity in this task, we'll put the header inside the scroll view.
 
-                  if (widget.rows.isEmpty)
-                    const Padding(
-                      padding: EdgeInsets.all(0.0),
-                      child: Center(
-                          child: CustomText("No data available",
-                              color: AppPalette.textSecondary)),
-                    )
-                  else
-                    ...widget.rows.map((row) => _buildRow(row)),
-                ],
+                    if (widget.rows.isEmpty)
+                      const Padding(
+                        padding: EdgeInsets.all(0.0),
+                        child: Center(
+                            child: CustomText("No data available",
+                                color: AppPalette.textSecondary)),
+                      )
+                    else
+                      ...widget.rows.map((row) => _buildRow(row)),
+                  ],
+                ),
               ),
             ),
-          ),
 
-          // Pagination Footer
-          _buildPagination(),
-        ],
+            // Pagination Footer
+            _buildPagination(),
+          ],
+        ),
       ),
     );
   }

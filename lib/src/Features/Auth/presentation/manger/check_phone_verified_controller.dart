@@ -1,7 +1,7 @@
 import 'package:care_desk/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
 import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:care_desk/src/Core/Utils/SnackUtils/snack_utils.dart';
-import 'package:care_desk/src/Features/Base/presentation/pages/base_page.dart';
+import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout_page.dart';
 import 'package:care_desk/src/Shared/Models/user_model.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Dialogs/app_dialogs.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Snackbar/client_snacks.dart';
@@ -19,7 +19,7 @@ class CheckPhoneVerifiedController extends GetControllerInterface<UserModel> {
     emit(state);
     if (state is DataSuccess) {
       if (state.data?.isPhoneVerify ?? false) {
-        Get.offAll(() => const BasePage());
+        Get.offAll(() => const MainLayoutPage());
       } else {
         AppSnacks().showSnack(
             title: "phone_not_verified".toTr(), state: UtilState.warning);

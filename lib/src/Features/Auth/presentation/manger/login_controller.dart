@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:care_desk/src/Core/App/app_flow.dart';
@@ -12,7 +13,6 @@ import '../../../../Core/Utils/general_utils.dart';
 import '../../../../Shared/Managers/user_controller.dart';
 import '../../../../Shared/Presentation/Widgets/GeneralWidgets/Snackbar/client_snacks.dart';
 import '../../../../Super/Controllers/Resources/get/get_controller_interface.dart';
-import '../../../Base/presentation/pages/base_page.dart';
 import '../../core/params/login_params.dart';
 import '../../domain/use_cases/login_use_case.dart';
 
@@ -44,7 +44,7 @@ class LoginController extends GetControllerInterface<UserModel> {
       onSuccessValidate: () async {
         if (AppFlow.currentSource == AppSource.dev) {
           ClientSnacks.loginSuccess();
-          Get.offAll(const BasePage());
+          Get.offAll(const MainLayoutPage());
           return;
         }
         final LoginUseCase useCase = LoginUseCase();
@@ -167,7 +167,7 @@ class LoginController extends GetControllerInterface<UserModel> {
         UserController.get.updateUser(state.data!);
         // Get.put(AppStatusController()).fetchAppStatus();
         UserCache().loginUser();
-        Get.offAll(const BasePage());
+        Get.offAll(const MainLayoutPage());
         // } else {
         //   UserController.get.updateUser(state.data!);
         //   if (state.data!.type == 1) {

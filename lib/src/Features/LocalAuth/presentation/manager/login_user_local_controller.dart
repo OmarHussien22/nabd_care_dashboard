@@ -1,6 +1,6 @@
+import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:care_desk/src/Features/Base/presentation/pages/base_page.dart';
 import 'package:care_desk/src/Features/LocalAuth/data/models/local_user_model.dart';
 import 'package:care_desk/src/Features/LocalAuth/domain/use_cases/login_user_local_use_case.dart';
 import 'package:care_desk/src/Features/LocalAuth/login_user_params.dart';
@@ -42,7 +42,7 @@ class LoginUserLocalController extends GetControllerInterface<LocalUserModel> {
             UserCacheLocal().loginUser();
             printDM("login success ${state.data}");
             // ClientSnacks.loginSuccess();
-            Get.offAll(const BasePage(),
+            Get.offAll(const MainLayoutPage(),
                 transition: Transition.fadeIn,
                 duration: const Duration(milliseconds: 300));
           }

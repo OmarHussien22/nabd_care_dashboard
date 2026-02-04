@@ -6,10 +6,6 @@ class MainLayoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MainLayout(
-      // child: Center(
-      //   child: Text('Home Page'),
-      // ),
-    );
+    return const MainLayout();
   }
 }

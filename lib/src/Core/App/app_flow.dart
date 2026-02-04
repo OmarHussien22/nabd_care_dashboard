@@ -1,8 +1,8 @@
+import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout_page.dart';
 import 'package:get/get.dart';
 import 'package:care_desk/src/Core/Services/Storage/storage_service.dart';
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:care_desk/src/Features/Auth/presentation/pages/imports_auth.dart';
-import 'package:care_desk/src/Features/Base/presentation/pages/base_page.dart';
 
 import '../Constants/Enums/app_source.dart';
 
@@ -30,7 +30,7 @@ class AppFlow {
     // if (isOnBoardingDone) {
 
     if (isLoggedIn) {
-      Get.offAll(() => const BasePage());
+      Get.offAll(() => const MainLayoutPage());
     } else {
       Get.offAll(() => const LoginPage());
     }

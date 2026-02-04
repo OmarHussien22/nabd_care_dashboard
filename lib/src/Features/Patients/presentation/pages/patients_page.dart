@@ -1,9 +1,11 @@
 import 'package:care_desk/src/Core/Styles/Colors/app_palette.dart';
+import 'package:care_desk/src/Core/routers/app_router_imports.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/Animation/animated_wrapper.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/General/dynamic_table.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/Inputs/desktop_input.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PatientsPage extends StatelessWidget {
   const PatientsPage({super.key});
@@ -158,7 +160,9 @@ class PatientsPage extends StatelessWidget {
                 ),
                 const Spacer(),
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed("${AppRoutes.addPatient}/1");
+                  },
                   icon: const Icon(Icons.add),
                   label: const CustomText("Add Patient"),
                 ),

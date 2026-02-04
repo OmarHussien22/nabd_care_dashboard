@@ -1,7 +1,7 @@
 import 'package:care_desk/src/Core/Styles/Colors/app_palette.dart';
-import 'package:care_desk/src/Features/MainLayout/presentation/controller/main_layout_controller.dart';
+import 'package:care_desk/src/Features/MainLayout/controller/main_layout_controller.dart';
 import 'package:care_desk/src/Features/common/widgets/custom_search_field.dart';
-import 'package:care_desk/src/Shared/Presentation/Widgets/sync_indicator.dart';
+import 'package:care_desk/src/Features/MainLayout/presentation/widgets/sync_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';

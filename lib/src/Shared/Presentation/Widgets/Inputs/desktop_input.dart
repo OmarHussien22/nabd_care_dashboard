@@ -26,31 +26,31 @@ class DesktopInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        CustomText(
-          label, 
-          fontSize: 13, 
-          fontWeight: FW.medium, 
-          color: AppPalette.textPrimary
-        ),
-        const SizedBox(height: 6),
-        TextFormField(
-          controller: controller,
-          obscureText: isPassword,
-          maxLines: maxLines,
-          validator: validator,
-          style: const TextStyle(fontSize: 14),
-          decoration: InputDecoration(
-            hintText: hint,
-            prefixIcon: prefixIcon,
-            suffixIcon: suffixIcon,
-            // Styling is handled globally by Theme in themes.dart
-          ),
-        ),
-      ],
+    return Material(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CustomText(label,
+              fontSize: 13,
+              fontWeight: FW.medium,
+              color: AppPalette.textPrimary),
+          const SizedBox(height: 6),
+          // TextFormField(
+          //   controller: controller,
+          //   obscureText: isPassword,
+          //   maxLines: maxLines,
+          //   validator: validator,
+          //   style: const TextStyle(fontSize: 14),
+          //   decoration: InputDecoration(
+          //     hintText: hint,
+          //     prefixIcon: prefixIcon,
+          //     suffixIcon: suffixIcon,
+          //     // Styling is handled globally by Theme in themes.dart
+          //   ),
+          // ),
+        ],
+      ),
     );
   }
 }
