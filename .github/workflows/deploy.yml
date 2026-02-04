@@ -2,26 +2,29 @@ name: Deploy Flutter Web
 on:
   push:
     branches:
-      - dev # العملية هتبدأ أول ما تعمل push على برانش الـ dev
+      - dev
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4 # تحديث للإصدار 4 أسرع وأفضل
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.32.8'
+          flutter-version: '3.32.8' # الإصدار بتاعك بالظبط
           channel: 'stable'
 
       - run: flutter config --enable-web
+      - run: flutter pub get
       
-      # تأكد إن اسم المستودع بين العلامات / / صح
-      - run: flutter build web --release --base-href /nabd_care_dashboard/ --web-renderer html
+      # تعديل بسيط في الأمر: حذفنا الـ renderer مؤقتاً للتأكد من الـ build الأساسي
+      # وزودنا سطر للتأكد من نظافة الفولدر قبل الـ build
+      - run: flutter clean
+      - run: flutter build web --release --base-href /nabd_care_dashboard/
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3 # ده الأكشن الصحيح والآمن للرفع
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
-          publish_branch: prod # هنا بنقول له ارفع ناتج الـ build على برانش prod
+          publish_branch: prod
