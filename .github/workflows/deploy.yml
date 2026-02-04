@@ -32,7 +32,7 @@ jobs:
       # وزودنا سطر للتأكد من نظافة الفولدر قبل الـ build
       - run: flutter clean
       - run: flutter build web --release --base-href /nabd_care_dashboard/
-
+      
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
