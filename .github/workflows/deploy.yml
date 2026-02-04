@@ -11,12 +11,13 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.32.8'
           channel: 'stable'
 
       - run: flutter config --enable-web
       
       # تأكد إن اسم المستودع بين العلامات / / صح
-      - run: flutter build web --release --base-href /nabd_care_dashboard/
+      - run: flutter build web --release --base-href /nabd_care_dashboard/ --web-renderer html
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3 # ده الأكشن الصحيح والآمن للرفع
