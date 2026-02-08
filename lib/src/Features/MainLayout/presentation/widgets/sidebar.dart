@@ -101,17 +101,17 @@ class Sidebar extends StatelessWidget {
                 ),
                 // _buildNavItem(3, Icons.medical_services_rounded, "Treatments"),
                 // _buildNavItem(4, Icons.payments_rounded, "Billing"),
-                const SizedBox(height: 24),
-                if (!isCollapsed)
-                  Padding(
-                    padding: EdgeInsets.only(left: 12, bottom: 8),
-                    child: CustomText(
-                      "SETTINGS",
-                      fontSize: 11,
-                      fontWeight: FW.bold,
-                      color: AppColors.get.textSecondary,
-                    ),
-                  ),
+                // const SizedBox(height: 24),
+                // if (!isCollapsed)
+                //   Padding(
+                //     padding: EdgeInsets.only(left: 12, bottom: 8),
+                //     child: CustomText(
+                //       "SETTINGS",
+                //       fontSize: 11,
+                //       fontWeight: FW.bold,
+                //       color: AppColors.get.textSecondary,
+                //     ),
+                //   ),
                 SideBarItem(
                   index: 5,
                   icon: Icons.settings_rounded,

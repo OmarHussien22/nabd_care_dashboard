@@ -5,13 +5,10 @@ import 'package:care_desk/src/Features/MainLayout/presentation/widgets/sync_indi
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:care_desk/src/Core/Constants/Decorations/app_Insets.dart';
 import 'package:care_desk/src/Core/Constants/Strings/Assets/app_basic_icons.dart';
-import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
-import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/default_text_field.dart';
 
 import '../GeneralWidgets/Buttons/Customizable/imports_customizable.dart';
 
@@ -158,80 +155,84 @@ class FixedAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cnt = Get.find<MainLayoutController>();
+    Get.find<MainLayoutController>();
 
     return Container(
       height: 80.toH(),
-      color: AppPalette.surface,
+      color: AppColors.get.surface,
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Row(
-        children: [
-          // Path / Breadcrumb (Simple Title for now)
-          CustomText(
-            cnt.getPageTitle(cnt.selectedIndex),
-            fontSize: 18,
-            fontWeight: FW.bold,
-            color: AppPalette.textPrimary,
-          ),
-          const Spacer(),
-          CustomSearchField(),
-          const Spacer(),
-          // Mock Controls for Demo
-          // IconButton(
-          //   icon: Icon(cnt.isOffline ? Icons.wifi_off : Icons.wifi,
-          //       color: AppPalette.textSecondary),
-          //   tooltip: "Toggle Mock Offline Mode",
-          //   onPressed: () => cnt.toggleNetworkStatus,
-          // ),
-          // const SizedBox(width: 16),
+      child: GetBuilder<MainLayoutController>(
+        builder: (cnt) {
+          return Row(
+            children: [
+              // Path / Breadcrumb (Simple Title for now)
+              CustomText(
+                cnt.getPageTitle(cnt.selectedIndex),
+                fontSize: 18,
+                fontWeight: FW.bold,
+                color: AppColors.get.textPrimary,
+              ),
+              const Spacer(),
+              CustomSearchField(),
+              const Spacer(),
+              // Mock Controls for Demo
+              // IconButton(
+              //   icon: Icon(cnt.isOffline ? Icons.wifi_off : Icons.wifi,
+              //       color: AppPalette.textSecondary),
+              //   tooltip: "Toggle Mock Offline Mode",
+              //   onPressed: () => cnt.toggleNetworkStatus,
+              // ),
+              // const SizedBox(width: 16),
 
-          // Doctor Selector
-          // Container(
-          //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          //   decoration: BoxDecoration(
-          //     color: AppPalette.background,
-          //     borderRadius: BorderRadius.circular(8),
-          //     border: Border.all(color: AppPalette.border),
-          //   ),
-          //   child: Row(
-          //     children: const [
-          //       CircleAvatar(
-          //           radius: 10,
-          //           backgroundColor: AppPalette.primary,
-          //           child: Icon(Icons.person, size: 12, color: Colors.white)),
-          //       SizedBox(width: 8),
-          //       CustomText("Dr. Sarah Bennett",
-          //           fontSize: 13, fontWeight: FW.medium),
-          //       SizedBox(width: 8),
-          //       Icon(Icons.keyboard_arrow_down,
-          //           size: 16, color: AppPalette.textSecondary)
-          //     ],
-          //   ),
-          // ),
+              // Doctor Selector
+              // Container(
+              //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              //   decoration: BoxDecoration(
+              //     color: AppPalette.background,
+              //     borderRadius: BorderRadius.circular(8),
+              //     border: Border.all(color: AppPalette.border),
+              //   ),
+              //   child: Row(
+              //     children: const [
+              //       CircleAvatar(
+              //           radius: 10,
+              //           backgroundColor: AppPalette.primary,
+              //           child: Icon(Icons.person, size: 12, color: Colors.white)),
+              //       SizedBox(width: 8),
+              //       CustomText("Dr. Sarah Bennett",
+              //           fontSize: 13, fontWeight: FW.medium),
+              //       SizedBox(width: 8),
+              //       Icon(Icons.keyboard_arrow_down,
+              //           size: 16, color: AppPalette.textSecondary)
+              //     ],
+              //   ),
+              // ),
 
-          // const SizedBox(width: 16),
+              // const SizedBox(width: 16),
 
-          // Sync Indicator
-          SyncIndicator(
-            state: cnt.isOffline ? SyncState.offline : SyncState.online,
-            lastSyncTime: DateTime.now(),
-          ),
+              // Sync Indicator
+              // SyncIndicator(
+              //   state: cnt.isOffline ? SyncState.offline : SyncState.online,
+              //   lastSyncTime: DateTime.now(),
+              // ),
 
-          const SizedBox(width: 16),
-          // Mock Controls for Demo
-          IconButton(
-            icon: Icon(cnt.isOffline ? Icons.wifi_off : Icons.wifi,
-                color: AppPalette.textSecondary),
-            tooltip: "Toggle Mock Offline Mode",
-            onPressed: () => cnt.toggleNetworkStatus,
-          ),
-          // Profile
-          // const CircleAvatar(
-          //   radius: 16,
-          //   backgroundColor: AppPalette.surfaceContainer,
-          //   child: Icon(Icons.person_outline, color: AppPalette.textPrimary),
-          // ),
-        ],
+              const SizedBox(width: 16),
+              // Mock Controls for Demo
+              // IconButton(
+              //   icon: Icon(cnt.isOffline ? Icons.wifi_off : Icons.wifi,
+              //       color: AppColors.get.textSecondary),
+              //   tooltip: "Toggle Mock Offline Mode",
+              //   onPressed: () => cnt.toggleNetworkStatus,
+              // ),
+              // Profile
+              // const CircleAvatar(
+              //   radius: 16,
+              //   backgroundColor: AppPalette.surfaceContainer,
+              //   child: Icon(Icons.person_outline, color: AppPalette.textPrimary),
+              // ),
+            ],
+          );
+        },
       ),
     );
   }

@@ -1,11 +1,11 @@
 import 'package:care_desk/src/Core/LocalDataBaseStructure/tables/clinic_tables.dart';
 import 'package:care_desk/src/Core/LocalDataBaseStructure/tables/roles_table.dart';
 import 'package:care_desk/src/Core/LocalDataBaseStructure/tables/users_table.dart';
-import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:path/path.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../../Constants/Strings/app_strings.dart';
+import '../../Utils/general_utils.dart';
 
 class DatabaseHelper {
   static Database? _database;
@@ -19,14 +19,14 @@ class DatabaseHelper {
   }
 
   Future<void> deleteDatabase() async {
-    final dbPath = await getDatabasesPath();
+    final dbPath = await databaseFactory.getDatabasesPath();
     final path = join(dbPath, AppStrings.dbName);
     await databaseFactory.deleteDatabase(path);
-    printDM("Success Deleting Database: $path");
+    printDM("✅ Database deleted: $path");
   }
 
   Future<void> clearTable({required String tableName}) async {
-    final db = await DatabaseHelper.instance.database;
+    final db = await database;
     await db.transaction((txn) async {
       await txn.delete(tableName);
       printDM("✅ $tableName cleared!");
@@ -34,47 +34,41 @@ class DatabaseHelper {
   }
 
   Future<void> resetDatabase() async {
-    final dbPath = await databaseFactoryFfi.getDatabasesPath();
-    final path = join(dbPath, 'store.db');
-    await databaseFactoryFfi.deleteDatabase(path);
+    final dbPath = await databaseFactory.getDatabasesPath();
+    final path = join(dbPath, AppStrings.dbName);
+    await databaseFactory.deleteDatabase(path);
     printDM("✅ Database reset successfully!");
-
-    ///TODO : close app and return run app again
   }
 
   Future<Database> _initDatabase() async {
-    final dbPath = await getDatabasesPath();
+    final dbPath = await databaseFactory.getDatabasesPath();
     final path = join(dbPath, AppStrings.dbName);
-    printDM("Omar DB Path: $path");
+    printDM("📦 DB Path: $path");
+
     return await openDatabase(
       path,
       version: AppStrings.dbVersion,
-      onCreate: (db, version) async {
-        await onCreate(db, version);
-      },
+      onCreate: _onCreate,
       onUpgrade: _onUpgrade,
     );
   }
 
-  Future<void> onCreate(Database db, int version) async {
-    Map<String, String> tables = {};
-    tables.addAll(CreateRolesTable().createTable());
-    tables.addAll(CreateUsersTable().createTable());
-    tables.addAll(CreateDoctorsTable().createTable());
-    tables.addAll(CreatePatientsTable().createTable());
-    tables.addAll(CreateBookingsTable().createTable());
+  Future<void> _onCreate(Database db, int version) async {
+    final tables = <String, String>{}
+      ..addAll(CreateRolesTable().createTable())
+      ..addAll(CreateUsersTable().createTable())
+      ..addAll(CreateDoctorsTable().createTable())
+      ..addAll(CreatePatientsTable().createTable())
+      ..addAll(CreateBookingsTable().createTable());
 
-    for (var table in tables.entries) {
+    for (final table in tables.entries) {
       await db.execute(table.value);
     }
   }
 
-  // Future<void> inquiryDataBase() async {
-    // Legacy query removed as it depended on tables being removed
-  // }
-
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < newVersion) {
+      // handle migrations
     }
   }
 }
