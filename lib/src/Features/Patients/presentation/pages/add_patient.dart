@@ -21,10 +21,10 @@ class AddPatient extends StatelessWidget {
 
 
             // الـ Inputs الخاصة بك هنا
-            // DesktopInput(
-            //   hint: "Patient Name",
-            //   label: "Patient Name",
-            // ),
+            DesktopInput(
+              hint: "Patient Name",
+              label: "Patient Name",
+            ),
           ],
         ),
       ),

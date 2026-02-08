@@ -19,9 +19,12 @@ class MainLayoutController extends GetControllerInterface {
 
   // Map sidebar index to specific pages
   final Map<int, Widget> pages = {
-    0: const DashboardPage(),
-    1: const AppointmentsPage(),
-    2: const PatientsPage(),
+    0: const AppointmentsPage(),
+    1: const PatientsPage(),
+    2: const DashboardPage(),
+    //0: const DashboardPage(),
+    //1: const AppointmentsPage(),
+    //2: const PatientsPage(),
     5: const SettingsPage(),
   };
 
@@ -85,8 +88,7 @@ class MainLayoutController extends GetControllerInterface {
 
   void toggleSidebar(bool val) {
     isSidebarCollapsed = val;
-    printDM('isSidebarCollapsed: $isSidebarCollapsed',
-        name: 'MainLayoutController');
+
     update();
   }
 
