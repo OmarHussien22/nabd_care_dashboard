@@ -17,9 +17,6 @@ class AddPatient extends StatelessWidget {
           children: [
             CustomText("Add New Patient"),
             const SizedBox(height: 20),
-
-
-
             // الـ Inputs الخاصة بك هنا
             DesktopInput(
               hint: "Patient Name",
