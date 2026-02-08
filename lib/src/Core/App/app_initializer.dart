@@ -27,12 +27,11 @@ class AppInitializer {
       databaseFactory = databaseFactoryFfiWeb;
       return;
     }
-  // ✅ **Initialize sqflite_common_ffi (for Windows, Linux, and MacOS)**
-if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    // ✅ **Initialize sqflite_common_ffi (for Windows, Linux, and MacOS)**
+    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
       sqfliteFfiInit();
       databaseFactory = databaseFactoryFfi;
       await DatabaseHelper.instance.database;
-
     }
     // await DatabaseHelper.instance.database;
 
