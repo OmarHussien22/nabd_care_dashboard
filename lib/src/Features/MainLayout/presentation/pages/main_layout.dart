@@ -36,7 +36,7 @@ class MainLayout extends StatelessWidget {
                           Divider(height: 1, color: AppColors.get.border),
                           Expanded(
                               child: GetRouterOutlet(
-                            initialRoute: AppRoutes.appointments,
+                            initialRoute: AppRoutes.dashboard,
                             anchorRoute: AppRoutes.mainApp,
                             // الـ anchorRoute يضمن بقاء الـ URL متسلسلاً
                           )),

@@ -23,6 +23,7 @@ class TextFieldDefault extends StatefulWidget {
   final VoidCallback? onComplete;
   final FormFieldSetter<String>? onSaved;
   final VoidCallback? onTap;
+  final Function(PointerDownEvent)? onTapOutside;
   //</editor-fold>
   //<editor-fold desc="Padding">
   final double horizontalPadding;
@@ -62,6 +63,7 @@ class TextFieldDefault extends StatefulWidget {
     this.validation,
     this.onChanged,
     this.onTap,
+    this.onTapOutside,
     this.onComplete,
     this.onSaved,
     this.maxLines = 1,
@@ -143,9 +145,10 @@ class _TextFieldDefaultState extends State<TextFieldDefault> {
                           widget.secureType,
                           secureState: secureState,
                         ),
-                  onTapOutside: (event) {
-                    FocusManager.instance.primaryFocus?.unfocus();
-                  },
+                  onTapOutside: widget.onTapOutside ??
+                      (event) {
+                        FocusManager.instance.primaryFocus?.unfocus();
+                      },
                   keyboardType: widget.keyboardType,
                   textInputAction: widget.textInputAction,
                   onEditingComplete: widget.onComplete,

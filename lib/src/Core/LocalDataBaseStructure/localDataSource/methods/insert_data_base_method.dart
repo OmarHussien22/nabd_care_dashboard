@@ -14,7 +14,7 @@ class InsertDataBaseMethod {
     try {
       final db = await DatabaseHelper.instance.database;
       int result = 0;
-      if (data.toJson() == null) {
+      if (data.toJson() == {}) {
         throw Exception("Table name and data are required for INSERT");
       } else {
         result = await db.insert(

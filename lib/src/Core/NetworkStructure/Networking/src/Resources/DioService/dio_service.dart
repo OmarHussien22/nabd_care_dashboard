@@ -8,7 +8,7 @@ import 'package:care_desk/src/Core/NetworkStructure/Networking/src/Utils/network
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-const String _testToken = '';
+// const String _testToken = '';
 
 ///change _apiToken later :
 
@@ -49,11 +49,10 @@ class DioService extends Networking<Response, DioError> {
     if (kDebugMode) {
       _dio.interceptors.add(
         PrettyDioLogger(
-          requestBody: true,
-          logPrint: (obj){
-            log(obj.toString(), name: "dio_serivce");
-          }
-        ),
+            requestBody: true,
+            logPrint: (obj) {
+              log(obj.toString(), name: "dio_serivce");
+            }),
       );
     }
     _get.injectDio(_dio);

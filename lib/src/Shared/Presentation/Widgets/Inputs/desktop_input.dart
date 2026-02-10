@@ -43,12 +43,12 @@ class DesktopInput extends StatelessWidget {
           ? SuffixWithIconData(iconData: suffixIcon!)
           : const SuffixNone(),
       prefix: prefixIcon != null
-          ? PrefixWithIconData(iconData: prefixIcon!, scale: 1)
+          ? PrefixWithIconData(iconData: prefixIcon!, scale: 1.5)
           : const PrefixNone(),
       cursorColor: AppColors.get.textPrimary,
       inputDecoration: InputDecorationWithBorder(
-        borderColor: AppColors.get.greyLight,
-        enableBorderColor: AppColors.get.greyLight,
+        borderColor: AppColors.get.grey,
+        enableBorderColor: AppColors.get.grey,
       ),
     );
   }

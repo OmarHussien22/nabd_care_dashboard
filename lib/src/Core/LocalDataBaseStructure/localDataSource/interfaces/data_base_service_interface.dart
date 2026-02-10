@@ -29,10 +29,10 @@ abstract class DataBaseServiceInterface<T>
       switch (action) {
         case ActionType.insert:
           return await InsertDataBaseMethod.instance
-              .insert(table: table ?? "", data: params!);
+              .insert(table: table, data: params!);
         case ActionType.fetch:
           return await GetDataBaseMethod.instance.fetch(
-            tableName: table ?? "",
+            tableName: table,
             where: where,
             whereArgs: params,
             showLoading: showLoading,
@@ -42,7 +42,7 @@ abstract class DataBaseServiceInterface<T>
           return await UpdateDataBaseMethod.instance.update(
             table: table,
             data: params,
-            where: where ?? "",
+            where: where,
             showLoading: showLoading,
           );
 

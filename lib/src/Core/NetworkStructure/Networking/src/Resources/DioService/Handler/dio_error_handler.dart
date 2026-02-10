@@ -33,8 +33,6 @@ class DioErrorHandler extends ErrorHandler<DioError> {
         throw TimeoutRequestException('Request Cancelled');
       case DioErrorType.other:
         throw UnKnownException('Unknown Error');
-      default:
-        throw UnKnownException('Unknown Error');
     }
   }
 }

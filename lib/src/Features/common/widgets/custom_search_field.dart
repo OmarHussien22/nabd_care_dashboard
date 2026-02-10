@@ -42,9 +42,10 @@ class CustomSearchField extends StatelessWidget {
               "Ahmed",
             ],
             itemLabel: (item) => item,
-            
-            hint: "Search for name...",
-            onOptionSelected: (selected) => printDM("Selected: $selected"),
+            hint: "search_for_patient_by_name_or_phone",
+            onOptionSelected: (selected) {
+              printDM("Selected: $selected");
+            },
           )),
     );
   }

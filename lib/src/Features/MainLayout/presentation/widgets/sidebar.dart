@@ -22,8 +22,8 @@ class Sidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 450),
-      width: isCollapsed ? 70 : 220,
+      duration: const Duration(milliseconds: 250),
+      width: isCollapsed ? 77.toW() : 210.toW(),
       decoration: BoxDecoration(
         color: AppColors.get.surface,
         border: Border(
@@ -50,10 +50,10 @@ class Sidebar extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
                 AnimatedSize(
-                  duration: const Duration(milliseconds: 300),
+                  duration: const Duration(milliseconds: 200),
                   curve: Curves.easeInOut,
                   child: AnimatedOpacity(
-                    duration: const Duration(milliseconds: 200),
+                    duration: const Duration(milliseconds: 100),
                     opacity: isCollapsed ? 0 : 1,
                     child: isCollapsed
                         ? const SizedBox.shrink()
@@ -125,16 +125,16 @@ class Sidebar extends StatelessWidget {
           ),
 
           // Collapse Button
-          Divider(color: AppColors.get.border, height: 1),
-          IconButton(
-            onPressed: () => onToggle(!isCollapsed),
-            icon: Icon(
-                isCollapsed
-                    ? Icons.keyboard_double_arrow_right_rounded
-                    : Icons.keyboard_double_arrow_left_rounded,
-                color: AppColors.get.textSecondary),
-          ),
-          const SizedBox(height: 8),
+          // Divider(color: AppColors.get.border, height: 1),
+          // IconButton(
+          //   onPressed: () => onToggle(!isCollapsed),
+          //   icon: Icon(
+          //       isCollapsed
+          //           ? Icons.keyboard_double_arrow_right_rounded
+          //           : Icons.keyboard_double_arrow_left_rounded,
+          //       color: AppColors.get.textSecondary),
+          // ),
+          // const SizedBox(height: 8),
         ],
       ),
     );

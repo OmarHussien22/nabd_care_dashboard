@@ -160,12 +160,18 @@ class FixedAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       height: 80.toH(),
       color: AppColors.get.surface,
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: GetBuilder<MainLayoutController>(
         builder: (cnt) {
           return Row(
             children: [
-              // Path / Breadcrumb (Simple Title for now)
+              IconButton(
+                onPressed: () {
+                  cnt.toggleSidebar(!cnt.isSidebarCollapsed);
+                },
+                icon: Icon(Icons.menu, color: AppColors.get.textSecondary),
+              ),
+              5.ESH(),
               CustomText(
                 cnt.getPageTitle(cnt.selectedIndex),
                 fontSize: 18,

@@ -61,52 +61,61 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
           link: _layerLink,
           showWhenUnlinked: false,
           offset: Offset(0, size.height + 5), // مسافة بسيطة تحت الحقل
-          child: Material(
-            elevation: 8,
-            borderRadius: BorderRadius.circular(12),
-            color: AppColors.get.activeBackground,
-            // يتبع ثيم التطبيق
-            child: Container(
-              constraints: const BoxConstraints(maxHeight: 250),
-              decoration: widget.sheetDecoration ??
-                  BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: AppColors.get.cardFill,
-                    border: Border.all(color: AppColors.get.cardBorder),
-                  ),
-              child: _filteredData.isEmpty
-                  ? Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text("No data found".toTr()),
-                    )
-                  : ListView.separated(
-                      shrinkWrap: true,
-                      padding: EdgeInsets.zero,
-                      itemCount: _filteredData.length,
-                      separatorBuilder: (context, index) =>
-                          Divider(height: 1, color: AppColors.get.cardBorder),
-                      itemBuilder: (context, index) {
-                        final item = _filteredData[index];
-                        return ListTile(
-                          dense: true,
-                          hoverColor:
-                              AppColors.get.primary.withValues(alpha: 0.1),
-                          selectedColor: AppColors.get.primary,
-                          selectedTileColor: AppColors.get.primary,
-                          leading: Icon(
-                            Icons.person,
-                            color: AppColors.get.primary,
-                            size: 20,
-                          ),
-                          title: CustomText(widget.itemLabel(item)),
-                          onTap: () {
-                            _controller.text = widget.itemLabel(item);
-                            widget.onOptionSelected?.call(item);
-                            _focusNode.unfocus();
-                          },
-                        );
-                      },
+          child: TapRegion(
+            groupId: _layerLink,
+            child: Material(
+              elevation: 8,
+              borderRadius: BorderRadius.circular(12),
+              // color: AppColors.get.activeBackground,
+              // يتبع ثيم التطبيق
+              child: Container(
+                constraints: const BoxConstraints(maxHeight: 250),
+                decoration: widget.sheetDecoration ??
+                    BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: AppColors.get.cardFill,
+                      border: Border.all(color: AppColors.get.cardBorder),
                     ),
+                child: _filteredData.isEmpty
+                    ? Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text("No data found".toTr()),
+                      )
+                    : ListView.separated(
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
+                        itemCount: _filteredData.length,
+                        separatorBuilder: (context, index) =>
+                            Divider(height: 1, color: AppColors.get.cardBorder),
+                        itemBuilder: (context, index) {
+                          final item = _filteredData[index];
+                          return ListTile(
+                            dense: true,
+                            // focusColor:
+                            //     AppColors.get.primary.withValues(alpha: 0.1),
+                            // mouseCursor: SystemMouseCursors.click,
+                            // splashColor:
+                            //     AppColors.get.primary.withValues(alpha: 0.1),
+                            // hoverColor:
+                            //     AppColors.get.primary.withValues(alpha: 0.1),
+                            // selectedColor: AppColors.get.primary,
+                            selectedTileColor: AppColors.get.primary,
+                            leading: Icon(
+                              Icons.person,
+                              color: AppColors.get.primary,
+                              size: 20,
+                            ),
+                            title: CustomText(widget.itemLabel(item)),
+                            onTap: () {
+                              _controller.text = widget.itemLabel(item);
+                              printDM("Selected: ${widget.itemLabel(item)}");
+                              widget.onOptionSelected?.call(item);
+                              _focusNode.unfocus();
+                            },
+                          );
+                        },
+                      ),
+              ),
             ),
           ),
         ),
@@ -144,27 +153,34 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
   Widget build(BuildContext context) {
     return CompositedTransformTarget(
       link: _layerLink,
-      child: TextFieldDefault(
-        width: widget.width,
-        controller: _controller,
-        focusNode: _focusNode,
-        onChanged: _filterData,
-        validation: widget.validation,
-        fillColor: AppColors.get.tTFBackGround,
-        isFilled: true,
-        inputDecoration: widget.inputDecoration ??
-            InputDecorationWithBorder(
-              filledColor: AppColors.get.tTFBackGround,
-              enableBorderColor: AppColors.get.tTFBorder,
-              enableBorderRadius: 12,
-              enableBorderWidth: 1,
-            ),
-        hint: TFFHint(title: widget.hint, fontSize: 15),
-        prefix: PrefixWithIconData(
-          iconData: widget.prefixIcon,
-          color: AppColors.get.tTFPrefixColor,
-          size: 25,
-          scale: 1,
+      child: TapRegion(
+        groupId: _layerLink,
+        onTapOutside: (event) {
+          _focusNode.unfocus();
+        },
+        child: TextFieldDefault(
+          width: widget.width,
+          controller: _controller,
+          focusNode: _focusNode,
+          onChanged: _filterData,
+          validation: widget.validation,
+          fillColor: AppColors.get.tTFBackGround,
+          isFilled: true,
+          onTapOutside: (event) {},
+          inputDecoration: widget.inputDecoration ??
+              InputDecorationWithBorder(
+                filledColor: AppColors.get.tTFBackGround,
+                enableBorderColor: AppColors.get.greyLight,
+                enableBorderRadius: 12,
+                enableBorderWidth: 1,
+              ),
+          hint: TFFHint(title: widget.hint, fontSize: 15),
+          prefix: PrefixWithIconData(
+            iconData: widget.prefixIcon,
+            color: AppColors.get.tTFPrefixColor,
+            size: 25,
+            scale: 1,
+          ),
         ),
       ),
     );

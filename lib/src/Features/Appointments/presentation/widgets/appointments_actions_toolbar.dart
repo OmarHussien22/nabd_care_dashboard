@@ -16,13 +16,18 @@ class AppointmentsActionsToolbar extends StatelessWidget {
         SizedBox(
           width: 300.toW(),
           child: DesktopInput(
-              label: "", hint: "Search patients...", prefixIcon: Icons.search),
+              label: "", hint: "search_appointment", prefixIcon: Icons.search),
         ),
         const SizedBox(width: 16),
         OutlinedButton.icon(
           onPressed: () {},
           style: OutlinedButton.styleFrom(
-            fixedSize: const Size(100, 42),
+            fixedSize: const Size(100, 41),
+            backgroundColor: AppColors.get.white,
+            side: BorderSide(color: AppColors.get.greyLight),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
           icon: const Icon(Icons.filter_list, size: 18),
           label: const CustomText("Filter"),

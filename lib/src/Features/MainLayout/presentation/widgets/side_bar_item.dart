@@ -1,6 +1,3 @@
-
-
-
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +9,19 @@ class SideBarItem extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onItemSelected;
   final bool isCollapsed;
-  const SideBarItem({super.key, required this.index, required this.icon, required this.label, required this.selectedIndex, required this.onItemSelected, required this.isCollapsed});
+  const SideBarItem(
+      {super.key,
+      required this.index,
+      required this.icon,
+      required this.label,
+      required this.selectedIndex,
+      required this.onItemSelected,
+      required this.isCollapsed});
 
   @override
   Widget build(BuildContext context) {
-     final bool isSelected = index == selectedIndex;
-   return Container(
+    final bool isSelected = index == selectedIndex;
+    return Container(
       margin: const EdgeInsets.only(bottom: 4),
       child: Tooltip(
         message: isCollapsed ? label : "",

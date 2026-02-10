@@ -13,7 +13,7 @@ class HeaderHandler {
   /// set header
   Map<String, String> setHeaders(bool isAuth) {
     String token = "";
-    final StorageService<bool> box = StorageService<bool>();
+    // final StorageService<bool> box = StorageService<bool>();
     if (isAuth) {
       token = UserController.get.user?.apiToken ?? "";
       // token = "16|IidujcKZuyZ4yLlMySvXJgAVz8E7w3DmMFJb9S6L9789ff30";
