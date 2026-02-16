@@ -35,7 +35,7 @@ class PatientsActionsToolbar extends StatelessWidget {
         Spacer(),
         ElevatedButton.icon(
           onPressed: () {
-            Get.toNamed("${AppRoutes.addPatient}/1");
+            Get.toNamed(AppRoutes.addPatient);
           },
           icon: const Icon(Icons.add),
           label: CustomText(
