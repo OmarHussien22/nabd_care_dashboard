@@ -46331,7 +46331,7 @@ A.akZ.prototype={
 $0(){},
 $S:0}
 A.al_.prototype={
-$0(){A.b_r($.b3(),"/add-patient/1",t.z)},
+$0(){A.b_r($.b3(),"/add-patient",t.z)},
 $S:0}
 A.Rv.prototype={
 F(a){return A.aNQ(A.b([B.U7,B.Ua,B.U8,B.Ud,B.fV,B.Ub,B.eA,B.eA,B.eA,B.eA,B.eA,B.eA],t.F8),1,new A.al1(),new A.al2(),new A.al3(),new A.al4(),A.Qs(15,new A.al5(),!0,t.Wh),8)}}
