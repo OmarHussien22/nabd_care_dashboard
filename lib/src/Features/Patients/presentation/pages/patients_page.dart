@@ -22,7 +22,7 @@ class PatientsPage extends StatelessWidget {
             PatientsActionsToolbar(),
             SizedBox(height: 16),
             Expanded(
-              child: PatientsTable(),
+              child: PatientsTable()
             ),
           ],
         ),
