@@ -5,7 +5,7 @@ import 'package:care_desk/src/Features/LocalAuth/domain/use_cases/register_user_
 import 'package:care_desk/src/Features/LocalAuth/presentation/manager/get_roles_local_controller.dart';
 import 'package:care_desk/src/Features/LocalAuth/register_user_params.dart';
 
-import '../../../../Core/NetworkStructure/Resources/DataState/data_state.dart';
+import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
 import '../../../../Core/Utils/general_utils.dart';
 import '../../../../Shared/Presentation/Widgets/GeneralWidgets/Snackbar/client_snacks.dart';
 import '../../../../Super/Controllers/Resources/get/get_controller_interface.dart';

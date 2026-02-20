@@ -1,4 +1,4 @@
-import '../../../../Core/NetworkStructure/Params/params.dart';
+import 'package:care_desk/src/core/network_structure/params/params.dart';
 import '../../../../Core/Utils/Extensions/basic_op_extensions.dart';
 
 class RegisterParams extends Params {
@@ -44,9 +44,9 @@ class RegisterParams extends Params {
       'device_name': deviceType,
       'version': version,
       'is_real_device': isRealDevice,
-      if (email != null&&email !="")'email': email,
-      if (address != null&&address !="")'address': address,
-      if (countryCode != null&&countryCode !="")  'country_code': countryCode,
+      if (email != null && email != "") 'email': email,
+      if (address != null && address != "") 'address': address,
+      if (countryCode != null && countryCode != "") 'country_code': countryCode,
       if (deviceType != null) 'device_type': deviceType,
     }.removeNullValues;
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:care_desk/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
+import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:care_desk/src/Features/LocalAuth/domain/entities/roles_entity.dart';
 import 'package:care_desk/src/Features/LocalAuth/domain/use_cases/get_roles_local_use_case.dart';

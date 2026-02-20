@@ -1,4 +1,4 @@
-import 'package:care_desk/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
+import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
 import 'package:flutter/material.dart';
 
 mixin MasterController<T> {

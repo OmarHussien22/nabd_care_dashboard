@@ -1,7 +1,7 @@
-import 'package:care_desk/Src/core/NetworkStructure/Networking/src/Utils/network_utils.dart';
 import 'package:care_desk/src/Core/LocalDataBaseStructure/helper/data_base_helper.dart';
 import 'package:care_desk/src/Core/LocalDataBaseStructure/localDataSource/respons/respons_local_data_base.dart';
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Core/network_structure/networking/src/utils/network_utils.dart' show NetworkUtils;
 
 class DeleteDataBaseMethod {
   static final instance = DeleteDataBaseMethod._();

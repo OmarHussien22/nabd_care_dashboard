@@ -1,6 +1,6 @@
 import 'package:care_desk/src/Core/Utils/Extensions/basic_op_extensions.dart';
 
-import '../../../../Core/NetworkStructure/Params/params.dart';
+import 'package:care_desk/src/core/network_structure/params/params.dart';
 
 class ResetPasswordParams extends Params {
   String phone;

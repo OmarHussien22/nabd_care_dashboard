@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
 import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,6 @@ import 'package:care_desk/src/Shared/Models/user_model.dart';
 
 import '../../../../Core/Constants/Enums/app_source.dart';
 import '../../../../Core/Constants/Strings/app_strings.dart';
-import '../../../../Core/NetworkStructure/Resources/DataState/data_state.dart';
 import '../../../../Core/Utils/Validation/app_validator.dart';
 import '../../../../Core/Utils/general_utils.dart';
 import '../../../../Shared/Managers/user_controller.dart';

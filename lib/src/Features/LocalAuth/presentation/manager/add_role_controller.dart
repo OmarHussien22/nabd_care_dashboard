@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:care_desk/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
+import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:care_desk/src/Features/LocalAuth/domain/use_cases/add_role_use_case.dart';
 import 'package:care_desk/src/Features/LocalAuth/roles_params.dart';

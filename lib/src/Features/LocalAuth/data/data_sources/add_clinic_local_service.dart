@@ -1,4 +1,4 @@
-import 'package:care_desk/Src/core/LocalDataBaseStructure/enum/crud_opertion_enum.dart';
+import 'package:care_desk/src/Core/LocalDataBaseStructure/enum/crud_opertion_enum.dart';
 import 'package:care_desk/src/Core/LocalDataBaseStructure/localDataSource/interfaces/data_base_service_interface.dart';
 import 'package:care_desk/src/Core/LocalDataBaseStructure/localDataSource/respons/respons_local_data_base.dart';
 import 'package:care_desk/src/Core/LocalDataBaseStructure/tables/clinic_tables.dart';

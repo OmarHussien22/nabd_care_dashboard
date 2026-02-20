@@ -1,7 +1,7 @@
 import 'package:care_desk/src/Core/LocalDataBaseStructure/localDataSource/respons/respons_local_data_base.dart';
-import 'package:care_desk/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
-import 'package:care_desk/src/Core/NetworkStructure/Resources/Errors/error_model.dart';
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
+import 'package:care_desk/src/Core/network_structure/resources/errors/error_model.dart';
 import 'package:care_desk/src/Core/params/local_params.dart';
 
 import '../localDataSource/interfaces/data_base_service_interface.dart';
@@ -32,12 +32,12 @@ abstract class LocalRepoInterface<T> {
             message: response.statusMessage);
       }
       return DataSuccess<T>(onParse(response.data));
-        } catch (e) {
+    } catch (e) {
       printDM('RepoInterface call error: $e');
       return DataFailed(
         ErrorModel(
-          title: 'حدث خطأ أثناء جلب البيانات: $e',
-          message: LocalResponse().statusMessage,
+          title:
+              'حدث خطأ أثناء جلب البيانات: $e ${LocalResponse().statusMessage}',
           type: ErrorType.unKnown,
         ),
       );

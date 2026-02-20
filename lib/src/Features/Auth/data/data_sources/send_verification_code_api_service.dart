@@ -1,7 +1,7 @@
 import 'package:dio/src/response.dart';
 
-import '../../../../Core/NetworkStructure/DataSource/service_interface.dart';
-import '../../../../Core/NetworkStructure/Params/params.dart';
+import 'package:care_desk/src/Core/network_structure/data_source/service_interface.dart';
+import 'package:care_desk/src/core/network_structure/params/params.dart';
 
 class SendVerificationCodeApiService extends ServicesInterface {
   SendVerificationCodeApiService._();

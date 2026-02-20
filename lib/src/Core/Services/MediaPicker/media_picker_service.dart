@@ -146,7 +146,7 @@ class MediaPickerService {
     } catch (e) {
       if (kDebugMode) {
         print("Error picking files: $e");
-      }
+      }   
       return [];
     }
   }

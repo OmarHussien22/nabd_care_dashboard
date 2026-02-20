@@ -1,7 +1,7 @@
-import 'dart:ui';
 import 'package:care_desk/src/Shared/Models/user_model.dart';
+import 'package:flutter/material.dart';
 
-import '../../../../Core/NetworkStructure/Resources/DataState/data_state.dart';
+import '../../../../Core/network_structure/resources/data_state/data_state.dart';
 import '../../../../Shared/Managers/user_controller.dart';
 import '../../../../Super/Controllers/Resources/get/get_controller_interface.dart';
 import '../../domain/use_cases/verify_phone_use_case.dart';

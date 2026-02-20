@@ -8,10 +8,10 @@ class BottomRequestStatusBuilder extends StatelessWidget {
   final Widget bottomWidget;
 
   const BottomRequestStatusBuilder({
-    super.key,
+    Key? key,
     required this.status,
     required this.bottomWidget,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

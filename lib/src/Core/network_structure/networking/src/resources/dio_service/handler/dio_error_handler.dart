@@ -1,0 +1,39 @@
+import 'package:dio/dio.dart';
+import 'package:care_desk/src/core/network_structure/exceptions/failure.dart';
+import 'package:care_desk/src/core/network_structure/networking/src/interfaces/handler/error_handler.dart';
+import 'package:care_desk/src/core/network_structure/networking/src/utils/status_handler.dart';
+
+class DioErrorHandler extends ErrorHandler<DioError> {
+  DioErrorHandler._();
+
+  static final DioErrorHandler instance = DioErrorHandler._();
+
+  @override
+  void handleError(DioError error) {
+    if (error.response.toString().contains("SocketException")) {
+      throw NetworkDisconnectException('Network Disconnect Exception');
+    } else {
+      _handleError(error);
+    }
+  }
+
+  void _handleError(DioError error) {
+    switch (error.type) {
+      case DioErrorType.connectTimeout:
+        throw TimeoutRequestException('Connection Timeout');
+      case DioErrorType.sendTimeout:
+        throw TimeoutRequestException('Send Timeout');
+      case DioErrorType.receiveTimeout:
+        throw TimeoutRequestException('Receive Timeout');
+      case DioErrorType.response:
+        StatusHandler.instance
+            .handleStatusCode(error.response?.statusCode ?? 0);
+        break;
+      case DioErrorType.cancel:
+        throw TimeoutRequestException('Request Cancelled');
+      case DioErrorType.other:
+        throw UnKnownException('Unknown Error');
+
+    }
+  }
+}

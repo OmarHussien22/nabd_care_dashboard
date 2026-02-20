@@ -1,9 +1,9 @@
 import 'package:dio/src/response.dart';
 
-import '../../../../Core/NetworkStructure/DataSource/service_interface.dart';
-import '../../../../Core/NetworkStructure/Params/params.dart';
+import 'package:care_desk/src/Core/network_structure/data_source/service_interface.dart';
+import 'package:care_desk/src/core/network_structure/params/params.dart';
 
-class RegisterApiService extends ServicesInterface{
+class RegisterApiService extends ServicesInterface {
   RegisterApiService._();
 
   static final instance = RegisterApiService._();
@@ -11,12 +11,10 @@ class RegisterApiService extends ServicesInterface{
   @override
   Future<Response> applyService({Params? params}) {
     return super.call(
-        uRLRegister,
-        type: CrudType.post,
-        params: params,
-        showLoadingDialog: true,
+      uRLRegister,
+      type: CrudType.post,
+      params: params,
+      showLoadingDialog: true,
     );
   }
-
-
 }

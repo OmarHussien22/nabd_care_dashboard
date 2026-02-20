@@ -1,12 +1,12 @@
 import 'dart:async';
 
+import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:care_desk/src/Shared/Models/user_model.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-import '../../../../Core/NetworkStructure/Resources/DataState/data_state.dart';
 import '../../../../Shared/Presentation/Widgets/GeneralWidgets/Snackbar/client_snacks.dart';
 import '../../../../Super/Controllers/Resources/get/get_controller_interface.dart';
 import '../../core/params/check_verification_code_params.dart';

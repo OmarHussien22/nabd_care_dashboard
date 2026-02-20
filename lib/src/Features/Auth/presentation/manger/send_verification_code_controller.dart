@@ -1,10 +1,10 @@
+import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:care_desk/src/Core/Utils/Validation/app_validator.dart';
 import 'package:care_desk/src/Features/Auth/presentation/pages/imports_auth.dart';
 import 'package:care_desk/src/Shared/Models/user_model.dart';
 
-import '../../../../Core/NetworkStructure/Resources/DataState/data_state.dart';
 import '../../../../Core/Utils/general_utils.dart';
 import '../../../../Shared/Presentation/Widgets/GeneralWidgets/Snackbar/client_snacks.dart';
 import '../../../../Super/Controllers/Resources/get/get_controller_interface.dart';

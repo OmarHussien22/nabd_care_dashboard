@@ -1,10 +1,12 @@
-import 'package:care_desk/src/Core/NetworkStructure/Exceptions/failure.dart';
 import 'package:care_desk/src/Features/Clinic/data/datasources/clinic_local_datasource.dart';
 import 'package:care_desk/src/Features/Clinic/domain/entities/booking.dart';
 import 'package:care_desk/src/Features/Clinic/domain/entities/doctor.dart';
 import 'package:care_desk/src/Features/Clinic/domain/entities/patient.dart';
 import 'package:care_desk/src/Features/Clinic/domain/repositories/clinic_repository.dart';
 import 'package:dartz/dartz.dart';
+
+import '../../../../Core/network_structure/exceptions/failure.dart';
+import '../../../../Core/network_structure/networking/exceptions/failure.dart' show LocalFailure;
 
 class ClinicRepositoryImpl implements ClinicRepository {
   final ClinicLocalDataSource dataSource;
@@ -17,7 +19,7 @@ class ClinicRepositoryImpl implements ClinicRepository {
       final result = await dataSource.addDoctor(doctor);
       return Right(result);
     } catch (e) {
-      return Left(LocalFailure(message: e.toString()));
+      return Left(Failure(e.toString()));
     }
   }
 
@@ -27,8 +29,7 @@ class ClinicRepositoryImpl implements ClinicRepository {
       final result = await dataSource.getDoctors();
       return Right(result);
     } catch (e) {
-      return Left(LocalFailure(message: e.toString()));
-    }
+   return Left(Failure(e.toString()));    }
   }
 
   @override
@@ -37,7 +38,7 @@ class ClinicRepositoryImpl implements ClinicRepository {
       final result = await dataSource.addPatient(patient);
       return Right(result);
     } catch (e) {
-      return Left(LocalFailure(message: e.toString()));
+      return Left(Failure(e.toString()));
     }
   }
 
@@ -47,7 +48,7 @@ class ClinicRepositoryImpl implements ClinicRepository {
       final result = await dataSource.getPatients();
       return Right(result);
     } catch (e) {
-      return Left(LocalFailure(message: e.toString()));
+      return Left(Failure(e.toString()));
     }
   }
 
@@ -57,7 +58,7 @@ class ClinicRepositoryImpl implements ClinicRepository {
       final result = await dataSource.addBooking(booking);
       return Right(result);
     } catch (e) {
-      return Left(LocalFailure(message: e.toString()));
+      return Left(Failure(e.toString()));
     }
   }
 
@@ -67,7 +68,7 @@ class ClinicRepositoryImpl implements ClinicRepository {
       final result = await dataSource.getBookings();
       return Right(result);
     } catch (e) {
-      return Left(LocalFailure(message: e.toString()));
+      return Left(Failure(e.toString()));
     }
   }
 }

@@ -1,5 +1,5 @@
+import 'package:care_desk/src/core/network_structure/params/params.dart';
 
-import '../../../../Core/NetworkStructure/Params/params.dart';
 
 class ChangeOnlineStatusParams extends Params {
   int online;

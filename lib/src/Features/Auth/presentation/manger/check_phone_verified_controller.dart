@@ -1,6 +1,6 @@
-import 'package:care_desk/src/Core/NetworkStructure/Resources/DataState/data_state.dart';
 import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:care_desk/src/Core/Utils/SnackUtils/snack_utils.dart';
+import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
 import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout_page.dart';
 import 'package:care_desk/src/Shared/Models/user_model.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Dialogs/app_dialogs.dart';

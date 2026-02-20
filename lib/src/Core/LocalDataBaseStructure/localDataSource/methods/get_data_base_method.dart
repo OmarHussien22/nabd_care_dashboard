@@ -1,8 +1,8 @@
-import 'package:care_desk/Src/core/NetworkStructure/Networking/src/Utils/network_utils.dart';
 import 'package:care_desk/src/Core/LocalDataBaseStructure/helper/data_base_helper.dart';
 import 'package:care_desk/src/Core/LocalDataBaseStructure/localDataSource/respons/respons_local_data_base.dart';
-import 'package:care_desk/src/Core/NetworkStructure/Resources/Errors/error_model.dart';
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Core/network_structure/networking/src/utils/network_utils.dart' show NetworkUtils;
+import 'package:care_desk/src/Core/network_structure/resources/errors/error_model.dart';
 import 'package:care_desk/src/Core/params/local_params.dart';
 import 'package:care_desk/src/Features/LocalAuth/data/models/local_user_model.dart';
 
@@ -56,8 +56,9 @@ class GetDataBaseMethod {
       if (result.isEmpty) {
         return LocalResponse(
           data: ErrorModel(
-            title: 'لا يوجد بيانات',
-            message: 'الجدول $tableName فارغ',
+            title: 'الجدول $tableName فارغ لا يوجد بيانات',
+            // message: 'الجدول $tableName فارغ',
+            status: false,
             type: ErrorType.dataEmpty,
           ),
           statusCode: 204,

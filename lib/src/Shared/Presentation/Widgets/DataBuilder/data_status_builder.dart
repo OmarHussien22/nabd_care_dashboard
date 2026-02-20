@@ -6,35 +6,55 @@ class DataStatusBuilder extends StatelessWidget {
   final Widget onDoneBuild;
   final Widget? onConnectionErrorBuild;
   final Widget? onErrorBuild;
-  final Widget? onLoadingBuild; 
+  final Widget? onLoadingBuild;
   final VoidCallback? onRedirect;
   final bool isOnRefreshed;
   final bool isImportant;
+  final bool? isFullScreen;
+  final double? heightRation;
+  final bool useShimmer;
 
-  const DataStatusBuilder(
-      {super.key, 
-      required this.status,
-      required this.onDoneBuild,
-      this.onConnectionErrorBuild,
-      this.initialBuild,
-      this.onErrorBuild,
-      this.onLoadingBuild,
-      this.onRedirect,
-      this.isOnRefreshed = false,
-      this.isImportant = true});
+  const DataStatusBuilder({
+    super.key,
+    required this.status,
+    required this.onDoneBuild,
+    this.onConnectionErrorBuild,
+    this.initialBuild,
+    this.onErrorBuild,
+    this.onLoadingBuild,
+    this.onRedirect,
+    this.isOnRefreshed = false,
+    this.isImportant = true,
+    this.heightRation,
+    this.isFullScreen,
+    this.useShimmer = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     Widget? widget = const SizedBox.shrink();
     if (status is DataInitial) {
-      widget = isImportant ? (initialBuild ?? const SizedBox.shrink()) : const Center();
+      widget = isImportant
+          ? (initialBuild ?? const SizedBox.shrink())
+          : const Center();
       // widget = Center();
     } else if (status is DataLoading) {
-      widget = isImportant ? (onLoadingBuild ?? (isOnRefreshed ? const SizedBox.shrink() : const AppLoader())) : const Center();
-      // widget = AppLoader();
+      widget = isImportant
+          ? (onLoadingBuild ??
+              (isOnRefreshed
+                  ? const SizedBox.shrink()
+                  : useShimmer
+                      ? Skeletonizer(
+                          enabled: true,
+                          child: onDoneBuild,
+                        )
+                      : AppLoader(
+                          isFullScreen: isFullScreen,
+                          heightRatio: heightRation,
+                        )))
+          : const Center();
     } else if (status is DataSuccess) {
       widget = onDoneBuild;
-      // widget = Center();
     } else if (status is DataFailed) {
       widget = isImportant
           ? (onErrorBuild ??
@@ -43,10 +63,16 @@ class DataStatusBuilder extends StatelessWidget {
                 onRedirect: onRedirect,
               ))
           : const Center();
-      // widget = Center();
     } else {
-      widget = isImportant ? (onLoadingBuild ?? (isOnRefreshed ? const SizedBox.shrink() : const AppLoader())) : const Center();
-      // widget = Center();
+      widget = isImportant
+          ? (onLoadingBuild ??
+              (isOnRefreshed
+                  ? const SizedBox.shrink()
+                  : AppLoader(
+                      isFullScreen: isFullScreen,
+                      heightRatio: heightRation,
+                    )))
+          : const Center();
     }
     return widget;
   }

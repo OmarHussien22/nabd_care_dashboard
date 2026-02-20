@@ -1,8 +1,8 @@
+import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
 import 'package:care_desk/src/Features/Auth/core/params/cahnge_online_status_params.dart';
 import 'package:care_desk/src/Features/Auth/domain/repositories/change_online_status_repository.dart';
 
-import '../../../../Core/NetworkStructure/Resources/DataState/data_state.dart';
-import '../../../../Super/UseCase/user_case.dart';
+import 'package:care_desk/src/Super/UseCase/user_case.dart';
 
 class ChangeOnlineStatusUseCase
     extends UseCase<void, ChangeOnlineStatusParams> {

@@ -1,4 +1,4 @@
-import 'package:care_desk/src/Core/NetworkStructure/Exceptions/failure.dart';
+import 'package:care_desk/src/Core/network_structure/networking/exceptions/failure.dart';
 import 'package:care_desk/src/Features/Clinic/data/datasources/clinic_local_datasource.dart';
 import 'package:care_desk/src/Features/Clinic/data/repositories/clinic_repository_impl.dart';
 import 'package:care_desk/src/Features/Clinic/domain/entities/booking.dart';

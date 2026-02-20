@@ -1,4 +1,4 @@
-import 'package:care_desk/src/Core/NetworkStructure/Resources/Errors/error_model.dart';
+import 'package:care_desk/src/Core/network_structure/resources/errors/error_model.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
