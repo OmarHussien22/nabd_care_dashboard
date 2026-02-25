@@ -10,8 +10,10 @@ class PrefixWithIconImage extends PrefixImp {
     double? constraintsWidth,
   }) : super(
           iconImage: iconImage,
-          constraintsHeight: constraintsHeight ?? TFFConstants.prefixConstrainsHeight,
-          constraintsWidth: constraintsWidth ?? TFFConstants.prefixConstrainsWidth,
+          constraintsHeight:
+              constraintsHeight ?? TFFConstants.prefixConstrainsHeight,
+          constraintsWidth:
+              constraintsWidth ?? TFFConstants.prefixConstrainsWidth,
           color: color ?? TFFConstants.color.tTFPrefixColor,
           size: size ?? TFFConstants.prefixImageSize,
           scale: scale ?? TFFConstants.prefixImageScale,

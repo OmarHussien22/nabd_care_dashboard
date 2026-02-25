@@ -21,13 +21,23 @@ class AdaptivePicker {
     required String title,
     DateTime? initial,
     DateTime? minDate,
+    DateTime? maxDate,
   }) async {
     if (getOS == ios) {
       _iosDatePicker(context, onConfirm, title,
           initial: initial, minDate: minDate);
-    } else {
+    } else if (getOS == android) {
       _androidDatePicker(context, onConfirm,
           initial: initial, minDate: minDate);
+    } else {
+      // Desktop or Web
+      final date = await showDatePicker(
+        context: context,
+        initialDate: initial ?? DateTime.now(),
+        firstDate: minDate ?? DateTime(1900),
+        lastDate: maxDate ?? DateTime(2100),
+      );
+      onConfirm(date);
     }
   }
 
@@ -75,7 +85,7 @@ class AdaptivePicker {
     int? maximumYear,
     int minimumYear = 1,
   }) {
-    DateTime date = DateTime.now();
+    DateTime selectedDate = initial ?? DateTime.now();
     return Container(
       height: MediaQuery.of(context).size.height * 0.45,
       color: AppColors.get.background,
@@ -101,7 +111,7 @@ class AdaptivePicker {
                 ),
                 TextButton(
                   onPressed: () {
-                    onConfirm(date);
+                    onConfirm(selectedDate);
                     context.back();
                   },
                   child: CustomText(
@@ -128,9 +138,9 @@ class AdaptivePicker {
               child: CupertinoDatePicker(
                 backgroundColor: AppColors.get.activeBackground,
                 initialDateTime: initial ?? DateTime.now(),
-                onDateTimeChanged: (date) {
-                  date = date;
-                  debugPrint("date is => $date");
+                onDateTimeChanged: (newDate) {
+                  selectedDate = newDate;
+                  debugPrint("date is => $selectedDate");
                 },
                 minimumDate:
                     minDate ?? DateTime.now().add(const Duration(days: -1)),

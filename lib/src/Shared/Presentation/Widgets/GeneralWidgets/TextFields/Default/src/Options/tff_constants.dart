@@ -39,22 +39,22 @@ abstract class TFFConstants {
   static const double prefixIconScale = .2;
   static const double prefixImageScale = 1.5;
 
-  static const double prefixImageSize = 12.0;
+  static const double prefixImageSize = 10.0;
 
 //</editor-fold>
 //<editor-fold desc="suffix">
   static const double suffixFontSize = 8.0;
   static const FontWeight suffixFontWeight = FontWeight.w300;
   static const double suffixIconSize = 8.0;
-  static const double suffixIconScale = .3;
-  static const double suffixImageScale = .3;
+  static const double suffixIconScale = 1.3;
+  static const double suffixImageScale = 1.3;
   static const double suffixImageSize = 10.0;
 //</editor-fold>
 
-  static const double prefixConstrainsHeight = 10.0;
-  static const double prefixConstrainsWidth = 17.17;
-  static const double suffixConstrainsHeight = 6.0;
-  static const double suffixConstrainsWidth = 15.17;
+  static const double prefixConstrainsHeight = 28.0;
+  static const double prefixConstrainsWidth = 38.17;
+  static const double suffixConstrainsHeight = 10.0;
+  static const double suffixConstrainsWidth = 25.17;
   static const double tffBorderRadius = 10;
   static const double tffBorderWidth = .5;
   static const FontWeight tffHeadrTitle = FontWeight.w600;

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 
 import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 
@@ -39,7 +40,7 @@ class AppStrings {
   static String inviteCode = "send_code_to_invite_friends".toTr();
 }
 
-String get getOS => Platform.operatingSystem;
+String get getOS => kIsWeb ? 'web' : Platform.operatingSystem;
 
 String get ios => "ios";
 

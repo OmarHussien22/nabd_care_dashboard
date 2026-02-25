@@ -1,6 +1,9 @@
 import 'dart:io';
+import 'package:intl/intl.dart';
 
 import 'package:care_desk/src/Core/Services/helper.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Features/Patients/domain/entity/gender_entity.dart';
 import 'package:care_desk/src/Super/Controllers/Resources/get/get_controller_interface.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +22,10 @@ class AddPatientBuilder extends GetControllerInterface {
   // Controllers for Administrative Details
   late TextEditingController notesController;
   late TextEditingController dateOfBirthController;
-  int? selectGender;
-  String? selectDateOfBirth;
+  // List<String> genderList = ["male", "female"];
+  GenderEntity? selectGender;
+  int selectGenderIndex = 0;
+  DateTime? selectDateOfBirth;
   int? selectVisitType;
   int? selectReferralType;
 
@@ -31,14 +36,17 @@ class AddPatientBuilder extends GetControllerInterface {
 
   // functions slected
 
-  void setSelectedGender(int value) {
+  void setSelectedGender(GenderEntity value) {
     selectGender = value;
+    // selectGenderIndex = genderList.indexOf(value);
+    selectGenderIndex = GenderEntity.getGenderList.indexOf(value);
+    printDM("selectGender ${selectGender?.name}");
     update();
   }
 
-  void setSelectedDateOfBirth(String value) {
+  void setSelectedDateOfBirth(DateTime value) {
     selectDateOfBirth = value;
-    dateOfBirthController.text = value;
+    dateOfBirthController.text = DateFormat('yyyy-MM-dd').format(value);
     update();
   }
 

@@ -5,6 +5,7 @@ import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:care_desk/src/Features/Patients/presentation/widgets/chronic_disease_chip.dart';
 import 'package:care_desk/src/Features/Patients/presentation/widgets/file_upload_card.dart';
 import 'package:care_desk/src/Features/Patients/presentation/widgets/file_upload_zone.dart';
+import 'package:care_desk/src/Features/Patients/presentation/widgets_add_patient/add_patient_section_card.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/Animation/animated_wrapper.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/Inputs/desktop_input.dart';
@@ -154,56 +155,6 @@ class _AddPatientState extends State<AddPatient> {
     }
   }
 
-  Widget _buildSectionCard({
-    required String title,
-    required IconData icon,
-    required List<Widget> children,
-  }) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 16.toH()),
-      decoration: BoxDecoration(
-        color: AppColors.get.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.get.greyLight, width: 1),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(20.toW()),
-            child: Row(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(8.toW()),
-                  decoration: BoxDecoration(
-                    color: AppColors.get.primary.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Icon(icon, color: AppColors.get.primary, size: 20),
-                ),
-                SizedBox(width: 12.toW()),
-                CustomText(
-                  title,
-                  fontSize: 16,
-                  fontWeight: FW.semiBold,
-                  color: AppColors.get.textPrimary,
-                ),
-              ],
-            ),
-          ),
-          Divider(height: 1, color: AppColors.get.greyLight),
-          Padding(
-            padding: EdgeInsets.all(20.toW()),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: children,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -244,52 +195,6 @@ class _AddPatientState extends State<AddPatient> {
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        OutlinedButton.icon(
-                          onPressed: () => Navigator.pop(context),
-                          style: OutlinedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 20.toW(),
-                              vertical: 12.toH(),
-                            ),
-                            side: BorderSide(color: AppColors.get.greyLight),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          icon: Icon(Icons.close,
-                              size: 18, color: AppColors.get.textSecondary),
-                          label: CustomText(
-                            "cancel".toTr(),
-                            fontSize: 14,
-                            color: AppColors.get.textSecondary,
-                          ),
-                        ),
-                        SizedBox(width: 12.toW()),
-                        ElevatedButton.icon(
-                          onPressed: _submitForm,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.get.primary,
-                            foregroundColor: AppColors.get.white,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 24.toW(),
-                              vertical: 12.toH(),
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          icon: const Icon(Icons.save, size: 18),
-                          label: CustomText(
-                            "save_patient".toTr(),
-                            color: AppColors.get.white,
-                            fontSize: 14,
-                            fontWeight: FW.medium,
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
@@ -302,168 +207,168 @@ class _AddPatientState extends State<AddPatient> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Personal Information Section
-                      _buildSectionCard(
-                        title: "personal_information".toTr(),
-                        icon: Icons.person_outline,
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                flex: 2,
-                                child: DesktopInput(
-                                  label: "full_name".toTr(),
-                                  hint: "enter_full_name".toTr(),
-                                  controller: _fullNameController,
-                                  prefixIcon: Icons.person,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "field_required".toTr();
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                              SizedBox(width: 16.toW()),
-                              Expanded(
-                                child: DesktopInput(
-                                  label: "phone_number".toTr(),
-                                  hint: "enter_phone".toTr(),
-                                  controller: _phoneController,
-                                  prefixIcon: Icons.phone,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "field_required".toTr();
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 16.toH()),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CustomText(
-                                      "gender".toTr(),
-                                      fontSize: 13,
-                                      fontWeight: FW.medium,
-                                    ),
-                                    SizedBox(height: 8.toH()),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: RadioListTile<String>(
-                                            title: CustomText("male".toTr(),
-                                                fontSize: 13),
-                                            value: 'male',
-                                            groupValue: _selectedGender,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                _selectedGender = value;
-                                              });
-                                            },
-                                            activeColor: AppColors.get.primary,
-                                            contentPadding: EdgeInsets.zero,
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: RadioListTile<String>(
-                                            title: CustomText("female".toTr(),
-                                                fontSize: 13),
-                                            value: 'female',
-                                            groupValue: _selectedGender,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                _selectedGender = value;
-                                              });
-                                            },
-                                            activeColor: AppColors.get.primary,
-                                            contentPadding: EdgeInsets.zero,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(width: 16.toW()),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CustomText(
-                                      "date_of_birth".toTr(),
-                                      fontSize: 13,
-                                      fontWeight: FW.medium,
-                                    ),
-                                    SizedBox(height: 8.toH()),
-                                    InkWell(
-                                      onTap: _pickDateOfBirth,
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 12.toW(),
-                                          vertical: 12.toH(),
-                                        ),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: AppColors.get.grey),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          color: AppColors.get.white,
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            CustomText(
-                                              _selectedDateOfBirth != null
-                                                  ? "${_selectedDateOfBirth!.day}/${_selectedDateOfBirth!.month}/${_selectedDateOfBirth!.year}"
-                                                  : "select_date".toTr(),
-                                              fontSize: 13,
-                                              color: _selectedDateOfBirth !=
-                                                      null
-                                                  ? AppColors.get.textPrimary
-                                                  : AppColors.get.grey,
-                                            ),
-                                            Icon(
-                                              Icons.calendar_today,
-                                              size: 18,
-                                              color: AppColors.get.primary,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    if (_selectedDateOfBirth != null) ...[
-                                      SizedBox(height: 8.toH()),
-                                      CustomText(
-                                        "${"age".toTr()}: ${_calculateAge(_selectedDateOfBirth!)} ${"years".toTr()}",
-                                        fontSize: 12,
-                                        color: AppColors.get.grey,
-                                      ),
-                                    ],
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 16.toH()),
-                          DesktopInput(
-                            label: "address".toTr(),
-                            hint: "enter_address".toTr(),
-                            controller: _addressController,
-                            prefixIcon: Icons.location_on,
-                            maxLines: 2,
-                          ),
-                        ],
-                      ),
+                      // AddPatientSectionCard(
+                      //   title: "personal_information".toTr(),
+                      //   icon: Icons.person_outline,
+                      //   children: [
+                      //     Row(
+                      //       children: [
+                      //         Expanded(
+                      //           flex: 2,
+                      //           child: DesktopInput(
+                      //             label: "full_name".toTr(),
+                      //             hint: "enter_full_name".toTr(),
+                      //             controller: _fullNameController,
+                      //             prefixIcon: Icons.person,
+                      //             validator: (value) {
+                      //               if (value == null || value.isEmpty) {
+                      //                 return "field_required".toTr();
+                      //               }
+                      //               return null;
+                      //             },
+                      //           ),
+                      //         ),
+                      //         SizedBox(width: 16.toW()),
+                      //         Expanded(
+                      //           child: DesktopInput(
+                      //             label: "phone_number".toTr(),
+                      //             hint: "enter_phone".toTr(),
+                      //             controller: _phoneController,
+                      //             prefixIcon: Icons.phone,
+                      //             validator: (value) {
+                      //               if (value == null || value.isEmpty) {
+                      //                 return "field_required".toTr();
+                      //               }
+                      //               return null;
+                      //             },
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //     SizedBox(height: 16.toH()),
+                      //     Row(
+                      //       children: [
+                      //         Expanded(
+                      //           child: Column(
+                      //             crossAxisAlignment: CrossAxisAlignment.start,
+                      //             children: [
+                      //               CustomText(
+                      //                 "gender".toTr(),
+                      //                 fontSize: 13,
+                      //                 fontWeight: FW.medium,
+                      //               ),
+                      //               SizedBox(height: 8.toH()),
+                      //               Row(
+                      //                 children: [
+                      //                   Expanded(
+                      //                     child: RadioListTile<String>(
+                      //                       title: CustomText("male".toTr(),
+                      //                           fontSize: 13),
+                      //                       value: 'male',
+                      //                       groupValue: _selectedGender,
+                      //                       onChanged: (value) {
+                      //                         setState(() {
+                      //                           _selectedGender = value;
+                      //                         });
+                      //                       },
+                      //                       activeColor: AppColors.get.primary,
+                      //                       contentPadding: EdgeInsets.zero,
+                      //                     ),
+                      //                   ),
+                      //                   Expanded(
+                      //                     child: RadioListTile<String>(
+                      //                       title: CustomText("female".toTr(),
+                      //                           fontSize: 13),
+                      //                       value: 'female',
+                      //                       groupValue: _selectedGender,
+                      //                       onChanged: (value) {
+                      //                         setState(() {
+                      //                           _selectedGender = value;
+                      //                         });
+                      //                       },
+                      //                       activeColor: AppColors.get.primary,
+                      //                       contentPadding: EdgeInsets.zero,
+                      //                     ),
+                      //                   ),
+                      //                 ],
+                      //               ),
+                      //             ],
+                      //           ),
+                      //         ),
+                      //         SizedBox(width: 16.toW()),
+                      //         Expanded(
+                      //           child: Column(
+                      //             crossAxisAlignment: CrossAxisAlignment.start,
+                      //             children: [
+                      //               CustomText(
+                      //                 "date_of_birth".toTr(),
+                      //                 fontSize: 13,
+                      //                 fontWeight: FW.medium,
+                      //               ),
+                      //               SizedBox(height: 8.toH()),
+                      //               InkWell(
+                      //                 onTap: _pickDateOfBirth,
+                      //                 child: Container(
+                      //                   padding: EdgeInsets.symmetric(
+                      //                     horizontal: 12.toW(),
+                      //                     vertical: 12.toH(),
+                      //                   ),
+                      //                   decoration: BoxDecoration(
+                      //                     border: Border.all(
+                      //                         color: AppColors.get.grey),
+                      //                     borderRadius:
+                      //                         BorderRadius.circular(8),
+                      //                     color: AppColors.get.white,
+                      //                   ),
+                      //                   child: Row(
+                      //                     mainAxisAlignment:
+                      //                         MainAxisAlignment.spaceBetween,
+                      //                     children: [
+                      //                       CustomText(
+                      //                         _selectedDateOfBirth != null
+                      //                             ? "${_selectedDateOfBirth!.day}/${_selectedDateOfBirth!.month}/${_selectedDateOfBirth!.year}"
+                      //                             : "select_date".toTr(),
+                      //                         fontSize: 13,
+                      //                         color: _selectedDateOfBirth !=
+                      //                                 null
+                      //                             ? AppColors.get.textPrimary
+                      //                             : AppColors.get.grey,
+                      //                       ),
+                      //                       Icon(
+                      //                         Icons.calendar_today,
+                      //                         size: 18,
+                      //                         color: AppColors.get.primary,
+                      //                       ),
+                      //                     ],
+                      //                   ),
+                      //                 ),
+                      //               ),
+                      //               if (_selectedDateOfBirth != null) ...[
+                      //                 SizedBox(height: 8.toH()),
+                      //                 CustomText(
+                      //                   "${"age".toTr()}: ${_calculateAge(_selectedDateOfBirth!)} ${"years".toTr()}",
+                      //                   fontSize: 12,
+                      //                   color: AppColors.get.grey,
+                      //                 ),
+                      //               ],
+                      //             ],
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //     SizedBox(height: 16.toH()),
+                      //     DesktopInput(
+                      //       label: "address".toTr(),
+                      //       hint: "enter_address".toTr(),
+                      //       controller: _addressController,
+                      //       prefixIcon: Icons.location_on,
+                      //       maxLines: 2,
+                      //     ),
+                      //   ],
+                      // ),
 
                       // Medical Status & History Section
-                      _buildSectionCard(
+                      AddPatientSectionCard(
                         title: "medical_status_history".toTr(),
                         icon: Icons.medical_services_outlined,
                         children: [
@@ -576,7 +481,7 @@ class _AddPatientState extends State<AddPatient> {
                       ),
 
                       // Media & Attachments Section
-                      _buildSectionCard(
+                      AddPatientSectionCard(
                         title: "media_attachments".toTr(),
                         icon: Icons.attach_file,
                         children: [
@@ -632,7 +537,7 @@ class _AddPatientState extends State<AddPatient> {
                       ),
 
                       // Administrative Details Section
-                      _buildSectionCard(
+                      AddPatientSectionCard(
                         title: "administrative_details".toTr(),
                         icon: Icons.admin_panel_settings_outlined,
                         children: [

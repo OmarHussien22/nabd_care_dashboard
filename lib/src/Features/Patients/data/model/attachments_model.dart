@@ -14,4 +14,13 @@ class AttachmentsModel extends AttachmentsEntity {
       url: json['url'] ?? '',
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'url': url,
+    };
+  }
+  
 }

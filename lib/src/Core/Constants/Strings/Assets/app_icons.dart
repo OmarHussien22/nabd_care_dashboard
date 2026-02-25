@@ -5,13 +5,13 @@ class AppIcons {
 
   static const infoCircle = 'assets/icons/info-circle.png';
   static const logout = 'assets/icons/logout.png';
-  static const location = 'assets/icons/location.png';
+  static const location = 'a ssets/icons/location.png';
   static const search = 'assets/icons/search.png';
   static const success = 'assets/icons/success.png';
 
 
   /// Old Assets
-  static const call = "assets/icons/phone.png";
+  static const call = "assets/icons/call.png";
   static const password = "assets/icons/shield-security.png";
   static const String user = 'assets/icons/user.png';
   static const String phone = 'assets/icons/phone.png';
@@ -31,4 +31,12 @@ class AppIcons {
   static const String whatsapp = "assets/icons/whatsapp.png";
   static const String whatsappIcon = "assets/icons/whatsapp2.png";
   static const String tikTok = "assets/icons/tiktok.png";
+
+
+
+  // New Assets
+  static const String profileActive = "assets/icons/profile_active.png";
+  static const String callIncoming = "assets/icons/call-incoming.png";
+  static const String gender = "assets/icons/gender.png";
+  
 }

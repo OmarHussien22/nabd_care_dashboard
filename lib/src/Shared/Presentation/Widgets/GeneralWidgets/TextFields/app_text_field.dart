@@ -13,6 +13,7 @@ class AppFillTextFieldField extends StatelessWidget {
   final String? header;
   final String? prefixAsset;
   final double? prefixScale;
+  final IconData? prefixIconData;
   final VoidCallback? onTap;
   final bool readOnly;
   final VoidCallback? onComplete;
@@ -30,6 +31,7 @@ class AppFillTextFieldField extends StatelessWidget {
     this.header,
     this.prefixAsset,
     this.prefixScale = 2.5,
+    this.prefixIconData,
     this.onTap,
     this.keyboardType,
     this.readOnly = false,
@@ -44,7 +46,7 @@ class AppFillTextFieldField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFieldDefault(
-      width: width ?? 180,
+      width: width ?? 500,
       keyboardType: keyboardType,
       fillColor: AppColors.get.greyLight,
       inputDecoration: InputDecorationWithBorder(
@@ -62,8 +64,15 @@ class AppFillTextFieldField extends StatelessWidget {
           ? PrefixWithIconImage(
               scale: prefixScale,
               iconImage: prefixAsset.noneNull,
+              color: AppColors.get.primary,
             )
-          : const PrefixNone(),
+          : prefixIconData != null
+              ? PrefixWithIconData(
+                  scale: prefixScale,
+                  iconData: prefixIconData ?? Icons.person,
+                  color: AppColors.get.primary,
+                )
+              : const PrefixNone(),
       suffix: isSheet
           ? SuffixWithIconData(
               iconData: Icons.keyboard_arrow_down,
