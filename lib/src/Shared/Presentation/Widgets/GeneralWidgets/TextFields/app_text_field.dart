@@ -46,7 +46,7 @@ class AppFillTextFieldField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFieldDefault(
-      width: width ?? 500,
+      width: width ?? MediaQuery.of(context).size.width * 0.4,
       keyboardType: keyboardType,
       fillColor: AppColors.get.greyLight,
       inputDecoration: InputDecorationWithBorder(
