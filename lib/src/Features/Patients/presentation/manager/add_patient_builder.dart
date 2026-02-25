@@ -1,9 +1,10 @@
 import 'dart:io';
+import 'package:care_desk/src/Features/Patients/domain/entity/disease_entity.dart';
 import 'package:intl/intl.dart';
 
 import 'package:care_desk/src/Core/Services/helper.dart';
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
-import 'package:care_desk/src/Features/Patients/domain/entity/gender_entity.dart';
+import 'package:care_desk/src/Features/Patients/domain/entity/general_static_entity.dart';
 import 'package:care_desk/src/Super/Controllers/Resources/get/get_controller_interface.dart';
 import 'package:flutter/material.dart';
 
@@ -22,25 +23,36 @@ class AddPatientBuilder extends GetControllerInterface {
   // Controllers for Administrative Details
   late TextEditingController notesController;
   late TextEditingController dateOfBirthController;
-  // List<String> genderList = ["male", "female"];
+
+  //Gender
   GenderEntity? selectGender;
   int selectGenderIndex = 0;
+
+  //Date of Birth
   DateTime? selectDateOfBirth;
-  int? selectVisitType;
+
+  //Visit Type
+  VisitTypeEntity? selectVisitType;
+  int selectVisitTypeIndex = 0;
+
+  //Referral Type
   int? selectReferralType;
 
+  //Chronic Diseases
   List<int> selectedChronicDiseases = [];
+
+  //Medications
   List<int> selectedMedications = [];
 
+  //Attachments
   List<File> attachments = [];
 
   // functions slected
 
   void setSelectedGender(GenderEntity value) {
     selectGender = value;
-    // selectGenderIndex = genderList.indexOf(value);
     selectGenderIndex = GenderEntity.getGenderList.indexOf(value);
-    printDM("selectGender ${selectGender?.name}");
+    printDM("selectGender ${selectGender?.title}");
     update();
   }
 
@@ -50,8 +62,9 @@ class AddPatientBuilder extends GetControllerInterface {
     update();
   }
 
-  void setSelectedVisitType(int value) {
+  void setSelectedVisitType(VisitTypeEntity value) {
     selectVisitType = value;
+    selectVisitTypeIndex = VisitTypeEntity.getVisitTypeList.indexOf(value);
     update();
   }
 
@@ -60,8 +73,13 @@ class AddPatientBuilder extends GetControllerInterface {
     update();
   }
 
-  void setSelectedChronicDiseases(List<int> value) {
-    selectedChronicDiseases = value;
+  void setSelectedChronicDiseases(DiseaseEntity value) {
+    if (selectedChronicDiseases.contains(value.id)) {
+      removeSelectedChronicDisease(value.id);
+    } else {
+      selectedChronicDiseases.add(value.id);
+      printDM("selectedChronicDiseases $selectedChronicDiseases");
+    }
     update();
   }
 
@@ -140,6 +158,9 @@ class AddPatientBuilder extends GetControllerInterface {
     allergiesController = TextEditingController();
     notesController = TextEditingController();
     dateOfBirthController = TextEditingController();
+    // Initialize with defaults so widgets never receive null groupValue
+    selectGender = GenderEntity.getGenderList.first;
+    selectVisitType = VisitTypeEntity.getVisitTypeList.first;
   }
 
   @override

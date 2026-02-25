@@ -1,5 +1,3 @@
-
-
 class MedicineEntity {
   final int id;
   final String name;
@@ -9,15 +7,21 @@ class MedicineEntity {
     required this.name,
   });
 
-  static const MedicineEntity empty = MedicineEntity(
-    id: 0,
-    name: '',
-  );
+  // static const MedicineEntity empty = MedicineEntity(
+  //   id: 0,
+  //   name: '',
+  // );
 
   static List<MedicineEntity> get emptyList => [
-        MedicineEntity.empty,
-        MedicineEntity.empty,
-        MedicineEntity.empty,
-        MedicineEntity.empty,
+        MedicineEntity(id: 1, name: "medicine_1"),
+        MedicineEntity(id: 2, name: "medicine_2"),
+        MedicineEntity(id: 3, name: "medicine_3"),
+        MedicineEntity(id: 4, name: "medicine_4"),
+        MedicineEntity(id: 5, name: "medicine_5"),
+        MedicineEntity(id: 6, name: "medicine_6"),
+        MedicineEntity(id: 7, name: "medicine_7"),
+        MedicineEntity(id: 8, name: "medicine_8"),
+        MedicineEntity(id: 9, name: "medicine_9"),
+        MedicineEntity(id: 10, name: "medicine_10"),
       ];
 }

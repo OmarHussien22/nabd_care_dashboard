@@ -51,7 +51,7 @@ class AddPatientInformationCard extends StatelessWidget {
           // date of birth and gender
           Row(
             children: [
-              const AddPatientSelectGender(),
+              Expanded(child: const AddPatientSelectGender()),
               SizedBox(width: 16.toW()),
               Expanded(
                 child: CustomDatePicker(

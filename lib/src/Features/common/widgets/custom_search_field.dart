@@ -1,6 +1,7 @@
 import 'package:care_desk/src/Core/Constants/Decorations/app_Insets.dart';
 import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/default_text_field.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,10 @@ class CustomSearchField extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.sizeOf(context).width * 0.45,
       child: Padding(
-          padding: AppInsets.defaultScreenALL,
+          padding: AppInsets.defaultScreenOnly(
+            top: 10.toH(),
+            bottom: 10.toH(),
+          ),
           child: SearchableFieldDefault<String>(
             items: [
               "Omar",

@@ -25,7 +25,7 @@ class AddPatientPage extends StatelessWidget {
               return Padding(
                 padding: AppInsets.defaultScreenALL,
                 child: AnimatedWrapper(
-                  styles: WrapAnimationStyles.scale,
+                  styles: WrapAnimationStyles.slide,
                   child: Form(
                     key: cnt.globalKey,
                     child: SingleChildScrollView(
@@ -33,19 +33,19 @@ class AddPatientPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           10.ESH(),
+                          //Patient Information Section
                           AddPatientSectionCard(
                             icon: Icons.person,
                             title: 'patient_information'.toTr(),
                             children: [
-                              // Patient Information Section
                               AddPatientInformationCard(node: node),
                             ],
                           ),
+                          //Medical Status History Section
                           AddPatientSectionCard(
                             title: "medical_status_history".toTr(),
                             icon: Icons.medical_services_outlined,
                             children: [
-                              // Patient Information Section
                               AddPatienrMedicalCard(node: node),
                             ],
                           ),
@@ -53,7 +53,6 @@ class AddPatientPage extends StatelessWidget {
                             icon: Icons.person,
                             title: 'patient_information',
                             children: [
-                              // Patient Information Section
                               AddPatientInformationCard(node: node),
                             ],
                           )
