@@ -61,8 +61,8 @@ class AddPatientInformationCard extends StatelessWidget {
                   onDateSelected: (date) {
                     cnt.setSelectedDateOfBirth(date);
                   },
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime.now(),
+                  // initialDate: DateTime.now(),
+                  // firstDate: DateTime.now(),
                   validator: AppValidator.defaultValidator.validate,
                 ),
               ),
