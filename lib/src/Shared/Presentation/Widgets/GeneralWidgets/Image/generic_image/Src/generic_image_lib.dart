@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:care_desk/src/Core/utils/Extensions/screen_spaces_extension.dart';
@@ -8,7 +9,7 @@ import '../../../../../../../Core/Styles/Colors/app_colors.dart';
 import '../../../../Builders/conditional_builder.dart';
 import '../generic_image.dart';
 import 'Parts/imports_parts.dart';
-
+import 'package:file_picker/file_picker.dart';
 class ImageGeneric extends StatelessWidget {
   final ImageOptions? options;
   final ImageProvider? imageProvider;
@@ -103,6 +104,42 @@ class ImageGeneric extends StatelessWidget {
     );
   }
 
+  factory ImageGeneric.memory({
+    Key? key,
+    required Uint8List bytes,
+    ImageOptions? options,
+    bool hasDropShadow = false,
+    VoidCallback? onTap,
+  }) {
+    return ImageGeneric(
+      key: key,
+      options: options,
+      child: ConditionalBuilder(
+        condition: hasDropShadow,
+        onBuild: ColorFiltered(
+          colorFilter: ColorFilter.mode(
+            AppColors.get.black.withOpacity(.2),
+            BlendMode.srcATop,
+          ),
+          child: Image.memory(
+            bytes,
+            fit: options?.fit,
+            scale: options?.scale ?? 1,
+            alignment: options?.alignment ?? Alignment.center,
+            color: options?.color,
+          ),
+        ),
+        onFeedBack: Image.memory(
+          bytes,
+          fit: options?.fit,
+          scale: options?.scale ?? 1,
+          alignment: options?.alignment ?? Alignment.center,
+          color: options?.color,
+        ),
+      ),
+    );
+  }
+
   factory ImageGeneric.file({
     Key? key,
     required File? fileImage,
@@ -171,6 +208,7 @@ class ImageGeneric extends StatelessWidget {
     double maxScale = 1,
     ImageType type = ImageType.network,
     required String url,
+    PlatformFile? fileImage,
     ImageOptions? options,
     bool hasHero = false,
   }) {
@@ -193,18 +231,33 @@ class ImageGeneric extends StatelessWidget {
                     options: options,
                     hasDropShadow: true,
                   )
-            : hasHero
-                ? Hero(
-                    tag: url,
-                    child: ImageGeneric.asset(
-                      url: url,
-                      options: options,
-                    ),
-                  )
-                : ImageGeneric.asset(
-                    url: url,
-                    options: options,
-                  ),
+            : type == ImageType.platformFile
+                ? hasHero
+                    ? Hero(
+                        tag: url,
+                        child: ImageGeneric.memory(
+                          bytes: fileImage!.bytes!,
+                          options: options,
+                          hasDropShadow: true,
+                        ),
+                      )
+                    : ImageGeneric.memory(
+                        bytes: fileImage!.bytes!,
+                        options: options,
+                        hasDropShadow: true,
+                      )
+                : hasHero
+                    ? Hero(
+                        tag: url,
+                        child: ImageGeneric.asset(
+                          url: url,
+                          options: options,
+                        ),
+                      )
+                    : ImageGeneric.asset(
+                        url: url,
+                        options: options,
+                      ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:care_desk/src/Core/network_structure/networking/src/utils/upload_option.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import '../../interfaces/networking.dart';
@@ -94,6 +95,7 @@ class DioService extends Networking<Response, DioError> {
     bool withPagination = false,
     bool showLoadingDialog = false,
     HeaderContentType? contentType,
+    UploadOptions? uploadOptions,
   }) async {
     return _post.post(
       url: url,
@@ -104,6 +106,7 @@ class DioService extends Networking<Response, DioError> {
       queryParams: queryParams,
       showLoadingDialog: showLoadingDialog,
       contentType: contentType,
+      uploadOptions: uploadOptions,
     );
   }
 

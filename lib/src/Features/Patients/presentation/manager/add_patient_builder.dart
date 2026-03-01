@@ -1,5 +1,8 @@
 import 'dart:io';
 import 'package:care_desk/src/Features/Patients/domain/entity/disease_entity.dart';
+import 'package:care_desk/src/Features/Patients/domain/entity/referral_sources.dart';
+import 'package:care_desk/src/Features/Patients/domain/entity/upload_attachments.dart';
+import 'package:care_desk/src/Features/Patients/presentation/widgets/file_upload_card.dart';
 import 'package:intl/intl.dart';
 
 import 'package:care_desk/src/Core/Services/helper.dart';
@@ -10,6 +13,48 @@ import 'package:flutter/material.dart';
 
 class AddPatientBuilder extends GetControllerInterface {
   final GlobalKey<FormState> globalKey = GlobalKey<FormState>();
+  final ScrollController scrollController = ScrollController();
+  final List<GlobalKey> sectionKeys = List.generate(4, (_) => GlobalKey());
+  int currentStep = 0;
+
+  static const String updateHeaderId = 'add_patient_header';
+  static String sectionUpdateId(int index) => 'add_patient_section_$index';
+
+  void updateStep(int step) {
+    if (currentStep != step) {
+      int oldStep = currentStep;
+      currentStep = step;
+      // Only update the header and the two cards that changed state
+      update([
+        updateHeaderId,
+        sectionUpdateId(oldStep),
+        sectionUpdateId(currentStep),
+      ]);
+    }
+  }
+
+  void back() {
+    if (currentStep > 0) {
+      scrollToStep(currentStep - 1);
+    }
+  }
+
+  void scrollToStep(int step) {
+    if (step >= 0 && step < sectionKeys.length) {
+      final context = sectionKeys[step].currentContext;
+      if (context != null) {
+        Scrollable.ensureVisible(
+          context,
+          duration: const Duration(milliseconds: 600),
+          curve: Curves.easeInOutCubic,
+        );
+        // Step will be updated by the scroll listener in the page
+      } else {
+        // Fallback if context is not ready
+        updateStep(step);
+      }
+    }
+  }
 
   // Controllers for Personal Information
   late TextEditingController nameController;
@@ -23,7 +68,8 @@ class AddPatientBuilder extends GetControllerInterface {
   // Controllers for Administrative Details
   late TextEditingController notesController;
   late TextEditingController dateOfBirthController;
-
+  late TextEditingController referralSourceController;
+  late TextEditingController secretaryNotesController;
   //Gender
   GenderEntity? selectGender;
   int selectGenderIndex = 0;
@@ -35,9 +81,6 @@ class AddPatientBuilder extends GetControllerInterface {
   VisitTypeEntity? selectVisitType;
   int selectVisitTypeIndex = 0;
 
-  //Referral Type
-  int? selectReferralType;
-
   //Chronic Diseases
   List<int> selectedChronicDiseases = [];
 
@@ -45,7 +88,10 @@ class AddPatientBuilder extends GetControllerInterface {
   List<int> selectedMedications = [];
 
   //Attachments
-  List<File> attachments = [];
+  List<UploadAttachment> attachments = [];
+
+  //Referral Type
+  ReferralSourcesEntity? selectReferralSource;
 
   // functions slected
 
@@ -65,11 +111,6 @@ class AddPatientBuilder extends GetControllerInterface {
   void setSelectedVisitType(VisitTypeEntity value) {
     selectVisitType = value;
     selectVisitTypeIndex = VisitTypeEntity.getVisitTypeList.indexOf(value);
-    update();
-  }
-
-  void setSelectedReferralType(int value) {
-    selectReferralType = value;
     update();
   }
 
@@ -98,35 +139,6 @@ class AddPatientBuilder extends GetControllerInterface {
     update();
   }
 
-  void setAttachments(List<File> value) {
-    attachments = value;
-    update();
-  }
-
-  void pickDateOfBirth() async {
-    // final DateTime? picked = await showDatePicker(
-    //   context: context,
-    //   initialDate: DateTime.now().subtract(const Duration(days: 365 * 25)),
-    //   firstDate: DateTime(1900),
-    //   lastDate: DateTime.now(),
-    //   builder: (context, child) {
-    //     return Theme(
-    //       data: Theme.of(context).copyWith(
-    //         colorScheme: ColorScheme.light(
-    //           primary: AppColors.get.primary,
-    //         ),
-    //       ),
-    //       child: child!,
-    //     );
-    //   },
-    // );
-    // if (picked != null) {
-    //
-    //     _selectedDateOfBirth = picked;
-    //   update();
-    // }
-  }
-
   int calculateAge(DateTime birthDate) {
     final now = DateTime.now();
     int age = now.year - birthDate.year;
@@ -142,10 +154,74 @@ class AddPatientBuilder extends GetControllerInterface {
       allowMultiple: true,
     );
 
-    if (files.isNotEmpty) {
-      attachments.addAll(files);
+    for (var file in files) {
+      final attachment = UploadAttachment(
+        getFile: GetFile(platformFile: file), // PlatformFile
+        name: file.name, // بدل path.split
+        size: Helper.mediaSizeHandler.formatBytes(file.size),
+      );
+
+      attachments.add(attachment);
+      update();
+
+      _uploadFile(attachment);
+    }
+  }
+
+  Future<void> _uploadFile(UploadAttachment attachmentFiles) async {
+    try {
+      attachmentFiles.state = FileUploadState.uploading;
+      update();
+
+      // Simulate upload
+      await Future.delayed(Duration(seconds: 2));
+
+      attachmentFiles.state = FileUploadState.completed;
+      attachmentFiles.progress = 100;
+      attachmentFiles = attachments.firstWhere((e) =>
+          e.getFile.platformFile == attachmentFiles.getFile.platformFile);
+      update();
+      // printDM("attachmentFiles ${attachmentFiles.getFile.platformFile}");
+    } catch (e) {
+      attachmentFiles.state = FileUploadState.failed;
       update();
     }
+  }
+
+  void removeAttachment(UploadAttachment attachment) {
+    attachments.remove(attachment);
+    update();
+  }
+
+  void cancelUpload(UploadAttachment attachment) {
+    attachment.cancelToken?.cancel();
+    attachment.state = FileUploadState.failed;
+    update();
+  }
+
+  void setReferralSource(ReferralSourcesEntity referralSource) {
+    selectReferralSource = referralSource;
+    referralSourceController.text = referralSource.name;
+    printDM("selectReferralSource ${selectReferralSource?.name}");
+    update();
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "name": nameController.text,
+      "phone": phoneController.text,
+      "address": addressController.text,
+      "main_complaint": mainComplaintController.text,
+      "allergies": allergiesController.text,
+      "notes": notesController.text,
+      "date_of_birth": dateOfBirthController.text,
+      "referral_source": selectReferralSource?.id,
+      "gender": selectGender?.id,
+      "visit_type": selectVisitType?.id,
+      "chronic_diseases": selectedChronicDiseases,
+      "medications": selectedMedications,
+      "attachments": attachments,
+    };
   }
 
   @override
@@ -158,9 +234,11 @@ class AddPatientBuilder extends GetControllerInterface {
     allergiesController = TextEditingController();
     notesController = TextEditingController();
     dateOfBirthController = TextEditingController();
+    referralSourceController = TextEditingController();
     // Initialize with defaults so widgets never receive null groupValue
     selectGender = GenderEntity.getGenderList.first;
     selectVisitType = VisitTypeEntity.getVisitTypeList.first;
+    secretaryNotesController = TextEditingController();
   }
 
   @override
@@ -168,10 +246,14 @@ class AddPatientBuilder extends GetControllerInterface {
     nameController.dispose();
     phoneController.dispose();
     addressController.dispose();
+
     mainComplaintController.dispose();
     allergiesController.dispose();
     notesController.dispose();
     dateOfBirthController.dispose();
+    referralSourceController.dispose();
+    secretaryNotesController.dispose();
+    scrollController.dispose();
     super.onClose();
   }
 }

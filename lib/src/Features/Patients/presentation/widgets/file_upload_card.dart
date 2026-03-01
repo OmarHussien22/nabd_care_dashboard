@@ -63,7 +63,9 @@ class FileUploadCard extends StatelessWidget {
       ),
       child: state == FileUploadState.uploading
           ? _buildUploadingState()
-          : _buildCompletedState(),
+          : state == FileUploadState.failed
+              ? _buildFailedState()
+              : _buildCompletedState(),
     );
   }
 
@@ -215,6 +217,25 @@ class FileUploadCard extends StatelessWidget {
                 tooltip: "Delete",
               ),
           ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFailedState() {
+    return Row(
+      children: [
+        Icon(Icons.error, color: AppColors.get.error),
+        SizedBox(width: 8),
+        Expanded(
+          child: CustomText(
+            "$fileName (Failed)",
+            color: AppColors.get.error,
+          ),
+        ),
+        IconButton(
+          onPressed: onDelete,
+          icon: Icon(Icons.delete, color: AppColors.get.error),
         ),
       ],
     );

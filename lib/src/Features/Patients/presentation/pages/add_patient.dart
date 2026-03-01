@@ -368,117 +368,117 @@ class _AddPatientState extends State<AddPatient> {
                       // ),
 
                       // Medical Status & History Section
-                      AddPatientSectionCard(
-                        title: "medical_status_history".toTr(),
-                        icon: Icons.medical_services_outlined,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                "visit_type".toTr(),
-                                fontSize: 13,
-                                fontWeight: FW.medium,
-                              ),
-                              SizedBox(height: 8.toH()),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: RadioListTile<String>(
-                                      title: CustomText("new_visit".toTr(),
-                                          fontSize: 13),
-                                      subtitle: CustomText(
-                                        "first_time_visit".toTr(),
-                                        fontSize: 11,
-                                        color: AppColors.get.grey,
-                                      ),
-                                      value: 'new_visit',
-                                      groupValue: _selectedVisitType,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          _selectedVisitType = value;
-                                        });
-                                      },
-                                      activeColor: AppColors.get.primary,
-                                      contentPadding: EdgeInsets.zero,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: RadioListTile<String>(
-                                      title: CustomText("follow_up".toTr(),
-                                          fontSize: 13),
-                                      subtitle: CustomText(
-                                        "return_visit".toTr(),
-                                        fontSize: 11,
-                                        color: AppColors.get.grey,
-                                      ),
-                                      value: 'follow_up',
-                                      groupValue: _selectedVisitType,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          _selectedVisitType = value;
-                                        });
-                                      },
-                                      activeColor: AppColors.get.primary,
-                                      contentPadding: EdgeInsets.zero,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 16.toH()),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                "chronic_diseases".toTr(),
-                                fontSize: 13,
-                                fontWeight: FW.medium,
-                              ),
-                              SizedBox(height: 12.toH()),
-                              Wrap(
-                                spacing: 8.toW(),
-                                runSpacing: 8.toH(),
-                                children: _chronicDiseaseOptions.map((disease) {
-                                  return ChronicDiseaseChip(
-                                    label: disease.toTr(),
-                                    isSelected: _selectedChronicDiseases
-                                        .contains(disease),
-                                    onTap: () {
-                                      setState(() {
-                                        if (_selectedChronicDiseases
-                                            .contains(disease)) {
-                                          _selectedChronicDiseases
-                                              .remove(disease);
-                                        } else {
-                                          _selectedChronicDiseases.add(disease);
-                                        }
-                                      });
-                                    },
-                                  );
-                                }).toList(),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 16.toH()),
-                          DesktopInput(
-                            label: "allergies".toTr(),
-                            hint: "enter_allergies".toTr(),
-                            controller: _allergiesController,
-                            prefixIcon: Icons.warning_amber_outlined,
-                            maxLines: 2,
-                          ),
-                          SizedBox(height: 16.toH()),
-                          DesktopInput(
-                            label: "main_complaint".toTr(),
-                            hint: "why_patient_here_today".toTr(),
-                            controller: _mainComplaintController,
-                            prefixIcon: Icons.notes,
-                            maxLines: 3,
-                          ),
-                        ],
-                      ),
+                      // AddPatientSectionCard(
+                      //   title: "medical_status_history".toTr(),
+                      //   icon: Icons.medical_services_outlined,
+                      //   children: [
+                      //     Column(
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: [
+                      //         CustomText(
+                      //           "visit_type".toTr(),
+                      //           fontSize: 13,
+                      //           fontWeight: FW.medium,
+                      //         ),
+                      //         SizedBox(height: 8.toH()),
+                      //         Row(
+                      //           children: [
+                      //             Expanded(
+                      //               child: RadioListTile<String>(
+                      //                 title: CustomText("new_visit".toTr(),
+                      //                     fontSize: 13),
+                      //                 subtitle: CustomText(
+                      //                   "first_time_visit".toTr(),
+                      //                   fontSize: 11,
+                      //                   color: AppColors.get.grey,
+                      //                 ),
+                      //                 value: 'new_visit',
+                      //                 groupValue: _selectedVisitType,
+                      //                 onChanged: (value) {
+                      //                   setState(() {
+                      //                     _selectedVisitType = value;
+                      //                   });
+                      //                 },
+                      //                 activeColor: AppColors.get.primary,
+                      //                 contentPadding: EdgeInsets.zero,
+                      //               ),
+                      //             ),
+                      //             Expanded(
+                      //               child: RadioListTile<String>(
+                      //                 title: CustomText("follow_up".toTr(),
+                      //                     fontSize: 13),
+                      //                 subtitle: CustomText(
+                      //                   "return_visit".toTr(),
+                      //                   fontSize: 11,
+                      //                   color: AppColors.get.grey,
+                      //                 ),
+                      //                 value: 'follow_up',
+                      //                 groupValue: _selectedVisitType,
+                      //                 onChanged: (value) {
+                      //                   setState(() {
+                      //                     _selectedVisitType = value;
+                      //                   });
+                      //                 },
+                      //                 activeColor: AppColors.get.primary,
+                      //                 contentPadding: EdgeInsets.zero,
+                      //               ),
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       ],
+                      //     ),
+                      //     SizedBox(height: 16.toH()),
+                      //     Column(
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: [
+                      //         CustomText(
+                      //           "chronic_diseases".toTr(),
+                      //           fontSize: 13,
+                      //           fontWeight: FW.medium,
+                      //         ),
+                      //         SizedBox(height: 12.toH()),
+                      //         Wrap(
+                      //           spacing: 8.toW(),
+                      //           runSpacing: 8.toH(),
+                      //           children: _chronicDiseaseOptions.map((disease) {
+                      //             return ChronicDiseaseChip(
+                      //               label: disease.toTr(),
+                      //               isSelected: _selectedChronicDiseases
+                      //                   .contains(disease),
+                      //               onTap: () {
+                      //                 setState(() {
+                      //                   if (_selectedChronicDiseases
+                      //                       .contains(disease)) {
+                      //                     _selectedChronicDiseases
+                      //                         .remove(disease);
+                      //                   } else {
+                      //                     _selectedChronicDiseases.add(disease);
+                      //                   }
+                      //                 });
+                      //               },
+                      //             );
+                      //           }).toList(),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //     SizedBox(height: 16.toH()),
+                      //     DesktopInput(
+                      //       label: "allergies".toTr(),
+                      //       hint: "enter_allergies".toTr(),
+                      //       controller: _allergiesController,
+                      //       prefixIcon: Icons.warning_amber_outlined,
+                      //       maxLines: 2,
+                      //     ),
+                      //     SizedBox(height: 16.toH()),
+                      //     DesktopInput(
+                      //       label: "main_complaint".toTr(),
+                      //       hint: "why_patient_here_today".toTr(),
+                      //       controller: _mainComplaintController,
+                      //       prefixIcon: Icons.notes,
+                      //       maxLines: 3,
+                      //     ),
+                      //   ],
+                      // ),
 
                       // Media & Attachments Section
                       AddPatientSectionCard(

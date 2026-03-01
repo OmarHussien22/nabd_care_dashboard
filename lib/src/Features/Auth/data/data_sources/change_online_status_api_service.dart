@@ -15,6 +15,7 @@ class ChangeOnlineStatusApiService extends ServicesInterface {
       auth: true,
       params: params,
       showLoadingDialog: false,
+      uploadOptions: uploadOptions,
     );
   }
 }

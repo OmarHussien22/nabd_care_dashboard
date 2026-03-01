@@ -16,13 +16,14 @@ class AddPatientInformationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<AddPatientBuilder>(builder: (cnt) {
       return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // name and phone number
+          // ── Name & Phone Row ──
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: AppFillTextFieldField(
-                  // width: 500,
                   controller: cnt.nameController,
                   hint: "enter_full_name",
                   header: "full_name",
@@ -32,27 +33,31 @@ class AddPatientInformationCard extends StatelessWidget {
                   onComplete: node.nextFocus,
                 ),
               ),
-              SizedBox(width: 16.toW()),
+              SizedBox(width: 20.toW()),
               Expanded(
                 child: AppFillTextFieldField(
-                  // width: 500,
                   controller: cnt.phoneController,
                   hint: "enter_phone",
                   header: "phone_number",
                   prefixAsset: AppIcons.callIncoming,
                   keyboardType: TextInputType.phone,
-                  validation: AppValidator.defaultValidator.validate,
+                  validation: (value) =>
+                      AppValidator.phoneValidator.validate(value),
                   onComplete: node.nextFocus,
                 ),
               ),
             ],
           ),
-          SizedBox(height: 16.toH()),
-          // date of birth and gender
+          SizedBox(height: 24.toH()),
+
+          // ── Gender & DOB Row ──
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(child: const AddPatientSelectGender()),
-              SizedBox(width: 16.toW()),
+              Expanded(
+                child: const AddPatientSelectGender(),
+              ),
+              SizedBox(width: 20.toW()),
               Expanded(
                 child: CustomDatePicker(
                   controller: cnt.dateOfBirthController,
@@ -61,21 +66,20 @@ class AddPatientInformationCard extends StatelessWidget {
                   onDateSelected: (date) {
                     cnt.setSelectedDateOfBirth(date);
                   },
-                  // initialDate: DateTime.now(),
-                  // firstDate: DateTime.now(),
                   validator: AppValidator.defaultValidator.validate,
                 ),
               ),
             ],
           ),
-          SizedBox(height: 16.toH()),
-          // address
+          SizedBox(height: 24.toH()),
+
+          // ── Address ──
           AppFillTextFieldField(
-            // width: 500,
+            width: double.infinity,
             controller: cnt.addressController,
             hint: "enter_address",
             header: "address",
-            prefixIconData: Icons.location_on,
+            prefixIconData: Icons.location_on_rounded,
             keyboardType: TextInputType.text,
             validation: AppValidator.defaultValidator.validate,
             onComplete: node.nextFocus,

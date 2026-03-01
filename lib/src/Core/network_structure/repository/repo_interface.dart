@@ -4,6 +4,7 @@ import 'dart:developer';
 //
 import 'package:care_desk/src/Core/App/app_flow.dart';
 import 'package:care_desk/src/Core/Constants/Enums/app_source.dart';
+import 'package:care_desk/src/Core/network_structure/networking/src/utils/upload_option.dart';
 import 'package:care_desk/src/Shared/Entities/pagination.dart';
 import 'package:care_desk/src/Shared/Models/pagination_model.dart';
 import 'package:care_desk/src/core/network_structure/params/params.dart';
@@ -78,7 +79,7 @@ abstract class RepoInterface<T> {
     return dataStatus;
   }
 
-  Future<DataState<T>>? call({Params? params}) async {
+  Future<DataState<T>>? call({Params? params, UploadOptions? uploadOptions}) async {
     // switch (AppFlavors.flavor.appMode) {
     //   case AppMode.prod:
     //     return await handleCall(params: params)!;

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:care_desk/src/Core/network_structure/networking/src/utils/upload_option.dart';
+import 'package:care_desk/src/Core/network_structure/networking/src/utils/upload_option.dart';
 import 'package:dio/dio.dart';
 import '../../../interfaces/methods/get_method.dart';
 import '../../../interfaces/methods/post_method.dart';

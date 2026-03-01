@@ -8,8 +8,10 @@ class SearchableFieldDefault<T> extends StatefulWidget {
   final String hint;
   final double? width;
   final IconData prefixIcon;
+  final String? leadingIcon;
   final Decoration? sheetDecoration;
   final InputDecorationImp? inputDecoration;
+  final TextEditingController? controller;
   const SearchableFieldDefault({
     super.key,
     required this.items,
@@ -21,6 +23,8 @@ class SearchableFieldDefault<T> extends StatefulWidget {
     this.prefixIcon = Icons.search,
     this.sheetDecoration,
     this.inputDecoration,
+    this.leadingIcon,
+    this.controller,
   });
 
   @override
@@ -31,13 +35,14 @@ class SearchableFieldDefault<T> extends StatefulWidget {
 class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
   final LayerLink _layerLink = LayerLink();
   OverlayEntry? _overlayEntry;
-  final TextEditingController _controller = TextEditingController();
+  late TextEditingController _controller;
   final FocusNode _focusNode = FocusNode();
   List<T> _filteredData = [];
 
   @override
   void initState() {
     super.initState();
+    _controller = widget.controller ?? TextEditingController();
     _filteredData = widget.items;
     _focusNode.addListener(() {
       if (_focusNode.hasFocus) {
@@ -48,11 +53,24 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
     });
   }
 
+  @override
+  void didUpdateWidget(covariant SearchableFieldDefault<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.items != widget.items) {
+      _filteredData = widget.items;
+    }
+  }
+
   void _showOverlay() {
     if (_overlayEntry != null) return;
 
     final RenderBox renderBox = context.findRenderObject() as RenderBox;
     final size = renderBox.size;
+    final globalOffset = renderBox.localToGlobal(Offset.zero);
+    final availableHeightBelow =
+        MediaQuery.sizeOf(context).height - globalOffset.dy - size.height;
+    const double dropdownMaxHeight = 250;
+    final bool showAtTop = availableHeightBelow < dropdownMaxHeight + 10;
 
     _overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
@@ -60,7 +78,9 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
         child: CompositedTransformFollower(
           link: _layerLink,
           showWhenUnlinked: false,
-          offset: Offset(0, size.height + 5), // مسافة بسيطة تحت الحقل
+          targetAnchor: showAtTop ? Alignment.topLeft : Alignment.bottomLeft,
+          followerAnchor: showAtTop ? Alignment.bottomLeft : Alignment.topLeft,
+          offset: Offset(0, showAtTop ? -5 : 5),
           child: TapRegion(
             groupId: _layerLink,
             child: Material(
@@ -100,16 +120,26 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
                             //     AppColors.get.primary.withValues(alpha: 0.1),
                             // selectedColor: AppColors.get.primary,
                             selectedTileColor: AppColors.get.primary,
-                            leading: Icon(
-                              Icons.person,
-                              color: AppColors.get.primary,
-                              size: 20,
+                            leading: ImageGeneric.asset(
+                              url: widget.leadingIcon ?? AppIcons.twitter,
+                              options: ImageOptions(
+                                width: 30,
+                                height: 30,
+                                color: AppColors.get.primary,
+                              ),
                             ),
+                            //  Icon(
+                            //   widget.leadingIcon ?? Icons.person,
+                            //   color: AppColors.get.primary,
+                            //   size: 20,
+                            // ),
                             title: CustomText(widget.itemLabel(item)),
+                            
                             onTap: () {
                               _controller.text = widget.itemLabel(item);
                               printDM("Selected: ${widget.itemLabel(item)}");
                               widget.onOptionSelected?.call(item);
+
                               _focusNode.unfocus();
                             },
                           );
@@ -144,7 +174,9 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
     _focusNode.dispose();
     super.dispose();
   }
@@ -163,10 +195,13 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
           controller: _controller,
           focusNode: _focusNode,
           onChanged: _filterData,
+          
           validation: widget.validation,
           fillColor: AppColors.get.tTFBackGround,
           isFilled: true,
-          onTapOutside: (event) {},
+          onTapOutside: (event) {
+            _hideOverlay();
+          },
           inputDecoration: widget.inputDecoration ??
               InputDecorationWithBorder(
                 filledColor: AppColors.get.tTFBackGround,
@@ -174,12 +209,21 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
                 enableBorderRadius: 12,
                 enableBorderWidth: 1,
               ),
-          hint: TFFHint(title: widget.hint, fontSize: 15),
+          hint: TFFHint(
+            title: widget.hint,
+            fontSize: 15,
+          ),
           prefix: PrefixWithIconData(
             iconData: widget.prefixIcon,
             color: AppColors.get.tTFPrefixColor,
             size: 25,
             scale: 1,
+          ),
+          suffix: SuffixWithIconData(
+            iconData: Icons.arrow_drop_down,
+            color: AppColors.get.tTFPrefixColor,
+            size: 25,
+            scale: 3,
           ),
         ),
       ),

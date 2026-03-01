@@ -1,6 +1,8 @@
 import 'package:care_desk/src/Core/Services/ImageCropper/image_cropper.dart';
 import 'package:care_desk/src/Core/Services/Launcher/launcher_service.dart';
+import 'package:care_desk/src/Core/Services/MediaPicker/media_size_handler.dart';
 import 'package:care_desk/src/Core/Services/NetworkConnection/network_service.dart';
+import 'package:care_desk/src/Core/Services/download/download_service.dart';
 
 import 'MediaPicker/imports_media_picker.dart';
 
@@ -17,6 +19,10 @@ class Helper {
   static LauncherServices launcher = LauncherServices.instance;
 
   static MediaPickerService media = MediaPickerService.instance;
+
+  static MediaSizeHandler mediaSizeHandler = MediaSizeHandler.instance;
+
+  static DownloadService downloadService = DownloadService.instance;
 
   // static QrService qr = QrService();
 

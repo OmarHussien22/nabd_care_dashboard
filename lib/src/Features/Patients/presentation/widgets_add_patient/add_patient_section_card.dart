@@ -9,15 +9,20 @@ class AddPatientSectionCard extends StatelessWidget {
   final IconData icon;
   final String title;
   final List<Widget> children;
-  const AddPatientSectionCard(
-      {super.key,
-      required this.icon,
-      required this.title,
-      required this.children});
+  final bool isActive;
+
+  const AddPatientSectionCard({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.children,
+    this.isActive = false,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 400),
       width: double.infinity,
       margin: EdgeInsets.only(bottom: 16.toH()),
       decoration: BoxDecoration(
@@ -25,35 +30,51 @@ class AddPatientSectionCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: AppColors.get.greyLight.withValues(alpha: 0.5),
-            blurRadius: 10,
-            offset: const Offset(0, 1),
+            color: isActive
+                ? AppColors.get.primary.withOpacity(0.12)
+                : AppColors.get.greyLight.withOpacity(0.4),
+            blurRadius: isActive ? 16 : 10,
+            offset: Offset(0, isActive ? 4 : 1),
           ),
         ],
-        border: DashedBorder(
-          color: AppColors.get.greyLight.withValues(alpha: .8),
-          width: 1.0,
-          dashLength: 8.0,
-          dashGap: 4.0,
-        ),
-        // border: Border.all(color: AppColors.get.greyLight, width: 1),
       ),
-      child: Padding(
-        padding: EdgeInsets.all(16.toW()),
-        child: Column(
-          children: [
-            AddPatientSectionHeader(
-              icon: icon,
-              title: title,
-            ),
-            SizedBox(height: 10.toH()),
-            XDivider.normal(height: 1, color: AppColors.get.greyLight),
-            SizedBox(height: 10.toH()),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: children,
-            ),
-          ],
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          border: DashedBorder(
+            color: isActive
+                ? AppColors.get.primary
+                : AppColors.get.greyLight.withOpacity(0.8),
+            width: isActive ? 1.5 : 1.0,
+            dashLength: 8.0,
+            dashGap: isActive ? 0 : 4.0,
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(16.toW()),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AddPatientSectionHeader(
+                icon: icon,
+                title: title,
+                isActive: isActive,
+              ),
+              SizedBox(height: 10.toH()),
+              XDivider.normal(
+                height: 1,
+                color: isActive
+                    ? AppColors.get.primary.withOpacity(0.2)
+                    : AppColors.get.greyLight,
+              ),
+              SizedBox(height: 12.toH()),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: children,
+              ),
+            ],
+          ),
         ),
       ),
     );

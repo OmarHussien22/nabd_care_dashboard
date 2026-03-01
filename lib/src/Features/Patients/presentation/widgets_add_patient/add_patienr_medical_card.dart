@@ -1,4 +1,4 @@
-import 'package:care_desk/src/Core/Constants/Strings/Assets/app_icons.dart';
+import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Core/Utils/Validation/app_validator.dart';
 import 'package:care_desk/src/Features/Patients/domain/entity/disease_entity.dart';
@@ -22,57 +22,75 @@ class AddPatienrMedicalCard extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-              AddPatientSelectVisit(),
-            SizedBox(height: 16.toH()),
+            // ── Visit Type Selection ──
+            const AddPatientSelectVisit(),
+            SizedBox(height: 24.toH()),
+
+            // ── Chronic Diseases Section ──
+            Row(
+              children: [
+                Icon(Icons.history_edu_rounded,
+                    size: 18, color: AppColors.get.primary),
+                SizedBox(width: 8.toW()),
+                CustomText(
+                  "chronic_diseases",
+                  fontSize: 14,
+                  fontWeight: FW.bold,
+                ),
+              ],
+            ),
+            SizedBox(height: 4.toH()),
             CustomText(
-              "chronic_diseases",
-              fontSize: 13,
-              fontWeight: FW.medium,
+              "select_any_existing_medical_conditions",
+              fontSize: 12,
+              color: AppColors.get.textSecondary,
             ),
             SizedBox(height: 12.toH()),
-            Wrap(
-              spacing: 8.toW(),
-              runSpacing: 8.toH(),
-              children: DiseaseEntity.emptyList.map((disease) {
-                return ChronicDiseaseChip(
-                  label: disease.name,
-                  isSelected: cnt.selectedChronicDiseases.contains(disease.id),
-                  onTap: () {
-                    cnt.setSelectedChronicDiseases(disease);
-                    // setState(() {
-                    //   if (_selectedChronicDiseases.contains(disease)) {
-                    //     _selectedChronicDiseases.remove(disease);
-                    //   } else {
-                    //     _selectedChronicDiseases.add(disease);
-                    //   }
-                    // });
-                  },
-                );
-              }).toList(),
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(12.toW()),
+              decoration: BoxDecoration(
+                color: AppColors.get.greyLight.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Wrap(
+                spacing: 10.toW(),
+                runSpacing: 10.toH(),
+                children: DiseaseEntity.emptyList.map((disease) {
+                  return ChronicDiseaseChip(
+                    label: disease.name,
+                    isSelected:
+                        cnt.selectedChronicDiseases.contains(disease.id),
+                    onTap: () => cnt.setSelectedChronicDiseases(disease),
+                  );
+                }).toList(),
+              ),
             ),
+            SizedBox(height: 24.toH()),
+
+            // ── Allergies & Complaint Row ──
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: AppFillTextFieldField(
-                    // width: 500,
                     controller: cnt.allergiesController,
                     hint: "enter_allergies",
                     header: "allergies",
-                    prefixIconData: Icons.warning_amber_outlined,
-                    keyboardType: TextInputType.name,
+                    prefixIconData: Icons.warning_amber_rounded,
+                    keyboardType: TextInputType.text,
                     validation: AppValidator.defaultValidator.validate,
                     onComplete: node.nextFocus,
                   ),
                 ),
-                SizedBox(width: 16.toW()),
+                SizedBox(width: 20.toW()),
                 Expanded(
                   child: AppFillTextFieldField(
-                    // width: 500,
                     controller: cnt.mainComplaintController,
                     hint: "why_patient_here_today",
                     header: "main_complaint",
-                    prefixIconData: Icons.notes,
-                    keyboardType: TextInputType.name,
+                    prefixIconData: Icons.chat_bubble_outline_rounded,
+                    keyboardType: TextInputType.text,
                     validation: AppValidator.defaultValidator.validate,
                     onComplete: node.nextFocus,
                   ),

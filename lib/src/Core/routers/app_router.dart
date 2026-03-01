@@ -38,7 +38,8 @@ class AppRouter {
         ),
         GetPage(
           name: AppRoutes.addPatient, // /add-patient (مسار مستقل ومباشر)
-          page: () => const AddPatientPage(),
+        //  page: () => const AddPatient(),
+        page: () => const AddPatientPage(),
         ),
         GetPage(
           name: AppRoutes.settings,

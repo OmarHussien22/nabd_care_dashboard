@@ -27,6 +27,7 @@ class DioPost extends PostMethod {
     bool withPagination = false,
     bool showLoadingDialog = false,
     HeaderContentType? contentType,
+    UploadOptions? uploadOptions,
     }) async {
     body ??= {};
     if(withPagination) {
@@ -57,6 +58,8 @@ class DioPost extends PostMethod {
         url,
         data: contentType == HeaderContentType.json ?body:formData,
         queryParameters: queryParams,
+        onSendProgress: uploadOptions?.onSendProgress,
+        cancelToken: uploadOptions?.cancelToken,
         options: Options(
             followRedirects: false,
             headers: headers ?? HeaderHandler.instance.setHeaders(auth),

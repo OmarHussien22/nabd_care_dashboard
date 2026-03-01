@@ -4,4 +4,5 @@ enum ImageType {
   file,
   sVGAsset,
   sVGNetwork,
+  platformFile,
 }

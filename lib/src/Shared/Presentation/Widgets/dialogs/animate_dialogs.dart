@@ -57,6 +57,42 @@ class Dialogs {
             color: isSuccess ? AppColors.get.white : AppColors.get.white,
           ));
 
+  static Future<T?> animatedDialog<T>({
+    required BuildContext context,
+    required Widget child,
+    bool barrierDismissible = true,
+    Duration duration = const Duration(milliseconds: 500),
+    Curve curve = Curves.fastOutSlowIn,
+    Curve reverseCurve = Curves.fastOutSlowIn,
+  }) {
+    return showGeneralDialog<T>(
+      context: context,
+      barrierDismissible: barrierDismissible,
+      barrierLabel: 'AnimatedDialog',
+      barrierColor: Colors.black.withOpacity(0.5),
+      transitionDuration: duration,
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return child;
+      },
+      transitionBuilder: (context, animation, secondaryAnimation, child) {
+        return ScaleTransition(
+          scale: CurvedAnimation(
+            parent: animation,
+            curve: curve,
+            reverseCurve: reverseCurve,
+          ),
+          child: FadeTransition(
+            opacity: CurvedAnimation(
+              parent: animation,
+              curve: curve,
+            ),
+            child: child,
+          ),
+        );
+      },
+    );
+  }
+
   //flutter pub add awesome_dialog
   // static warningDialog({
   //   required BuildContext context,

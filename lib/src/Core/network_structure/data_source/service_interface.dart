@@ -1,4 +1,5 @@
 import 'package:care_desk/src/Core/network_structure/networking/network_service.dart';
+import 'package:care_desk/src/Core/network_structure/networking/src/utils/upload_option.dart';
 import 'package:dio/dio.dart';
 import 'package:care_desk/src/core/network_structure/constants/exception_constants.dart';
 import 'package:care_desk/src/core/network_structure/data_source/service_caller.dart';
@@ -32,6 +33,7 @@ abstract class ServicesInterface with ApiNames implements ServiceCaller {
   late CrudType type;
   late bool withPagination;
   late bool showLoadingDialog;
+  late UploadOptions? uploadOptions;
 
   Future<Response> call(
     String url, {
@@ -44,11 +46,13 @@ abstract class ServicesInterface with ApiNames implements ServiceCaller {
     Params? params,
     Map<String, dynamic>? details,
     HeaderContentType? contentType,
+    UploadOptions? uploadOptions,
   }) async {
     setData(
       type: type,
       showLoadingDialog: showLoadingDialog,
       withPagination: withPagination,
+      uploadOptions: uploadOptions,
     );
     Response? response;
     // if (AppSettings.appMode == AppMode.dev&&type==CrudType.post&&showLoadingDialog) {
@@ -69,6 +73,7 @@ abstract class ServicesInterface with ApiNames implements ServiceCaller {
             queryParams: params?.query() ?? {},
             showLoadingDialog: showLoadingDialog,
             contentType: contentType,
+            uploadOptions: uploadOptions,
           );
           break;
         case CrudType.get:
@@ -156,9 +161,11 @@ abstract class ServicesInterface with ApiNames implements ServiceCaller {
     required CrudType type,
     required bool showLoadingDialog,
     required bool withPagination,
+    UploadOptions? uploadOptions,
   }) {
     this.type = type;
     this.showLoadingDialog = showLoadingDialog;
     this.withPagination = withPagination;
+    this.uploadOptions = uploadOptions;
   }
 }
