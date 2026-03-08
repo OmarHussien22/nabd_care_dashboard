@@ -2,7 +2,6 @@ import 'package:care_desk/src/Features/Appointments/presentation/pages/appointme
 import 'package:care_desk/src/Features/Auth/presentation/pages/imports_auth.dart';
 import 'package:care_desk/src/Features/Dashboard/presentation/pages/dashboard_page.dart';
 import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout.dart';
-import 'package:care_desk/src/Features/Patients/presentation/pages/add_patient.dart';
 import 'package:care_desk/src/Features/Patients/presentation/pages/add_patient_page.dart';
 import 'package:care_desk/src/Features/Patients/presentation/pages/patients_page.dart';
 import 'package:care_desk/src/Features/settings/presentation/pages/settings_page.dart';

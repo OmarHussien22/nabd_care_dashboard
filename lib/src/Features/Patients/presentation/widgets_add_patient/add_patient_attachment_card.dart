@@ -1,6 +1,7 @@
 import 'package:care_desk/src/Core/Services/helper.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:care_desk/src/Features/Patients/presentation/manager/add_patient_builder.dart';
 import 'package:care_desk/src/Features/Patients/presentation/widgets/file_upload_card.dart';
 import 'package:care_desk/src/Features/Patients/presentation/widgets/file_upload_zone.dart';
@@ -78,26 +79,34 @@ class AddPatientAttachmentCard extends StatelessWidget {
               padding: EdgeInsets.all(8.toW()),
               child: Column(
                 children: cnt.attachments.map((attachment) {
-                  return FileUploadCard(
-                    fileName: attachment.name,
-                    fileSize: attachment.size,
-                    state: attachment.state,
-                    progress: 30, // Could be dynamic if controller supported it
-                    isImage: Helper.mediaSizeHandler.isImage(attachment.name),
-                    onCancel: () => cnt.cancelUpload(attachment),
-                    onDelete: () => cnt.removeAttachment(attachment),
-                    onView: () {
-                      Dialogs.animatedDialog(
-                        context: context,
-                        child: CardViewAttachment(
-                          file: attachment.getFile.platformFile!,
+                  printDM(
+                      "upload file progress ${attachment.progress.toString()}");
+                  return GetBuilder<AddPatientBuilder>(
+                      id: 'upload_${attachment.id}',
+                      builder: (controller) {
+                        return FileUploadCard(
+                          fileName: attachment.name,
+                          fileSize: attachment.size,
+                          state: attachment.state,
+                          progress: attachment
+                              .progress, // Could be dynamic if controller supported it
                           isImage:
                               Helper.mediaSizeHandler.isImage(attachment.name),
-                        ),
-                      );
-                    },
-                    uploadedDate: DateTime.now(),
-                  );
+                          onCancel: () => cnt.cancelUpload(attachment),
+                          onDelete: () => cnt.removeAttachment(attachment),
+                          onView: () {
+                            Dialogs.animatedDialog(
+                              context: context,
+                              child: CardViewAttachment(
+                                file: attachment.getFile.platformFile!,
+                                isImage: Helper.mediaSizeHandler
+                                    .isImage(attachment.name),
+                              ),
+                            );
+                          },
+                          uploadedDate: DateTime.now(),
+                        );
+                      });
                 }).toList(),
               ),
             ),

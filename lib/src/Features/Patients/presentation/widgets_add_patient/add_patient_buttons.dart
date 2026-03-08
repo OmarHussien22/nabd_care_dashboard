@@ -2,13 +2,14 @@ import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dar
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Features/Patients/presentation/manager/add_patient_builder.dart';
+import 'package:care_desk/src/Features/Patients/presentation/manager/patient_stepper_controller.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/Animation/animated_wrapper.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddPatientButtons extends StatelessWidget {
-  final AddPatientBuilder cnt;
+  final PatientStepController cnt;
   const AddPatientButtons({super.key, required this.cnt});
 
   @override

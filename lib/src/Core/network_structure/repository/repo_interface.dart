@@ -56,7 +56,7 @@ abstract class RepoInterface<T> {
   //  }
 
   Future<DataState<T>>? sendFakeData(T? data,
-      {String? title, Params? params}) async {
+      {String? title, Params? params, UploadOptions? uploadOption}) async {
     log("serviceInstance => ${serviceInstance.runtimeType}");
     try {
       // AppDialogs.showLoadingDialog();
@@ -79,7 +79,7 @@ abstract class RepoInterface<T> {
     return dataStatus;
   }
 
-  Future<DataState<T>>? call({Params? params, UploadOptions? uploadOptions}) async {
+  Future<DataState<T>>? call({Params? params,UploadOptions? uploadoption}) async {
     // switch (AppFlavors.flavor.appMode) {
     //   case AppMode.prod:
     //     return await handleCall(params: params)!;
@@ -94,7 +94,7 @@ abstract class RepoInterface<T> {
       return await handleCall(params: params)!;
     }
     if (AppFlow.currentSource == AppSource.test) {
-      return await sendFakeData(testData, params: params, title: 'Test Data')!;
+      return await sendFakeData(testData, params: params, title: 'Test Data',uploadOption: uploadoption)!;
     } else {
       return await handleCall(params: params)!;
     }
@@ -105,7 +105,9 @@ abstract class RepoInterface<T> {
     bool hasPagination = false;
     {
       try {
-        final httpResponse = await serviceInstance.applyService(params: params);
+        final httpResponse = await serviceInstance.applyService(
+          params: params,
+        );
         hasPagination = serviceInstance.withPagination;
         final checkStatusValue =
             requireStatus ? (httpResponse.data['status'] ?? false) : true;

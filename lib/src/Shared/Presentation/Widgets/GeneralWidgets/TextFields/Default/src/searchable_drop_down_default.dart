@@ -12,6 +12,11 @@ class SearchableFieldDefault<T> extends StatefulWidget {
   final Decoration? sheetDecoration;
   final InputDecorationImp? inputDecoration;
   final TextEditingController? controller;
+  final PrefixImp? prefix;
+  final SuffixImp? suffix;
+  final EdgeInsets? surroundingPadding;
+  final double? verticalPadding;
+  final double? horizontalPadding;
   const SearchableFieldDefault({
     super.key,
     required this.items,
@@ -25,6 +30,11 @@ class SearchableFieldDefault<T> extends StatefulWidget {
     this.inputDecoration,
     this.leadingIcon,
     this.controller,
+    this.prefix,
+    this.suffix,
+    this.surroundingPadding,
+    this.verticalPadding,
+    this.horizontalPadding,
   });
 
   @override
@@ -85,21 +95,33 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
             groupId: _layerLink,
             child: Material(
               elevation: 8,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(8),
               // color: AppColors.get.activeBackground,
               // يتبع ثيم التطبيق
               child: Container(
-                constraints: const BoxConstraints(maxHeight: 250),
+                constraints: const BoxConstraints(maxHeight: 230),
                 decoration: widget.sheetDecoration ??
                     BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(8),
                       color: AppColors.get.cardFill,
                       border: Border.all(color: AppColors.get.cardBorder),
                     ),
                 child: _filteredData.isEmpty
                     ? Padding(
                         padding: const EdgeInsets.all(16.0),
-                        child: Text("No data found".toTr()),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.info,
+                              color: AppColors.get.red,
+                            ),
+                            8.ESW(),
+                            CustomText(
+                              "no_data_found".toTr(),
+                              fontSize: 12,
+                            ),
+                          ],
+                        ),
                       )
                     : ListView.separated(
                         shrinkWrap: true,
@@ -121,10 +143,10 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
                             // selectedColor: AppColors.get.primary,
                             selectedTileColor: AppColors.get.primary,
                             leading: ImageGeneric.asset(
-                              url: widget.leadingIcon ?? AppIcons.twitter,
+                              url: widget.leadingIcon ?? AppIcons.user,
                               options: ImageOptions(
-                                width: 30,
-                                height: 30,
+                                width: 24,
+                                height: 24,
                                 color: AppColors.get.primary,
                               ),
                             ),
@@ -134,7 +156,7 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
                             //   size: 20,
                             // ),
                             title: CustomText(widget.itemLabel(item)),
-                            
+
                             onTap: () {
                               _controller.text = widget.itemLabel(item);
                               printDM("Selected: ${widget.itemLabel(item)}");
@@ -195,17 +217,20 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
           controller: _controller,
           focusNode: _focusNode,
           onChanged: _filterData,
-          
           validation: widget.validation,
-          fillColor: AppColors.get.tTFBackGround,
+          fillColor: AppColors.get.lighterGrey,
           isFilled: true,
+          verticalPadding: widget.verticalPadding ?? 12.toH(),
+          horizontalPadding: widget.horizontalPadding ?? 12.toW(),
+          surroundingPadding: widget.surroundingPadding ??
+              EdgeInsets.symmetric(horizontal: 12.toW(), vertical: 12.toH()),
           onTapOutside: (event) {
             _hideOverlay();
           },
           inputDecoration: widget.inputDecoration ??
               InputDecorationWithBorder(
-                filledColor: AppColors.get.tTFBackGround,
-                enableBorderColor: AppColors.get.greyLight,
+                filledColor: AppColors.get.lighterGrey,
+                enableBorderColor: AppColors.get.white,
                 enableBorderRadius: 12,
                 enableBorderWidth: 1,
               ),
@@ -213,18 +238,24 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
             title: widget.hint,
             fontSize: 15,
           ),
-          prefix: PrefixWithIconData(
-            iconData: widget.prefixIcon,
-            color: AppColors.get.tTFPrefixColor,
-            size: 25,
-            scale: 1,
-          ),
-          suffix: SuffixWithIconData(
-            iconData: Icons.arrow_drop_down,
-            color: AppColors.get.tTFPrefixColor,
-            size: 25,
-            scale: 3,
-          ),
+          prefix: widget.prefix != null
+              ? widget.prefix ??
+                  PrefixWithIconData(
+                    iconData: widget.prefixIcon,
+                    color: AppColors.get.tTFPrefixColor,
+                    size: 25,
+                    scale: 1,
+                  )
+              : PrefixNone(),
+          suffix: widget.suffix != null
+              ? widget.suffix ??
+                  SuffixWithIconData(
+                    iconData: Icons.arrow_drop_down,
+                    color: AppColors.get.tTFPrefixColor,
+                    size: 25,
+                    scale: 3,
+                  )
+              : SuffixNone(),
         ),
       ),
     );

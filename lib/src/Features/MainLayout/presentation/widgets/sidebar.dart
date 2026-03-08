@@ -23,7 +23,7 @@ class Sidebar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 250),
-      width: isCollapsed ? 77.toW() : 210.toW(),
+      width: isCollapsed ? 77.toW() : 240.toW(),
       decoration: BoxDecoration(
         color: AppColors.get.surface,
         border: Border(

@@ -113,4 +113,10 @@ mixin ApiNames {
 
   final String fetchDistanceMatrixURL =
       'https://maps.googleapis.com/maps/api/distancematrix/json';
+
+
+
+
+  // New Api
+  final String urlAddPatient = "${baseUrl}add_patient";    
 }

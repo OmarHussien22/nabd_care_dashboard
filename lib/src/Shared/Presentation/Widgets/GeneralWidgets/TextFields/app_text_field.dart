@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 
@@ -23,6 +24,9 @@ class AppFillTextFieldField extends StatelessWidget {
   final double? fontSizeHint;
   final double? fontSizeHeader;
   final double? width;
+  final double? verticalPadding;
+  final double? horizontalPadding;
+  final EdgeInsets? surroundingPadding;
   const AppFillTextFieldField({
     super.key,
     this.controller,
@@ -30,7 +34,7 @@ class AppFillTextFieldField extends StatelessWidget {
     this.hint,
     this.header,
     this.prefixAsset,
-    this.prefixScale = 2.5,
+    this.prefixScale = 1.8,
     this.prefixIconData,
     this.onTap,
     this.keyboardType,
@@ -41,11 +45,17 @@ class AppFillTextFieldField extends StatelessWidget {
     this.fontSizeHeader,
     this.maxLines = 1,
     this.width,
+    this.verticalPadding,
+    this.horizontalPadding,
+    this.surroundingPadding,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFieldDefault(
+      verticalPadding: verticalPadding ?? 14.toH(),
+      horizontalPadding: horizontalPadding ?? 14.toW(),
+      surroundingPadding: surroundingPadding ?? EdgeInsets.zero,
       width: width ?? MediaQuery.of(context).size.width * 0.4,
       keyboardType: keyboardType,
       fillColor: AppColors.get.greyLight,

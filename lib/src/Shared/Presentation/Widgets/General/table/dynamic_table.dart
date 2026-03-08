@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/Constants/Decorations/app_Insets.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_palette.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/General/table/dynamic_table_row.dart';
@@ -53,10 +54,12 @@ class _DynamicTableState extends State<DynamicTable> {
   Widget build(BuildContext context) {
     return Material(
       child: Container(
+        clipBehavior: Clip.hardEdge,
         height: double.infinity,
         decoration: BoxDecoration(
+          color: AppColors.get.white,
           border: Border.all(color: AppColors.get.border),
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: AppInsets.defaultTableBorderRadius,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

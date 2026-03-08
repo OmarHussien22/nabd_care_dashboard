@@ -99,6 +99,7 @@ class AppDialogs {
   static void showDialog({
     Widget? child,
     double? width,
+    double? height,
     bool isDismissible = true,
     EdgeInsets insetPadding =
         const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
@@ -106,13 +107,13 @@ class AppDialogs {
         const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 30.0),
   }) {
     Get.dialog(
-      AlertDialog(
+      Dialog(
         insetPadding: insetPadding,
-        contentPadding: contentPadding,
         shape: AppShapes.dialogShape,
         backgroundColor: AppColors.get.white,
-        content: SizedBox(
+        child: SizedBox(
           width: width ?? Get.mediaQuery.size.width,
+          height: height ?? Get.mediaQuery.size.height,
           child: child,
         ),
       ),
@@ -158,13 +159,31 @@ class AppDialogs {
   static Future<void> showPreviewDialog({
     required Widget child,
     bool closeAfterAWhile = true,
+    double? width,
+    double? height,
+    bool isDismissible = true,
+    EdgeInsets insetPadding =
+        const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+    EdgeInsetsGeometry contentPadding =
+        const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 30.0),
   }) async {
     await Utils.applyHapticFeedback();
     // await AudioService.play(audio_zoom_in);
     // play sound
     Get.dialog(
-      child,
+      Dialog(
+        insetPadding: insetPadding,
+        shape: AppShapes.dialogShape,
+        backgroundColor: AppColors.get.white,
+        child: SizedBox(
+          width: width ?? Get.mediaQuery.size.width,
+          height: height ?? Get.mediaQuery.size.height,
+          child: child,
+        ),
+      ),
       transitionCurve: Curves.fastLinearToSlowEaseIn,
+      barrierColor: const Color(0xff334444).withOpacity(0.9),
+      barrierDismissible: isDismissible,
     );
     if (closeAfterAWhile) {
       Future.delayed(const Duration(milliseconds: 1500), () {}).then((_) async {

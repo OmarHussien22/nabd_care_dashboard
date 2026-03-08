@@ -33,9 +33,7 @@ class SideBarItem extends StatelessWidget {
             duration: const Duration(milliseconds: 150),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
             decoration: BoxDecoration(
-              color: isSelected
-                  ? AppColors.get.primary.withValues(alpha: .1)
-                  : Colors.transparent,
+              color: isSelected ? AppColors.get.primary : Colors.transparent,
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
                 color: isSelected
@@ -65,7 +63,7 @@ class SideBarItem extends StatelessWidget {
                       icon,
                       size: 22,
                       color: isSelected
-                          ? AppColors.get.primary
+                          ? AppColors.get.white
                           : AppColors.get.textSecondary,
                     ),
                     if (!showOnlyIcon) ...[
@@ -74,7 +72,7 @@ class SideBarItem extends StatelessWidget {
                         child: CustomText(
                           label,
                           color: isSelected
-                              ? AppColors.get.primary
+                              ? AppColors.get.white
                               : AppColors.get.textPrimary,
                           fontWeight: isSelected ? FW.semiBold : FW.medium,
                           fontSize: 14,

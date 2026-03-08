@@ -17,6 +17,7 @@ abstract class Networking<R, E> with ApiNames {
     Map<String, dynamic>? body,
     bool auth = false,
     bool showLoadingDialog = false,
+    
   });
 
   // handle

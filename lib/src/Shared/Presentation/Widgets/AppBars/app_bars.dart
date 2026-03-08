@@ -1,7 +1,10 @@
+import 'package:care_desk/src/Core/Constants/Decorations/app_Insets.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_palette.dart';
+import 'package:care_desk/src/Core/routers/app_router_imports.dart';
 import 'package:care_desk/src/Features/MainLayout/controller/main_layout_controller.dart';
 import 'package:care_desk/src/Features/common/widgets/custom_search_field.dart';
 import 'package:care_desk/src/Features/MainLayout/presentation/widgets/sync_indicator.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Buttons/Basic/custom_rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -160,7 +163,9 @@ class FixedAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       height: 80.toH(),
       color: AppColors.get.surface,
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 12,
+      ),
       child: GetBuilder<MainLayoutController>(
         builder: (cnt) {
           return Row(
@@ -181,15 +186,34 @@ class FixedAppBar extends StatelessWidget implements PreferredSizeWidget {
               const Spacer(),
               CustomSearchField(),
               const Spacer(),
-              // Mock Controls for Demo
-              // IconButton(
-              //   icon: Icon(cnt.isOffline ? Icons.wifi_off : Icons.wifi,
-              //       color: AppPalette.textSecondary),
-              //   tooltip: "Toggle Mock Offline Mode",
-              //   onPressed: () => cnt.toggleNetworkStatus,
-              // ),
-              // const SizedBox(width: 16),
-
+              ButtonDefault.icon(
+                width: 150.toW(),
+                padding: AppInsets.defaultButtonVertical,
+                onPressed: () {
+                  Get.toNamed(AppRoutes.addPatient);
+                },
+                titleSize: 14,
+                borderRadius: AppInsets.buttonBorderRadius,
+                icon: Icons.person_add,
+                label: "add_patient",
+              ),
+              10.ESW(),
+              Container(
+                height: 45.toH(),
+                decoration: BoxDecoration(
+                  color: AppColors.get.lighterGrey,
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: AppColors.get.cardBorder, width: 0),
+                ),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.notifications,
+                    color: AppColors.get.textSecondary,
+                  ),
+                ),
+              ),
               // Doctor Selector
               // Container(
               //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),

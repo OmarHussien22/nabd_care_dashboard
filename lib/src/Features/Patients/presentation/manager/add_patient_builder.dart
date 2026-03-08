@@ -1,7 +1,8 @@
-import 'dart:io';
+import 'package:care_desk/src/Features/Patients/core/add_patinet_params.dart';
 import 'package:care_desk/src/Features/Patients/domain/entity/disease_entity.dart';
 import 'package:care_desk/src/Features/Patients/domain/entity/referral_sources.dart';
 import 'package:care_desk/src/Features/Patients/domain/entity/upload_attachments.dart';
+import 'package:care_desk/src/Features/Patients/presentation/manager/patient_stepper_controller.dart';
 import 'package:care_desk/src/Features/Patients/presentation/widgets/file_upload_card.dart';
 import 'package:intl/intl.dart';
 
@@ -10,52 +11,9 @@ import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:care_desk/src/Features/Patients/domain/entity/general_static_entity.dart';
 import 'package:care_desk/src/Super/Controllers/Resources/get/get_controller_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AddPatientBuilder extends GetControllerInterface {
-  final GlobalKey<FormState> globalKey = GlobalKey<FormState>();
-  final ScrollController scrollController = ScrollController();
-  final List<GlobalKey> sectionKeys = List.generate(4, (_) => GlobalKey());
-  int currentStep = 0;
-
-  static const String updateHeaderId = 'add_patient_header';
-  static String sectionUpdateId(int index) => 'add_patient_section_$index';
-
-  void updateStep(int step) {
-    if (currentStep != step) {
-      int oldStep = currentStep;
-      currentStep = step;
-      // Only update the header and the two cards that changed state
-      update([
-        updateHeaderId,
-        sectionUpdateId(oldStep),
-        sectionUpdateId(currentStep),
-      ]);
-    }
-  }
-
-  void back() {
-    if (currentStep > 0) {
-      scrollToStep(currentStep - 1);
-    }
-  }
-
-  void scrollToStep(int step) {
-    if (step >= 0 && step < sectionKeys.length) {
-      final context = sectionKeys[step].currentContext;
-      if (context != null) {
-        Scrollable.ensureVisible(
-          context,
-          duration: const Duration(milliseconds: 600),
-          curve: Curves.easeInOutCubic,
-        );
-        // Step will be updated by the scroll listener in the page
-      } else {
-        // Fallback if context is not ready
-        updateStep(step);
-      }
-    }
-  }
-
   // Controllers for Personal Information
   late TextEditingController nameController;
   late TextEditingController phoneController;
@@ -70,6 +28,9 @@ class AddPatientBuilder extends GetControllerInterface {
   late TextEditingController dateOfBirthController;
   late TextEditingController referralSourceController;
   late TextEditingController secretaryNotesController;
+  late TextEditingController dateOfVisitController;
+  late TextEditingController timeOfVisitController;
+  late TextEditingController priceController;
   //Gender
   GenderEntity? selectGender;
   int selectGenderIndex = 0;
@@ -156,36 +117,44 @@ class AddPatientBuilder extends GetControllerInterface {
 
     for (var file in files) {
       final attachment = UploadAttachment(
-        getFile: GetFile(platformFile: file), // PlatformFile
-        name: file.name, // بدل path.split
+        getFile: GetFile(platformFile: file),
+        name: file.name,
         size: Helper.mediaSizeHandler.formatBytes(file.size),
       );
 
       attachments.add(attachment);
+
       update();
 
       _uploadFile(attachment);
     }
   }
 
-  Future<void> _uploadFile(UploadAttachment attachmentFiles) async {
+  Future<void> _uploadFile(UploadAttachment file) async {
     try {
-      attachmentFiles.state = FileUploadState.uploading;
-      update();
+      file.state = FileUploadState.uploading;
+      updateAttachment(file);
 
-      // Simulate upload
-      await Future.delayed(Duration(seconds: 2));
+      for (int i = 1; i <= 100; i++) {
+        await Future.delayed(const Duration(milliseconds: 40));
 
-      attachmentFiles.state = FileUploadState.completed;
-      attachmentFiles.progress = 100;
-      attachmentFiles = attachments.firstWhere((e) =>
-          e.getFile.platformFile == attachmentFiles.getFile.platformFile);
-      update();
-      // printDM("attachmentFiles ${attachmentFiles.getFile.platformFile}");
+        file.progress = i / 100;
+
+        updateAttachment(file);
+      }
+
+      file.state = FileUploadState.completed;
+
+      updateAttachment(file);
     } catch (e) {
-      attachmentFiles.state = FileUploadState.failed;
-      update();
+      file.state = FileUploadState.failed;
+
+      updateAttachment(file);
     }
+  }
+
+  void updateAttachment(UploadAttachment file) {
+    update(['upload_${file.id}']);
   }
 
   void removeAttachment(UploadAttachment attachment) {
@@ -202,26 +171,50 @@ class AddPatientBuilder extends GetControllerInterface {
   void setReferralSource(ReferralSourcesEntity referralSource) {
     selectReferralSource = referralSource;
     referralSourceController.text = referralSource.name;
-    printDM("selectReferralSource ${selectReferralSource?.name}");
     update();
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      "name": nameController.text,
-      "phone": phoneController.text,
-      "address": addressController.text,
-      "main_complaint": mainComplaintController.text,
-      "allergies": allergiesController.text,
-      "notes": notesController.text,
-      "date_of_birth": dateOfBirthController.text,
-      "referral_source": selectReferralSource?.id,
-      "gender": selectGender?.id,
-      "visit_type": selectVisitType?.id,
-      "chronic_diseases": selectedChronicDiseases,
-      "medications": selectedMedications,
-      "attachments": attachments,
-    };
+  /// to send data to controller
+  AddPatinetParams toMap() {
+    return AddPatinetParams(
+      name: nameController.text,
+      phone: phoneController.text,
+      address: addressController.text,
+      mainComplaint: mainComplaintController.text,
+      allergies: allergiesController.text,
+      notes: notesController.text,
+      dateOfBirth: dateOfBirthController.text,
+      referralSource: selectReferralSource?.id ?? -1,
+      gender: selectGender?.id ?? -1,
+      visitType: selectVisitType?.id ?? -1,
+      chronicDiseases: selectedChronicDiseases,
+      medications: selectedMedications,
+      attachments: attachments,
+    );
+  }
+
+  
+
+  void clear() {
+    nameController.clear();
+    phoneController.clear();
+    addressController.clear();
+    mainComplaintController.clear();
+    allergiesController.clear();
+    notesController.clear();
+    dateOfBirthController.clear();
+    referralSourceController.clear();
+    secretaryNotesController.clear();
+    dateOfVisitController.clear();
+    timeOfVisitController.clear();
+    priceController.clear();
+    selectGender = GenderEntity.getGenderList.first;
+    selectVisitType = VisitTypeEntity.getVisitTypeList.first;
+    selectReferralSource = null;
+    selectedChronicDiseases.clear();
+    selectedMedications.clear();
+    attachments.clear();
+    update();
   }
 
   @override
@@ -235,10 +228,24 @@ class AddPatientBuilder extends GetControllerInterface {
     notesController = TextEditingController();
     dateOfBirthController = TextEditingController();
     referralSourceController = TextEditingController();
-    // Initialize with defaults so widgets never receive null groupValue
+
     selectGender = GenderEntity.getGenderList.first;
     selectVisitType = VisitTypeEntity.getVisitTypeList.first;
     secretaryNotesController = TextEditingController();
+    dateOfVisitController = TextEditingController();
+    timeOfVisitController = TextEditingController();
+    priceController = TextEditingController();
+
+    nameController.addListener(update);
+    phoneController.addListener(update);
+    addressController.addListener(update);
+    mainComplaintController.addListener(update);
+    dateOfBirthController.addListener(update);
+    dateOfVisitController.addListener(update);
+    timeOfVisitController.addListener(update);
+    priceController.addListener(update);
+    referralSourceController.addListener(update);
+    secretaryNotesController.addListener(update);
   }
 
   @override
@@ -246,14 +253,15 @@ class AddPatientBuilder extends GetControllerInterface {
     nameController.dispose();
     phoneController.dispose();
     addressController.dispose();
-
     mainComplaintController.dispose();
     allergiesController.dispose();
     notesController.dispose();
     dateOfBirthController.dispose();
     referralSourceController.dispose();
     secretaryNotesController.dispose();
-    scrollController.dispose();
+    dateOfVisitController.dispose();
+    timeOfVisitController.dispose();
+    priceController.dispose();
     super.onClose();
   }
 }

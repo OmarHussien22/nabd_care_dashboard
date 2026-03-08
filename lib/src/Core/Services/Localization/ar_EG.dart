@@ -170,16 +170,28 @@ const Map<String, String> arEG = {
   "back_to_login": "العودة لتسجيل الدخول",
   "complete_data_to_register": "أكمل البيانات لإنشاء حساب",
 
-
   "success_register": "تم انشاء حسابك بنجاح",
   "sucess_register_tip": "يمكنك الان الاستمتاع بخدمات انجو ",
   "sucess_register_tip_two": "بكل سهولة و يسر و الاستفاده بجميع نقاط الشراء",
+
   /// New Translate ///
 
-  "enter_full_name":"ادخل الاسم الكامل",
-  "enter_email":"ادخل البريد الالكتروني",
-  "chosse_role":"اختر الدور",
-  "enter_password":"ادخل كلمة المرور",
-  "enter_confirm_password":"ادخل تأكيد كلمة المرور",
+  "enter_full_name": "ادخل الاسم الكامل",
+  "enter_email": "ادخل البريد الالكتروني",
+  "chosse_role": "اختر الدور",
+  "enter_password": "ادخل كلمة المرور",
+  "enter_confirm_password": "ادخل تأكيد كلمة المرور",
 
+  /// ── Add Patient Step-by-Step ──
+  "step": "خطوة",
+  "submit": "إرسال",
+  "return_to_main": "العودة للرئيسية",
+  "filled": "مكتملة",
+  "completed": "مكتمل",
+  "patient_information": "معلومات المريض",
+  "medical_status_history": "الحالة الطبية والتاريخ",
+  "media_attachments": "المرفقات والوسائط",
+  "administrative_details": "التفاصيل الإدارية",
+  "add_new_patient": "إضافة مريض جديد",
+  "fill_in_the_patient_details_below": "أدخل بيانات المريض بالأسفل",
 };

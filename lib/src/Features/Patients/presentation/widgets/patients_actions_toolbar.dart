@@ -1,8 +1,9 @@
+import 'package:care_desk/src/Core/Constants/Decorations/app_Insets.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/routers/app_router_imports.dart';
 import 'package:care_desk/src/Core/utils/Extensions/screen_spaces_extension.dart';
-import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
-import 'package:care_desk/src/Shared/Presentation/Widgets/Inputs/desktop_input.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Buttons/Basic/custom_rounded_button.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/app_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,31 +18,42 @@ class PatientsActionsToolbar extends StatelessWidget {
       children: [
         SizedBox(
           width: 300.toW(),
-          child: DesktopInput(
-            label: "",
-            hint: "Search by name or ID...",
-            prefixIcon: Icons.search,
+          child: AppFillTextFieldField(
+            controller: TextEditingController(),
+            hint: "search_by_name_or_id",
+            verticalPadding: 10.toH(),
+            surroundingPadding: EdgeInsets.symmetric(horizontal: 10.toH()),
+            prefixIconData: Icons.search,
+            prefixScale: 1.5,
+            keyboardType: TextInputType.text,
+            //  validation: AppValidator.defaultValidator.validate,
+            //   onComplete: node.nextFocus,
           ),
         ),
         const SizedBox(width: 16),
-        OutlinedButton.icon(
+        ButtonDefault.icon(
+          width: 120.toW(),
+          padding: AppInsets.defaultButtonVertical,
           onPressed: () {},
-          icon: const Icon(Icons.filter_list, size: 18),
-          style: OutlinedButton.styleFrom(
-            fixedSize: const Size(120, 42),
-          ),
-          label: const CustomText("Filter"),
+          borderRadius: AppInsets.buttonBorderRadius,
+          icon: Icons.filter_list,
+          label: "filter",
+          titleColor: AppColors.get.primary,
+          iconColor: AppColors.get.primary,
+          color: AppColors.get.white,
+          backgroundColor: AppColors.get.background,
         ),
         Spacer(),
-        ElevatedButton.icon(
+        ButtonDefault.icon(
+          width: 150.toW(),
+          padding: AppInsets.defaultButtonVertical,
           onPressed: () {
             Get.toNamed(AppRoutes.addPatient);
           },
-          icon: const Icon(Icons.add),
-          label: CustomText(
-            "Add Patient",
-            color: AppColors.get.white,
-          ),
+          titleSize: 14,
+          borderRadius: AppInsets.buttonBorderRadius,
+          icon: Icons.person_add,
+          label: "add_patient",
         ),
       ],
     );

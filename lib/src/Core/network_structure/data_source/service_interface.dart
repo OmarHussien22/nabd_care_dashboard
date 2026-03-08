@@ -33,7 +33,7 @@ abstract class ServicesInterface with ApiNames implements ServiceCaller {
   late CrudType type;
   late bool withPagination;
   late bool showLoadingDialog;
-  late UploadOptions? uploadOptions;
+  UploadOptions? uploadOptions;
 
   Future<Response> call(
     String url, {

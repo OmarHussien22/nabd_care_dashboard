@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:care_desk/src/Features/Patients/presentation/widgets/file_upload_card.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 
 class UploadAttachment {
+   final String id = UniqueKey().toString();
   final GetFile getFile;
   final String name;
   final String size;

@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/Constants/Decorations/app_Insets.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/routers/app_router_imports.dart';
 import 'package:care_desk/src/Features/MainLayout/controller/main_layout_controller.dart';
@@ -35,11 +36,15 @@ class MainLayout extends StatelessWidget {
                           FixedAppBar(),
                           Divider(height: 1, color: AppColors.get.border),
                           Expanded(
-                              child: GetRouterOutlet(
-                            initialRoute: AppRoutes.dashboard,
-                            anchorRoute: AppRoutes.mainApp,
-                            // الـ anchorRoute يضمن بقاء الـ URL متسلسلاً
-                          )),
+                            child: Container(
+                                padding: AppInsets.defaultScreenALL,
+                                color: AppColors.get.lighterGrey,
+                                child: GetRouterOutlet(
+                                  initialRoute: AppRoutes.dashboard,
+                                  anchorRoute: AppRoutes.mainApp,
+                                  // الـ anchorRoute يضمن بقاء الـ URL متسلسلاً
+                                )),
+                          ),
                         ],
                       ),
                     ),

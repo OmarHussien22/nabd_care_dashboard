@@ -359,7 +359,6 @@ const Map<String, String> enUS = {
   "enter_your_email": "Enter your email",
   "send": "Send",
 
-
   /// -------------- Wallet ------------------
   "wallet_balance": "Wallet balance",
   "current_balance": "Current balance",
@@ -368,4 +367,16 @@ const Map<String, String> enUS = {
   "last_transactions": "Last transactions",
   "wallet_transactions": "Wallet transactions",
 
+  /// ── Add Patient Step-by-Step ──
+  "step": "Step",
+  "submit": "Submit",
+  "return_to_main": "Return to Main",
+  "filled": "Filled",
+  "completed": "Completed",
+  "patient_information": "Patient Information",
+  "medical_status_history": "Medical Status & History",
+  "media_attachments": "Media Attachments",
+  "administrative_details": "Administrative Details",
+  "add_new_patient": "Add New Patient",
+  "fill_in_the_patient_details_below": "Fill in the patient details below",
 };

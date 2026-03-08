@@ -85,7 +85,7 @@ abstract class ColorInterface {
   Color get greyLight => const Color(0xffc8c7cc);
   Color get grey => const Color(0xff666666);
   Color get darkGrey => const Color(0xff525356);
-  Color get lighterGrey => const Color(0xffF3F3F5);
+  Color get lighterGrey => const Color(0xffF1F5F9);
 
   Color get lightPink => const Color(0xffE1D0D6);
 

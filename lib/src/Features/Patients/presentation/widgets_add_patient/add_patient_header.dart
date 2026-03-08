@@ -2,11 +2,10 @@ import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dar
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Features/Patients/presentation/manager/add_patient_builder.dart';
-import 'package:care_desk/src/Features/Patients/presentation/widgets_add_patient/stepper_add_patient.dart';
+import 'package:care_desk/src/Features/Patients/presentation/manager/patient_stepper_controller.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/Animation/animated_wrapper.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class AddPatientHeader extends StatelessWidget {
@@ -54,7 +53,7 @@ class AddPatientHeader extends StatelessWidget {
                     if (currentStep == 0) {
                       Get.back();
                     } else {
-                      Get.find<AddPatientBuilder>().back();
+                      Get.find<PatientStepController>().back();
                     }
                   },
                   child: Padding(
@@ -121,15 +120,26 @@ class AddPatientHeader extends StatelessWidget {
                 ),
               ),
 
-              // Step indicator chips
-              StepperAddPatient(
-                currentStep: currentStep,
-                steps: const [
-                  (Icons.person_outline_rounded, 'info'),
-                  (Icons.medical_services_outlined, 'medical'),
-                  (Icons.attach_file_rounded, 'media'),
-                  (Icons.admin_panel_settings_outlined, 'admin'),
-                ],
+              // Step counter chip
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 14.toW(),
+                  vertical: 6.toH(),
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.get.primary.withOpacity(0.08),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: AppColors.get.primary.withOpacity(0.25),
+                    width: 1,
+                  ),
+                ),
+                child: CustomText(
+                  '${'step'.toTr()} ${currentStep + 1} / 4',
+                  fontSize: 13,
+                  fontWeight: FW.semiBold,
+                  color: AppColors.get.primary,
+                ),
               ),
             ],
           ),

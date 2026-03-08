@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:care_desk/src/Core/network_structure/networking/src/utils/upload_option.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -37,6 +38,14 @@ class DioService extends Networking<Response, DioError> {
         sendTimeout: kSendTimeout,
       ),
     );
+
+    UploadOptions(
+      cancelToken: CancelToken(),
+      onSendProgress: (count, total) {
+        printDM("");
+      },
+    );
+
     // _dio.interceptors.add(
     //   LogInterceptor(
     //     requestHeader: true,

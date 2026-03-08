@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_palette.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:flutter/material.dart';
@@ -17,17 +18,19 @@ class TablePagination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       height: 52,
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: const BoxDecoration(
-        border: Border(top: BorderSide(color: AppPalette.border)),
+      decoration: BoxDecoration(
+        color: AppColors.get.white,
+        border: Border(top: BorderSide(color: AppColors.get.border)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CustomText(
             "Page $currentPage of $totalPages",
-            color: AppPalette.textSecondary,
+            color: AppColors.get.textSecondary,
             fontSize: 13,
           ),
           Row(

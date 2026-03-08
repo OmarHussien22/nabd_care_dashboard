@@ -25,7 +25,6 @@ class ButtonDefault extends StatefulWidget {
   final String tooltip;
 
   const ButtonDefault({
-
     super.key,
     this.backgroundColor,
     this.disabledBackgroundColor,
@@ -61,13 +60,30 @@ class ButtonDefault extends StatefulWidget {
     final VoidCallback? onPressed,
     final bool isDisabled = false,
     final bool isUpperCase = false,
-    final String tooltip = '',
+    final String? tooltip,
+    final double? width,
+    final double? height,
+    final double? borderRadius,
+    final double? elevation,
+    final Color? titleColor,
+    final double? titleSize,
+    final String? title,
+    final EdgeInsetsGeometry? padding,
+    final Color? iconColor,
   }) =>
       ButtonDefault(
-        tooltip: tooltip,
+        tooltip: tooltip ?? label,
         onPressed: onPressed,
         isDisabled: isDisabled,
         color: color,
+        width: width,
+        borderRadius: borderRadius,
+        elevation: elevation ?? 2.2,
+        height: height,
+        titleColor: titleColor,
+        titleSize: titleSize,
+        title: title,
+        padding: padding,
         disabledColor: disabledColor,
         disabledBackgroundColor: disabledBackgroundColor,
         backgroundColor: backgroundColor ?? AppColors.get.primary,
@@ -76,6 +92,8 @@ class ButtonDefault extends StatefulWidget {
           label: label.toTr(),
           icon: icon,
           isUpperCase: isUpperCase,
+          iconColor: iconColor,
+          titleColor: titleColor,
         ),
       );
 
@@ -92,11 +110,11 @@ class ButtonDefault extends StatefulWidget {
     final bool isDisabled = false,
     final bool isUpperCase = false,
     final EdgeInsetsGeometry? padding,
-    final String tooltip = '',
+    final String? tooltip,
   }) =>
       ButtonDefault(
         padding: padding,
-        tooltip: tooltip,
+        tooltip: tooltip ?? label,
         onPressed: onPressed,
         height: height,
         isDisabled: isDisabled,
@@ -125,8 +143,9 @@ class _ButtonDefaultState extends State<ButtonDefault> {
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
-      cursor:
-          widget.isDisabled ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+      cursor: widget.isDisabled
+          ? SystemMouseCursors.forbidden
+          : SystemMouseCursors.click,
       child: AnimatedScale(
         duration: const Duration(milliseconds: 150),
         scale: _isHovered && !widget.isDisabled ? 1.03 : 1.0,
@@ -134,7 +153,8 @@ class _ButtonDefaultState extends State<ButtonDefault> {
           duration: const Duration(milliseconds: 180),
           curve: Curves.easeOut,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular((widget.borderRadius ?? 15).toRad()),
+            borderRadius:
+                BorderRadius.circular((widget.borderRadius ?? 15).toRad()),
             boxShadow: _isHovered && !widget.isDisabled
                 ? [
                     BoxShadow(
@@ -152,7 +172,8 @@ class _ButtonDefaultState extends State<ButtonDefault> {
               height: widget.height ?? 45.toH(),
               child: CupertinoButton(
                 padding: widget.padding ?? EdgeInsets.zero,
-                color: _isHovered && !widget.isDisabled ? hoverColor : baseColor,
+                color:
+                    _isHovered && !widget.isDisabled ? hoverColor : baseColor,
                 disabledColor: widget.disabledColor ??
                     AppColors.get.primary.withOpacity(0.5),
                 borderRadius:
@@ -192,6 +213,8 @@ class _IconRoundedChild extends StatelessWidget {
   final String label;
   final IconData icon;
   final Color? color;
+  final Color? iconColor;
+  final Color? titleColor;
   final bool isUpperCase;
 
   const _IconRoundedChild({
@@ -200,6 +223,8 @@ class _IconRoundedChild extends StatelessWidget {
     required this.icon,
     this.color,
     required this.isUpperCase,
+    this.iconColor,
+    this.titleColor,
   });
 
   @override
@@ -207,13 +232,15 @@ class _IconRoundedChild extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(icon, color: color),
-        10.ESW(),
+        Icon(icon, color: iconColor ?? color),
+        16.ESW(),
         Text(
           isUpperCase ? label.toUpperCase() : label,
           textAlign: TextAlign.center,
-          style:
-              Theme.of(context).textTheme.titleMedium?.copyWith(color: color),
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium
+              ?.copyWith(color: titleColor ?? color),
         ),
       ],
     );

@@ -40,7 +40,7 @@ class AppFlow {
   }
 
   void _devFlow() {
-    Get.offAll(() => const LoginPage());
+    Get.offAll(() => const MainLayoutPage());
     // Get.offAll(() => const AddCategoryPage());
   }
 }

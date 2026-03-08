@@ -74,15 +74,65 @@ class AddPatientInformationCard extends StatelessWidget {
           SizedBox(height: 24.toH()),
 
           // ── Address ──
-          AppFillTextFieldField(
-            width: double.infinity,
-            controller: cnt.addressController,
-            hint: "enter_address",
-            header: "address",
-            prefixIconData: Icons.location_on_rounded,
-            keyboardType: TextInputType.text,
-            validation: AppValidator.defaultValidator.validate,
-            onComplete: node.nextFocus,
+          Row(
+            children: [
+              Expanded(
+                child: AppFillTextFieldField(
+                  width: double.infinity,
+                  controller: cnt.addressController,
+                  hint: "enter_address",
+                  header: "address",
+                  prefixIconData: Icons.location_on_rounded,
+                  keyboardType: TextInputType.text,
+                  validation: AppValidator.defaultValidator.validate,
+                  onComplete: node.nextFocus,
+                ),
+              ),
+              SizedBox(width: 20.toW()),
+              Expanded(
+                child: AppFillTextFieldField(
+                  width: double.infinity,
+                  controller: cnt.dateOfVisitController,
+                  hint: "enter_date_of_visit",
+                  header: "date_of_visit",
+                  prefixIconData: Icons.location_on_rounded,
+                  keyboardType: TextInputType.text,
+                  validation: AppValidator.defaultValidator.validate,
+                  onComplete: node.nextFocus,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 18.toH()),
+
+          Row(
+            children: [
+              Expanded(
+                child: AppFillTextFieldField(
+                  width: double.infinity,
+                  controller: cnt.timeOfVisitController,
+                  hint: "enter_time_of_visit",
+                  header: "time_of_visit",
+                  prefixIconData: Icons.location_on_rounded,
+                  keyboardType: TextInputType.text,
+                  validation: AppValidator.defaultValidator.validate,
+                  onComplete: node.nextFocus,
+                ),
+              ),
+              SizedBox(width: 20.toW()),
+              Expanded(
+                child: AppFillTextFieldField(
+                  width: double.infinity,
+                  controller: cnt.priceController,
+                  hint: "enter_price",
+                  header: "price",
+                  prefixIconData: Icons.location_on_rounded,
+                  keyboardType: TextInputType.text,
+                  validation: AppValidator.defaultValidator.validate,
+                  onComplete: node.nextFocus,
+                ),
+              ),
+            ],
           ),
         ],
       );
