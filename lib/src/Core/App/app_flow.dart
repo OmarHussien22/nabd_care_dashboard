@@ -9,10 +9,13 @@ import '../Constants/Enums/app_source.dart';
 class AppFlow {
   AppFlow._();
   static final AppFlow instance = AppFlow._();
-  static AppSource get currentSource => AppSource.prod;
+  // static AppSource get currentSource => AppSource.prod;
   final StorageService _storageService = StorageService();
+
   void controlFlow() {
-    if (currentSource == AppSource.prod) {
+
+    printDM("App Flow ${IntalizeAppSource.currentSource.toString()}");
+    if (IntalizeAppSource.currentSource == AppSource.prod) {
       _prodFlow();
     } else {
       _devFlow();

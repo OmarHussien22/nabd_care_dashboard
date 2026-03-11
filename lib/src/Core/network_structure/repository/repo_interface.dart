@@ -87,13 +87,13 @@ abstract class RepoInterface<T> {
     //     return await handleCall(params: params)!;
     //   case AppMode.test:
 
-    if (AppFlow.currentSource == AppSource.prod) {
+    if (IntalizeAppSource.currentSource == AppSource.prod) {
       return await handleCall(params: params)!;
     }
-    if (AppFlow.currentSource == AppSource.dev) {
+    if (IntalizeAppSource.currentSource == AppSource.dev) {
       return await handleCall(params: params)!;
     }
-    if (AppFlow.currentSource == AppSource.test) {
+    if (IntalizeAppSource.currentSource == AppSource.test) {
       return await sendFakeData(testData, params: params, title: 'Test Data',uploadOption: uploadoption)!;
     } else {
       return await handleCall(params: params)!;

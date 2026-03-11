@@ -19,6 +19,21 @@ class AddPatientPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final FocusScopeNode node = FocusScope.of(context);
     Get.put(PatientStepController());
+    final screenWidth = MediaQuery.of(context).size.width;
+    double horizontalPadding = 24;
+    double verticalPadding = 16;
+    double maxWidth = 900;
+
+    if (screenWidth >= 1024) {
+      horizontalPadding = 38;
+      verticalPadding = 22;
+      maxWidth = 1100;
+    } else if (screenWidth >= 600) {
+      horizontalPadding = 32;
+      verticalPadding = 24;
+      maxWidth = 850;
+    }
+
     return Scaffold(
       backgroundColor: AppColors.get.lighterGrey,
       body: GetBuilder<PatientStepController>(builder: (cnt) {
@@ -38,21 +53,22 @@ class AddPatientPage extends StatelessWidget {
                   controller: cnt.scrollController,
                   physics: const BouncingScrollPhysics(),
                   padding: EdgeInsets.symmetric(
-                    horizontal: 24.toW(),
-                    vertical: 16.toH(),
+                    horizontal: horizontalPadding.toW(),
+                    vertical: verticalPadding.toH(),
                   ),
                   child: GetBuilder<PatientStepController>(
                     builder: (cnt) {
                       final step = cnt.currentStep;
                       return Center(
                         child: ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 900),
+                          constraints: BoxConstraints(maxWidth: maxWidth.toW()),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // ── Stepper above current card ─────────────
                               StepperRow(),
-                              SizedBox(height: 20.toH()),
+                              SizedBox(
+                                  height: (screenWidth < 600 ? 20 : 20.toH())),
 
                               // ── Completed cards (collapsed, above active) ─
                               for (int i = 0; i < step; i++)

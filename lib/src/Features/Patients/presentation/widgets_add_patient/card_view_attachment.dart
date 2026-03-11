@@ -16,10 +16,6 @@ class CardViewAttachment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isMobile = MediaQuery.of(context).size.width < 600;
-    // final String extension = file.name.split('.').last.toLowerCase();
-    // final bool isImage =
-    //     ['jpg', 'jpeg', 'png', 'gif', 'webp'].contains(extension);
-    // final bool isPdf = extension == 'pdf';
 
     return Center(
       child: Material(
@@ -27,20 +23,20 @@ class CardViewAttachment extends StatelessWidget {
         child: Container(
           width: isMobile ? MediaQuery.of(context).size.width * 0.9 : 800.toW(),
           height:
-              isMobile ? MediaQuery.of(context).size.height * 0.7 : 800.toH(),
+              isMobile ? MediaQuery.of(context).size.height * 0.7 : 600.toH(),
           decoration: BoxDecoration(
             color: AppColors.get.surface,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                blurRadius: 20,
-                offset: const Offset(0, 10),
+                color: Colors.black.withOpacity(0.15),
+                blurRadius: 30,
+                offset: const Offset(0, 15),
               ),
             ],
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(24),
             child: Stack(
               children: [
                 // Content
@@ -48,48 +44,69 @@ class CardViewAttachment extends StatelessWidget {
                   child: isImage
                       ? CardViewImage(file: file)
                       : Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.insert_drive_file,
-                                size: 80,
-                                color: AppColors.get.primary,
-                              ),
-                              SizedBox(height: 24.toH()),
-                              CustomText(
-                                file.name,
-                                fontSize: 16,
-                                fontWeight: FW.semiBold,
-                                textAlign: TextAlign.center,
-                              ),
-                              SizedBox(height: 32.toH()),
-                              ButtonDefault(
-                                title: "open_document",
-                                onPressed: () async {
-                                  await Helper.launcher.openPdfWeb(file);
-                                },
-                                backgroundColor: AppColors.get.primary,
-                                titleColor: Colors.white,
-                                height: 50.toH(),
-                                width: 200.toW(),
-                                titleSize: 16,
-                              ),
-                            ],
+                          child: Padding(
+                            padding: EdgeInsets.all(32.toW()),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.all(24.toW()),
+                                  decoration: BoxDecoration(
+                                    color:
+                                        AppColors.get.primary.withOpacity(0.08),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Icon(
+                                    Helper.mediaIconHandler.getIcon(file.name),
+                                    size: 80,
+                                    color: AppColors.get.primary,
+                                  ),
+                                ),
+                                SizedBox(height: 24.toH()),
+                                CustomText(
+                                  file.name,
+                                  fontSize: 18,
+                                  fontWeight: FW.bold,
+                                  textAlign: TextAlign.center,
+                                  maxLines: 2,
+                                  isOverFlow: true,
+                                ),
+                                SizedBox(height: 8.toH()),
+                                CustomText(
+                                  Helper.mediaSizeHandler
+                                      .formatBytes(file.size),
+                                  fontSize: 14,
+                                  color: AppColors.get.grey,
+                                ),
+                                SizedBox(height: 48.toH()),
+                                ButtonDefault(
+                                  title: Helper.mediaIconHandler
+                                      .getButtonTitle(file.name),
+                                  onPressed: () async {
+                                    await Helper.launcher.openFile(file);
+                                  },
+                                  backgroundColor: AppColors.get.primary,
+                                  titleColor: Colors.white,
+                                  height: 54.toH(),
+                                  width: 260.toW(),
+                                  titleSize: 16,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                 ),
 
                 // Close Button
                 Positioned(
-                  top: 12,
-                  right: 12,
+                  top: 16,
+                  right: 16,
                   child: IconButton(
                     onPressed: () => Navigator.pop(context),
                     icon: Container(
-                      padding: const EdgeInsets.all(4),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: AppColors.get.surfaceContainer.withOpacity(0.8),
+                        color: Colors.black.withOpacity(0.05),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(

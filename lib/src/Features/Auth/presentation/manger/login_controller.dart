@@ -42,7 +42,7 @@ class LoginController extends GetControllerInterface<UserModel> {
     formValidator(
       globalKey: globalKey,
       onSuccessValidate: () async {
-        if (AppFlow.currentSource == AppSource.dev) {
+        if (IntalizeAppSource.currentSource == AppSource.dev) {
           ClientSnacks.loginSuccess();
           Get.offAll(const MainLayoutPage());
           return;

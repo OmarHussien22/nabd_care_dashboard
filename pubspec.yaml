@@ -116,6 +116,7 @@ flutter:
     - assets/icons/
     - assets/fonts/
     - assets/images/
+    - assets/lottie/
 
 
   fonts:

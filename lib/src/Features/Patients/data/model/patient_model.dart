@@ -6,7 +6,7 @@ import 'package:care_desk/src/Features/Patients/domain/entity/patient_entity.dar
 class PatientModel extends PatientEntity {
   PatientModel({
     required super.id,
-    required super.name,
+    required super.title,
     required super.phone,
     required super.address,
     required super.gender,
@@ -33,7 +33,7 @@ class PatientModel extends PatientEntity {
   factory PatientModel.fromJson(Map<String, dynamic> json) {
     return PatientModel(
       id: json['id'] ?? 0,
-      name: json['name'] ?? '',
+      title: json['name'] ?? '',
       phone: json['phone'] ?? '',
       address: json['address'] ?? '',
       gender: json['gender'] ?? 0,

@@ -4,6 +4,7 @@ import 'package:care_desk/src/Core/Constants/strings/app_strings.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/navigation_extension.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Core/Utils/platform_helper.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Spaces&Dividers/custom_divider.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:flutter/cupertino.dart';
@@ -161,27 +162,78 @@ class AdaptivePicker {
       required String title,
       required DateTime initial,
       required Function(DateTime? date) onConfirm}) async {
-    if (Platform.isIOS) {
+    if (PlatformHelper.isIOS) {
       _iosTimePicker(context, title, onConfirm, initial);
     } else {
-      _androidTimePicker(context, onConfirm);
+      _androidTimePicker(context, onConfirm, initial: initial);
     }
   }
 
   static _androidTimePicker(
-      BuildContext context, Function(DateTime date) onConfirm) {
-    var now = DateTime.now();
-    showRoundedTimePicker(
+      BuildContext context, Function(DateTime date) onConfirm,
+      {DateTime? initial}) async {
+    final now = DateTime.now();
+    final initialTime = TimeOfDay.fromDateTime(initial ?? now);
+
+    final TimeOfDay? picked = await showTimePicker(
       context: context,
-      theme: ThemeData(
-        primaryColor: AppColors.get.primary,
-        hintColor: Colors.black,
-        // backgroundColor: AppColors.get.white,
-        buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary),
-      ),
-      initialTime: TimeOfDay.now(),
-    ).then((time) => onConfirm(
-        DateTime(now.year, now.month, now.day, time!.hour, time.minute)));
+      initialTime: initialTime,
+      initialEntryMode: (PlatformHelper.isDesktop)
+          ? TimePickerEntryMode.input
+          : TimePickerEntryMode.dial,
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: AppColors.get.primary,
+              onPrimary: AppColors.get.white,
+              onSurface: AppColors.get.textPrimary,
+              surface: AppColors.get.background,
+            ),
+            timePickerTheme: TimePickerThemeData(
+              backgroundColor: AppColors.get.background,
+              hourMinuteColor: WidgetStateColor.resolveWith((states) =>
+                  states.contains(WidgetState.selected)
+                      ? AppColors.get.primary.withOpacity(0.12)
+                      : AppColors.get.surfaceContainer),
+              hourMinuteTextColor: WidgetStateColor.resolveWith((states) =>
+                  states.contains(WidgetState.selected)
+                      ? AppColors.get.primary
+                      : AppColors.get.textPrimary),
+              dayPeriodColor: WidgetStateColor.resolveWith((states) =>
+                  states.contains(WidgetState.selected)
+                      ? AppColors.get.primary.withOpacity(0.12)
+                      : AppColors.get.surfaceContainer),
+              dayPeriodTextColor: WidgetStateColor.resolveWith((states) =>
+                  states.contains(WidgetState.selected)
+                      ? AppColors.get.primary
+                      : AppColors.get.textPrimary),
+              dialHandColor: AppColors.get.primary,
+              dialBackgroundColor: AppColors.get.surfaceContainer,
+              dialTextColor: AppColors.get.textPrimary,
+              entryModeIconColor: AppColors.get.primary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(24),
+                side: BorderSide(color: AppColors.get.border, width: 1),
+              ),
+              confirmButtonStyle: TextButton.styleFrom(
+                foregroundColor: AppColors.get.primary,
+                textStyle: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              cancelButtonStyle: TextButton.styleFrom(
+                foregroundColor: AppColors.get.textSecondary,
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null) {
+      onConfirm(
+          DateTime(now.year, now.month, now.day, picked.hour, picked.minute));
+    }
   }
 
   static _iosTimePicker(BuildContext context, String title,
@@ -196,7 +248,7 @@ class AdaptivePicker {
   static Widget cupertinoTimePicker(BuildContext context, String title,
       {required Function(DateTime? date) onConfirm,
       required DateTime initial}) {
-    DateTime date = DateTime.now();
+    DateTime selectedDate = initial;
     return Container(
       color: AppColors.get.background,
       height: 260.h,
@@ -215,7 +267,7 @@ class AdaptivePicker {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    onConfirm(date);
+                    onConfirm(selectedDate);
                     Navigator.of(context).pop();
                   },
                   style: ElevatedButton.styleFrom(elevation: 0),
@@ -232,8 +284,8 @@ class AdaptivePicker {
           Flexible(
               child: CupertinoDatePicker(
             initialDateTime: initial,
-            onDateTimeChanged: (date) {
-              date = date;
+            onDateTimeChanged: (newDate) {
+              selectedDate = newDate;
             },
             mode: CupertinoDatePickerMode.time,
           )),

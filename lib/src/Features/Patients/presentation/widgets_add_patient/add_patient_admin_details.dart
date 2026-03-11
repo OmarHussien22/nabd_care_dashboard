@@ -1,9 +1,12 @@
+import 'package:care_desk/src/Core/Constants/Strings/Assets/app_icons.dart';
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Core/Utils/Validation/app_validator.dart';
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:care_desk/src/Features/Patients/domain/entity/referral_sources.dart';
 import 'package:care_desk/src/Features/Patients/presentation/manager/add_patient_builder.dart';
+import 'package:care_desk/src/Features/Patients/presentation/widgets_add_patient/gender_card.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/default_text_field.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/app_text_field.dart';
@@ -39,9 +42,11 @@ class AddPatientAdminDetails extends StatelessWidget {
             child: SearchableFieldDefault<ReferralSourcesEntity>(
               controller: cnt.referralSourceController,
               items: ReferralSourcesEntity.referralSources,
-              itemLabel: (item) => item.name,
+              itemLabel: (item) => item.title,
               hint: "select_referral_source",
-              leadingIcon: ReferralSourcesEntity.referralSources.first.icon,
+              leadingIcon: AppIcons.whatsapp,
+              suffix: SuffixNone(),
+              inputDecoration: InputDecorationWithBorder(),
               onOptionSelected: cnt.setReferralSource,
             ),
           ),
@@ -59,6 +64,20 @@ class AddPatientAdminDetails extends StatelessWidget {
             validation: AppValidator.defaultValidator.validate,
             onComplete: () => node.unfocus(),
           ),
+
+          SizedBox(height: 24.toH()),
+          // SizedBox(
+          //   width: MediaQuery.sizeOf(context).width * 0.45,
+          //   child: GenderCard(
+          //     label: "referral_source".toTr(),
+          //     icon: Icons.female_rounded,
+          //     isSelected: cnt.selectReferralSourceId ==
+          //         ReferralSourcesEntity.referralSources[1].id,
+          //     onTap: () => cnt
+          //         .setReferralSource(ReferralSourcesEntity.referralSources[1]),
+          //   ),
+          // ),
+          //
         ],
       );
     });

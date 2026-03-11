@@ -188,7 +188,7 @@ class FixedAppBar extends StatelessWidget implements PreferredSizeWidget {
               const Spacer(),
               ButtonDefault.icon(
                 width: 150.toW(),
-                padding: AppInsets.defaultButtonVertical,
+                //padding: AppInsets.defaultButtonVertical,
                 onPressed: () {
                   Get.toNamed(AppRoutes.addPatient);
                 },
@@ -202,7 +202,7 @@ class FixedAppBar extends StatelessWidget implements PreferredSizeWidget {
                 height: 45.toH(),
                 decoration: BoxDecoration(
                   color: AppColors.get.lighterGrey,
-                  shape: BoxShape.rectangle,
+                  // shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: AppColors.get.cardBorder, width: 0),
                 ),

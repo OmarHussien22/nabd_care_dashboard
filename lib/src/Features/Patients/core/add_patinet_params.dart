@@ -1,5 +1,6 @@
 import 'package:care_desk/src/Features/Patients/domain/entity/upload_attachments.dart';
-import 'package:care_desk/src/core/network_structure/params/params.dart' show Params;
+import 'package:care_desk/src/core/network_structure/params/params.dart'
+    show Params;
 
 class AddPatinetParams extends Params {
   final String name;
@@ -15,6 +16,10 @@ class AddPatinetParams extends Params {
   final List<int> chronicDiseases;
   final List<int> medications;
   final List<UploadAttachment> attachments;
+  final String dateOfVisit;
+  final String timeOfVisit;
+  final String price;
+  final String age;
 
   AddPatinetParams({
     required this.name,
@@ -30,6 +35,10 @@ class AddPatinetParams extends Params {
     required this.chronicDiseases,
     required this.medications,
     required this.attachments,
+    required this.dateOfVisit,
+    required this.timeOfVisit,
+    required this.price,
+    required this.age,
   });
 
   @override
@@ -48,11 +57,15 @@ class AddPatinetParams extends Params {
       "chronic_diseases": chronicDiseases,
       "medications": medications,
       "attachments": attachments,
+      "date_of_visit": dateOfVisit,
+      "time_of_visit": timeOfVisit,
+      "price": price,
+      "age":age
     };
   }
 
   @override
   String toString() {
-    return "AddPatinetParams(name: $name, phone: $phone, address: $address, mainComplaint: $mainComplaint, allergies: $allergies, notes: $notes, dateOfBirth: $dateOfBirth, referralSource: $referralSource, gender: $gender, visitType: $visitType, chronicDiseases: $chronicDiseases, medications: $medications, attachments: $attachments)";
+    return "AddPatinetParams(name: $name, phone: $phone, address: $address, mainComplaint: $mainComplaint, allergies: $allergies, notes: $notes, dateOfBirth: $dateOfBirth, referralSource: $referralSource, gender: $gender, visitType: $visitType, chronicDiseases: $chronicDiseases, medications: $medications, attachments: $attachments,dateOfVisit:$dateOfVisit,timeOfVisit:$timeOfVisit,price:$price)";
   }
 }

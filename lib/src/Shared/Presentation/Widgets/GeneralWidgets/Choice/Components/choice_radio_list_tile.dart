@@ -19,6 +19,7 @@ class ChoiceRadioListTile<T extends TitleInterface> extends StatelessWidget {
   final T value;
   final T groupValue;
   final Function(T?) onChanged;
+  final Color? cardColor;
   const ChoiceRadioListTile({
     super.key,
     required this.value,
@@ -34,12 +35,17 @@ class ChoiceRadioListTile<T extends TitleInterface> extends StatelessWidget {
     this.shape,
     this.titleFontWeight,
     this.width,
+    this.cardColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: width ?? 100.toW(),
+      decoration: BoxDecoration(
+        color: cardColor,
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: RadioListTile<T>(
         title: CustomText(
           value.title,

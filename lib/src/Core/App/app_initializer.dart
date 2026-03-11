@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:care_desk/src/Core/Constants/Enums/app_source.dart';
 import 'package:care_desk/src/Core/network_structure/networking/network_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,8 @@ class AppInitializer {
 
     ErrorWidget.builder =
         (FlutterErrorDetails details) => AppErrorBuilder(details);
+    IntalizeAppSource.currentSource;
+    IntalizeAppSource.setAppSource();
 
     /// * Storage Service Initialization
     await StorageService().init();
@@ -46,9 +49,9 @@ class AppInitializer {
     ///
     /// ✅ **Initialize sqflite_common_ffi (for Windows, Linux, and MacOS)**
 
-    sqfliteFfiInit();
-    databaseFactory = databaseFactoryFfi;
-    await DatabaseHelper.instance.database;
+    // sqfliteFfiInit();
+    // databaseFactory = databaseFactoryFfi;
+    // await DatabaseHelper.instance.database;
 
     //* delete existing database for testing
     // await DatabaseHelper.instance.deleteDatabase();

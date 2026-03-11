@@ -1,5 +1,8 @@
+import 'package:care_desk/src/Core/App/app_flow.dart';
+import 'package:care_desk/src/Core/Constants/Enums/app_source.dart';
 import 'package:care_desk/src/Core/network_structure/networking/network_service.dart';
 import 'package:care_desk/src/Core/network_structure/networking/src/utils/upload_option.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Dialogs/app_dialogs.dart';
 import 'package:dio/dio.dart';
 import 'package:care_desk/src/core/network_structure/constants/exception_constants.dart';
 import 'package:care_desk/src/core/network_structure/data_source/service_caller.dart';
@@ -55,12 +58,12 @@ abstract class ServicesInterface with ApiNames implements ServiceCaller {
       uploadOptions: uploadOptions,
     );
     Response? response;
-    // if (AppSettings.appMode == AppMode.dev&&type==CrudType.post&&showLoadingDialog) {
-    //   AppDialogs.showLoadingDialog();
-    //   await Future.delayed(const Duration(seconds: 3), () {
-    //     AppDialogs.closeOpenDialogs();
-    //   });
-    // }
+    if (IntalizeAppSource.currentSource == AppSource.dev&&type==CrudType.post&&showLoadingDialog) {
+      AppDialogs.showLoadingDialog();
+      await Future.delayed(const Duration(seconds: 3), () {
+        AppDialogs.closeOpenDialogs();
+      });
+    }
     try {
       switch (type) {
         case CrudType.post:

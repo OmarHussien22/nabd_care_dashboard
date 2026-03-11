@@ -23,6 +23,14 @@ class AddPatientSectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    double cardPadding = 16.toW();
+    if (screenWidth < 600) {
+      cardPadding = 16; // Use fixed 16 on mobile to avoid shrinking too much
+    } else if (screenWidth >= 1024) {
+      cardPadding = 24; // Use fixed 24 on desktop
+    }
+    
     return AnimatedContainer(
       duration: const Duration(milliseconds: 400),
       width: double.infinity,
@@ -59,7 +67,7 @@ class AddPatientSectionCard extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.all(16.toW()),
+          padding: EdgeInsets.all(cardPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

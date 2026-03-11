@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,59 +11,71 @@ import 'package:care_desk/src/Core/Utils/utils.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/Loading/loading.dart';
 
 class AppDialogs {
+  /// Enhanced Loading Dialog for a more premium look when sending requests
   static void showLoadingDialog({
-    Loading? loading,
-    Color? color,
-    bool isDark = false,
+    String? message,
+    Widget? loading,
     bool isDismissible = false,
   }) {
     Get.dialog(
-      Center(
-        child: Dialog(
-          shape: AppShapes.dialogShape,
-          backgroundColor: color ?? (AppColors.get.main),
-          elevation: 5,
-          child: Container(
-            // height: Get.mediaQuery.size.height * 0.12,
-            // width: Get.mediaQuery.size.width * 0.1,
-            padding: EdgeInsets.symmetric(vertical: 10.toH()),
-            child:
-                //TODO 7.b : change to loading widget
-                loading ??
-                    Loading.fadingCircle(size: 50, color: AppColors.get.grey),
-            // Lottie.asset(Assets.lottieLoading,height: 80.toH(),width: 80.toW()),
-            // child: Column(
-            //   mainAxisSize: MainAxisSize.min,
-            //   crossAxisAlignment: CrossAxisAlignment.center,
-            //   children: [
-            //     loading ??
-            //         Loading.fadingCircle(size: 50, color: AppColors.get.grey),
-            //     YSpace.normal,
-            //     SizedBox(
-            //       // height: Get.mediaQuery.size.height * 0.08,
-            //       child: DefaultTextStyle(
-            //         style: TextStyle(
-            //           fontSize: 12.0,
-            //           color: AppColors.get.black,
-            //           fontFamily: AppStrings.fontFamily,
-            //         ),
-            //         child: AnimatedTextKit(
-            //           animatedTexts: [
-            //             TypewriterAnimatedText('Loading',
-            //                 speed: const Duration(milliseconds: 250),
-            //                 textAlign: TextAlign.center),
-            //           ],
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
+      PopScope(
+        canPop: isDismissible,
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+          child: Center(
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 50.toW()),
+              padding: EdgeInsets.all(24.toRad()),
+              decoration: BoxDecoration(
+                color: AppColors.get.surface.withOpacity(0.9),
+                borderRadius: BorderRadius.circular(24.toRad()),
+                border: Border.all(
+                  color: AppColors.get.white.withOpacity(0.3),
+                  width: 1.5,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.12),
+                    blurRadius: 30,
+                    offset: const Offset(0, 15),
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  loading ??
+                      Loading.staggeredDotsWave(
+                        color: AppColors.get.primary,
+                        size: 50.toRad(),
+                      ),
+                  if (message != null) ...[
+                    SizedBox(height: 20.toH()),
+                    Material(
+                      color: Colors.transparent,
+                      child: Text(
+                        message.toTr(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 14.toFS(),
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.get.textPrimary,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
           ),
-          // insetPadding: const EdgeInsets.all(2.0),
         ),
       ),
       barrierDismissible: isDismissible,
-      transitionCurve: Curves.fastLinearToSlowEaseIn,
+      barrierColor: Colors.black.withOpacity(0.3),
+      transitionDuration: const Duration(milliseconds: 300),
+      transitionCurve: Curves.easeOutBack,
     );
   }
 

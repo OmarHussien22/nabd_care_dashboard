@@ -1,5 +1,7 @@
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
+import 'package:care_desk/src/Features/Patients/domain/entity/patient_entity.dart';
+import 'package:care_desk/src/Shared/Entities/title_interface.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/default_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -10,28 +12,15 @@ class CustomSearchField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.sizeOf(context).width * 0.45,
-      child: SearchableFieldDefault<String>(
-        items: [
-          "Omar",
-          "Fathy",
-          "Ahmed",
-          "Omar",
-          "Fathy",
-          "Fathy",
-          "Ahmed",
-          "Omar",
-          "Fathy",
-          "Ahmed",
-          "Omar",
-          "Fathy",
-          "Ahmed",
-        ],
+      child: SearchableFieldDefault<PatientEntity>(
+        items: PatientEntity.emptyList,
         prefix: PrefixWithIconData(
           iconData: Icons.search,
           scale: 1.5,
           color: AppColors.get.textSecondary,
         ),
-        itemLabel: (item) => item,
+        suffix: SuffixNone(),
+        itemLabel: (item) => item.title,
         hint: "search_for_patient_by_name_or_phone",
         onOptionSelected: (selected) {
           printDM("Selected: $selected");

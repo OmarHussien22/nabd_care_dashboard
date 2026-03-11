@@ -60,7 +60,7 @@ class AddPatienrMedicalCard extends StatelessWidget {
                   return ChronicDiseaseChip(
                     label: disease.name,
                     isSelected:
-                        cnt.selectedChronicDiseases.contains(disease.id),
+                        cnt.selectedChronicDiseasesIds.contains(disease.id),
                     onTap: () => cnt.setSelectedChronicDiseases(disease),
                   );
                 }).toList(),

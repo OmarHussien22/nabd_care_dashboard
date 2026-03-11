@@ -80,39 +80,61 @@ class LauncherServices {
     }
   }
 
-  Future<void> launchFile(PlatformFile file, bool isPdf) async {
+  Future<void> openFile(PlatformFile file) async {
     try {
+      final String extension = file.name.split('.').last.toLowerCase();
+      final bool isPdf = extension == 'pdf';
+      final bool isVideo = ['mp4', 'mov', 'avi', 'mkv'].contains(extension);
+      final bool isDoc = ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'].contains(extension);
+
       if (kIsWeb) {
-        if (file.bytes != null) {
-          final String mimeType =
-              isPdf ? 'application/pdf' : 'application/octet-stream';
-          final Uri uri = Uri.dataFromBytes(
-            file.bytes!,
-            mimeType: mimeType,
-          );
-          await launchUrl(uri);
+        if (file.bytes == null) return;
+        
+        String mimeType;
+        if (isPdf) {
+          mimeType = 'application/pdf';
+        } else if (isVideo) {
+          mimeType = 'video/${extension == 'mov' ? 'quicktime' : extension}';
+        } else if (isDoc) {
+          if (extension.startsWith('xls')) mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+          else if (extension.startsWith('doc')) mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+          else mimeType = 'application/octet-stream';
+        } else {
+          mimeType = 'application/octet-stream';
         }
+
+        final blob = html.Blob([file.bytes], mimeType);
+        final url = html.Url.createObjectUrlFromBlob(blob);
+        
+        // Open in new tab. Browser will handle display for PDF/Video or download for others.
+        html.window.open(url, '_blank');
+        
+        // Revoke after a delay to ensure it opens
+        Future.delayed(const Duration(seconds: 1), () {
+          html.Url.revokeObjectUrl(url);
+        });
       } else {
+        // Mobile/Desktop
         if (file.path != null) {
           final Uri uri = Uri.file(file.path!);
+          // We use launchUrl with external application mode for best compatibility
           if (await canLaunchUrl(uri)) {
-            await launchUrl(uri);
+            await launchUrl(uri, mode: LaunchMode.externalApplication);
+          } else {
+            debugPrint("Could not launch $uri");
           }
         }
       }
     } catch (e) {
-      debugPrint("Error opening document: $e");
+      debugPrint("Error opening file: $e");
     }
   }
 
+  Future<void> launchFile(PlatformFile file, bool isPdf) async {
+    await openFile(file);
+  }
+
   Future<void> openPdfWeb(PlatformFile file) async {
-    if (file.bytes == null) return;
-
-    final blob = html.Blob([file.bytes], 'application/pdf');
-    final url = html.Url.createObjectUrlFromBlob(blob);
-
-    html.window.open(url, '_blank');
-
-    html.Url.revokeObjectUrl(url);
+    await openFile(file);
   }
 }

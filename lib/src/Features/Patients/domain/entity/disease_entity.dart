@@ -12,12 +12,12 @@ class DiseaseEntity {
     name: '',
   );
 
-  static List<DiseaseEntity> get emptyList => [
-        DiseaseEntity(id: 1, name: "diabetes"),
-        DiseaseEntity(id: 2, name: "hypertension"),
-        DiseaseEntity(id: 3, name: "heart_disease"),
-        DiseaseEntity(id: 4, name: "asthma"),
-        DiseaseEntity(id: 5, name: "kidney_disease"),
-        DiseaseEntity(id: 6, name: "thyroid_disease"),
-      ];
+  static List<DiseaseEntity> emptyList = [
+    DiseaseEntity(id: 1, name: "diabetes"),
+    DiseaseEntity(id: 2, name: "hypertension"),
+    DiseaseEntity(id: 3, name: "heart_disease"),
+    DiseaseEntity(id: 4, name: "asthma"),
+    DiseaseEntity(id: 5, name: "kidney_disease"),
+    DiseaseEntity(id: 6, name: "thyroid_disease"),
+  ];
 }

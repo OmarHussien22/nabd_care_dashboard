@@ -20,7 +20,7 @@ class AddPatientSelectVisit extends StatelessWidget {
           fontSize: 13,
           fontWeight: FW.medium,
         ),
-        // SizedBox(height: 8.toH()),
+        SizedBox(height: 8.toH()),
         GetBuilder<AddPatientBuilder>(builder: (cnt) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -28,6 +28,10 @@ class AddPatientSelectVisit extends StatelessWidget {
               ChoiceRadioListTile<VisitTypeEntity>(
                 width: 300.toW(),
                 value: VisitTypeEntity.getVisitTypeList[0],
+                cardColor:
+                    cnt.selectVisitType == VisitTypeEntity.getVisitTypeList[0]
+                        ? AppColors.get.primary.withValues(alpha: .1)
+                        : AppColors.get.greyLight.withValues(alpha: .3),
                 titlecolor:
                     cnt.selectVisitType == VisitTypeEntity.getVisitTypeList[0]
                         ? AppColors.get.primary
@@ -56,6 +60,10 @@ class AddPatientSelectVisit extends StatelessWidget {
               ChoiceRadioListTile<VisitTypeEntity>(
                 width: 300.toW(),
                 value: VisitTypeEntity.getVisitTypeList[1],
+                cardColor:
+                    cnt.selectVisitType == VisitTypeEntity.getVisitTypeList[1]
+                        ? AppColors.get.primary.withValues(alpha: .1)
+                        : AppColors.get.greyLight.withValues(alpha: .3),
                 titlecolor:
                     cnt.selectVisitType == VisitTypeEntity.getVisitTypeList[1]
                         ? AppColors.get.primary

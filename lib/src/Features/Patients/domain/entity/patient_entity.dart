@@ -1,10 +1,11 @@
 import 'package:care_desk/src/Features/Patients/domain/entity/attachments_entity.dart';
 import 'package:care_desk/src/Features/Patients/domain/entity/disease_entity.dart';
 import 'package:care_desk/src/Features/Patients/domain/entity/medicine_entity.dart';
+import 'package:care_desk/src/Shared/Entities/title_interface.dart';
 
-class PatientEntity {
-  final int id;
-  final String name;
+class PatientEntity extends TitleInterface {
+  // final int id;
+  // final String name;
   final String phone;
   final String address;
   final int gender; // 1 for male, 2 for female
@@ -29,8 +30,8 @@ class PatientEntity {
   final String deletedAt;
 
   PatientEntity({
-    required this.id,
-    required this.name,
+    required super.id,
+    required super.title,
     required this.phone,
     required this.address,
     required this.gender,
@@ -57,7 +58,7 @@ class PatientEntity {
 
   static PatientEntity empty = PatientEntity(
     id: 1,
-    name: 'Omar Hussien',
+    title: 'Omar Hussien',
     phone: '01023456789',
     address: '123 Main St',
     gender: 1,
@@ -84,7 +85,7 @@ class PatientEntity {
   static List<PatientEntity> get emptyList => [
         PatientEntity(
           id: 1,
-          name: 'Omar Hussien',
+          title: 'Omar Hussien',
           phone: '01023456789',
           address: '123 Main St',
           gender: 1,
@@ -109,7 +110,7 @@ class PatientEntity {
         ),
         PatientEntity(
           id: 2,
-          name: 'Omar Hussien',
+          title: 'Omar Hussien',
           phone: '01023456789',
           address: '123 Main St',
           gender: 1,
@@ -134,7 +135,7 @@ class PatientEntity {
         ),
         PatientEntity(
           id: 3,
-          name: 'Omar Hussien',
+          title: 'Omar Hussien',
           phone: '01023456789',
           address: '123 Main St',
           gender: 1,
@@ -159,7 +160,7 @@ class PatientEntity {
         ),
         PatientEntity(
           id: 4,
-          name: 'Omar Hussien',
+          title: 'Omar Hussien',
           phone: '01023456789',
           address: '123 Main St',
           gender: 1,
@@ -184,7 +185,7 @@ class PatientEntity {
         ),
         PatientEntity(
           id: 5,
-          name: 'Omar Hussien',
+          title: 'Omar Hussien',
           phone: '01023456789',
           address: '123 Main St',
           gender: 1,

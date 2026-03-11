@@ -1,5 +1,6 @@
 import 'package:care_desk/src/Core/Services/ImageCropper/image_cropper.dart';
 import 'package:care_desk/src/Core/Services/Launcher/launcher_service.dart';
+import 'package:care_desk/src/Core/Services/MediaPicker/media_icon_handler.dart';
 import 'package:care_desk/src/Core/Services/MediaPicker/media_size_handler.dart';
 import 'package:care_desk/src/Core/Services/NetworkConnection/network_service.dart';
 import 'package:care_desk/src/Core/Services/download/download_service.dart';
@@ -21,6 +22,7 @@ class Helper {
   static MediaPickerService media = MediaPickerService.instance;
 
   static MediaSizeHandler mediaSizeHandler = MediaSizeHandler.instance;
+  static MediaIconHandler mediaIconHandler = MediaIconHandler.instance;
 
   static DownloadService downloadService = DownloadService.instance;
 

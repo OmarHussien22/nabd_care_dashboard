@@ -147,21 +147,31 @@ class CustomText extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    double finalFontSize = fontSize ?? 16;
+    double baseFontSize = fontSize ?? 16;
+    double finalFontSize = baseFontSize;
 
     if (screenWidth >= 1024) {
       // Desktop && Web
-      finalFontSize = (fontSize ?? 16) * 1.2;
+      finalFontSize = baseFontSize * 1.25;
     } else if (screenWidth >= 600) {
       // Tablet
-      finalFontSize = (fontSize ?? 16) * 1.1;
+      finalFontSize = baseFontSize * 1.15;
     } else {
       // Mobile
+      finalFontSize = baseFontSize;
+    }
 
-      finalFontSize = fontSize ?? 16;
+    // Responsive padding
+    EdgeInsetsGeometry? finalPadding = padding;
+    if (finalPadding is EdgeInsets) {
+      if (screenWidth >= 1024) {
+        finalPadding = finalPadding * 1.5;
+      } else if (screenWidth >= 600) {
+        finalPadding = finalPadding * 1.25;
+      }
     }
     return Padding(
-      padding: padding ?? EdgeInsets.zero,
+      padding: finalPadding ?? EdgeInsets.zero,
       child: Text(
         customTextLabel(
           label: label,

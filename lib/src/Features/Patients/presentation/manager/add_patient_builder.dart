@@ -2,6 +2,7 @@ import 'package:care_desk/src/Features/Patients/core/add_patinet_params.dart';
 import 'package:care_desk/src/Features/Patients/domain/entity/disease_entity.dart';
 import 'package:care_desk/src/Features/Patients/domain/entity/referral_sources.dart';
 import 'package:care_desk/src/Features/Patients/domain/entity/upload_attachments.dart';
+import 'package:dio/dio.dart';
 import 'package:care_desk/src/Features/Patients/presentation/manager/patient_stepper_controller.dart';
 import 'package:care_desk/src/Features/Patients/presentation/widgets/file_upload_card.dart';
 import 'package:intl/intl.dart';
@@ -24,8 +25,9 @@ class AddPatientBuilder extends GetControllerInterface {
   late TextEditingController allergiesController;
 
   // Controllers for Administrative Details
-  late TextEditingController notesController;
   late TextEditingController dateOfBirthController;
+  // late TextEditingController dateOfVisitController;
+
   late TextEditingController referralSourceController;
   late TextEditingController secretaryNotesController;
   late TextEditingController dateOfVisitController;
@@ -37,13 +39,20 @@ class AddPatientBuilder extends GetControllerInterface {
 
   //Date of Birth
   DateTime? selectDateOfBirth;
+  // Date of visit
+  DateTime? selecDateOfVisit;
+
+  DateTime? selectTimeOfVisit;
+
+  int age = 0;
 
   //Visit Type
   VisitTypeEntity? selectVisitType;
   int selectVisitTypeIndex = 0;
 
   //Chronic Diseases
-  List<int> selectedChronicDiseases = [];
+  List<DiseaseEntity> selectedChronicDiseases = [];
+  List<int> selectedChronicDiseasesIds = [];
 
   //Medications
   List<int> selectedMedications = [];
@@ -53,6 +62,7 @@ class AddPatientBuilder extends GetControllerInterface {
 
   //Referral Type
   ReferralSourcesEntity? selectReferralSource;
+  int? selectReferralSourceId;
 
   // functions slected
 
@@ -66,6 +76,19 @@ class AddPatientBuilder extends GetControllerInterface {
   void setSelectedDateOfBirth(DateTime value) {
     selectDateOfBirth = value;
     dateOfBirthController.text = DateFormat('yyyy-MM-dd').format(value);
+    calculateAge(value);
+    update();
+  }
+
+  void setSelectedDateOfVisit(DateTime value) {
+    selecDateOfVisit = value;
+    dateOfVisitController.text = DateFormat('yyyy-MM-dd').format(value);
+    update();
+  }
+
+  void setSelectedTimeOfVisit(DateTime value) {
+    selectTimeOfVisit = value;
+    timeOfVisitController.text = DateFormat('h:mm a').format(value);
     update();
   }
 
@@ -76,16 +99,18 @@ class AddPatientBuilder extends GetControllerInterface {
   }
 
   void setSelectedChronicDiseases(DiseaseEntity value) {
-    if (selectedChronicDiseases.contains(value.id)) {
-      removeSelectedChronicDisease(value.id);
+    if (selectedChronicDiseasesIds.contains(value.id)) {
+      removeSelectedChronicDisease(
+          selectedChronicDiseasesIds.indexOf(value.id));
     } else {
-      selectedChronicDiseases.add(value.id);
-      printDM("selectedChronicDiseases $selectedChronicDiseases");
+      selectedChronicDiseases.add(value);
+      selectedChronicDiseasesIds.add(value.id);
     }
     update();
   }
 
   void removeSelectedChronicDisease(int index) {
+    selectedChronicDiseasesIds.removeAt(index);
     selectedChronicDiseases.removeAt(index);
     update();
   }
@@ -100,9 +125,10 @@ class AddPatientBuilder extends GetControllerInterface {
     update();
   }
 
-  int calculateAge(DateTime birthDate) {
+  calculateAge(DateTime birthDate) {
     final now = DateTime.now();
-    int age = now.year - birthDate.year;
+    age = now.year - birthDate.year;
+
     if (now.month < birthDate.month ||
         (now.month == birthDate.month && now.day < birthDate.day)) {
       age--;
@@ -133,23 +159,33 @@ class AddPatientBuilder extends GetControllerInterface {
   Future<void> _uploadFile(UploadAttachment file) async {
     try {
       file.state = FileUploadState.uploading;
+      file.cancelToken = CancelToken();
       updateAttachment(file);
 
       for (int i = 1; i <= 100; i++) {
+        // Check if the upload was canceled
+        if (file.state == FileUploadState.failed) {
+          printDM("Upload canceled for file: ${file.name}");
+          return;
+        }
+
         await Future.delayed(const Duration(milliseconds: 40));
 
-        file.progress = i / 100;
+        // Double check after delay in case it was canceled during the wait
+        if (file.state == FileUploadState.failed) return;
 
+        file.progress = i / 100;
         updateAttachment(file);
       }
 
       file.state = FileUploadState.completed;
-
       updateAttachment(file);
     } catch (e) {
-      file.state = FileUploadState.failed;
-
-      updateAttachment(file);
+      // If it's already failed (via cancelUpload), don't overwrite it
+      if (file.state != FileUploadState.failed) {
+        file.state = FileUploadState.failed;
+        updateAttachment(file);
+      }
     }
   }
 
@@ -165,12 +201,15 @@ class AddPatientBuilder extends GetControllerInterface {
   void cancelUpload(UploadAttachment attachment) {
     attachment.cancelToken?.cancel();
     attachment.state = FileUploadState.failed;
-    update();
+    updateAttachment(attachment);
   }
 
   void setReferralSource(ReferralSourcesEntity referralSource) {
     selectReferralSource = referralSource;
-    referralSourceController.text = referralSource.name;
+    selectReferralSourceId = referralSource.id;
+
+    printDM(
+        "setReferralSource: id=${referralSource.id}, name=${referralSource.title}");
     update();
   }
 
@@ -182,18 +221,20 @@ class AddPatientBuilder extends GetControllerInterface {
       address: addressController.text,
       mainComplaint: mainComplaintController.text,
       allergies: allergiesController.text,
-      notes: notesController.text,
+      notes: secretaryNotesController.text,
       dateOfBirth: dateOfBirthController.text,
       referralSource: selectReferralSource?.id ?? -1,
       gender: selectGender?.id ?? -1,
       visitType: selectVisitType?.id ?? -1,
-      chronicDiseases: selectedChronicDiseases,
+      chronicDiseases: selectedChronicDiseasesIds,
       medications: selectedMedications,
       attachments: attachments,
+      age: age.toString(),
+      dateOfVisit: dateOfVisitController.text,
+      timeOfVisit: timeOfVisitController.text,
+      price: priceController.text,
     );
   }
-
-  
 
   void clear() {
     nameController.clear();
@@ -201,8 +242,11 @@ class AddPatientBuilder extends GetControllerInterface {
     addressController.clear();
     mainComplaintController.clear();
     allergiesController.clear();
-    notesController.clear();
+    // notesController.clear();
     dateOfBirthController.clear();
+    dateOfVisitController.clear();
+    timeOfVisitController.clear();
+
     referralSourceController.clear();
     secretaryNotesController.clear();
     dateOfVisitController.clear();
@@ -225,7 +269,6 @@ class AddPatientBuilder extends GetControllerInterface {
     addressController = TextEditingController();
     mainComplaintController = TextEditingController();
     allergiesController = TextEditingController();
-    notesController = TextEditingController();
     dateOfBirthController = TextEditingController();
     referralSourceController = TextEditingController();
 
@@ -255,12 +298,11 @@ class AddPatientBuilder extends GetControllerInterface {
     addressController.dispose();
     mainComplaintController.dispose();
     allergiesController.dispose();
-    notesController.dispose();
     dateOfBirthController.dispose();
-    referralSourceController.dispose();
-    secretaryNotesController.dispose();
     dateOfVisitController.dispose();
     timeOfVisitController.dispose();
+    referralSourceController.dispose();
+    secretaryNotesController.dispose();
     priceController.dispose();
     super.onClose();
   }

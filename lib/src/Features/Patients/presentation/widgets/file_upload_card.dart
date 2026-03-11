@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/Services/helper.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
@@ -35,31 +36,28 @@ class FileUploadCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 8.toH()),
-      padding: EdgeInsets.all(12.toW()),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      margin: EdgeInsets.symmetric(vertical: 6.toH()),
+      padding: EdgeInsets.all(14.toW()),
       decoration: BoxDecoration(
         color: state == FileUploadState.uploading
-            ? AppColors.get.cardFill.withOpacity(0.5)
+            ? AppColors.get.primary.withOpacity(0.02)
             : AppColors.get.white,
         border: Border.all(
           color: state == FileUploadState.uploading
-              ? AppColors.get.grey
-              : AppColors.get.greyLight,
-          style: state == FileUploadState.uploading
-              ? BorderStyle.solid
-              : BorderStyle.solid,
+              ? AppColors.get.primary.withOpacity(0.2)
+              : AppColors.get.border.withOpacity(0.6),
+          width: 1,
         ),
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: state == FileUploadState.completed
-            ? [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 4,
-                  offset: const Offset(0, 2),
-                )
-              ]
-            : null,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.02),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          )
+        ],
       ),
       child: state == FileUploadState.uploading
           ? _buildUploadingState()
@@ -71,18 +69,11 @@ class FileUploadCard extends StatelessWidget {
 
   Widget _buildUploadingState() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
-            // File Icon
-            Icon(
-              isImage ? Icons.image : Icons.picture_as_pdf,
-              color: AppColors.get.grey,
-              size: 32,
-            ),
+            _buildFileIcon(isUploading: true),
             SizedBox(width: 12.toW()),
-            // File Info
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +81,9 @@ class FileUploadCard extends StatelessWidget {
                   CustomText(
                     fileName,
                     fontSize: 14,
-                    fontWeight: FW.semiBold,
+                    fontWeight: FW.bold,
+                    maxLines: 1,
+                    isOverFlow: true,
                   ),
                   SizedBox(height: 4.toH()),
                   CustomText(
@@ -101,37 +94,44 @@ class FileUploadCard extends StatelessWidget {
                 ],
               ),
             ),
-            // Progress Percentage
-            CustomText(
-              "${((progress ?? 0) * 100).toInt()}%",
-              fontSize: 14,
-              fontWeight: FW.semiBold,
-              color: AppColors.get.primary,
-            ),
             SizedBox(width: 8.toW()),
-            // Cancel Button
             IconButton(
               onPressed: onCancel,
+              style: IconButton.styleFrom(
+                backgroundColor: AppColors.get.error.withOpacity(0.08),
+                padding: EdgeInsets.all(4.toW()),
+              ),
               icon: Icon(
                 Icons.close,
                 color: AppColors.get.error,
-                size: 20,
+                size: 16,
               ),
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(),
             ),
           ],
         ),
-        SizedBox(height: 12.toH()),
-        // Progress Bar
-        ClipRRect(
-          borderRadius: BorderRadius.circular(4),
-          child: LinearProgressIndicator(
-            value: progress ?? 0,
-            backgroundColor: AppColors.get.greyLight,
-            valueColor: AlwaysStoppedAnimation<Color>(AppColors.get.primary),
-            minHeight: 6,
-          ),
+        SizedBox(height: 14.toH()),
+        Row(
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: LinearProgressIndicator(
+                  value: progress ?? 0,
+                  minHeight: 8,
+                  backgroundColor: AppColors.get.primary.withOpacity(0.1),
+                  valueColor:
+                      AlwaysStoppedAnimation<Color>(AppColors.get.primary),
+                ),
+              ),
+            ),
+            SizedBox(width: 12.toW()),
+            CustomText(
+              "${((progress ?? 0) * 100).toInt()}%",
+              fontSize: 13,
+              fontWeight: FW.bold,
+              color: AppColors.get.primary,
+            ),
+          ],
         ),
       ],
     );
@@ -140,22 +140,8 @@ class FileUploadCard extends StatelessWidget {
   Widget _buildCompletedState() {
     return Row(
       children: [
-        // Thumbnail or Icon
-        Container(
-          width: 50.toW(),
-          height: 50.toH(),
-          decoration: BoxDecoration(
-            color: AppColors.get.cardFill,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Icon(
-            isImage ? Icons.image : Icons.picture_as_pdf,
-            color: AppColors.get.primary,
-            size: 28,
-          ),
-        ),
+        _buildFileIcon(),
         SizedBox(width: 12.toW()),
-        // File Info
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,80 +149,129 @@ class FileUploadCard extends StatelessWidget {
               CustomText(
                 fileName,
                 fontSize: 14,
-                fontWeight: FW.semiBold,
+                fontWeight: FW.bold,
+                maxLines: 1,
+                isOverFlow: true,
               ),
               SizedBox(height: 4.toH()),
-              CustomText(
-                fileSize,
-                fontSize: 12,
-                color: AppColors.get.grey,
+              Row(
+                children: [
+                  CustomText(
+                    fileSize,
+                    fontSize: 12,
+                    color: AppColors.get.grey,
+                  ),
+                  if (uploadedDate != null) ...[
+                    CustomText(" • ", color: AppColors.get.grey),
+                    CustomText(
+                      _formatDate(uploadedDate),
+                      fontSize: 12,
+                      color: AppColors.get.grey,
+                    ),
+                  ],
+                ],
               ),
-              if (uploadedBy != null || uploadedDate != null) ...[
-                SizedBox(height: 4.toH()),
-                CustomText(
-                  "${uploadedBy ?? ''} • ${_formatDate(uploadedDate)}",
-                  fontSize: 11,
-                  color: AppColors.get.grey,
-                ),
-              ],
             ],
           ),
         ),
-        // Action Buttons
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             if (onView != null)
-              IconButton(
-                onPressed: onView,
-                icon: Icon(
-                  Icons.visibility_outlined,
-                  color: AppColors.get.primary,
-                  size: 20,
-                ),
-                tooltip: "View",
-              ),
+              _buildActionButton(Icons.visibility_outlined,
+                  AppColors.get.primary, onView!, "View"),
             if (onDownload != null)
-              IconButton(
-                onPressed: onDownload,
-                icon: Icon(
-                  Icons.download_outlined,
-                  color: AppColors.get.primary,
-                  size: 20,
-                ),
-                tooltip: "Download",
-              ),
+              _buildActionButton(Icons.download_rounded, AppColors.get.primary,
+                  onDownload!, "Download"),
             if (onDelete != null)
-              IconButton(
-                onPressed: onDelete,
-                icon: Icon(
-                  Icons.delete_outline,
-                  color: AppColors.get.error,
-                  size: 20,
-                ),
-                tooltip: "Delete",
-              ),
+              _buildActionButton(Icons.delete_outline_rounded,
+                  AppColors.get.error, onDelete!, "Delete"),
           ],
         ),
       ],
     );
   }
 
+  Widget _buildFileIcon({bool isUploading = false}) {
+    return Container(
+      width: 44.toW(),
+      height: 44.toH(),
+      decoration: BoxDecoration(
+        color: isUploading
+            ? AppColors.get.primary.withOpacity(0.08)
+            : AppColors.get.cardFill,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Center(
+        child: Icon(
+          Helper.mediaIconHandler.getIcon(fileName),
+          color: AppColors.get.primary,
+          size: 24,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildActionButton(
+      IconData icon, Color color, VoidCallback onPressed, String tooltip) {
+    return Padding(
+      padding: EdgeInsets.only(left: 4.toW()),
+      child: Tooltip(
+        message: tooltip,
+        child: InkWell(
+          onTap: onPressed,
+          borderRadius: BorderRadius.circular(8),
+          child: Container(
+            padding: EdgeInsets.all(8.toW()),
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.06),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(
+              icon,
+              color: color,
+              size: 20,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildFailedState() {
     return Row(
       children: [
-        Icon(Icons.error, color: AppColors.get.error),
-        SizedBox(width: 8),
+        Container(
+          width: 44.toW(),
+          height: 44.toH(),
+          decoration: BoxDecoration(
+            color: AppColors.get.error.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Icon(Icons.error_outline_rounded, color: AppColors.get.error),
+        ),
+        SizedBox(width: 12.toW()),
         Expanded(
-          child: CustomText(
-            "$fileName (Failed)",
-            color: AppColors.get.error,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomText(
+                fileName,
+                fontSize: 14,
+                fontWeight: FW.bold,
+                maxLines: 1,
+                isOverFlow: true,
+              ),
+              CustomText(
+                "Upload Failed",
+                fontSize: 12,
+                color: AppColors.get.error,
+              ),
+            ],
           ),
         ),
-        IconButton(
-          onPressed: onDelete,
-          icon: Icon(Icons.delete, color: AppColors.get.error),
-        ),
+        _buildActionButton(Icons.delete_outline_rounded, AppColors.get.error,
+            onDelete!, "Delete"),
       ],
     );
   }

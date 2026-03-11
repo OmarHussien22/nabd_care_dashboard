@@ -5,6 +5,7 @@ import 'package:care_desk/src/Features/Patients/presentation/manager/add_patient
 import 'package:care_desk/src/Features/Patients/presentation/widgets_add_patient/add_patient_select_gender.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/custom_date_picker.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/app_text_field.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/custom_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -90,15 +91,15 @@ class AddPatientInformationCard extends StatelessWidget {
               ),
               SizedBox(width: 20.toW()),
               Expanded(
-                child: AppFillTextFieldField(
-                  width: double.infinity,
+                child: CustomDatePicker(
                   controller: cnt.dateOfVisitController,
                   hint: "enter_date_of_visit",
-                  header: "date_of_visit",
-                  prefixIconData: Icons.location_on_rounded,
-                  keyboardType: TextInputType.text,
-                  validation: AppValidator.defaultValidator.validate,
-                  onComplete: node.nextFocus,
+                  title: "date_of_visit",
+                  firstDate: DateTime.now(),
+                  onDateSelected: (date) {
+                    cnt.setSelectedDateOfVisit(date);
+                  },
+                  validator: AppValidator.defaultValidator.validate,
                 ),
               ),
             ],
@@ -108,17 +109,29 @@ class AddPatientInformationCard extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: AppFillTextFieldField(
-                  width: double.infinity,
+                child: CustomTimePicker(
                   controller: cnt.timeOfVisitController,
                   hint: "enter_time_of_visit",
-                  header: "time_of_visit",
-                  prefixIconData: Icons.location_on_rounded,
-                  keyboardType: TextInputType.text,
-                  validation: AppValidator.defaultValidator.validate,
-                  onComplete: node.nextFocus,
+                  title: "time_of_visit",
+                  onTimeSelected: (timer) {
+                    cnt.setSelectedTimeOfVisit(timer);
+                  },
+                  initialTime: cnt.selectTimeOfVisit,
+                  validator: AppValidator.defaultValidator.validate,
                 ),
               ),
+              // Expanded(
+              //   child: AppFillTextFieldField(
+              //     width: double.infinity,
+              //     controller: cnt.timeOfVisitController,
+              //     hint: "enter_time_of_visit",
+              //     header: "time_of_visit",
+              //     prefixIconData: Icons.location_on_rounded,
+              //     keyboardType: TextInputType.text,
+              //     validation: AppValidator.defaultValidator.validate,
+              //     onComplete: node.nextFocus,
+              //   ),
+              // ),
               SizedBox(width: 20.toW()),
               Expanded(
                 child: AppFillTextFieldField(
@@ -126,8 +139,8 @@ class AddPatientInformationCard extends StatelessWidget {
                   controller: cnt.priceController,
                   hint: "enter_price",
                   header: "price",
-                  prefixIconData: Icons.location_on_rounded,
-                  keyboardType: TextInputType.text,
+                  prefixIconData: Icons.price_change,
+                  keyboardType: TextInputType.number,
                   validation: AppValidator.defaultValidator.validate,
                   onComplete: node.nextFocus,
                 ),

@@ -37,18 +37,29 @@ class StepperAddPatient extends StatelessWidget {
             ),
           ),
           if (i < steps.length - 1)
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 400),
-              width: 180.toW(),
-              height: 2,
-              margin: EdgeInsets.symmetric(horizontal: 4.toW()),
-              decoration: BoxDecoration(
-                color: i < currentStep
-                    ? AppColors.get.primary
-                    : AppColors.get.border,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
+            Builder(builder: (context) {
+              final screenWidth = MediaQuery.of(context).size.width;
+              double lineWidth = 180;
+              if (screenWidth >= 1024) {
+                lineWidth = 200;
+              } else if (screenWidth >= 600) {
+                lineWidth = 300;
+              } else {
+                lineWidth = 100;
+              }
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 400),
+                width: lineWidth.toW(),
+                height: 2,
+                margin: EdgeInsets.symmetric(horizontal: 4.toW()),
+                decoration: BoxDecoration(
+                  color: i < currentStep
+                      ? AppColors.get.primary
+                      : AppColors.get.border,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              );
+            }),
         ],
       ],
     );
@@ -72,6 +83,21 @@ class _StepDot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    double dotWidth = 42;
+    double dotHeight = 46;
+    double iconSize = 20;
+
+    if (screenWidth >= 1024) {
+      dotWidth = 52;
+      dotHeight = 56;
+      iconSize = 24;
+    } else if (screenWidth >= 600) {
+      dotWidth = 48;
+      dotHeight = 52;
+      iconSize = 22;
+    }
+
     final Color bkgColor = isCompleted
         ? AppColors.get.primary
         : isActive
@@ -94,6 +120,15 @@ class _StepDot extends StatelessWidget {
         ? AppColors.get.primary
         : AppColors.get.textSecondary;
 
+    double labelWidth = 82;
+    if (screenWidth >= 1024) {
+      labelWidth = 100;
+    } else if (screenWidth >= 600) {
+      labelWidth = 90;
+    } else {
+      labelWidth = 70; // Fixed size on mobile to avoid extreme shrinking
+    }
+
     return Tooltip(
       message: label,
       child: Column(
@@ -101,8 +136,8 @@ class _StepDot extends StatelessWidget {
         children: [
           AnimatedContainer(
             duration: const Duration(milliseconds: 300),
-            width: 42.toW(),
-            height: 45.toH(),
+            width: dotWidth.toW(),
+            height: dotHeight.toH(),
             decoration: BoxDecoration(
               color: bkgColor,
               borderRadius: BorderRadius.circular(10),
@@ -131,14 +166,14 @@ class _StepDot extends StatelessWidget {
             child: Center(
               child: Icon(
                 isCompleted ? Icons.check_rounded : icon,
-                size: isCompleted ? 20 : 20,
+                size: iconSize,
                 color: iconColor,
               ),
             ),
           ),
-          SizedBox(height: 6.toH()),
+          SizedBox(height: 10.toH()),
           SizedBox(
-            width: 82.toW(),
+            width: labelWidth.toW(),
             child: CustomText(
               label,
               fontSize: 10,

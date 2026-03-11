@@ -47,6 +47,7 @@ class TextFieldDefault extends StatefulWidget {
   final FocusNode? focusNode;
   final TextAlign? textAlign;
   final double? width;
+  final double? height;
   const TextFieldDefault({
     super.key,
     this.prefix = const PrefixNone(),
@@ -84,6 +85,7 @@ class TextFieldDefault extends StatefulWidget {
     this.focusNode,
     this.textAlign,
     this.width,
+    this.height,
   });
 
   @override
@@ -110,6 +112,16 @@ class _TextFieldDefaultState extends State<TextFieldDefault> {
       finalWidth = widget.width ?? screenWidth * 0.9;
     }
 
+    // Adjust height based on screen type
+    double? finalHeight = widget.height;
+    if (finalHeight != null) {
+      if (screenWidth >= 1024) {
+        finalHeight = finalHeight * 1.5; // Desktop
+      } else if (screenWidth >= 600) {
+        finalHeight = finalHeight * 1.25; // Tablet
+      }
+    }
+
     // Adjust height (vertical padding) if حابب
     double verticalPadding = widget.verticalPadding;
     if (screenWidth >= 1024) {
@@ -133,6 +145,7 @@ class _TextFieldDefaultState extends State<TextFieldDefault> {
               ),
               SizedBox(
                 width: finalWidth, // Use calculated width
+                height: finalHeight?.toH(), // Use calculated height
                 child: TextFormField(
                   autocorrect: true,
                   focusNode: widget.focusNode,

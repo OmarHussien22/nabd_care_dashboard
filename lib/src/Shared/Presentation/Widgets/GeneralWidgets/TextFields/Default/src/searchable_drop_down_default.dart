@@ -1,6 +1,6 @@
 part of 'imports_text_field.dart';
 
-class SearchableFieldDefault<T> extends StatefulWidget {
+class SearchableFieldDefault<T extends TitleInterface> extends StatefulWidget {
   final List<T> items;
   final String Function(T) itemLabel; // دالة لتحويل العنصر لنص يظهر في القائمة
   final Function(T)? onOptionSelected;
@@ -42,20 +42,30 @@ class SearchableFieldDefault<T> extends StatefulWidget {
       _SearchableFieldDefaultState<T>();
 }
 
-class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
+class _SearchableFieldDefaultState<T extends TitleInterface>
+    extends State<SearchableFieldDefault<T>> {
   final LayerLink _layerLink = LayerLink();
   OverlayEntry? _overlayEntry;
-  late TextEditingController _controller;
+  late final TextEditingController _internalController;
+
+  TextEditingController get _effectiveController =>
+      widget.controller ?? _internalController;
   final FocusNode _focusNode = FocusNode();
   List<T> _filteredData = [];
+  T? _selectedItem;
 
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? TextEditingController();
+    _internalController = TextEditingController();
     _filteredData = widget.items;
+
     _focusNode.addListener(() {
       if (_focusNode.hasFocus) {
+        // Reset filter to full list and show overlay when focused
+        setState(() {
+          _filteredData = widget.items;
+        });
         _showOverlay();
       } else {
         _hideOverlay();
@@ -158,11 +168,30 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
                             title: CustomText(widget.itemLabel(item)),
 
                             onTap: () {
-                              _controller.text = widget.itemLabel(item);
-                              printDM("Selected: ${widget.itemLabel(item)}");
+                              final label = widget.itemLabel(item);
+
+                              // Set the text BEFORE hiding overlay
+                              _effectiveController.value = TextEditingValue(
+                                text: label,
+                                selection: TextSelection.collapsed(
+                                    offset: label.length),
+                              );
+
+                              // Track the selected item
+                              setState(() {
+                                _selectedItem = item;
+                                _filteredData = widget.items;
+                              });
+
+                              printDM("Selected: $label");
                               widget.onOptionSelected?.call(item);
 
-                              _focusNode.unfocus();
+                              // Hide overlay directly — do NOT unfocus here
+                              // because unfocus() triggers the focus listener
+                              // which calls _hideOverlay() again and may
+                              // race with our text assignment.
+                              _hideOverlay();
+                              FocusScope.of(context).unfocus();
                             },
                           );
                         },
@@ -183,13 +212,25 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
   }
 
   void _filterData(String query) {
+    // If user is re-typing after a valid selection, clear the selection
+    if (_selectedItem != null) {
+      final selectedLabel = widget.itemLabel(_selectedItem as T);
+      if (query != selectedLabel) {
+        setState(() {
+          _selectedItem = null;
+        });
+      }
+    }
+
     setState(() {
-      _filteredData = widget.items
-          .where((item) => widget
-              .itemLabel(item)
-              .toLowerCase()
-              .contains(query.toLowerCase()))
-          .toList();
+      _filteredData = query.isEmpty
+          ? widget.items
+          : widget.items
+              .where((item) => widget
+                  .itemLabel(item)
+                  .toLowerCase()
+                  .contains(query.toLowerCase()))
+              .toList();
     });
     _overlayEntry?.markNeedsBuild();
   }
@@ -197,7 +238,7 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
   @override
   void dispose() {
     if (widget.controller == null) {
-      _controller.dispose();
+      _internalController.dispose();
     }
     _focusNode.dispose();
     super.dispose();
@@ -214,7 +255,7 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
         },
         child: TextFieldDefault(
           width: widget.width,
-          controller: _controller,
+          controller: _effectiveController,
           focusNode: _focusNode,
           onChanged: _filterData,
           validation: widget.validation,
@@ -238,24 +279,20 @@ class _SearchableFieldDefaultState<T> extends State<SearchableFieldDefault<T>> {
             title: widget.hint,
             fontSize: 15,
           ),
-          prefix: widget.prefix != null
-              ? widget.prefix ??
-                  PrefixWithIconData(
-                    iconData: widget.prefixIcon,
-                    color: AppColors.get.tTFPrefixColor,
-                    size: 25,
-                    scale: 1,
-                  )
-              : PrefixNone(),
-          suffix: widget.suffix != null
-              ? widget.suffix ??
-                  SuffixWithIconData(
-                    iconData: Icons.arrow_drop_down,
-                    color: AppColors.get.tTFPrefixColor,
-                    size: 25,
-                    scale: 3,
-                  )
-              : SuffixNone(),
+          prefix: widget.prefix ??
+              PrefixWithIconData(
+                iconData: widget.prefixIcon,
+                color: AppColors.get.tTFPrefixColor,
+                size: 25,
+                scale: 1,
+              ),
+          suffix: widget.suffix ??
+              SuffixWithIconData(
+                iconData: Icons.arrow_drop_down,
+                color: AppColors.get.tTFPrefixColor,
+                size: 25,
+                scale: 3,
+              ),
         ),
       ),
     );

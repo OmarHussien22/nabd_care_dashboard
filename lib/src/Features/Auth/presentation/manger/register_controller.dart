@@ -74,7 +74,7 @@ class RegisterController extends GetControllerInterface<UserModel> {
     formValidator(
       globalKey: globalKey,
       onSuccessValidate: () async {
-        if (AppFlow.currentSource == AppSource.dev) {
+        if (IntalizeAppSource.currentSource == AppSource.dev) {
           // ClientSnacks.registerSuccess();
           // Get.offAll(const CompleteDataPage());
           return;

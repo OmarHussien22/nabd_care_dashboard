@@ -55,6 +55,10 @@ class AddPatientController extends GetControllerInterface<PatientEntity> {
       chronicDiseases: [],
       medications: [],
       attachments: [],
+      age: "",
+      dateOfVisit: "",
+      timeOfVisit: "",
+      price: "",
     ))!;
     if (state is DataSuccess) {
       printDM('done');
