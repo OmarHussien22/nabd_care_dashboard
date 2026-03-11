@@ -1,4 +1,6 @@
 import 'dart:ui';
+import 'package:care_desk/src/Core/Constants/Strings/Assets/app_lottie.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Image/generic_image/generic_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +10,6 @@ import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/navigation_extension.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Core/Utils/utils.dart';
-import 'package:care_desk/src/Shared/Presentation/Widgets/Loading/loading.dart';
 
 class AppDialogs {
   /// Enhanced Loading Dialog for a more premium look when sending requests
@@ -46,9 +47,16 @@ class AppDialogs {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   loading ??
-                      Loading.staggeredDotsWave(
-                        color: AppColors.get.primary,
-                        size: 50.toRad(),
+                      // Loading.staggeredDotsWave(
+                      //   color: AppColors.get.primary,
+                      //   size: 50.toRad(),
+                      // ),
+                      ImageGeneric.lottie(
+                        url: AppLottie.loading,
+                        options: ImageOptions(
+                          height: 50.toRad(),
+                          width: 50.toRad(),
+                        ),
                       ),
                   if (message != null) ...[
                     SizedBox(height: 20.toH()),

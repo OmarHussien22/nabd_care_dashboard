@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Image/generic_image/Src/Parts/image_lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:care_desk/src/Core/utils/Extensions/screen_spaces_extension.dart';
 
@@ -68,6 +69,20 @@ class ImageGeneric extends StatelessWidget {
       key: key,
       options: options,
       child: ImageAsset(
+        url: url,
+        options: options,
+      ),
+    );
+  }
+   factory ImageGeneric.lottie({
+    Key? key,
+    required String url,
+    ImageOptions? options,
+  }) {
+    return ImageGeneric(
+      key: key,
+      options: options,
+      child: ImageLottie(
         url: url,
         options: options,
       ),

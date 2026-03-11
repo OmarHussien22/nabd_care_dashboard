@@ -43,6 +43,7 @@ dependencies:
   #syncfusion_flutter_pdfviewer: ^32.2.7
   device_info_plus: ^12.3.0
   universal_html: ^2.3.0
+  lottie: ^3.3.2
 
 dev_dependencies:
   flutter_test:
