@@ -1,5 +1,4 @@
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
-import 'package:flutter/services.dart';
 
 enum AppSource {
   prod,
@@ -8,7 +7,7 @@ enum AppSource {
 }
 
 class IntalizeAppSource {
-  static AppSource get currentSource => AppSource.prod;
+  static AppSource get currentSource => AppSource.test;
 
   static void setAppSource() {
     printDM("App Flow${currentSource.toString()}");

@@ -9,12 +9,13 @@ class CustomActionDropDown extends StatelessWidget {
   final Function(String)? onEdit;
   final Function(String)? onDelete;
   final String rowId;
-  const CustomActionDropDown(
-      {super.key,
-      this.onView,
-      this.onEdit,
-      this.onDelete,
-      required this.rowId});
+  const CustomActionDropDown({
+    super.key,
+    this.onView,
+    this.onEdit,
+    this.onDelete,
+    required this.rowId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +24,27 @@ class CustomActionDropDown extends StatelessWidget {
       padding: const EdgeInsets.only(right: 8),
       child: PopupMenuButton<TableActionType>(
         tooltip: 'Actions',
-        icon: Icon(
-          Icons.more_vert,
-          size: 18.toRad(),
-          color: AppColors.get.textSecondary,
+        offset: const Offset(0, 40),
+        elevation: 4,
+        shadowColor: AppColors.get.shadow.withOpacity(0.3),
+        surfaceTintColor: AppColors.get.main,
+        color: AppColors.get.main,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(
+              color: AppColors.get.border.withOpacity(0.5), width: 1),
+        ),
+        icon: Container(
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            color: AppColors.get.surfaceContainer.withOpacity(0.5),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            Icons.more_horiz_rounded,
+            size: 20.toRad(),
+            color: AppColors.get.textSecondary,
+          ),
         ),
         onSelected: (action) {
           switch (action) {
@@ -44,33 +62,35 @@ class CustomActionDropDown extends StatelessWidget {
         itemBuilder: (context) => [
           if (onView != null)
             PopupMenuItem(
-              mouseCursor: SystemMouseCursors.click,
               value: TableActionType.view,
+              padding: EdgeInsets.zero,
               child: ActionMenuItem(
                 icon: Icons.visibility_outlined,
+                label: 'View Details',
+                onTap: () => onView?.call(rowId),
                 tooltip: 'View',
-                onTap: onView?.call(rowId),
-                label: 'View',
               ),
             ),
           if (onEdit != null)
             PopupMenuItem(
               value: TableActionType.edit,
+              padding: EdgeInsets.zero,
               child: ActionMenuItem(
                 icon: Icons.edit_outlined,
-                label: 'Edit',
-                onTap: onEdit?.call(rowId),
+                label: 'Edit Info',
+                onTap: () => onEdit?.call(rowId),
                 tooltip: "Edit",
               ),
             ),
           if (onDelete != null)
             PopupMenuItem(
               value: TableActionType.delete,
+              padding: EdgeInsets.zero,
               child: ActionMenuItem(
-                icon: Icons.delete_outline,
-                // color هنظبطها تحت
-                label: 'Delete',
-                onTap: onDelete?.call(rowId),
+                icon: Icons.delete_outline_rounded,
+                color: AppColors.get.error,
+                label: 'Delete Record',
+                onTap: () => onDelete?.call(rowId),
                 tooltip: "Delete",
               ),
             ),

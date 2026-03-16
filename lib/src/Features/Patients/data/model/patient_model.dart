@@ -2,6 +2,8 @@ import 'package:care_desk/src/Features/Patients/data/model/attachments_model.dar
 import 'package:care_desk/src/Features/Patients/data/model/disease_model.dart';
 import 'package:care_desk/src/Features/Patients/data/model/medicine_model.dart';
 import 'package:care_desk/src/Features/Patients/domain/entity/patient_entity.dart';
+import 'package:care_desk/src/Features/Patients/enums/book_status_enum.dart';
+import 'package:care_desk/src/Features/Patients/enums/visit_type_enum.dart';
 
 class PatientModel extends PatientEntity {
   PatientModel({
@@ -38,7 +40,7 @@ class PatientModel extends PatientEntity {
       address: json['address'] ?? '',
       gender: json['gender'] ?? 0,
       dateOfBirth: json['date_of_birth'] ?? '',
-      visitType: json['visit_type'] ?? 0,
+      visitType: VisitTypeEnum.fromValue(json['visit_type'] ?? 1),
       chronicDiseases: json['chronic_diseases'] != null
           ? (json['chronic_diseases'] as List)
                 .map((e) => DiseaseModel.fromJson(e))
@@ -63,7 +65,7 @@ class PatientModel extends PatientEntity {
       price: json['price'] ?? '',
       date: json['date'] ?? '',
       time: json['time'] ?? '',
-      status: json['status'] ?? 0,
+      status: BookStatusEnum.fromValue(json['status'] ?? 1),
       createdAt: json['created_at'] ?? '',
       updatedAt: json['updated_at'] ?? '',
       deletedAt: json['deleted_at'] ?? '',

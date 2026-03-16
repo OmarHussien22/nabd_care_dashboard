@@ -1,17 +1,11 @@
-import 'package:care_desk/src/Core/Constants/Strings/Assets/app_icons.dart';
 import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
 import 'package:care_desk/src/Features/Patients/core/add_patinet_params.dart';
 import 'package:care_desk/src/Features/Patients/domain/entity/patient_entity.dart';
 import 'package:care_desk/src/Features/Patients/domain/useCase/add_patient_use_case.dart';
 import 'package:care_desk/src/Features/Patients/presentation/manager/add_patient_builder.dart';
 import 'package:care_desk/src/Features/Patients/presentation/widgets/dialog_add_patient_success.dart';
-import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Dialogs/app_dialogs.dart';
-import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Image/generic_image/Src/generic_image_lib.dart';
-import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Image/generic_image/Src/options/image_options.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Snackbar/client_snacks.dart';
-import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
-import 'package:care_desk/src/Shared/Presentation/Widgets/dialogs/animate_dialogs.dart';
-import 'package:flutter/material.dart';
+
 
 import '../../../../Core/Utils/general_utils.dart';
 import '../../../../Super/Controllers/Resources/get/get_controller_interface.dart';

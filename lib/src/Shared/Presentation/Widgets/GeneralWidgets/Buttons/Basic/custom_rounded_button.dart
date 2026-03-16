@@ -169,7 +169,7 @@ class _ButtonDefaultState extends State<ButtonDefault> {
             ignoring: widget.isDisabled,
             child: SizedBox(
               width: widget.width ?? double.infinity,
-              height: widget.height ?? 45.toH(),
+              height: widget.height ?? 50.toH(),
               child: CupertinoButton(
                 padding: widget.padding ?? EdgeInsets.zero,
                 color:

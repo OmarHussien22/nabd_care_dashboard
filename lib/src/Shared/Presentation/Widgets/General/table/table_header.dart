@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_palette.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/General/table/table_column.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
@@ -12,29 +13,30 @@ class TableHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 48,
-      decoration: const BoxDecoration(
-        color: AppPalette.surfaceContainer,
+      decoration: BoxDecoration(
+        color: AppColors.get.surfaceContainer,
         border: Border(bottom: BorderSide(color: AppPalette.border)),
       ),
       child: Row(
         children: [
           ...columns.map((col) => Container(
                 width: col.width,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                alignment: Alignment.center,
                 child: Row(
+                  //mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomText(
                       col.label.toUpperCase(),
-                      fontSize: 12,
+                      fontSize: 11,
                       fontWeight: FW.bold,
-                      color: AppPalette.textSecondary,
+                      color: AppColors.get.textSecondary,
                     ),
                     if (col.isSortable)
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(left: 4),
                         child: Icon(Icons.swap_vert,
-                            size: 14, color: AppPalette.textDisabled),
+                            size: 14, color: AppColors.get.textDisabled),
                       )
                   ],
                 ),

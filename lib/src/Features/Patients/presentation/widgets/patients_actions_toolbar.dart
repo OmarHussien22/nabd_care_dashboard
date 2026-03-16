@@ -33,7 +33,8 @@ class PatientsActionsToolbar extends StatelessWidget {
         const SizedBox(width: 16),
         ButtonDefault.icon(
           width: 120.toW(),
-          padding: AppInsets.defaultButtonVertical,
+          height: 50.toH(),
+          padding: EdgeInsets.symmetric(vertical: 0.toH()),
           onPressed: () {},
           borderRadius: AppInsets.buttonBorderRadius,
           icon: Icons.filter_list,
@@ -44,17 +45,17 @@ class PatientsActionsToolbar extends StatelessWidget {
           backgroundColor: AppColors.get.background,
         ),
         Spacer(),
-        ButtonDefault.icon(
-          width: 150.toW(),
-          padding: AppInsets.defaultButtonVertical,
-          onPressed: () {
-            Get.toNamed(AppRoutes.addPatient);
-          },
-          titleSize: 14,
-          borderRadius: AppInsets.buttonBorderRadius,
-          icon: Icons.person_add,
-          label: "add_patient",
-        ),
+        // ButtonDefault.icon(
+        //   width: 150.toW(),
+        //   padding: AppInsets.defaultButtonVertical,
+        //   onPressed: () {
+        //     Get.toNamed(AppRoutes.addPatient);
+        //   },
+        //   titleSize: 14,
+        //   borderRadius: AppInsets.buttonBorderRadius,
+        //   icon: Icons.person_add,
+        //   label: "add_patient",
+        // ),
       ],
     );
   }

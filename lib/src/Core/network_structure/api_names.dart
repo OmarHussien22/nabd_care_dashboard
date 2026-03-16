@@ -118,5 +118,6 @@ mixin ApiNames {
 
 
   // New Api
-  final String urlAddPatient = "${baseUrl}add_patient";    
+  final String urlAddPatient = "${baseUrl}add_patient";   
+  final String urlFetchPatients = "${baseUrl}fetch_patients"; 
 }

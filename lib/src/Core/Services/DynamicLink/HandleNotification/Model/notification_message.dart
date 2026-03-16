@@ -1,16 +1,16 @@
 import 'package:equatable/equatable.dart';
 
 class NotificationMessage with EquatableMixin {
-  String title;
-  String body;
-  String image;
-  String type;
+ final String title;
+ final String body;
+ final String image;
+ final String type;
   // MessageModel? message;
   // ChatModel? chat;
 
 //<editor-fold desc="Data Methods">
 
-  NotificationMessage({
+  const NotificationMessage({
     required this.title,
     required this.body,
     required this.image,
