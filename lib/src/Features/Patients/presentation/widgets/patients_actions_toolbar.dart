@@ -2,6 +2,7 @@ import 'package:care_desk/src/Core/Constants/Decorations/app_Insets.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/routers/app_router_imports.dart';
 import 'package:care_desk/src/Core/utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Features/MainLayout/controller/main_layout_controller.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Buttons/Basic/custom_rounded_button.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/app_text_field.dart';
 import 'package:flutter/material.dart';
@@ -45,17 +46,17 @@ class PatientsActionsToolbar extends StatelessWidget {
           backgroundColor: AppColors.get.background,
         ),
         Spacer(),
-        // ButtonDefault.icon(
-        //   width: 150.toW(),
-        //   padding: AppInsets.defaultButtonVertical,
-        //   onPressed: () {
-        //     Get.toNamed(AppRoutes.addPatient);
-        //   },
-        //   titleSize: 14,
-        //   borderRadius: AppInsets.buttonBorderRadius,
-        //   icon: Icons.person_add,
-        //   label: "add_patient",
-        // ),
+        ButtonDefault.icon(
+          width: 150.toW(),
+          padding: AppInsets.defaultButtonVertical,
+          onPressed: () {
+            Get.find<MainLayoutController>().pushPage(AppRoutes.addPatient);
+          },
+          titleSize: 14,
+          borderRadius: AppInsets.buttonBorderRadius,
+          icon: Icons.person_add,
+          label: "add_patient",
+        ),
       ],
     );
   }

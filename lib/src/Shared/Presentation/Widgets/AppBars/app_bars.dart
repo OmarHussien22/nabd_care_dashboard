@@ -190,7 +190,7 @@ class FixedAppBar extends StatelessWidget implements PreferredSizeWidget {
                 width: 150.toW(),
                 //padding: AppInsets.defaultButtonVertical,
                 onPressed: () {
-                  Get.toNamed(AppRoutes.addPatient);
+                  cnt.pushPage(AppRoutes.addPatient);
                 },
                 titleSize: 14,
                 borderRadius: AppInsets.buttonBorderRadius,

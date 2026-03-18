@@ -5,6 +5,7 @@ import 'package:care_desk/src/Features/Patients/presentation/manager/add_patient
 import 'package:care_desk/src/Features/Patients/presentation/manager/patient_stepper_controller.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/Animation/animated_wrapper.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
+import 'package:care_desk/src/Features/MainLayout/controller/main_layout_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -65,7 +66,7 @@ class AddPatientButtons extends StatelessWidget {
                     label: 'cancel'.toTr(),
                     icon: Icons.close_rounded,
                     isPrimary: false,
-                    onTap: () => Get.back(),
+                    onTap: () => Get.find<MainLayoutController>().popPage(),
                   ),
                   SizedBox(width: 12.toW()),
 

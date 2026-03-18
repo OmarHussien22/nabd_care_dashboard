@@ -42,6 +42,10 @@ class AppRouter {
         page: () => const AddPatientPage(),
         ),
         GetPage(
+          name: AppRoutes.testAppointments,
+          page: () => const TestAppointmentsPage(),
+        ),
+        GetPage(
           name: AppRoutes.settings,
           page: () => const SettingsPage(),
         ),

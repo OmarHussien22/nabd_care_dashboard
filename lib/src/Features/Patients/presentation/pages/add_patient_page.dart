@@ -1,6 +1,8 @@
+import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
-import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Core/routers/app_router_imports.dart';
+import 'package:care_desk/src/Features/MainLayout/controller/main_layout_controller.dart';
 import 'package:care_desk/src/Features/Patients/presentation/manager/add_patient_builder.dart';
 import 'package:care_desk/src/Features/Patients/presentation/manager/patient_stepper_controller.dart';
 import 'package:care_desk/src/Features/Patients/presentation/widgets_add_patient/add_patient_completed_card.dart';
@@ -34,82 +36,95 @@ class AddPatientPage extends StatelessWidget {
       maxWidth = 850;
     }
 
-    return Scaffold(
-      backgroundColor: AppColors.get.lighterGrey,
-      body: GetBuilder<PatientStepController>(builder: (cnt) {
-        return Column(
-          children: [
-            // ─── Header (no stepper) ───────────────────────────
-            GetBuilder<PatientStepController>(
-              id: PatientStepController.updateHeaderId,
-              builder: (cnt) => AddPatientHeader(currentStep: cnt.currentStep),
+    return GetBuilder<PatientStepController>(builder: (cnt) {
+      return Column(
+        children: [
+          // ─── Header (no stepper) ───────────────────────────
+          GetBuilder<PatientStepController>(
+            id: PatientStepController.updateHeaderId,
+            builder: (cnt) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  NavigationBreadcrumbs(),
+                  AddPatientHeader(currentStep: cnt.currentStep),
+                ],
+              ),
             ),
+          ),
 
-            // ─── Scrollable Content ───────────────────────────
-            Expanded(
-              child: Form(
-                key: cnt.globalKey,
-                child: SingleChildScrollView(
-                  controller: cnt.scrollController,
-                  physics: const BouncingScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: horizontalPadding.toW(),
-                    vertical: verticalPadding.toH(),
-                  ),
-                  child: GetBuilder<PatientStepController>(
-                    builder: (cnt) {
-                      final step = cnt.currentStep;
-                      return Center(
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(maxWidth: maxWidth.toW()),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // ── Stepper above current card ─────────────
-                              StepperRow(),
-                              SizedBox(
-                                  height: (screenWidth < 600 ? 20 : 20.toH())),
+          // ─── Scrollable Content ───────────────────────────
+          Expanded(
+            child: Form(
+              key: cnt.globalKey,
+              child: SingleChildScrollView(
+                controller: cnt.scrollController,
+                physics: const BouncingScrollPhysics(),
+                padding: EdgeInsets.symmetric(
+                  horizontal: horizontalPadding.toW(),
+                  vertical: verticalPadding.toH(),
+                ),
+                child: GetBuilder<PatientStepController>(
+                  builder: (cnt) {
+                    final step = cnt.currentStep;
+                    return Center(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(maxWidth: maxWidth.toW()),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // ── Stepper above current card ─────────────
+                            StepperRow(),
+                            SizedBox(
+                                height: (screenWidth < 600 ? 20 : 20.toH())),
 
-                              // ── Completed cards (collapsed, above active) ─
-                              for (int i = 0; i < step; i++)
-                                AddPatientCompletedCard(
-                                  icon: cnt.kSteps[i].$1,
-                                  title: cnt.kSteps[i].$2.toTr(),
-                                  onEdit: () => cnt.goToStep(i),
-                                ),
-
-                              // ── Active step card ────────────────────────
-                              AddPatientSectionCard(
-                                key: cnt.sectionKeys[step],
-                                icon: cnt.kSteps[step].$1,
-                                title: cnt.kSteps[step].$2.toTr(),
-                                isActive: true,
-                                children: [
-                                  CardStepperContent(step: step, node: node),
-                                  // ── Step navigation ──────────────
-                                  StepNavigationButtons(
-                                    isLastStep: step == cnt.kSteps.length - 1,
-                                    nextStepLabel: step < cnt.kSteps.length - 1
-                                        ? cnt.kSteps[step].$3?.toTr()
-                                        : null,
-                                    onNext: cnt.nextStep,
-                                    onBack: cnt.back,
-                                  ),
-                                ],
+                            // ── Completed cards (collapsed, above active) ─
+                            for (int i = 0; i < step; i++)
+                              AddPatientCompletedCard(
+                                icon: cnt.kSteps[i].$1,
+                                title: cnt.kSteps[i].$2.toTr(),
+                                onEdit: () => cnt.goToStep(i),
                               ),
-                            ],
-                          ),
+
+                            // ── Active step card ────────────────────────
+                            AddPatientSectionCard(
+                              key: cnt.sectionKeys[step],
+                              icon: cnt.kSteps[step].$1,
+                              title: cnt.kSteps[step].$2.toTr(),
+                              isActive: true,
+                              children: [
+                                CardStepperContent(step: step, node: node),
+                                // ── Step navigation ──────────────
+                                StepNavigationButtons(
+                                  isLastStep: step == cnt.kSteps.length - 1,
+                                  nextStepLabel: step < cnt.kSteps.length - 1
+                                      ? cnt.kSteps[step].$3?.toTr()
+                                      : null,
+                                  onNext: cnt.nextStep,
+                                  onBack: () {
+                                    if (step == 0) {
+                                      Get.find<MainLayoutController>()
+                                          .pushPage(AppRoutes.testAppointments);
+                                    } else {
+                                      cnt.back();
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
-          ],
-        );
-      }),
-    );
+          ),
+        ],
+      );
+    });
   }
 
   // Widget _buildStepperRow(AddPatientBuilder cnt) {

@@ -5,6 +5,7 @@ import 'package:care_desk/src/Core/Constants/Strings/app_strings.dart';
 import 'package:care_desk/src/Core/Libraries/snap/src/snap_main.dart';
 import 'package:care_desk/src/Core/Libraries/snap/src/snap_router/route_generator.dart';
 import 'package:care_desk/src/Core/Services/Localization/localization_services.dart';
+import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 import 'package:care_desk/src/Core/Styles/Themes/imports_themes.dart';
 import 'package:care_desk/src/Core/Styles/Themes/theme_controller.dart';
 import 'package:care_desk/src/Core/Utils/utils.dart';
@@ -36,6 +37,7 @@ class AppMaterial extends StatelessWidget {
           darkTheme: ThemeManager.dark,
           themeMode: controller.themeMode,
           initialRoute: initPage,
+          navigatorObservers: [NavigationStackObserver()],
           getPages: router,
           // home: home,
           builder: (context, child) => child!,

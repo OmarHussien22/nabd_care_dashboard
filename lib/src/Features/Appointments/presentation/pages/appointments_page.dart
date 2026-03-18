@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 import 'package:care_desk/src/Core/utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Features/Appointments/presentation/widgets/appointments_actions_toolbar.dart';
 import 'package:care_desk/src/Features/Appointments/presentation/widgets/appointments_table.dart';
@@ -19,6 +20,32 @@ class AppointmentsPage extends StatelessWidget {
           children: const [
             AppointmentsActionsToolbar(),
             SizedBox(height: 16),
+            Expanded(
+              child: AppointmentsTable(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class TestAppointmentsPage extends StatelessWidget {
+  const TestAppointmentsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedWrapper(
+      styles: WrapAnimationStyles.slide,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.toW()),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            AppointmentsActionsToolbar(),
+            SizedBox(height: 16),
+            NavigationBreadcrumbs(),
             Expanded(
               child: AppointmentsTable(),
             ),

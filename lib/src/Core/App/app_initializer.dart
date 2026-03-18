@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:care_desk/src/Core/App/app_layout.dart';
 import 'package:care_desk/src/Core/LocalDataBaseStructure/helper/data_base_helper.dart';
 import 'package:care_desk/src/Core/Services/Storage/storage_service.dart';
+import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
+import 'package:get/get.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 import '../../Shared/Presentation/Widgets/Error/app_error_builder.dart';
@@ -24,6 +26,7 @@ class AppInitializer {
 
     /// * Storage Service Initialization
     await StorageService().init();
+    Get.put(NavigationService(), permanent: true);
     await AppLayout.fixedOrientation();
     NetworkService().init();
     if (kIsWeb) {
