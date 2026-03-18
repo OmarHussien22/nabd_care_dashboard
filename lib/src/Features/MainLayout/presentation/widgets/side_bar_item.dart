@@ -51,7 +51,7 @@ class SideBarItem extends StatelessWidget {
                     icon,
                     size: 18,
                     color: isSelected
-                        ? AppColors.get.primary
+                        ? AppColors.get.white
                         : AppColors.get.textSecondary,
                   );
                 }

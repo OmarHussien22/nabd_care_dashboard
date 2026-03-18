@@ -1,4 +1,4 @@
-import 'package:care_desk/src/Core/Constants/Strings/Assets/app_icons.dart';
+import 'package:care_desk/src/Core/Constants/Strings/Assets/app_lottie.dart';
 import 'package:care_desk/src/Core/utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Dialogs/app_dialogs.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Image/generic_image/generic_image.dart';
@@ -14,16 +14,16 @@ class DialogAddPatientSuccess {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ImageGeneric.asset(
-            url: AppIcons.success,
+          ImageGeneric.lottie(
+            url: AppLottie.success,
             options: ImageOptions(
-              width: 120,
-              height: 130,
+              width: 210,
+              height: 210,
             ),
           ),
           30.ESH(),
           CustomText(
-            "add_patient_success",
+            "add_patient_successfully",
             fontSize: 14,
             fontWeight: FW.bold,
           ),

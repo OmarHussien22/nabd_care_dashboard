@@ -80,9 +80,8 @@ class _NavButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color bg = isPrimary
-        ? (isSubmit ? AppColors.get.green : AppColors.get.primary)
-        : AppColors.get.surfaceContainer;
+    final Color bg =
+        isPrimary ? (AppColors.get.primary) : AppColors.get.surfaceContainer;
 
     final Color fg = isPrimary ? Colors.white : AppColors.get.textSecondary;
 

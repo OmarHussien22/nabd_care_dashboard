@@ -1,11 +1,11 @@
 import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
+import 'package:care_desk/src/Core/routers/app_router_imports.dart';
 import 'package:care_desk/src/Features/Patients/core/add_patinet_params.dart';
 import 'package:care_desk/src/Features/Patients/domain/entity/patient_entity.dart';
 import 'package:care_desk/src/Features/Patients/domain/useCase/add_patient_use_case.dart';
 import 'package:care_desk/src/Features/Patients/presentation/manager/add_patient_builder.dart';
 import 'package:care_desk/src/Features/Patients/presentation/widgets/dialog_add_patient_success.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Snackbar/client_snacks.dart';
-
 
 import '../../../../Core/Utils/general_utils.dart';
 import '../../../../Super/Controllers/Resources/get/get_controller_interface.dart';
@@ -20,12 +20,17 @@ class AddPatientController extends GetControllerInterface<PatientEntity> {
     state = await useCase(params: addPatientbuilder.toMap())!;
     if (state is DataSuccess) {
       Future.delayed(const Duration(milliseconds: 1500), () {
-        Get.back();
+        Get.offAllNamed(
+          AppRoutes.mainApp,
+          predicate: (route) {
+            return route.settings.name == AppRoutes.mainApp;
+          },
+        );
       });
       DialogAddPatientSuccess.showDialog();
     } else {
       ClientSnacks.requestError(
-        error: state.error?.title ?? "مشكله في اضافة المريض",
+        error: state.error?.title ?? "problem_in_adding_patient",
       );
     }
     emit(state);

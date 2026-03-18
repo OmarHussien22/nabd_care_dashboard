@@ -3,7 +3,6 @@ import 'package:care_desk/src/Features/Patients/domain/entity/disease_entity.dar
 import 'package:care_desk/src/Features/Patients/domain/entity/referral_sources.dart';
 import 'package:care_desk/src/Features/Patients/domain/entity/upload_attachments.dart';
 import 'package:dio/dio.dart';
-import 'package:care_desk/src/Features/Patients/presentation/manager/patient_stepper_controller.dart';
 import 'package:care_desk/src/Features/Patients/presentation/widgets/file_upload_card.dart';
 import 'package:intl/intl.dart';
 
