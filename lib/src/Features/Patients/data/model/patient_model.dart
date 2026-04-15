@@ -13,6 +13,8 @@ class PatientModel extends PatientEntity {
     required super.address,
     required super.gender,
     required super.dateOfBirth,
+    required super.bloodType,
+    required super.referralSource,
     required super.visitType,
     required super.chronicDiseases,
     required super.medications,
@@ -40,6 +42,8 @@ class PatientModel extends PatientEntity {
       address: json['address'] ?? '',
       gender: json['gender'] ?? 0,
       dateOfBirth: json['date_of_birth'] ?? '',
+      bloodType: json['blood_type'] ?? '',
+      referralSource: json['referral_source'] ?? 0,
       visitType: VisitTypeEnum.fromValue(json['visit_type'] ?? 1),
       chronicDiseases: json['chronic_diseases'] != null
           ? (json['chronic_diseases'] as List)

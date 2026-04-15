@@ -5,10 +5,10 @@ import 'package:care_desk/src/Shared/Presentation/Widgets/General/table/table_ac
 import 'package:flutter/material.dart';
 
 class CustomActionDropDown extends StatelessWidget {
-  final Function(String)? onView;
-  final Function(String)? onEdit;
-  final Function(String)? onDelete;
-  final String rowId;
+  final Function(int)? onView;
+  final Function(int)? onEdit;
+  final Function(int)? onDelete;
+  final int rowId;
   const CustomActionDropDown({
     super.key,
     this.onView,

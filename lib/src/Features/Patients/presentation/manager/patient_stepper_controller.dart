@@ -1,11 +1,18 @@
+import 'package:care_desk/src/Core/routers/app_router_imports.dart';
+import 'package:care_desk/src/Features/MainLayout/controller/main_layout_controller.dart';
 import 'package:care_desk/src/Super/Controllers/Resources/get/get_controller_interface.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 class PatientStepController extends GetControllerInterface {
   final GlobalKey<FormState> globalKey = GlobalKey<FormState>();
   final ScrollController scrollController = ScrollController();
   final List<GlobalKey> sectionKeys = List.generate(4, (_) => GlobalKey());
   int currentStep = 0;
+  @override
+  void onInit() {
+    super.onInit();
+    currentStep = 0;
+  }
 
   static const String updateHeaderId = 'add_patient_header';
   static String sectionUpdateId(int index) => 'add_patient_section_$index';
@@ -73,8 +80,12 @@ class PatientStepController extends GetControllerInterface {
     if (next < totalSteps) {
       goToStep(next);
     } else {
-      // _submitForm();
+      _submitForm();
     }
+  }
+
+  void _submitForm() {
+    Get.find<MainLayoutController>().pushReplacementPage(AppRoutes.patients);
   }
 
   @override

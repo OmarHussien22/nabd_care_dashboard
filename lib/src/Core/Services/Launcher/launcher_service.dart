@@ -86,35 +86,53 @@ class LauncherServices {
       final bool isPdf = extension == 'pdf';
       final bool isVideo = ['mp4', 'mov', 'avi', 'mkv'].contains(extension);
       final bool isDoc = ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'].contains(extension);
+      final String? filePath = file.path;
+      final bool hasHttpPath =
+          filePath != null && (filePath.startsWith('http://') || filePath.startsWith('https://'));
 
       if (kIsWeb) {
-        if (file.bytes == null) return;
-        
-        String mimeType;
-        if (isPdf) {
-          mimeType = 'application/pdf';
-        } else if (isVideo) {
-          mimeType = 'video/${extension == 'mov' ? 'quicktime' : extension}';
-        } else if (isDoc) {
-          if (extension.startsWith('xls')) mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-          else if (extension.startsWith('doc')) mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-          else mimeType = 'application/octet-stream';
-        } else {
-          mimeType = 'application/octet-stream';
+        if (file.bytes != null) {
+          String mimeType;
+          if (isPdf) {
+            mimeType = 'application/pdf';
+          } else if (isVideo) {
+            mimeType = 'video/${extension == 'mov' ? 'quicktime' : extension}';
+          } else if (isDoc) {
+            if (extension.startsWith('xls')) mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+            else if (extension.startsWith('doc')) mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+            else mimeType = 'application/octet-stream';
+          } else {
+            mimeType = 'application/octet-stream';
+          }
+
+          final blob = html.Blob([file.bytes], mimeType);
+          final url = html.Url.createObjectUrlFromBlob(blob);
+
+          // Open in new tab. Browser will handle display for PDF/Video or download for others.
+          html.window.open(url, '_blank');
+
+          // Revoke after a delay to ensure it opens
+          Future.delayed(const Duration(seconds: 1), () {
+            html.Url.revokeObjectUrl(url);
+          });
+          return;
         }
 
-        final blob = html.Blob([file.bytes], mimeType);
-        final url = html.Url.createObjectUrlFromBlob(blob);
-        
-        // Open in new tab. Browser will handle display for PDF/Video or download for others.
-        html.window.open(url, '_blank');
-        
-        // Revoke after a delay to ensure it opens
-        Future.delayed(const Duration(seconds: 1), () {
-          html.Url.revokeObjectUrl(url);
-        });
+        if (hasHttpPath) {
+          html.window.open(filePath, '_blank');
+        }
       } else {
         // Mobile/Desktop
+        if (hasHttpPath) {
+          final Uri uri = Uri.parse(filePath);
+          if (await canLaunchUrl(uri)) {
+            await launchUrl(uri, mode: LaunchMode.externalApplication);
+          } else {
+            debugPrint("Could not launch $uri");
+          }
+          return;
+        }
+
         if (file.path != null) {
           final Uri uri = Uri.file(file.path!);
           // We use launchUrl with external application mode for best compatibility
@@ -130,7 +148,7 @@ class LauncherServices {
     }
   }
 
-  Future<void> launchFile(PlatformFile file, bool isPdf) async {
+  Future<void> launchFile(PlatformFile file) async {
     await openFile(file);
   }
 

@@ -8,21 +8,35 @@ class CardViewImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool hasBytes = file.bytes != null;
+    final bool hasNetworkUrl = (file.path ?? '').startsWith('http');
+
     return InteractiveViewer(
       panEnabled: true,
       scaleEnabled: true,
       minScale: 0.5,
       maxScale: 4.0,
       child: Hero(
-        tag: file.bytes ?? file.name,
-        child: ImageGeneric.memory(
-          bytes: file.bytes!,
-          options: ImageOptions(
-            fit: BoxFit.contain,
-            width: double.infinity,
-            height: double.infinity,
-          ),
-        ),
+        tag: file.path ?? file.name,
+        child: hasBytes
+            ? ImageGeneric.memory(
+                bytes: file.bytes!,
+                options: ImageOptions(
+                  fit: BoxFit.contain,
+                  width: double.infinity,
+                  height: double.infinity,
+                ),
+              )
+            : hasNetworkUrl
+                ? ImageGeneric.network(
+                    url: file.path!,
+                    options: ImageOptions(
+                      fit: BoxFit.contain,
+                      width: double.infinity,
+                      height: double.infinity,
+                    ),
+                  )
+                : const SizedBox.shrink(),
       ),
     );
   }

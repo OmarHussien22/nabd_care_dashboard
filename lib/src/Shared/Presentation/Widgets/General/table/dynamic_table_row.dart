@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 class DynamicTableRow extends StatefulWidget {
   final TableRowData row;
   final List<TableColumn> columns;
-  final Function(String)? onEdit;
-  final Function(String)? onDelete;
-  final Function(String)? onView;
+  final Function(int)? onEdit;
+  final Function(int)? onDelete;
+  final Function(int)? onView;
 
   const DynamicTableRow({
     super.key,
@@ -30,6 +30,7 @@ class _DynamicTableRowState extends State<DynamicTableRow> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
+      
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: Container(

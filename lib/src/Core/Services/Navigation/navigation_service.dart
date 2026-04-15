@@ -1,3 +1,4 @@
+// ignore_for_file: unused_import
 import 'package:care_desk/src/Core/routers/app_router_imports.dart';
 import 'package:care_desk/src/Features/MainLayout/controller/main_layout_controller.dart';
 import 'package:flutter/material.dart';
@@ -60,13 +61,7 @@ class NavigationService extends GetxController {
 
   /// Navigates back or to a specific previous route keeping the sidebar visible.
   void navigateToRoute(String routeName) {
-    int index = _routeStack.indexOf(routeName);
-    if (index != -1 && index < _routeStack.length - 1) {
-      int popCount = (_routeStack.length - 1) - index;
-      for (int i = 0; i < popCount; i++) {
-        dashboardNavigatorKey.currentState?.pop();
-      }
-    }
+    Get.until((route) => route.settings.name == routeName);
   }
 
   /// Map route names to readable display labels
@@ -80,6 +75,8 @@ class NavigationService extends GetxController {
         return 'Patients';
       case AppRoutes.addPatient:
         return 'Add Patient';
+      case AppRoutes.patientDetails:
+        return 'Patient Details';
       case AppRoutes.settings:
         return 'Settings';
       default:

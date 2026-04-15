@@ -2,13 +2,23 @@ part of 'app_router_imports.dart';
 
 abstract class BaseRouteArgs {}
 
+class PatientDetailsArgs extends BaseRouteArgs {
+  final int patientId;
+  final dynamic patient;
+
+  PatientDetailsArgs({
+    required this.patientId,
+    this.patient,
+  });
+}
+
 /// ------------------ Auth ------------------
 class VerifyCodeArgs extends BaseRouteArgs {
   final String phone;
   final bool isRegister;
   final String? title;
   final bool viewPhone;
-  final VoidCallback? onSuccess;
+  final void Function()? onSuccess;
 
   VerifyCodeArgs({
     this.title,

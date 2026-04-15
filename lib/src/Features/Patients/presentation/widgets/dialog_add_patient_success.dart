@@ -6,8 +6,9 @@ import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/cu
 import 'package:flutter/material.dart';
 
 class DialogAddPatientSuccess {
-  static void showDialog() {
+  static void showDialog({bool closeAfterAWhile = true}) {
     AppDialogs.showPreviewDialog(
+      closeAfterAWhile: closeAfterAWhile,
       width: 380.toW(),
       height: 380.toH(),
       child: Column(

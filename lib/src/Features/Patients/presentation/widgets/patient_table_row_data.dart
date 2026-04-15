@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class PatientTableRowData {
   static List<TableRowData> patientRowsTable({
     required List<PatientEntity> patients,
-    required Function() onTap,
+    required void Function(int id) onTap,
   }) {
     return patients.map((patient) {
       final labelStatus = patient.status.label;
@@ -16,12 +16,12 @@ class PatientTableRowData {
       final visitColor = patient.visitType.color;
 
       return TableRowData(
-        id: patient.id.toString(),
+        id: patient.id,
+        showId: patient.id.toString(),
         cells: [
           // Patient ID
           CustomText(
             '#${patient.id}',
-
             // fontWeight: FW.semiBold,
             color: AppColors.get.textSecondary,
             fontSize: 11,
@@ -60,7 +60,7 @@ class PatientTableRowData {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: colorStatus.withOpacity(0.12),
+              color: colorStatus.withAlpha(31),
               borderRadius: BorderRadius.circular(6),
             ),
             child: CustomText(
@@ -82,7 +82,7 @@ class PatientTableRowData {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: AppColors.get.primary.withOpacity(0.08),
+              color: AppColors.get.primary.withAlpha(20),
               borderRadius: BorderRadius.circular(6),
             ),
             child: CustomText(
@@ -113,7 +113,7 @@ class PatientTableRowData {
           //   ],
           // ),
         ],
-        onTap: () {},
+        onTap: () => onTap(patient.id),
       );
     }).toList();
   }

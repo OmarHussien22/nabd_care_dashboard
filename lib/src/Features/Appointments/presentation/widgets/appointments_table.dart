@@ -29,10 +29,11 @@ class _AppointmentsTableState extends State<AppointmentsTable> {
         _currentPage = page;
         _rows = List.generate(10, (index) {
           // Offset the index based on the page to show different data
-          final absoluteIndex = (page - 1) * 10 + index;
+          final int absoluteIndex = (page - 1) * 10 + index;
 
           return TableRowData(
-            id: "appt_$absoluteIndex",
+            id: absoluteIndex,
+            showId:"appt_$absoluteIndex" ,
             cells: [
               Row(children: [
                 CircleAvatar(

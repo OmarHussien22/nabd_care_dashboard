@@ -11,6 +11,8 @@ class AppRoutes {
   static const addAppointment = "/add-appointment";
   static const patients = "/patients";
   static const addPatient = "/add-patient";
+  static const patientDetails = "/patient-details";
+  static const acts = "/acts";
   static const testAppointments = "/test-appointments";
   static const settings = "/settings";
   

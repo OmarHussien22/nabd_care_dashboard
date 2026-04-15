@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/routers/app_router_imports.dart';
 import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +19,7 @@ class ChatNotification extends NotificationType {
 
   @override
   void onMessageTaped(NotificationMessage message) {
-    Get.offAll(const MainLayout());
+    Get.offAllNamed(AppRoutes.dashboard);
     // Snap.to(ChatsPage());
     // Snap.to(MessagesPage(chat: message.chat!));
   }

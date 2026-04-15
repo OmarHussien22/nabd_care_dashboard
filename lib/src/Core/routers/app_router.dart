@@ -2,56 +2,33 @@
 
 part of 'app_router_imports.dart';
 
-// If you had custom transitions in route_transitions.dart, you can
-// map them here via `transition:` or `customTransition:`, see note below.
-
 class AppRouter {
+  // Helper to wrap a page with the Dashboard shell
+  static GetPage shellPage({required String name, required Widget page}) {
+    return GetPage(
+      name: name,
+      page: () => MainLayout(child: page),
+      transition: Transition.noTransition, // Keeps shell steady during swap
+    );
+  }
+
   static final List<GetPage<dynamic>> pages = <GetPage<dynamic>>[
     GetPage(
       name: AppRoutes.login,
       page: () => const LoginPage(),
     ),
 
-    // اجعل الـ MainLayout هو الأب لكل صفحات السيستم
-    GetPage(
-      name: AppRoutes.mainApp,
-      page: () => const MainLayout(),
-      // binding: MainLayoutBinding(),
-      children: [
-        GetPage(
-          name: AppRoutes.dashboard,
-          page: () => const DashboardPage(),
-        ),
-        GetPage(
-          name: AppRoutes.appointments,
-          page: () => const AppointmentsPage(),
-        ),
-        GetPage(
-          name: AppRoutes.patients,
-          page: () => const PatientsPage(),
-          // children: [
-          //   GetPage(
-          //     name: AppRoutes.addPatient,
-          //     page: () => const AddPatient(),
-          //   ),
-          // ],
-        ),
-        GetPage(
-          name: AppRoutes.addPatient, // /add-patient (مسار مستقل ومباشر)
-        //  page: () => const AddPatient(),
-        page: () => const AddPatientPage(),
-        ),
-        GetPage(
-          name: AppRoutes.testAppointments,
-          page: () => const TestAppointmentsPage(),
-        ),
-        GetPage(
-          name: AppRoutes.settings,
-          page: () => const SettingsPage(),
-        ),
-      ],
-    ),
+    // Dashboard Routes (all wrapped with MainLayout)
+    shellPage(name: AppRoutes.mainApp, page: const DashboardPage()),
+    shellPage(name: AppRoutes.dashboard, page: const DashboardPage()),
+    shellPage(name: AppRoutes.appointments, page: const AppointmentsPage()),
+    shellPage(name: AppRoutes.patients, page: const PatientsPage()),
+    shellPage(name: AppRoutes.addPatient, page: const AddPatientPage()),
+    shellPage(name: AppRoutes.patientDetails, page: const PatientDetailsPage()),
+    shellPage(name: AppRoutes.testAppointments, page: const TestAppointmentsPage()),
+    shellPage(name: AppRoutes.settings, page: const SettingsPage()),
   ];
+
   static final GetPage<dynamic> unknownRoute = GetPage(
     name: '/404',
     page: () => const Scaffold(

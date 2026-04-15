@@ -75,9 +75,9 @@ class AddPatienrMedicalCard extends StatelessWidget {
                 Expanded(
                   child: AppFillTextFieldField(
                     controller: cnt.allergiesController,
-                    hint: "enter_allergies",
-                    header: "allergies",
-                    prefixIconData: Icons.warning_amber_rounded,
+                    hint: "enter_medicines",
+                    header: "medicines",
+                    prefixIconData: Icons.medical_information_outlined,
                     keyboardType: TextInputType.text,
                     validation: AppValidator.defaultValidator.validate,
                     onComplete: node.nextFocus,

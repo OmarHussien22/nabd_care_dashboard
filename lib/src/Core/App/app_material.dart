@@ -1,4 +1,6 @@
 import 'package:care_desk/src/Core/routers/app_router_imports.dart';
+import 'package:care_desk/src/Features/MainLayout/controller/main_layout_controller.dart';
+import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:care_desk/src/Core/Constants/Strings/app_strings.dart';
@@ -36,8 +38,10 @@ class AppMaterial extends StatelessWidget {
           theme: ThemeManager.light,
           darkTheme: ThemeManager.dark,
           themeMode: controller.themeMode,
-          initialRoute: initPage,
-          navigatorObservers: [NavigationStackObserver()],
+          navigatorObservers: [
+            NavigationStackObserver(),
+            sidebarRouteObserver,
+          ],
           getPages: router,
           // home: home,
           builder: (context, child) => child!,

@@ -1,6 +1,7 @@
 import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:care_desk/src/Core/routers/app_router_imports.dart';
 import 'package:care_desk/src/Features/MainLayout/controller/main_layout_controller.dart';
 import 'package:care_desk/src/Features/Patients/presentation/manager/add_patient_builder.dart';
@@ -105,7 +106,7 @@ class AddPatientPage extends StatelessWidget {
                                   onBack: () {
                                     if (step == 0) {
                                       Get.find<MainLayoutController>()
-                                          .pushPage(AppRoutes.testAppointments);
+                                          .popPage();
                                     } else {
                                       cnt.back();
                                     }

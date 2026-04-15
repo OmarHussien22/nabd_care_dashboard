@@ -290,19 +290,19 @@ class AddPatientBuilder extends GetControllerInterface {
     secretaryNotesController.addListener(update);
   }
 
-  @override
-  void onClose() {
-    nameController.dispose();
-    phoneController.dispose();
-    addressController.dispose();
-    mainComplaintController.dispose();
-    allergiesController.dispose();
-    dateOfBirthController.dispose();
-    dateOfVisitController.dispose();
-    timeOfVisitController.dispose();
-    referralSourceController.dispose();
-    secretaryNotesController.dispose();
-    priceController.dispose();
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   nameController.dispose();
+  //   phoneController.dispose();
+  //   addressController.dispose();
+  //   mainComplaintController.dispose();
+  //   allergiesController.dispose();
+  //   dateOfBirthController.dispose();
+  //   dateOfVisitController.dispose();
+  //   timeOfVisitController.dispose();
+  //   referralSourceController.dispose();
+  //   secretaryNotesController.dispose();
+  //   priceController.dispose();
+  //   super.onClose();
+  // }
 }

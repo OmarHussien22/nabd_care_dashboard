@@ -37,20 +37,20 @@ class AddPatientAdminDetails extends StatelessWidget {
             ],
           ),
           SizedBox(height: 12.toH()),
-          SizedBox(
-            width: MediaQuery.sizeOf(context).width * 0.45,
-            child: SearchableFieldDefault<ReferralSourcesEntity>(
-              controller: cnt.referralSourceController,
-              items: ReferralSourcesEntity.referralSources,
-              itemLabel: (item) => item.title,
-              hint: "select_referral_source",
-              leadingIcon: AppIcons.whatsapp,
-              suffix: SuffixNone(),
-              inputDecoration: InputDecorationWithBorder(),
-              onOptionSelected: cnt.setReferralSource,
-            ),
-          ),
-          SizedBox(height: 24.toH()),
+          // SizedBox(
+          //   width: MediaQuery.sizeOf(context).width * 0.45,
+          //   child: SearchableFieldDefault<ReferralSourcesEntity>(
+          //     controller: cnt.referralSourceController,
+          //     items: ReferralSourcesEntity.referralSources,
+          //     itemLabel: (item) => item.title,
+          //     hint: "select_referral_source",
+          //     leadingIcon: AppIcons.whatsapp,
+          //     suffix: SuffixNone(),
+          //     inputDecoration: InputDecorationWithBorder(),
+          //     onOptionSelected: cnt.setReferralSource,
+          //   ),
+          // ),
+          // SizedBox(height: 24.toH()),
 
           // ── Secretary Notes ──
           AppFillTextFieldField(

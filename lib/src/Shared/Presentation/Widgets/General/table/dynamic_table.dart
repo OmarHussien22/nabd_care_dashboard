@@ -15,9 +15,9 @@ export 'table_row_data.dart';
 class DynamicTable extends StatefulWidget {
   final List<TableColumn> columns;
   final List<TableRowData> rows;
-  final Function(String)? onEdit;
-  final Function(String)? onDelete;
-  final Function(String)? onView;
+  final Function(int)? onEdit;
+  final Function(int)? onDelete;
+  final Function(int)? onView;
   final Function(int)? onPageChanged;
   final int currentPage;
   final int totalPages;

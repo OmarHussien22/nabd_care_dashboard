@@ -158,8 +158,6 @@ class FixedAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<MainLayoutController>();
-
     return Container(
       height: 80.toH(),
       color: AppColors.get.surface,
@@ -186,18 +184,20 @@ class FixedAppBar extends StatelessWidget implements PreferredSizeWidget {
               const Spacer(),
               CustomSearchField(),
               const Spacer(),
-              ButtonDefault.icon(
-                width: 150.toW(),
-                //padding: AppInsets.defaultButtonVertical,
-                onPressed: () {
-                  cnt.pushPage(AppRoutes.addPatient);
-                },
-                titleSize: 14,
-                borderRadius: AppInsets.buttonBorderRadius,
-                icon: Icons.person_add,
-                label: "add_patient",
-              ),
-              10.ESW(),
+              if (cnt.selectedIndex != 2) ...[
+                ButtonDefault.icon(
+                  width: 150.toW(),
+                  //padding: AppInsets.defaultButtonVertical,
+                  onPressed: () {
+                    cnt.pushPage(AppRoutes.addPatient);
+                  },
+                  titleSize: 14,
+                  borderRadius: AppInsets.buttonBorderRadius,
+                  icon: Icons.person_add,
+                  label: "add_patient",
+                ),
+                10.ESW()
+              ],
               Container(
                 height: 45.toH(),
                 decoration: BoxDecoration(
