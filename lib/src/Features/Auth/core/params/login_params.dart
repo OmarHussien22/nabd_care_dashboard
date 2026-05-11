@@ -1,4 +1,4 @@
-import 'package:care_desk/src/core/network_structure/params/params.dart';
+import 'package:care_desk/src/Core/network_structure/params/params.dart';
 import '../../../../Core/Utils/Extensions/basic_op_extensions.dart';
 
 class LoginParams extends Params {

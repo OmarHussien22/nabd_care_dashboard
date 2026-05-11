@@ -5,7 +5,6 @@ import 'package:care_desk/src/Shared/Presentation/Widgets/Illustrations/imports_
 
 import '../../../../Core/Constants/Decorations/app_Insets.dart';
 import '../../../../Shared/Presentation/Widgets/GeneralWidgets/Buttons/Basic/custom_rounded_button.dart';
-import '../manger/check_phone_verified_controller.dart';
 
 class ErrorPage extends StatelessWidget {
   final bool isCheckPhoneRequired;
@@ -13,8 +12,7 @@ class ErrorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CheckPhoneVerifiedController checkPhoneVerifiedController =
-        Get.put(CheckPhoneVerifiedController());
+
     return Scaffold(
         body: Padding(
       padding: AppInsets.defaultScreenALL,
@@ -25,17 +23,7 @@ class ErrorPage extends StatelessWidget {
           const Expanded(
             child: IllustrationUnKnownErrorScreen(),
           ),
-          if (isCheckPhoneRequired == true) ...[
-            ButtonDefault(
-                title: "goto_app",
-                height: 60.toH(),
-                width: 200.toW(),
-                backgroundColor: Colors.green,
-                onPressed: () {
-                  checkPhoneVerifiedController.checkPhoneVerified();
-                }),
-            24.ESH()
-          ]
+
         ],
       ),
     ));

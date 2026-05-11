@@ -3,12 +3,12 @@ import 'package:care_desk/src/Core/network_structure/networking/network_service.
 import 'package:care_desk/src/Core/network_structure/networking/src/utils/upload_option.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Dialogs/app_dialogs.dart';
 import 'package:dio/dio.dart';
-import 'package:care_desk/src/core/network_structure/constants/exception_constants.dart';
-import 'package:care_desk/src/core/network_structure/data_source/service_caller.dart';
-import 'package:care_desk/src/core/utils/general_utils.dart';
+import 'package:care_desk/src/Core/network_structure/constants/exception_constants.dart';
+import 'package:care_desk/src/Core/network_structure/data_source/service_caller.dart';
+import 'package:care_desk/src/Core/utils/general_utils.dart';
 
 import '../exceptions/failure.dart';
-import 'package:care_desk/src/core/network_structure/params/params.dart';
+import 'package:care_desk/src/Core/network_structure/params/params.dart';
 import '../api_names.dart';
 
 enum CrudType {

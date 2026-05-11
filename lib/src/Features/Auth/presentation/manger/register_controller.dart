@@ -128,44 +128,6 @@ class RegisterController extends GetControllerInterface<UserModel> {
 
   // AppStatusController appStatusController = Get.put(AppStatusController());
 
-  void checkNeedOtp() {
-    printDM("Omar 1");
-    // if (appStatusController.state.data!.whatsAppOtp == true) {
-    printDM("Omar 2");
-
-    if (state.data!.isPhoneVerify ?? false) {
-      printDM("Omar 3");
-      Future.delayed(
-        const Duration(milliseconds: 350),
-        () {
-          Get.offAll(
-            VerificationPage(
-              phone: phoneController.text,
-              onSuccess: () {
-                // Get.offAll(() => const CompleteDataPage());
-              },
-            ),
-            transition: Transition.leftToRightWithFade,
-          );
-        },
-      );
-    } else {
-      printDM("Omar 4");
-
-      Future.delayed(
-        const Duration(milliseconds: 350),
-        () {
-          // Get.offAll(const CompleteDataPage());
-        },
-      );
-    }
-    // } else {
-    //   printDM("Omar 5");
-    //   Future.delayed(const Duration(milliseconds: 350), () {
-    //     Get.offAll(const CompleteDataPage());
-    //   });
-    // }
-  }
 
   bool _isButtonDisabled = false;
 

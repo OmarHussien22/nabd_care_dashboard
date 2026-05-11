@@ -1,4 +1,4 @@
-import 'package:care_desk/src/core/utils/general_utils.dart';
+import 'package:care_desk/src/Core/utils/general_utils.dart';
 
 class NetworkLogger {
   NetworkLogger._();

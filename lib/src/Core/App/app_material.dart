@@ -1,35 +1,27 @@
-import 'package:care_desk/src/Core/routers/app_router_imports.dart';
-import 'package:care_desk/src/Features/MainLayout/controller/main_layout_controller.dart';
-import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout.dart';
+import 'package:care_desk/src/Core/routers/go_router/app_go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:care_desk/src/Core/Constants/Strings/app_strings.dart';
 import 'package:care_desk/src/Core/Libraries/snap/src/snap_main.dart';
-import 'package:care_desk/src/Core/Libraries/snap/src/snap_router/route_generator.dart';
 import 'package:care_desk/src/Core/Services/Localization/localization_services.dart';
-import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 import 'package:care_desk/src/Core/Styles/Themes/imports_themes.dart';
 import 'package:care_desk/src/Core/Styles/Themes/theme_controller.dart';
 import 'package:care_desk/src/Core/Utils/utils.dart';
 
 class AppMaterial extends StatelessWidget {
-  // final Widget home;
-  final String initPage;
-
-  const AppMaterial({super.key, required this.initPage});
+  const AppMaterial({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final router = AppRouter.pages;
-
     return GetBuilder<ThemeController>(
       init: ThemeController(),
       builder: (controller) {
-        return GetMaterialApp(
+        return GetMaterialApp.router(
           debugShowCheckedModeBanner: false,
-          navigatorKey: Get.key,
           scaffoldMessengerKey: Snap.messengerKey,
-          onGenerateRoute: RouterGenerator().goRoutes,
+          routerDelegate: AppGoRouter.router.routerDelegate,
+          routeInformationParser: AppGoRouter.router.routeInformationParser,
+          routeInformationProvider: AppGoRouter.router.routeInformationProvider,
           defaultTransition: Transition.cupertino,
           transitionDuration: const Duration(milliseconds: 200),
           translations: LocalizationServices(),
@@ -38,12 +30,6 @@ class AppMaterial extends StatelessWidget {
           theme: ThemeManager.light,
           darkTheme: ThemeManager.dark,
           themeMode: controller.themeMode,
-          navigatorObservers: [
-            NavigationStackObserver(),
-            sidebarRouteObserver,
-          ],
-          getPages: router,
-          // home: home,
           builder: (context, child) => child!,
         );
       },

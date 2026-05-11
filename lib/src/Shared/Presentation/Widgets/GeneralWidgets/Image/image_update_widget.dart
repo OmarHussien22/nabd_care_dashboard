@@ -43,7 +43,7 @@ class ImageUpdateWidget extends StatelessWidget {
                   ),
                 )
               : ImageGeneric.network(
-                  url: (UserController.get.user?.image).noneNull,
+                  url: (UserController.get.user?.avatar).noneNull,
                   options: const ImageOptions(radius: 100),
                 ),
 

@@ -10,6 +10,7 @@ import '../../../../../Core/Libraries/snap/snap.dart';
 import '../../../../../Core/Libraries/snap/src/snap_overlay/src/sheet/extension_sheet.dart';
 import '../../../../../Core/Styles/Colors/app_colors.dart';
 import '../../../../Entities/title_interface.dart';
+import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 
 class AppSheets {
   AppSheets._();
@@ -17,7 +18,7 @@ class AppSheets {
 
   void closeOpenSheets() {
     if (Get.isBottomSheetOpen == true) {
-      Get.back();
+      NavigationService.instance.pop();
     }
   }
 

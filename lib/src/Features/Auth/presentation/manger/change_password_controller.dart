@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
+import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 
 import '../../../../Core/Utils/SnackUtils/snack_utils.dart';
 import '../../../../Core/Utils/Validation/app_validator.dart';
@@ -42,7 +43,7 @@ class ChangePasswordController extends GetControllerInterface<bool> {
         if (state.data ?? false) {
           printDM('done');
           UserCache().logout();
-          Get.offAll(const LoginPage());
+          NavigationService.instance.go('/login');
           ClientSnacks.passwordChangedsuccess();
         } else {
           AppSnacks().showSnack(

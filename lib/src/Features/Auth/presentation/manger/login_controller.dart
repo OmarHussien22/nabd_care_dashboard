@@ -1,5 +1,7 @@
+import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
-import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout_page.dart';
+import 'package:care_desk/src/Core/routers/go_router/app_go_router.dart';
+import 'package:care_desk/src/Features/Auth/presentation/manger/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:care_desk/src/Core/App/app_flow.dart';
@@ -36,15 +38,15 @@ class LoginController extends GetControllerInterface<UserModel> {
       phoneController!.text = phone;
       passwordController!.text = password;
     }
-    // if (screenDetectorController.detectorScreen == true) {
-    //   ClientSnacks.requestError(error: "يجب عليك اغلاق تسجيل الشاشة");
-    // } else {
     formValidator(
       globalKey: globalKey,
       onSuccessValidate: () async {
         if (IntalizeAppSource.currentSource == AppSource.dev) {
           ClientSnacks.loginSuccess();
-          Get.offAll(const MainLayoutPage());
+          // We use 'go' instead of 'push' to replace the stack and remove the login page
+            await AuthController.instance.setAuthenticatedUser(UserModel.devUser);
+            UserController.get.updateUser(UserModel.devUser);
+          NavigationService.instance.go('/dashboard');
           return;
         }
         final LoginUseCase useCase = LoginUseCase();
@@ -68,74 +70,13 @@ class LoginController extends GetControllerInterface<UserModel> {
           ),
         )!;
         if (state is DataSuccess) {
-          // Get.put(AppStatusController()).fetchAppStatus();
           if (state.data != null) {
+            await AuthController.instance.setAuthenticatedUser(state.data!);
             UserController.get.updateUser(state.data!);
-          }
-          // CheckSendDeviceRequestHandler.checkSendDeviceRequest(
-          //   phone: phoneController!.text,
-          //   deviceId: await DeviceInfoService.instance.getDeviceId(),
-          //   deviceType: await DeviceInfoService.instance.type,
-          //   onSuccess: () {
-          //     ClientSnacks.loginSuccess();
-          //     if (state.data != null) {
-          //       UserController.get.updateUser(state.data!);
-          //     }
-          //     if (state.data?.isBlocked == true) {
-          //       Get.to(const BlockedPage());
-          //     } else {
-          //       UserController.get.updateUser(state.data!);
-          //       if (state.data!.type == 1) {
-          //         AppStatusController.get.appType = AppType.center;
-          //       } else if (state.data!.type == 2) {
-          //         AppStatusController.get.appType = AppType.lecturer;
-          //       }
-          //       if (state.data?.isInfoComplete == 0) {
-          //         printDM("omar update ");
-          //         Get.offAll(const CompleteDataPage());
-          //       } else {
-          //         UserCache().loginUser();
-          //         Get.offAll(const BasePage());
-          //       }
-          //     }
-          //   },
-          // );
 
-          // ClientSnacks.loginSuccess();
-          // Get.put(AppStatusController()).fetchAppStatus();
-          // if (state.data != null) {
-          //   UserController.get.updateUser(state.data!);
-          // }
-          // if (state.data?.isBlocked == true) {
-          //   Get.to(const BlockedPage());
-          // } else {
-          //   UserController.get.updateUser(state.data!);
-          //   if (state.data!.type == 1) {
-          //     AppStatusController.get.appType = AppType.center;
-          //   } else if (state.data!.type == 2) {
-          //     AppStatusController.get.appType = AppType.lecturer;
-          //   }
-          //
-          //   // VerificationHandler.instance.phoneVerify(
-          //   //   phone: phoneController.text,
-          //   //   // onSuccess: () {
-          //   //   //   UserController.get.updateUser(state.data!);
-          //   //   //   if (state.data!.type == 1) {
-          //   //   //     AppStatusController.get.appType = AppType.center;
-          //   //   //   } else if (state.data!.type == 2) {
-          //   //   //     AppStatusController.get.appType = AppType.lecturer;
-          //   //   //   }
-          //   //   //   // Get.offAll(const BasePage());
-          //   //   // },
-          //   // );
-          //   if (state.data?.isInfoComplete == 0) {
-          //     printDM("omar update ");
-          //     Get.offAll(const CompleteDataPage());
-          //   } else {
-          //     UserCache().loginUser();
-          //     Get.offAll(const BasePage());
-          //   }
-          // }
+            ClientSnacks.loginSuccess();
+            NavigationService.instance.go('/dashboard');
+          }
         } else if (state is DataFailed) {
           printDM("error is=> ${state.error?.title}");
           ClientSnacks.requestError(error: state.error?.title);
@@ -143,48 +84,6 @@ class LoginController extends GetControllerInterface<UserModel> {
       },
     );
     // }
-  }
-
-  void loginAsVisitor() async {
-    // if (screenDetectorController.detectorScreen == true) {
-    ClientSnacks.requestError(error: "يجب عليك اغلاق تسجيل الشاشة");
-    // } else {
-    final LoginUseCase useCase = LoginUseCase();
-    state = await useCase(
-      params: LoginParams(
-        phone: "01013171109",
-        password: "1234567890",
-        deviceToken: null,
-        deviceId: "", //await DeviceInfoService.instance.getDeviceId(),
-        deviceType: "", //await DeviceInfoService.instance.type,
-        version: AppStrings.appVersion,
-        // isRealDevice: await SafeDevice.isRealDevice,
-        isVisitor: 1,
-      ),
-    )!;
-    if (state is DataSuccess) {
-      if (state.data != null) {
-        UserController.get.updateUser(state.data!);
-        // Get.put(AppStatusController()).fetchAppStatus();
-        UserCache().loginUser();
-        Get.offAll(const MainLayoutPage());
-        // } else {
-        //   UserController.get.updateUser(state.data!);
-        //   if (state.data!.type == 1) {
-        //     AppStatusController.get.appType = AppType.center;
-        //   } else if (state.data!.type == 2) {
-        //     AppStatusController.get.appType = AppType.lecturer;
-        //   } else {
-        //     printDM("Omar Hussien");
-        //     // UserCache().loginUser();
-        //     // Get.offAll(const BasePage());
-        //   }
-        // }
-      } else if (state is DataFailed) {
-        printDM("error is=> ${state.error?.title}");
-        ClientSnacks.requestError(error: state.error?.title);
-      }
-    }
   }
 
   bool _isButtonDisabled = true;

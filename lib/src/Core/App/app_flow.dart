@@ -1,8 +1,6 @@
-import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout_page.dart';
-import 'package:get/get.dart';
+import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 import 'package:care_desk/src/Core/Services/Storage/storage_service.dart';
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
-import 'package:care_desk/src/Features/Auth/presentation/pages/imports_auth.dart';
 
 import '../Constants/Enums/app_source.dart';
 
@@ -33,9 +31,9 @@ class AppFlow {
     // if (isOnBoardingDone) {
 
     if (isLoggedIn) {
-      Get.offAll(() => const MainLayoutPage());
+      NavigationService.instance.go('/dashboard');
     } else {
-      Get.offAll(() => const LoginPage());
+      NavigationService.instance.go('/login');
     }
     // } else {
     //   Get.offAll(const OnBoardingPage());
@@ -43,7 +41,7 @@ class AppFlow {
   }
 
   void _devFlow() {
-    Get.offAll(() => const MainLayoutPage());
+    NavigationService.instance.go('/dashboard');
     // Get.offAll(() => const AddCategoryPage());
   }
 }

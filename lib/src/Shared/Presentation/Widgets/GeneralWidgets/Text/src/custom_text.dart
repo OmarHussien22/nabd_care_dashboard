@@ -152,13 +152,13 @@ class CustomText extends StatelessWidget {
 
     if (screenWidth >= 1024) {
       // Desktop && Web
-      finalFontSize = baseFontSize * 1.25;
+      finalFontSize = baseFontSize * 1.4;
     } else if (screenWidth >= 600) {
       // Tablet
-      finalFontSize = baseFontSize * 1.15;
+      finalFontSize = baseFontSize * 1.25;
     } else {
       // Mobile
-      finalFontSize = baseFontSize;
+      finalFontSize = baseFontSize *3;
     }
 
     // Responsive padding

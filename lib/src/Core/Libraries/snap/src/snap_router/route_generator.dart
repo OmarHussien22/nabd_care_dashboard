@@ -1,4 +1,5 @@
-import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout_page.dart';
+import 'package:care_desk/src/Features/Dashboard/presentation/pages/dashboard_page.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/Layout/presentation/pages/main_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:care_desk/src/Core/Libraries/snap/src/snap_router/named_routes.dart';
 
@@ -14,7 +15,7 @@ class RouterGenerator extends GoGenerator {
     switch (namedRoute) {
       case NamedRoutes.home:
         return GoBuilder().build(
-          const MainLayoutPage(),
+          const MainLayout(child: DashboardPage()),
           settings: settings,
           transition: TransitionType.fade,
         );

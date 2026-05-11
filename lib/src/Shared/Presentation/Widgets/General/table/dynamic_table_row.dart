@@ -30,18 +30,26 @@ class _DynamicTableRowState extends State<DynamicTableRow> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
           color: _isHovered
-              ? AppColors.get.surfaceContainer.withOpacity(0.5)
+              ? AppColors.get.primary.withValues(alpha: 0.02)
               : Colors.white,
-          border: Border(bottom: BorderSide(color: AppColors.get.border)),
+          border: Border(
+            bottom: BorderSide(
+              color: _isHovered 
+                ? AppColors.get.primary.withValues(alpha: 0.1)
+                : AppColors.get.border.withValues(alpha: 0.3)
+            ),
+          ),
         ),
         child: InkWell(
           onTap: widget.row.onTap,
+          hoverColor: Colors.transparent,
+          splashColor: AppColors.get.primary.withValues(alpha: 0.05),
           child: Row(
             children: [
               ...widget.columns.asMap().entries.map((entry) {
@@ -49,21 +57,24 @@ class _DynamicTableRowState extends State<DynamicTableRow> {
                 final col = entry.value;
                 return Container(
                   width: col.width,
-                  constraints: const BoxConstraints(minHeight: 52),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  constraints: const BoxConstraints(minHeight: 60),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                   alignment: Alignment.centerLeft,
                   child: widget.row.cells.length > index
                       ? widget.row.cells[index]
                       : const SizedBox(),
                 );
               }),
-              // Actions
-              CustomActionDropDown(
-                rowId: widget.row.id,
-                onView: widget.onView,
-                onEdit: widget.onEdit,
-                onDelete: widget.onDelete,
+              // Actions Column
+              Container(
+                width: 100,
+                alignment: Alignment.center,
+                child: CustomActionDropDown(
+                  rowId: widget.row.id,
+                  onView: widget.onView,
+                  onEdit: widget.onEdit,
+                  onDelete: widget.onDelete,
+                ),
               )
             ],
           ),

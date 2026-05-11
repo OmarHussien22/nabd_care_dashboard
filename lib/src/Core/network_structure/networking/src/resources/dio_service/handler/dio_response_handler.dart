@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:care_desk/src/core/network_structure/networking/src/interfaces/handler/response_handler.dart';
-import 'package:care_desk/src/core/network_structure/networking/src/resources/dio_service/handler/dio_error_handler.dart';
+import 'package:care_desk/src/Core/network_structure/networking/src/interfaces/handler/response_handler.dart';
+import 'package:care_desk/src/Core/network_structure/networking/src/resources/dio_service/handler/dio_error_handler.dart';
 
 import '../../../../../../utils/general_utils.dart' show printDM;
 import 'un_auth_handeler.dart';

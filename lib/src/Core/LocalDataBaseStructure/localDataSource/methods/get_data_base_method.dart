@@ -4,7 +4,6 @@ import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:care_desk/src/Core/network_structure/networking/src/utils/network_utils.dart' show NetworkUtils;
 import 'package:care_desk/src/Core/network_structure/resources/errors/error_model.dart';
 import 'package:care_desk/src/Core/params/local_params.dart';
-import 'package:care_desk/src/Features/LocalAuth/data/models/local_user_model.dart';
 
 enum TypeOrderBy {
   ASC, // ترتيب تصاعدي
@@ -84,21 +83,21 @@ class GetDataBaseMethod {
   }
 
   /// ✅ **جلب بيانات المستخدم عبر `phone` و `password`**
-  Future<LocalUserModel?> getUser({
-    required String emailOrPhone,
-    required String password,
-  }) async {
-    final response = await fetch(
-      tableName: 'users',
-      where: '(phone = ? OR email = ?) AND password = ?',
-      whereArgs: [emailOrPhone, emailOrPhone, password],
-      limit: 1,
-      singleResult: true,
-    );
-
-    if (response.statusCode == 200 && response.data != null) {
-      return LocalUserModel.fromJson(response.data);
-    }
-    return null;
-  }
+  // Future<LocalUserModel?> getUser({
+  //   required String emailOrPhone,
+  //   required String password,
+  // }) async {
+  //   final response = await fetch(
+  //     tableName: 'users',
+  //     where: '(phone = ? OR email = ?) AND password = ?',
+  //     whereArgs: [emailOrPhone, emailOrPhone, password],
+  //     limit: 1,
+  //     singleResult: true,
+  //   );
+  //
+  //   if (response.statusCode == 200 && response.data != null) {
+  //     return LocalUserModel.fromJson(response.data);
+  //   }
+  //   return null;
+  // }
 }

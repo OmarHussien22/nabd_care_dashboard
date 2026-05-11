@@ -26,11 +26,18 @@ class CustomTable extends StatefulWidget {
 class _CustomTableState extends State<CustomTable> {
   bool selectAll = false;
   late List<bool> selectedRows;
+  final ScrollController _horizontalScrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     selectedRows = List.generate(widget.data.length, (_) => false);
+  }
+
+  @override
+  void dispose() {
+    _horizontalScrollController.dispose();
+    super.dispose();
   }
 
   void toggleSelectAll(bool? value) {
@@ -71,9 +78,11 @@ class _CustomTableState extends State<CustomTable> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(3.toW()),
           child: Scrollbar(
+            controller: _horizontalScrollController,
             thumbVisibility: true,
             radius: Radius.circular(10.toRad()),
             child: SingleChildScrollView(
+              controller: _horizontalScrollController,
               scrollDirection: Axis.horizontal,
               child: DataTable(
                 showCheckboxColumn: false,
@@ -103,7 +112,7 @@ class _CustomTableState extends State<CustomTable> {
                         child: CustomText(
                           columnName,
                           fontWeight: FW.semiBold,
-                          fontSize: 4.2,
+                          fontSize: 10.2,
 
                           maxLines: widget.maxLines,
                           isOverFlow: true,
@@ -146,13 +155,15 @@ class _CustomTableState extends State<CustomTable> {
                             child: ConstrainedBox(
                               constraints: BoxConstraints(
                                   maxWidth: widget.minWidth ?? 140.toW()),
-                              child: CustomText(
-                                cellData.toString(),
-                                fontSize: 4,
-                                textAlign: TextAlign.start,
-                                maxLines: widget.maxLines,
-                                isOverFlow: true,
-                              ),
+                              child: cellData is Widget
+                                  ? cellData
+                                  : CustomText(
+                                      cellData.toString(),
+                                      fontSize: 4,
+                                      textAlign: TextAlign.start,
+                                      maxLines: widget.maxLines,
+                                      isOverFlow: true,
+                                    ),
                             ),
                           ),
                         ),

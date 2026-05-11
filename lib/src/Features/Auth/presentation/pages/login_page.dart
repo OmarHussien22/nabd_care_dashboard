@@ -5,125 +5,113 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(LoginUserLocalController());
+    Get.put(LoginController());
     final node = FocusScope.of(context);
 
-    // Using LayoutBuilder to get responsive constraints
     return Scaffold(
       backgroundColor: AppColors.get.background,
-      body: GetBuilder<LoginUserLocalController>(
+      body: GetBuilder<LoginController>(
         builder: (logic) {
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final isWide = constraints.maxWidth > 900;
+          final screenWidth = MediaQuery.of(context).size.width;
+          final isWide = screenWidth > 900;
+          final formMaxWidth = 480.0;
 
-              if (!isWide) {
-                // Mobile/Tablet View (Vertical)
-                return Center(
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.all(24),
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                          maxWidth: MediaQuery.of(context).size.width * 0.6),
-                      child: _LoginForm(logic: logic, node: node),
+          final loginForm = _LoginForm(logic: logic, node: node, maxWidth: formMaxWidth);
+
+          if (!isWide) {
+            return Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    AppColors.get.primary.withOpacity(0.05),
+                    AppColors.get.background,
+                  ],
+                ),
+              ),
+              child: Center(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(24),
+                  child: loginForm,
+                ),
+              ),
+            );
+          }
+
+          return Row(
+            children: [
+              Expanded(
+                flex: 3,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.get.background,
+                    image: const DecorationImage(
+                      image: NetworkImage('https://www.transparenttextures.com/patterns/cubes.png'),
+                      opacity: 0.05,
                     ),
                   ),
-                );
-              }
-
-              // Desktop View (Split Screen)
-              return Row(
-                children: [
-                  // Left Side: Login Form
-                  Expanded(
-                    flex: 3,
-                    child: Center(
-                      child: SingleChildScrollView(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 48, vertical: 24),
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                              maxWidth:
-                                  MediaQuery.of(context).size.width * 0.6),
-                          child: _LoginForm(logic: logic, node: node),
+                  child: Center(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(horizontal: 64),
+                      child: loginForm,
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        AppColors.get.primary,
+                        AppColors.get.primary.withRed(50),
+                      ],
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(32),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.15),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.local_hospital_rounded,
+                          size: 80.toW(),
+                          color: Colors.white,
                         ),
                       ),
-                    ),
-                  ),
-
-                  // Right Side: Branding / Hero
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.get.primary,
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            AppColors.get.primary,
-                            AppColors.get.primaryDarker,
-                          ],
+                      SizedBox(height: 40.toH()),
+                      CustomText(
+                        "CareDesk Pro",
+                        fontSize: 32,
+                        fontWeight: FW.bold,
+                        color: Colors.white,
+                      ),
+                      SizedBox(height: 16.toH()),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 64.toW()),
+                        child: CustomText(
+                          "The complete ecosystem for modern healthcare management. Experience the future of clinic operations.",
+                          fontSize: 15,
+                          textAlign: TextAlign.center,
+                          color: Colors.white.withOpacity(0.8),
+                          textHeight: 1.5,
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 10,
-                            offset: const Offset(-4, 0),
-                          ),
-                        ],
-                        // image: DecorationImage(
-                        //   image: AssetImage("assets/images/login_bg.png"), // Placeholder if you have an image
-                        //   fit: BoxFit.cover,
-                        //   opacity: 0.1,
-                        // ),
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // Logo Container
-                          Container(
-                            padding: const EdgeInsets.all(24),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.1),
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: Colors.white.withOpacity(0.2),
-                                width: 2,
-                              ),
-                            ),
-                            child: Icon(
-                              Icons.medical_services_rounded,
-                              size: 80,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(height: 32),
-                          // Title
-                          CustomText(
-                            "CareDesk System",
-                            fontSize: 18,
-                            fontWeight: FW.bold,
-                            color: Colors.white,
-                          ),
-                          const SizedBox(height: 16),
-                          // Subtitle
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 64),
-                            child: CustomText(
-                              "Manage your clinic efficiently with our comprehensive desktop solution.",
-                              fontSize: 12,
-                              textAlign: TextAlign.center,
-                              color: Colors.white.withOpacity(0.9),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    ],
                   ),
-                ],
-              );
-            },
+                ),
+              ),
+            ],
           );
         },
       ),
@@ -132,108 +120,104 @@ class LoginPage extends StatelessWidget {
 }
 
 class _LoginForm extends StatelessWidget {
-  final LoginUserLocalController logic;
+  final LoginController logic;
   final FocusScopeNode node;
+  final double maxWidth;
 
-  const _LoginForm({required this.logic, required this.node});
+  const _LoginForm({
+    required this.logic,
+    required this.node,
+    required this.maxWidth,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: logic.globalKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Header
-          CustomText(
-            "Welcome Back",
-            fontSize: 22,
-            fontWeight: FW.bold,
-            color: AppColors.get.title,
+    return Container(
+      constraints: BoxConstraints(maxWidth: maxWidth),
+      padding: EdgeInsets.all(40.toRad()),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24.toRad()),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 40,
+            offset: const Offset(0, 12),
           ),
-          const SizedBox(height: 8),
-          CustomText(
-            "Please enter your account to sign in.",
-            fontSize: 18,
-            color: AppColors.get.subTitle,
-          ),
-          const SizedBox(height: 48),
-          // Phone Field
-          // CustomText(
-          //   "Phone Number",
-          //   fontSize: 16,
-          //   fontWeight: FW.semiBold,
-          //   color: AppColors.get.title,
-          // ),
-          // const SizedBox(height: 8),
-          PhoneFormField(
-            width: MediaQuery.of(context).size.width * .4,
-            controller: logic.phoneController,
-            hasCountryCode: false,
-            onComplete: node.nextFocus,
-          ),
-          const SizedBox(height: 24),
+        ],
+      ),
+      child: Form(
+        key: logic.globalKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CustomText(
+              "Login to Dashboard",
+              fontSize: 24,
+              fontWeight: FW.bold,
+              color: AppColors.get.textPrimary,
+            ),
+            SizedBox(height: 12.toH()),
+            CustomText(
+              "Welcome back! Please enter your details.",
+              fontSize: 14,
+              color: AppColors.get.textSecondary,
+            ),
+            SizedBox(height: 40.toH()),
+            
+            PhoneFormField(
+              width: double.infinity,
+              controller: logic.phoneController,
+              hasCountryCode: false,
+              onComplete: node.nextFocus,
+            ),
+            SizedBox(height: 24.toH()),
 
-          // Password Field
-          // CustomText(
-          //   "Password",
-          //   fontSize: 16,
-          //   fontWeight: FW.semiBold,
-          //   color: AppColors.get.title,
-          // ),
-          // const SizedBox(height: 8),
-          AppPasswordField(
-            width: MediaQuery.of(context).size.width * .4,
-            hint: "Enter your password",
-            controller: logic.passwordController!,
-            onComplete: () {
-              node.unfocus();
-              logic.login();
-            },
-          ),
+            AppPasswordField(
+              width: double.infinity,
+              hint: "••••••••",
+              controller: logic.passwordController!,
+              onComplete: () {
+                node.unfocus();
+                logic.login();
+              },
+            ),
 
-          const SizedBox(height: 42),
+            SizedBox(height: 16.toH()),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {},
+                child: CustomText("Forgot Password?", color: AppColors.get.primary, fontSize: 13, fontWeight: FW.semiBold),
+              ),
+            ),
 
-          // Login Button
-          Center(
-            child: ButtonDefault(
-              height: 54,
-              width: 350,
+            SizedBox(height: 32.toH()),
+
+            ButtonDefault(
+              height: 56.toH(),
+              width: double.infinity,
               isDisabled: logic.isButtonDisabled,
               title: "Sign In",
-              titleSize: 16,
+              titleSize: 16.toFS(),
               onPressed: logic.login,
+              color: AppColors.get.primary,
             ),
-          ),
 
-          const SizedBox(height: 24),
-
-          // // Register Link
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     CustomText(
-          //       "Don't have an account?",
-          //       //fontSize: 4.5,
-          //       color: AppColors.get.subTitle,
-          //     ),
-          //     TextButton(
-          //       onPressed: () => Get.off(() => const RegisterPage(),
-          //           transition: Transition.noTransition),
-          //       child: CustomText(
-          //         "Sign up",
-          //         // fontSize: 4.5,
-          //         fontWeight: FW.bold,
-          //         color: AppColors.get.primary,
-          //       ),
-          //     ),
-          //   ],
-          // ),
-
-          const SizedBox(height: 24),
-          //  const Center(child: FooterLogin()),
-        ],
+            SizedBox(height: 32.toH()),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomText("New to CareDesk?", color: AppColors.get.textSecondary, fontSize: 14),
+                TextButton(
+                  onPressed: () => NavigationService.instance.replace('/register'),
+                  child: CustomText("Create Account", fontWeight: FW.bold, color: AppColors.get.primary, fontSize: 14),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

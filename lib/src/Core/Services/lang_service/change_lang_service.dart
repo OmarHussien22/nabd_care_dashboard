@@ -1,7 +1,6 @@
 // import 'package:easy_localization/easy_localization.dart';
-import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout_page.dart';
+import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 
 class ChangeLangService {
   ChangeLangService._();
@@ -15,6 +14,6 @@ class ChangeLangService {
     // } else if (id == 2) {
     //   context.setLocale(L10n.all[1]);
     // }
-    Get.offAll(const MainLayoutPage());
+    NavigationService.instance.go('/dashboard');
   }
 }

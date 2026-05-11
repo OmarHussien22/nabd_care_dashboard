@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,7 @@ class ResetPasswordController extends GetControllerInterface<UserModel> {
           phone: phone,
         ))!;
         if (state is DataSuccess) {
-          Get.offAll(const LoginPage());
+          NavigationService.instance.go('/login');
           // if (appStatusController.state.data!.whatsAppOtp == true) {
           //   Future.delayed(const Duration(milliseconds: 350), () {
           //     Get.offAll(

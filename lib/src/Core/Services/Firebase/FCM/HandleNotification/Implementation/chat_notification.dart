@@ -1,6 +1,4 @@
-import 'package:care_desk/src/Core/routers/app_router_imports.dart';
-import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout.dart';
-import 'package:get/get.dart';
+import 'package:care_desk/src/Core/routers/go_router/app_go_router.dart';
 
 import '../Interfaces/notification_type.dart';
 import '../Model/notification_message.dart';
@@ -19,7 +17,7 @@ class ChatNotification extends NotificationType {
 
   @override
   void onMessageTaped(NotificationMessage message) {
-    Get.offAllNamed(AppRoutes.dashboard);
+
     // Snap.to(ChatsPage());
     // Snap.to(MessagesPage(chat: message.chat!));
   }

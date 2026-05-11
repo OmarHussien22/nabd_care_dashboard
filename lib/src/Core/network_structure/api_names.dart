@@ -1,5 +1,5 @@
 mixin ApiNames {
-  static const String baseUrl = "http://192.168.1.47:8000/api/driver/";
+  static const String baseUrl = "http://192.168.1.47:8000/api/";
   // static const String baseUrl = "https://transport.x-coders.net/api/driver/";
   //"https://anjo.crazyidea.online/api/";
 
@@ -17,6 +17,7 @@ mixin ApiNames {
 
   //==================Search===================//
   final String urlSearch = "${baseUrl}seach_products";
+  final String urlGlobalSearch = "${baseUrl}global_search";
 
   // =================Profile Screen================//
   final String urlNotification = "${baseUrl}fetch_notifictions";
@@ -32,10 +33,22 @@ mixin ApiNames {
   //=================Contact Us================//
   final String urLSendContactUs = '${baseUrl}contact_us';
 
-
   // New Api
   final String urlAddPatient = "${baseUrl}add_patient";
   final String urlFetchPatients = "${baseUrl}fetch_patients";
   final String urlFetchPatientDetails = "${baseUrl}fetch_patient_details";
   final String urlDeletePatient = "${baseUrl}delete_patient";
+
+  //==================Users===================//
+  final String urlFetchUsers = "${baseUrl}fetch_users";
+  final String urlAddUser = "${baseUrl}add_user";
+  final String urlUpdateUser = "${baseUrl}update_user";
+  final String urlDeleteUser = "${baseUrl}delete_user";
+
+  //==================Roles===================//
+  final String urlFetchRoles = "${baseUrl}fetch_roles";
+  final String urlAddRole = "${baseUrl}add_role";
+  final String urlUpdateRole = "${baseUrl}update_role";
+  final String urlDeleteRole = "${baseUrl}delete_role";
+  final String urlFetchPermissions = "${baseUrl}fetch_permissions";
 }

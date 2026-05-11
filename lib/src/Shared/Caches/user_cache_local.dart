@@ -1,5 +1,6 @@
 import 'package:care_desk/src/Core/Services/Storage/src/storage_constants.dart';
-import 'package:care_desk/src/Features/LocalAuth/data/models/local_user_model.dart';
+import 'package:care_desk/src/Features/Users/domain/entities/auth_entities.dart';
+import 'package:care_desk/src/Shared/Models/user_model.dart';
 
 import '../../Core/Services/Storage/storage_service.dart';
 import '../../Core/Utils/general_utils.dart';
@@ -14,7 +15,7 @@ class UserCacheLocal {
 
   static final _storage = StorageService<Map<String, dynamic>>();
 
-  Future<void> saveUser(LocalUserModel user) async {
+  Future<void> saveUser(UserModel user) async {
     await _storage.save(
       stgLocalUserModel,
       value: user.toJson(),
@@ -23,14 +24,14 @@ class UserCacheLocal {
     printDM("User Saved From Cache => ${user.toJson()}");
   }
 
-  LocalUserModel? get data {
-    LocalUserModel? user;
+  UserModel? get data {
+    UserModel? user;
     try {
       final data = _storage.read(
         stgLocalUserModel,
       );
       if (data == null) return null;
-      user = LocalUserModel.fromJson(data);
+      user = UserModel.fromJson(data);
       printDM("Local User Model is => ${user.toString()}");
     } catch (e) {
       printDM("Error in getting user from cache => $e");
@@ -47,14 +48,20 @@ class UserCacheLocal {
     printDM("User Deleted From Cache => ${data.toString()}");
   }
 
-  LocalUserModel get _guestUser {
-    return LocalUserModel(
+  UserModel get _guestUser {
+    return UserModel(
       id: 0,
       name: "Guest${Utils.randomNumber()}",
+      avatar:
+          'https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839653_LxRKJopMjofmvbVYIHAjjUhxfqApStEa.jpg',
       email: "",
-      password: "",
       phone: "",
-      roleId: 0,
+      roles: [RoleEntity.devRole],
+      permissions: [PermissionEntity.devPermission],
+    apiToken: 'dev_api_token',
+      userType: "",
+      userTypeId: 1,
+      isActive: true,
     );
   }
 

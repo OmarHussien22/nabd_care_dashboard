@@ -51,13 +51,14 @@ class UserCache {
       id: 0,
       name: "Guest${Utils.randomNumber()}",
       phone: "-",
-      image:
+        avatar:
           "https://yt3.googleusercontent.com/uBxEzJWmk3pCDWu5glP-UeCAbTV8y71CGYlRiWOVs6j_EPQYPxj3Ke6YQdBjmpHy2rnbZ4AFUg=s900-c-k-c0x00ffffff-no-rj",
       apiToken: 'token',
       isPhoneVerify: false,
       code: "0",
       email: '',
       userType: "",
+      userTypeId: 1,
     );
   }
 

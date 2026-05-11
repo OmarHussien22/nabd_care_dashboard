@@ -1,0 +1,566 @@
+Clinic System — Phase 1 Development Plan
+Project Context
+
+We are building a scalable Clinic Management System using Flutter.
+
+The project architecture already uses:
+
+Flutter
+GoRouter
+GetX (State Management + DI)
+Clean Architecture
+Controller
+UseCase
+Repository
+Service
+Feature-based structure
+
+The application targets:
+
+Web
+Desktop
+Tablet
+
+The system uses a persistent dashboard layout with:
+
+Fixed Sidebar
+Fixed Topbar
+Dynamic Content Area
+
+We are currently working on:
+
+PHASE 1 — Core Navigation, Authentication & Access Control
+Main Goals
+
+Build the core infrastructure for:
+
+Navigation
+Authentication
+Authorization
+Role & Permission Management
+User Management
+Theme System
+Reusable Dashboard Layout
+
+This phase is the foundation for all future modules.
+
+Technical Requirements
+Use GoRouter with ShellRoute
+Use responsive layout
+Use reusable widgets
+Keep business logic separated
+Use clean architecture strictly
+Avoid direct navigation inside controllers
+Use centralized permission management
+Support future backend-driven permissions
+TASKS
+1. Routing & Layout Infrastructure
+Task 1.1 — Setup ShellRoute Layout
+Objective
+
+Create a persistent dashboard layout.
+
+Requirements
+Fixed Sidebar
+Fixed Topbar
+Dynamic Content Area
+Responsive behavior
+Nested routes support
+Expected Structure
+MainLayout
+ ├── Sidebar
+ ├── Topbar
+ └── Content Area
+Notes
+Use ShellRoute
+All internal pages must inherit the same layout
+Sidebar must remain visible while navigating
+Task 1.2 — Content Wrapper System
+Objective
+
+Create a unified wrapper for all internal pages.
+
+Requirements
+
+Create:
+
+AppContentWrapper
+Responsive padding
+Max width handling
+Standard page spacing
+Page title section
+Usage Example
+AppContentWrapper(
+  title: 'Patients',
+  child: PatientsScreen(),
+)
+Task 1.3 — Breadcrumb System
+Objective
+
+Show the current page hierarchy.
+
+Example
+Dashboard / Patients / Add Patient
+Requirements
+Dynamic breadcrumb generation
+GoRouter integration
+Reusable breadcrumb widget
+Widgets
+AppBreadcrumb
+BreadcrumbItem
+2. Authentication System
+Task 2.1 — Auth State Management
+Objective
+
+Manage authentication state globally.
+
+Requirements
+
+Create:
+
+AuthController
+AuthState
+SessionManager
+Responsibilities
+Store current user
+Handle tokens
+Validate session
+Track authentication state
+Task 2.2 — Auth Redirect System
+Objective
+
+Protect routes based on authentication state.
+
+Requirements
+Redirect unauthenticated users to Login
+Redirect authenticated users to Dashboard
+Handle session expiration
+Support auto logout
+Notes
+
+Use GoRouter redirect system.
+
+Task 2.3 — Route Guards
+Objective
+
+Protect routes using:
+
+Authentication
+Roles
+Permissions
+Requirements
+
+Create:
+
+RouteGuard
+AuthGuard
+PermissionGuard
+RoleGuard
+Notes
+
+Guards must be reusable and centralized.
+
+3. Permission & Authorization System
+Task 3.1 — Permission Manager
+Objective
+
+Create a centralized permission system.
+
+Requirements
+
+Create:
+
+PermissionManager
+Example Methods
+canViewPatients()
+canCreatePatient()
+canEditInvoice()
+canDeleteAppointment()
+Notes
+
+Do not directly check permissions inside UI widgets.
+
+Task 3.2 — Entities & Models
+Objective
+
+Create authorization entities.
+
+Required Entities
+UserEntity
+RoleEntity
+PermissionEntity
+Relationship
+User
+ └── Roles
+      └── Permissions
+Task 3.3 — Dynamic Permission Support
+Objective
+
+Allow future backend-driven permissions.
+
+Requirements
+Permission caching
+Dynamic parsing
+Feature toggle support
+Runtime permission updates
+Task 3.4 — Permission Middleware
+Objective
+
+Add middleware between UI and business logic.
+
+Flow
+UI → Controller → Permission Check → UseCase
+Notes
+
+Actions must be validated before execution.
+
+4. Users Module
+Task 4.1 — Users Feature Structure
+Objective
+
+Create a complete users module.
+
+Structure
+users/
+ ├── data/
+ ├── domain/
+ └── presentation/
+Task 4.2 — User Models
+Objective
+
+Create user models and mapping system.
+
+Required
+UserEntity
+UserModel
+UserMapper
+Fields
+id
+name
+email
+avatar
+roles
+permissions
+Task 4.3 — Users List Screen
+Requirements
+Table view
+Pagination
+Search
+Filters
+Responsive layout
+Task 4.4 — User Details Screen
+Requirements
+
+Display:
+
+User information
+Roles
+Permissions
+Activity history
+Task 4.5 — Create & Edit User
+Requirements
+Add user form
+Edit user form
+Assign roles
+Assign permissions
+5. Roles & Permissions Module
+Task 5.1 — Roles Management
+Requirements
+Create role
+Edit role
+Delete role
+Assign permissions
+Task 5.2 — Permissions Management
+Requirements
+Permissions list
+Categorized permissions
+Permission grouping
+Example
+Patients
+ ├── View
+ ├── Create
+ ├── Edit
+ └── Delete
+Task 5.3 — Role Assignment System
+Objective
+
+Connect:
+
+Users
+Roles
+Permissions
+Relationship
+Users ↔ Roles ↔ Permissions
+6. Profile Settings
+Task 6.1 — User Profile Screen
+Requirements
+User info
+Avatar
+Contact details
+Task 6.2 — Account Settings
+Requirements
+Change password
+Theme mode
+Language
+Notifications
+7. Theme System
+Task 7.1 — Light/Dark Theme Architecture
+Requirements
+
+Create:
+
+ThemeManager
+Theme persistence
+Dynamic switching
+Task 7.2 — Theme Tokens
+Objective
+
+Create centralized design tokens.
+
+Requirements
+
+Standardize:
+
+Colors
+Typography
+Radius
+Shadows
+Spacing
+Task 7.3 — Theme Persistence
+Objective
+
+Persist selected theme after app restart.
+
+Requirements
+Save theme locally
+Restore theme on startup
+Development Rules
+Architecture Rules
+Controllers must not directly navigate
+Business logic must stay inside UseCases
+Services handle external resources only
+Repositories abstract data sources
+UI must remain reusable
+UI Rules
+Reusable widgets only
+Responsive layouts
+Consistent spacing
+Consistent typography
+Consistent table styles
+Consistent form styles
+Security Rules
+Never trust UI permissions only
+Validate permissions before actions
+Handle session expiration globally
+Protect all private routes
+Execution Order
+Sprint 1
+ShellRoute
+MainLayout
+ContentWrapper
+Breadcrumb
+Theme setup
+Sprint 2
+Authentication system
+Session manager
+Auth redirects
+Route guards
+Sprint 3
+Permission manager
+Role system
+Permission middleware
+Sprint 4
+Users module
+Roles screens
+Profile settings
+Expected Result After Phase 1
+
+After completing this phase, the system should have:
+
+Stable dashboard architecture
+Persistent navigation layout
+Authentication system
+Authorization system
+Role & permission infrastructure
+User management foundation
+Theme system
+Protected routes
+Reusable layout components
+
+This foundation will support future modules like:
+
+Patients
+Appointments
+Doctors
+Billing
+Reports
+Notifications
+Analytics
+
+
+Additional Requirement — Global Search System
+Feature Name
+
+Global Search System
+
+Objective
+
+Create a centralized global search feature inside the Top App Bar.
+
+The search system should allow users to quickly search across the entire clinic system from anywhere in the application.
+
+The UI component already exists and is ready.
+
+Only the business logic, architecture integration, and system behavior are required.
+
+Search Location
+
+The global search field exists inside:
+
+Top App Bar
+
+The search must be accessible from all internal dashboard pages.
+
+Expected Behavior
+
+The search should support searching across multiple modules such as:
+
+Patients
+Doctors
+Appointments
+Invoices
+Users
+Prescriptions
+Medical Records
+Search Experience
+Requirements
+Real-time search
+Debounced requests
+Dropdown results
+Keyboard navigation support
+Loading state
+Empty state
+Error state
+Responsive behavior
+Search Result Dropdown
+Requirements
+
+The dropdown should:
+
+Open below the search field
+Group results by module/category
+Support scrolling
+Show quick preview information
+Navigate to selected item details
+Example Result Structure
+Patients
+ ├── Ahmed Mohamed
+ ├── Sara Ali
+
+Doctors
+ ├── Dr. Karim Hassan
+
+Appointments
+ ├── Appointment #1023
+Search Architecture
+Task 1 — Create Global Search Module
+Structure
+global_search/
+ ├── data/
+ ├── domain/
+ └── presentation/
+Task 2 — Search Entities
+Required Entities
+SearchResultEntity
+SearchCategoryEntity
+SearchItemEntity
+Task 3 — Search Repository
+Responsibilities
+Handle search requests
+Merge results
+Manage caching
+Handle pagination if needed
+Task 4 — Search Service
+Responsibilities
+API communication
+Request cancellation
+Debouncing support
+Error handling
+Task 5 — Search Controller
+Responsibilities
+Manage search state
+Control dropdown visibility
+Handle selected item navigation
+Manage loading & empty states
+Search Categories
+Requirements
+
+Each result should contain:
+
+id
+title
+subtitle
+category
+route
+optional avatar/icon
+Navigation Requirements
+
+When selecting a search result:
+
+Navigate directly to the details page
+Close dropdown automatically
+Preserve dashboard layout
+Performance Requirements
+Important
+Use debounce
+Prevent unnecessary requests
+Cancel previous requests when typing quickly
+Avoid rebuilding the whole page
+Cache recent searches if possible
+Permission Integration
+Important
+
+Search results must respect permissions.
+
+Example:
+
+If the user cannot access invoices,
+invoice results must not appear.
+Suggested Search Flow
+User Types
+    ↓
+Debounce
+    ↓
+Search Request
+    ↓
+Permission Filtering
+    ↓
+Dropdown Results
+    ↓
+Select Item
+    ↓
+Navigate to Details Page
+UI States
+Required States
+Idle State
+Loading State
+Empty State
+Error State
+Results State
+Optional Future Enhancements
+Recent searches
+Search history
+Command palette mode
+Keyboard shortcuts
+AI-powered search
+Voice search
+Offline search cache
+Technical Notes
+Keep search logic independent from UI
+Search should be reusable globally
+Avoid direct API calls inside widgets
+Use centralized navigation handling
+Support future backend-driven search indexing
+Expected Result
+
+A scalable and reusable global search system integrated into the Top App Bar that allows fast navigation across the entire clinic management system while respecting permissions and maintaining performance.

@@ -10,6 +10,7 @@ import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/navigation_extension.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Core/Utils/utils.dart';
+import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 
 class AppDialogs {
   /// Enhanced Loading Dialog for a more premium look when sending requests
@@ -112,7 +113,7 @@ class AppDialogs {
   static void closeOpenDialogs() {
     /// close All open sheets and dialogs
     if (Get.isDialogOpen == true) {
-      Get.back();
+      NavigationService.instance.pop();
     }
     // Navigator.of(context).pop();
   }
@@ -209,7 +210,7 @@ class AppDialogs {
     if (closeAfterAWhile) {
       Future.delayed(const Duration(milliseconds: 1500), () {}).then((_) async {
         if (Get.isDialogOpen!) {
-          Get.back();
+          NavigationService.instance.pop();
           // await AudioService.play(audio_zoom_out);
           Utils.applyHapticFeedback(vibration: true);
         }

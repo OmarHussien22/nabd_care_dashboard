@@ -6,7 +6,7 @@ import 'package:care_desk/src/Core/Constants/Enums/app_source.dart';
 import 'package:care_desk/src/Core/network_structure/networking/src/utils/upload_option.dart';
 import 'package:care_desk/src/Shared/Entities/pagination.dart';
 import 'package:care_desk/src/Shared/Models/pagination_model.dart';
-import 'package:care_desk/src/core/network_structure/params/params.dart';
+import 'package:care_desk/src/Core/network_structure/params/params.dart';
 
 import '../../utils/general_utils.dart';
 import '../constants/exception_constants.dart';
@@ -90,10 +90,15 @@ abstract class RepoInterface<T> {
       return await handleCall(params: params)!;
     }
     if (IntalizeAppSource.currentSource == AppSource.dev) {
+      if (devData != null) {
+        return await sendFakeData(devData,
+            params: params, title: 'Dev Data', uploadOption: uploadoption)!;
+      }
       return await handleCall(params: params)!;
     }
     if (IntalizeAppSource.currentSource == AppSource.test) {
-      return await sendFakeData(testData, params: params, title: 'Test Data',uploadOption: uploadoption)!;
+      return await sendFakeData(testData,
+          params: params, title: 'Test Data', uploadOption: uploadoption)!;
     } else {
       return await handleCall(params: params)!;
     }

@@ -1,6 +1,4 @@
-import 'package:care_desk/src/Features/Auth/presentation/pages/imports_auth.dart';
-import 'package:get/get.dart';
-
+import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 import '../../../../../../../shared/caches/user_cache.dart';
 
 import '../../../../../../utils/general_utils.dart';
@@ -17,7 +15,7 @@ class UnAuthHandler {
     UserCache().logout();
     UserCache().logoutUser();
     printDM("handleUnAuth called");
-    Get.offAll(() => const LoginPage());
+    NavigationService.instance.go('/login');
   }
 
   void handelBlockUser() {

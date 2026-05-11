@@ -1,4 +1,4 @@
-import 'package:care_desk/src/Core/Styles/Colors/app_palette.dart';
+import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/General/table/dynamic_table.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:flutter/material.dart';
@@ -38,9 +38,9 @@ class _AppointmentsTableState extends State<AppointmentsTable> {
               Row(children: [
                 CircleAvatar(
                     radius: 14,
-                    backgroundColor: AppPalette.primary.withOpacity(0.1),
+                    backgroundColor: AppColors.get.primary.withOpacity(0.1),
                     child: CustomText("P${absoluteIndex + 1}",
-                        fontSize: 10, color: AppPalette.primary)),
+                        fontSize: 10, color: AppColors.get.primary)),
                 const SizedBox(width: 8),
                 CustomText("Patient Name ${absoluteIndex + 1}",
                     fontWeight: FW.medium),
@@ -55,15 +55,15 @@ class _AppointmentsTableState extends State<AppointmentsTable> {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
                   color: index % 3 == 0
-                      ? AppPalette.success.withOpacity(0.1)
-                      : AppPalette.warning.withOpacity(0.1),
+                      ? AppColors.get.success.withOpacity(0.1)
+                      : AppColors.get.warning.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: CustomText(
                   index % 3 == 0 ? "Completed" : "Pending",
                   fontSize: 11,
                   color:
-                      index % 3 == 0 ? AppPalette.success : AppPalette.warning,
+                      index % 3 == 0 ? AppColors.get.success : AppColors.get.warning,
                   fontWeight: FW.semiBold,
                 ),
               ),

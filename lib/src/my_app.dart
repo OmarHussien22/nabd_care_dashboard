@@ -1,6 +1,4 @@
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
-import 'package:care_desk/src/Core/routers/app_router_imports.dart';
-import 'package:care_desk/src/Features/MainLayout/presentation/pages/main_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:care_desk/src/Core/App/app_material.dart';
@@ -22,7 +20,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
@@ -44,7 +42,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         designSize: AppSizes.screenSize,
         minTextAdapt: true,
         builder: (context, child) {
-          child = AppMaterial(initPage: AppRoutes.mainApp);
+          child = const AppMaterial();
           return child;
         },
       ),

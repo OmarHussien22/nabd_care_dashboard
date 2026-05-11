@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Buttons/Basic/custom_rounded_button.dart';
@@ -37,7 +38,7 @@ class DialogPendingSendRequestDevice extends StatelessWidget {
                       height: 50.toH(),
                       onPressed: () {
                         printDM("send request device is okay");
-                        Get.back();
+                        NavigationService.instance.pop();
                       },
                     ),
                   ),

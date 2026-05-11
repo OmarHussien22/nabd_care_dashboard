@@ -1,15 +1,22 @@
+import 'package:care_desk/src/Features/Roles/data/models/permission_model.dart';
+import 'package:care_desk/src/Features/Roles/data/models/role_model.dart';
+import 'package:care_desk/src/Features/Users/domain/entities/auth_entities.dart';
+import 'package:care_desk/src/Features/Users/domain/entities/user_entity.dart';
 import 'package:equatable/equatable.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/json_parsing_extension.dart';
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
 
-class UserModel with EquatableMixin {
-  int? id;
-  String? name;
-  String? email;
+class UserModel {
+  int id;
+  String name;
+  String email;
+  String? avatar;
+  List<RoleEntity> roles;
+  List<PermissionEntity> permissions;
+  String apiToken;
+  int userTypeId;
+
   String? phone;
-  String? apiToken;
-  String? image =
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTewPdubiwZ-wA40RGuCnUu-IBIkj3iSCGGd6s5Hf7Q&s";
   bool? isPhoneVerify;
   String? code;
   String? userType;
@@ -29,14 +36,14 @@ class UserModel with EquatableMixin {
   bool? isApproved;
 
   UserModel({
-    this.id,
-    this.name,
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.apiToken,
+    this.avatar,
     this.phone,
-    this.apiToken,
     this.isPhoneVerify,
-    this.image,
     this.code,
-    this.email,
     this.userType,
     this.birthDay,
     this.gender,
@@ -52,6 +59,9 @@ class UserModel with EquatableMixin {
     this.deviceType,
     this.version,
     this.isApproved,
+    this.permissions = const [],
+    this.roles = const [],
+    required this.userTypeId,
   });
 
   Map<String, dynamic> toMap() {
@@ -61,7 +71,7 @@ class UserModel with EquatableMixin {
       'phone': phone,
       'api_token': apiToken,
       'is_verified': isPhoneVerify,
-      'image': image,
+      'image': avatar,
       'code': code,
       'email': email,
       'user_type': userType,
@@ -79,43 +89,36 @@ class UserModel with EquatableMixin {
       'device_type': deviceType,
       'version': version,
       'is_approved': isApproved,
+      'user_type_id': userTypeId,
     };
   }
 
-  UserModel.fromJson(Map<String, dynamic> json) {
-    printDM("************UserModel.fromMap(map)************");
-    id = json.parseInt('id');
-    printDM("id => $id ");
-    name = json.parseString('name');
-    printDM("name => $name ");
-    phone = json.parseString('phone');
-    printDM("phone => $phone ");
-    apiToken = json.parseString('api_token');
-    printDM("api_token => $apiToken ");
-    isPhoneVerify = json.parseBool('is_verified');
-    printDM("is_phone_verify => $isPhoneVerify ");
-    image = json.parseString('image');
-    printDM("image => $image");
-    code = json.parseString('code');
-    printDM("code => $code");
-    email = json.parseString('email');
-    printDM("email => $email");
-    isBlocked = json.parseBool('is_blocked');
-    printDM("isBlocked => $isBlocked");
-    isActive = json.parseBool('is_active');
-    printDM("isActive => $isActive");
-    address = json.parseString('address');
-    printDM("address => $address");
-    deviceToken = json.parseString('device_token');
-    printDM("deviceToken => $deviceToken");
-    deviceId = json.parseString('device_id');
-    printDM("deviceId => $deviceId");
-    deviceType = json.parseString('device_type');
-    printDM("deviceType => $deviceType");
-    version = json.parseString('version');
-    printDM("version => $version");
-    isApproved = json.parseBool('is_approved');
-    printDM("isApproved => $isApproved");
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json.parseInt('id'),
+      name: json.parseString('name'),
+      phone: json.parseString('phone'),
+      apiToken: json.parseString('api_token'),
+      isPhoneVerify: json.parseBool('is_verified'),
+      avatar: json.parseString('image'),
+      code: json.parseString('code'),
+      email: json.parseString('email'),
+      isBlocked: json.parseBool('is_blocked'),
+      isActive: json.parseBool('is_active'),
+      address: json.parseString('address'),
+      deviceToken: json.parseString('device_token'),
+      deviceId: json.parseString('device_id'),
+      deviceType: json.parseString('device_type'),
+      version: json.parseString('version'),
+      isApproved: json.parseBool('is_approved'),
+      permissions: (json['permissions'] as List? ?? [])
+          .map((e) => PermissionModel.fromJson(e))
+          .toList(),
+      roles: (json['roles'] as List? ?? [])
+          .map((e) => RoleModel.fromJson(e))
+          .toList(),
+      userTypeId: json.parseInt('user_type_id'),
+    );
   }
 
   @override
@@ -125,7 +128,7 @@ class UserModel with EquatableMixin {
         phone,
         apiToken,
         isPhoneVerify,
-        image,
+        avatar,
         code,
         email,
         userType,
@@ -144,4 +147,18 @@ class UserModel with EquatableMixin {
         version,
         isApproved,
       ];
+
+  Map<String, dynamic> toJson() => toMap();
+
+  static UserModel get devUser => UserModel(
+        id: 1,
+        name: 'Admin',
+        email: 'admin@gmail.com',
+        avatar:
+            'https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839653_LxRKJopMjofmvbVYIHAjjUhxfqApStEa.jpg',
+        roles: [RoleEntity.devRole],
+        permissions: [PermissionEntity.devPermission],
+        apiToken: 'dev_api_token',
+        userTypeId: 1,
+      );
 }

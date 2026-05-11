@@ -1,44 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:care_desk/src/Core/Styles/Colors/app_palette.dart';
+import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 
 abstract class Themes {
   static ThemeData light = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
-    primaryColor: AppPalette.primary,
-    scaffoldBackgroundColor: AppPalette.background,
+    primaryColor: AppColors.get.primary,
+    scaffoldBackgroundColor: AppColors.get.background,
     
     // Color Scheme
-    colorScheme: const ColorScheme.light(
-      primary: AppPalette.primary,
-      secondary: AppPalette.secondary,
-      surface: AppPalette.surface,
-      error: AppPalette.error,
+    colorScheme: ColorScheme.light(
+      primary: AppColors.get.primary,
+      secondary: AppColors.get.secondary,
+      surface: AppColors.get.surface,
+      error: AppColors.get.error,
       onPrimary: Colors.white,
       onSecondary: Colors.white,
-      onSurface: AppPalette.textPrimary,
-      surfaceContainerHighest: AppPalette.surfaceContainer,
+      onSurface: AppColors.get.textPrimary,
+      surfaceContainerHighest: AppColors.get.surfaceContainer,
     ),
 
     // Typography
     textTheme: GoogleFonts.interTextTheme().apply(
-      bodyColor: AppPalette.textPrimary,
-      displayColor: AppPalette.textPrimary,
+      bodyColor: AppColors.get.textPrimary,
+      displayColor: AppColors.get.textPrimary,
     ),
 
     // App Bar
     appBarTheme: AppBarTheme(
-      backgroundColor: AppPalette.surface,
+      backgroundColor: AppColors.get.surface,
       elevation: 0,
       scrolledUnderElevation: 1,
       centerTitle: false,
-      iconTheme: const IconThemeData(color: AppPalette.textPrimary),
+      iconTheme: IconThemeData(color: AppColors.get.textPrimary),
       titleTextStyle: GoogleFonts.inter(
         fontSize: 18,
         fontWeight: FontWeight.w600,
-        color: AppPalette.textPrimary,
+        color: AppColors.get.textPrimary,
       ),
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -48,47 +48,47 @@ abstract class Themes {
 
     // Card
     cardTheme: CardThemeData(
-      color: AppPalette.surface,
+      color: AppColors.get.surface,
       elevation: 1,
       margin: EdgeInsets.zero,
       shadowColor: Colors.black.withOpacity(0.05),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
-        side: const BorderSide(color: AppPalette.border, width: 1),
+        side: BorderSide(color: AppColors.get.border, width: 1),
       ),
     ),
 
     // Inputs (Desktop Style)
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: AppPalette.surface,
+      fillColor: AppColors.get.surface,
       isDense: true,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: AppPalette.border),
+        borderSide: BorderSide(color: AppColors.get.border),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: AppPalette.border),
+        borderSide: BorderSide(color: AppColors.get.border),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: AppPalette.primary, width: 1.5),
+        borderSide: BorderSide(color: AppColors.get.primary, width: 1.5),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: AppPalette.error),
+        borderSide: BorderSide(color: AppColors.get.error),
       ),
-      hoverColor: AppPalette.surfaceContainer,
-      labelStyle: const TextStyle(color: AppPalette.textSecondary),
-      hintStyle: const TextStyle(color: AppPalette.textDisabled),
+      hoverColor: AppColors.get.surfaceContainer,
+      labelStyle: TextStyle(color: AppColors.get.textSecondary),
+      hintStyle: TextStyle(color: AppColors.get.textDisabled),
     ),
 
     // Buttons
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppPalette.primary,
+        backgroundColor: AppColors.get.primary,
         foregroundColor: Colors.white,
         elevation: 0,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -99,8 +99,8 @@ abstract class Themes {
     
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        foregroundColor: AppPalette.primary,
-        side: const BorderSide(color: AppPalette.border),
+        foregroundColor: AppColors.get.primary,
+        side: BorderSide(color: AppColors.get.border),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         textStyle: GoogleFonts.inter(fontWeight: FontWeight.w600),
@@ -108,8 +108,8 @@ abstract class Themes {
     ),
 
     // Divider
-    dividerTheme: const DividerThemeData(
-      color: AppPalette.divider,
+    dividerTheme: DividerThemeData(
+      color: AppColors.get.divider,
       thickness: 1,
       space: 1,
     ),

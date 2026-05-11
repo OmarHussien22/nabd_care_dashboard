@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 import 'package:care_desk/src/Features/Auth/presentation/pages/imports_auth.dart';
 
 import '../../../../Core/Styles/Colors/app_colors.dart';
@@ -28,7 +28,7 @@ class FooterLogin extends StatelessWidget {
             2.ESW(),
             InkWell(
               onTap: () {
-                Get.offAll(() => const RegisterPage(),transition: Transition.fadeIn, duration: const Duration(milliseconds: 300));
+                NavigationService.instance.go('/register');
               },
               child: CustomText(
                 "create_account",

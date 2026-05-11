@@ -1,18 +1,15 @@
 name: care_desk
 description: "CareDesk - A Clinic Management System."
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
 
-
 dependencies:
   flutter:
     sdk: flutter
-
 
   cupertino_icons: ^1.0.8
   google_fonts: ^6.3.2
@@ -25,6 +22,8 @@ dependencies:
   device_info_plus: ^12.3.0
   universal_html: ^2.3.0
   lottie: ^3.3.1
+  go_router: ^14.8.1
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:
@@ -43,7 +42,7 @@ dev_dependencies:
   flutter_spinkit: ^5.1.0
   flutter_staggered_animations: ^1.1.1
   # confetti: ^0.8.0  # Blast some confetti all over the screen and celebrate user achievements!
-#  lottie: ^3.3.0
+  #  lottie: ^3.3.0
   flutter_html: ^3.0.0-beta.2
   flutter_widget_from_html: any
   flutter_colorpicker: ^1.1.0
@@ -57,9 +56,6 @@ dev_dependencies:
   #----------------- Rating -----------------
   flutter_rating_bar: ^4.0.1
   flutter_rounded_date_picker: ^3.0.2
-
-  #----------------- Responsive --------------
-  flutter_screenutil: ^5.9.3
 
   #----------------- Scrollable -----------------
   flutter_staggered_grid_view: ^0.7.0
@@ -79,15 +75,13 @@ dev_dependencies:
   sqflite: ^2.4.1
   path: ^1.9.0
   sqflite_common_ffi: ^2.3.4+4
-  
+
   pretty_dio_logger: ^1.2.0-beta-1
   dio_http_cache: ^0.3.0
   dio: ^4.0.6
   #shared_preferences: ^2.3.2
   country_code_picker: ^3.1.0
   crypto: ^3.0.3
-
-
 
 flutter:
   # The following line ensures that the Material Icons font is
@@ -99,7 +93,6 @@ flutter:
     - assets/fonts/
     - assets/images/
     - assets/lottie/
-
 
   fonts:
     - family: cairo

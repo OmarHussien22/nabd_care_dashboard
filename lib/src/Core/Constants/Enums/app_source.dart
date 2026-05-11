@@ -7,7 +7,7 @@ enum AppSource {
 }
 
 class IntalizeAppSource {
-  static AppSource get currentSource => AppSource.test;
+  static AppSource get currentSource => AppSource.dev;
 
   static void setAppSource() {
     printDM("App Flow${currentSource.toString()}");

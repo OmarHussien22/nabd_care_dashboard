@@ -13,7 +13,7 @@ abstract class ColorInterface {
   Color get secondaryLight => Color(0xFF34D399); // Emerald 400
 
   // Neutrals - Light
-  Color get background => Color(0xFFF8FAFC); // Slate 50
+  Color get background => Color.fromARGB(255, 230, 235, 240); // Slate 50
   Color get surface => Color(0xFFFFFFFF);
   Color get surfaceContainer => Color(0xFFF1F5F9); // Slate 100
 

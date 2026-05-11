@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../../../../Core/Styles/Colors/app_colors.dart';
 import '../../../../../../Core/Utils/Extensions/screen_spaces_extension.dart';
+import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 
 class ButtonClose extends StatelessWidget {
   final VoidCallback? onTap;
@@ -14,7 +14,7 @@ class ButtonClose extends StatelessWidget {
     return GestureDetector(
       onTap: onTap ??
           () {
-            Get.back();
+            NavigationService.instance.pop();
           },
       child: Container(
         height: 25.toH(),

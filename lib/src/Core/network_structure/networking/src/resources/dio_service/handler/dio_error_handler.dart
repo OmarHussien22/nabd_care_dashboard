@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:care_desk/src/core/network_structure/exceptions/failure.dart';
-import 'package:care_desk/src/core/network_structure/networking/src/interfaces/handler/error_handler.dart';
-import 'package:care_desk/src/core/network_structure/networking/src/utils/status_handler.dart';
+import 'package:care_desk/src/Core/network_structure/exceptions/failure.dart';
+import 'package:care_desk/src/Core/network_structure/networking/src/interfaces/handler/error_handler.dart';
+import 'package:care_desk/src/Core/network_structure/networking/src/utils/status_handler.dart';
 
 class DioErrorHandler extends ErrorHandler<DioError> {
   DioErrorHandler._();

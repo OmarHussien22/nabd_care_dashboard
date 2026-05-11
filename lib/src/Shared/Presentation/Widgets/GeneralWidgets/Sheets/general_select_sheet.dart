@@ -8,6 +8,7 @@ import 'package:care_desk/src/Shared/Entities/title_interface.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Dialogs/app_dialogs.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Sheets/app_Sheet.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Sheets/src/Resources/sheet_single_select.dart';
+import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 
 import '../../../../../Core/Styles/Colors/app_colors.dart';
 import '../../../../../Core/Utils/Validation/Implementation/DefaultValidator/default_validator.dart';
@@ -62,7 +63,7 @@ class GeneralSelectSheet<T extends TitleInterface> extends StatelessWidget {
                 selectedId: selectedId,
                 title: title,
                 onSave: (value) {
-                  Get.back();
+                  NavigationService.instance.pop();
                   onSelected(value);
                 },
                 items: items,
@@ -82,7 +83,7 @@ class GeneralSelectSheet<T extends TitleInterface> extends StatelessWidget {
                   selectedId: selectedId,
                   title: title,
                   onSave: (value) {
-                    Get.back();
+                    NavigationService.instance.pop();
                     onSelected(value);
                   },
                   items: items,

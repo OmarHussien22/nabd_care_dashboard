@@ -1,11 +1,10 @@
+import 'package:care_desk/src/Features/Auth/presentation/manger/login_controller.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
-import 'package:care_desk/src/Features/LocalAuth/presentation/manager/login_user_local_controller.dart';
-import 'package:care_desk/src/Features/LocalAuth/presentation/manager/register_user_local_controller.dart';
-import 'package:care_desk/src/Features/LocalAuth/presentation/pages/add_role_page.dart';
-import 'package:care_desk/src/Features/LocalAuth/presentation/widgets/select_roles_sheet.dart';
+
 import 'package:care_desk/src/Shared/Presentation/Widgets/Animation/animated_wrapper.dart';
 
 import '../../../../Core/Constants/Decorations/app_Insets.dart';
@@ -22,10 +21,11 @@ import '../../../../Shared/Presentation/Widgets/GeneralWidgets/TextFields/Defaul
 import '../../../../Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/src/phone_form_field.dart';
 import '../../../../Shared/Presentation/Widgets/GeneralWidgets/TextFields/app_text_field.dart';
 import '../manger/change_password_controller.dart';
-import '../manger/check_verification_code_controller.dart';
+import '../manger/register_controller.dart';
 import '../manger/reset_password_controller.dart';
 import '../widgets/auth_header.dart';
 import '../widgets/footer_login.dart';
+import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
 
 part 'change_password_page.dart';
 // part 'enter_password_page.dart';
@@ -33,4 +33,3 @@ part 'change_password_page.dart';
 part 'login_page.dart';
 part 'register_page.dart';
 part 'reset_password_page.dart';
-part 'verification_page.dart';

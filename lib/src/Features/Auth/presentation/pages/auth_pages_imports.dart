@@ -1,5 +1,4 @@
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
-import 'package:care_desk/src/Features/Auth/presentation/manger/send_verification_code_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,4 +8,3 @@ import '../../../../Shared/Presentation/Widgets/GeneralWidgets/Buttons/Basic/cus
 import '../../../../Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/src/phone_form_field.dart';
 import '../widgets/auth_header.dart';
 
-part 'enter_phone_page.dart';
