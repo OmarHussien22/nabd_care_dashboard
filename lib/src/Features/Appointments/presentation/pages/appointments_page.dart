@@ -88,10 +88,10 @@ class AppointmentsPage extends StatelessWidget {
         CircleAvatar(
           radius: 16.toRad(),
           backgroundColor: AppColors.get.primary.withOpacity(0.1),
-          child: CustomText(initials, fontSize: 4, fontWeight: FW.bold, color: AppColors.get.primary),
+          child: CustomText(initials, fontSize: 12, fontWeight: FW.bold, color: AppColors.get.primary),
         ),
         12.ESW(),
-        CustomText(name, fontSize: 4.2, fontWeight: FW.semiBold, color: AppColors.get.textPrimary),
+        CustomText(name, fontSize: 13, fontWeight: FW.semiBold, color: AppColors.get.textPrimary),
       ],
     );
   }
@@ -104,7 +104,7 @@ class AppointmentsPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.toRad()),
         border: Border.all(color: AppColors.get.border.withOpacity(0.5)),
       ),
-      child: CustomText(type, fontSize: 3.5, color: AppColors.get.textSecondary, fontWeight: FW.medium),
+      child: CustomText(type, fontSize: 12, color: AppColors.get.textSecondary, fontWeight: FW.medium),
     );
   }
 
@@ -116,7 +116,7 @@ class AppointmentsPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.toRad()),
         border: Border.all(color: color.withOpacity(0.2)),
       ),
-      child: CustomText(status, fontSize: 3.5, color: color, fontWeight: FW.semiBold),
+      child: CustomText(status, fontSize: 12, color: color, fontWeight: FW.semiBold),
     );
   }
 }

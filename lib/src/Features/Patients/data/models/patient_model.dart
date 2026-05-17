@@ -18,6 +18,9 @@ class PatientModel extends PatientEntity {
     super.isActive = true,
     super.lastVisit,
     super.age,
+    super.chronicDiseases,
+    super.medications,
+    super.attachments,
   });
 
   factory PatientModel.fromJson(Map<String, dynamic> json) {
@@ -37,6 +40,9 @@ class PatientModel extends PatientEntity {
       isActive: json.parseBool('is_active') ?? true,
       lastVisit: json.parseString('last_visit'),
       age: json.parseInt('age'),
+      chronicDiseases: (json['chronic_diseases'] as List?)?.map((e) => e.toString()).toList(),
+      medications: (json['medications'] as List?)?.map((e) => Map<String, String>.from(e as Map)).toList(),
+      attachments: (json['attachments'] as List?)?.map((e) => Map<String, String>.from(e as Map)).toList(),
     );
   }
 
@@ -57,6 +63,9 @@ class PatientModel extends PatientEntity {
       'is_active': isActive,
       'last_visit': lastVisit,
       'age': age,
+      'chronic_diseases': chronicDiseases,
+      'medications': medications,
+      'attachments': attachments,
     };
   }
 }

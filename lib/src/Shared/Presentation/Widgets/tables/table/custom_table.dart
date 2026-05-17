@@ -159,7 +159,7 @@ class _CustomTableState extends State<CustomTable> {
                                   ? cellData
                                   : CustomText(
                                       cellData.toString(),
-                                      fontSize: 4,
+                                      fontSize: 12,
                                       textAlign: TextAlign.start,
                                       maxLines: widget.maxLines,
                                       isOverFlow: true,

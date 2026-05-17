@@ -16,6 +16,9 @@ class PatientEntity extends Equatable {
   final bool isActive;
   final String? lastVisit;
   final int? age;
+  final List<String>? chronicDiseases;
+  final List<Map<String, String>>? medications;
+  final List<Map<String, String>>? attachments;
 
   const PatientEntity({
     required this.id,
@@ -33,6 +36,9 @@ class PatientEntity extends Equatable {
     this.isActive = true,
     this.lastVisit,
     this.age,
+    this.chronicDiseases,
+    this.medications,
+    this.attachments,
   });
 
   PatientEntity copyWith({
@@ -51,6 +57,9 @@ class PatientEntity extends Equatable {
     bool? isActive,
     String? lastVisit,
     int? age,
+    List<String>? chronicDiseases,
+    List<Map<String, String>>? medications,
+    List<Map<String, String>>? attachments,
   }) {
     return PatientEntity(
       id: id ?? this.id,
@@ -68,6 +77,9 @@ class PatientEntity extends Equatable {
       isActive: isActive ?? this.isActive,
       lastVisit: lastVisit ?? this.lastVisit,
       age: age ?? this.age,
+      chronicDiseases: chronicDiseases ?? this.chronicDiseases,
+      medications: medications ?? this.medications,
+      attachments: attachments ?? this.attachments,
     );
   }
 
@@ -78,7 +90,7 @@ class PatientEntity extends Equatable {
   List<Object?> get props => [
         id, name, phone, email, avatar, gender, dateOfBirth, bloodType,
         address, emergencyContact, emergencyPhone, medicalNotes, isActive,
-        lastVisit, age
+        lastVisit, age, chronicDiseases, medications, attachments
       ];
 
 
@@ -95,6 +107,16 @@ class PatientEntity extends Equatable {
           bloodType: 'A+',
           address: 'Cairo, Egypt',
           lastVisit: '2024-05-10',
+          chronicDiseases: const ['Diabetes', 'Hypertension'],
+          medications: const [
+            {'name': 'Metformin', 'dosage': '500mg', 'notes': 'After meals'},
+            {'name': 'Lisinopril', 'dosage': '10mg', 'notes': 'Morning daily'}
+          ],
+          attachments: const [
+            {'name': 'Chest_XRay_Ahmed.png', 'path': 'assets/images/chest_xray.png', 'type': 'IMAGE'},
+            {'name': 'Blood_Report_Jan2026.pdf', 'path': 'assets/images/blood_report.pdf', 'type': 'PDF'},
+            {'name': 'Clinic_Invoices.xlsx', 'path': 'assets/images/invoice.xlsx', 'type': 'EXCEL'}
+          ],
         ),
         PatientEntity(
           id: 2,

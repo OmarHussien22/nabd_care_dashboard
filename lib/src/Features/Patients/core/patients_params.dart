@@ -37,6 +37,9 @@ class AddPatientParams extends Params {
   final String? emergencyContact;
   final String? emergencyPhone;
   final String? medicalNotes;
+  final List<String>? chronicDiseases;
+  final List<Map<String, String>>? medications;
+  final List<Map<String, String>>? attachments;
 
   AddPatientParams({
     required this.name,
@@ -48,6 +51,9 @@ class AddPatientParams extends Params {
     this.emergencyContact,
     this.emergencyPhone,
     this.medicalNotes,
+    this.chronicDiseases,
+    this.medications,
+    this.attachments,
   });
 
   @override
@@ -62,6 +68,9 @@ class AddPatientParams extends Params {
       if (emergencyContact != null) 'emergency_contact': emergencyContact,
       if (emergencyPhone != null) 'emergency_phone': emergencyPhone,
       if (medicalNotes != null) 'medical_notes': medicalNotes,
+      if (chronicDiseases != null) 'chronic_diseases': chronicDiseases,
+      if (medications != null) 'medications': medications,
+      if (attachments != null) 'attachments': attachments,
     };
   }
 }

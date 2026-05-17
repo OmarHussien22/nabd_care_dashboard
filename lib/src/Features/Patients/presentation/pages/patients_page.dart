@@ -132,7 +132,7 @@ class PatientsPage extends StatelessWidget {
   }) {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.all(10.toRad()),
+        padding: EdgeInsets.all(18.toRad()),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(18.toRad()),
@@ -175,17 +175,17 @@ class PatientsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(value,
-                      fontSize: 14,
+                      fontSize: 28,
                       fontWeight: FW.bold,
                       color: AppColors.get.textPrimary),
-                  4.ESH(),
+                  6.ESH(),
                   CustomText(label,
                       color: AppColors.get.textSecondary,
-                      fontSize: 10,
+                      fontSize: 13,
                       fontWeight: FW.medium),
-                  2.ESH(),
+                  4.ESH(),
                   CustomText(subtitle,
-                      color: color, fontSize: 10, fontWeight: FW.semiBold),
+                      color: color, fontSize: 11, fontWeight: FW.semiBold),
                 ],
               ),
             ),
@@ -288,7 +288,7 @@ class PatientsPage extends StatelessWidget {
         child: CustomText(
           label,
           fontWeight: isSelected ? FW.bold : FW.medium,
-          fontSize: 8.8,
+          fontSize: 12,
           color: isSelected ? Colors.white : Colors.grey.shade600,
         ),
       ),
@@ -298,7 +298,7 @@ class PatientsPage extends StatelessWidget {
   Widget _buildPerPageSelector(PatientsController cnt) {
     return Row(
       children: [
-        CustomText('Show:', color: Colors.grey.shade600, fontSize: 10.8),
+        CustomText('Show:', color: Colors.grey.shade600, fontSize: 12),
         8.ESW(),
         Container(
           padding:
@@ -319,7 +319,7 @@ class PatientsPage extends StatelessWidget {
                   .map((e) => DropdownMenuItem(
                         value: e,
                         child: CustomText('$e',
-                            fontSize: 9.8, fontWeight: FW.semiBold),
+                            fontSize: 12, fontWeight: FW.semiBold),
                       ))
                   .toList(),
             ),
@@ -391,7 +391,7 @@ class PatientsPage extends StatelessWidget {
           Icons.visibility_rounded,
           AppColors.get.info,
           'View Record',
-          () {},
+          () => context.go('/patients/details/${patient.id}'),
         ),
         6.ESW(),
         // Edit
@@ -438,7 +438,7 @@ class PatientsPage extends StatelessWidget {
                     patient.isActive
                         ? 'Deactivate Patient'
                         : 'Already Inactive',
-                    fontSize: 8.8,
+                    fontSize: 12,
                     fontWeight: FW.semiBold,
                     color:
                         patient.isActive ? Colors.orange.shade700 : Colors.grey,
@@ -570,7 +570,7 @@ class PatientsPage extends StatelessWidget {
             ),
             child: Center(
               child: CustomText(p.initials,
-                  fontSize: 8.5, fontWeight: FW.bold, color: Colors.white),
+                  fontSize: 13, fontWeight: FW.bold, color: Colors.white),
             ),
           ),
           14.ESW(),
@@ -578,13 +578,13 @@ class PatientsPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomText(p.name,
-                  fontSize: 8.5,
+                  fontSize: 13.5,
                   fontWeight: FW.bold,
                   color: AppColors.get.textPrimary),
               4.ESH(),
               CustomText(
                 '#PT-${p.id.toString().padLeft(4, '0')}',
-                fontSize: 8.2,
+                fontSize: 11,
                 color: AppColors.get.primary.withValues(alpha: 0.7),
                 fontWeight: FW.semiBold,
               ),
@@ -615,7 +615,7 @@ class PatientsPage extends StatelessWidget {
                   4.ESW(),
                   CustomText(p.bloodType ?? 'N/A',
                       fontWeight: FW.bold,
-                      fontSize: 9.5,
+                      fontSize: 12,
                       color: Colors.red.shade600),
                 ],
               ),
@@ -635,7 +635,7 @@ class PatientsPage extends StatelessWidget {
             4.ESW(),
             CustomText(
               '${p.age ?? '?'} yrs • ${p.gender ?? 'Unknown'}',
-              fontSize: 8.5,
+              fontSize: 12,
               color: AppColors.get.textSecondary,
             ),
           ],
@@ -654,7 +654,7 @@ class PatientsPage extends StatelessWidget {
             Icon(Icons.phone_rounded, size: 15, color: AppColors.get.info),
             5.ESW(),
             CustomText(p.phone ?? 'No Phone',
-                fontSize: 8.8, fontWeight: FW.medium),
+                fontSize: 12, fontWeight: FW.medium),
           ],
         ),
         5.ESH(),
@@ -663,7 +663,7 @@ class PatientsPage extends StatelessWidget {
             Icon(Icons.email_outlined, size: 15, color: Colors.grey.shade400),
             5.ESW(),
             CustomText(p.email ?? 'No Email',
-                fontSize: 8.2, color: AppColors.get.textSecondary),
+                fontSize: 11.5, color: AppColors.get.textSecondary),
           ],
         ),
       ],
@@ -677,7 +677,7 @@ class PatientsPage extends StatelessWidget {
       children: [
         CustomText(
           hasVisit ? p.lastVisit! : 'Never Visited',
-          fontSize: 8.8,
+          fontSize: 12,
           fontWeight: FW.semiBold,
           color: hasVisit
               ? AppColors.get.textPrimary
@@ -692,7 +692,7 @@ class PatientsPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(6),
             ),
             child: CustomText('Recent visit',
-                fontSize: 8.0,
+                fontSize: 11,
                 color: AppColors.get.success,
                 fontWeight: FW.semiBold),
           ),
@@ -719,7 +719,7 @@ class PatientsPage extends StatelessWidget {
             decoration: BoxDecoration(color: color, shape: BoxShape.circle),
           ),
           7.ESW(),
-          CustomText(label, fontSize: 8.5, color: color, fontWeight: FW.bold),
+          CustomText(label, fontSize: 12, color: color, fontWeight: FW.bold),
         ],
       ),
     );
@@ -763,7 +763,7 @@ class PatientsPage extends StatelessWidget {
             child: CustomText(
               'Showing ${cnt.patients.length} of ${cnt.totalPages * cnt.perPage} results',
               color: AppColors.get.textSecondary,
-              fontSize: 8.8,
+              fontSize: 12,
             ),
           ),
           Row(
@@ -810,7 +810,7 @@ class PatientsPage extends StatelessWidget {
                               ? Colors.white
                               : AppColors.get.textPrimary,
                           fontWeight: isSelected ? FW.bold : FW.medium,
-                          fontSize: 8,
+                          fontSize: 12,
                         ),
                       ),
                     ),

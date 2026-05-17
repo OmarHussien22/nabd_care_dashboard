@@ -114,7 +114,7 @@ class UsersListPage extends StatelessWidget {
           backgroundColor: AppColors.get.primary.withOpacity(0.1),
           child: CustomText(
             name[0].toUpperCase(),
-            fontSize: 4,
+            fontSize: 12,
             color: AppColors.get.primary,
             fontWeight: FW.bold,
           ),
@@ -122,7 +122,7 @@ class UsersListPage extends StatelessWidget {
         12.ESW(),
         CustomText(
           name,
-          fontSize: 4.2,
+          fontSize: 13,
           fontWeight: FW.semiBold,
           color: AppColors.get.textPrimary,
         ),
@@ -139,7 +139,7 @@ class UsersListPage extends StatelessWidget {
       ),
       child: CustomText(
         role,
-        fontSize: 3.5,
+        fontSize: 12,
         color: AppColors.get.primary,
         fontWeight: FW.semiBold,
       ),
@@ -161,7 +161,7 @@ class UsersListPage extends StatelessWidget {
         8.ESW(),
         CustomText(
           status,
-          fontSize: 3.8,
+          fontSize: 12,
           color: AppColors.get.textPrimary,
         ),
       ],

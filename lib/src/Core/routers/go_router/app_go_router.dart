@@ -5,6 +5,7 @@ import 'package:care_desk/src/Features/Dashboard/presentation/pages/dashboard_pa
 import 'package:care_desk/src/Features/Appointments/presentation/pages/appointments_page.dart';
 import 'package:care_desk/src/Features/Patients/presentation/pages/patients_page.dart';
 import 'package:care_desk/src/Features/Patients/presentation/pages/patient_form_page.dart';
+import 'package:care_desk/src/Features/Patients/presentation/pages/patient_details_page.dart';
 import 'package:care_desk/src/Features/Users/presentation/pages/users_list_page.dart';
 import 'package:care_desk/src/Features/Users/presentation/pages/user_form_page.dart';
 import 'package:care_desk/src/Features/Roles/presentation/pages/roles_list_page.dart';
@@ -91,6 +92,14 @@ class AppGoRouter {
                 path: 'edit/:id',
                 name: 'edit-patient',
                 builder: (context, state) => const PatientFormPage(isEdit: true),
+              ),
+              GoRoute(
+                path: 'details/:id',
+                name: 'patient-details',
+                builder: (context, state) {
+                  final id = int.tryParse(state.pathParameters['id'] ?? '') ?? 0;
+                  return PatientDetailsPage(patientId: id);
+                },
               ),
             ],
           ),
