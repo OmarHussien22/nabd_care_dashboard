@@ -60,18 +60,53 @@ class RolesListPage extends StatelessWidget {
                 '', // Placeholder for Actions column if needed, but we use customRowActions
               ]).toList(),
               customRowActions: [
-                (data) => ActionIconButton(
-                  icon: Icons.edit_outlined,
-                  color: AppColors.get.primary,
-                  onTap: () => context.go('/roles/edit/1'), // Should use real ID
-                  tooltipMessage: 'Edit Role',
-                ),
-                (data) => ActionIconButton(
-                  icon: Icons.delete_outline,
-                  color: AppColors.get.red,
-                  onTap: () {},
-                  tooltipMessage: 'Delete Role',
-                ),
+                (data) {
+                  final roleName = data[0] as String;
+                  final idx = cnt.roles.indexWhere((r) => r.name == roleName);
+                  if (idx == -1) return const SizedBox();
+                  final role = cnt.roles[idx];
+
+                  return ActionIconButton(
+                    icon: Icons.edit_outlined,
+                    color: AppColors.get.primary,
+                    onTap: () => context.go('/roles/edit/${role.id}'),
+                    tooltipMessage: 'Edit Role',
+                  );
+                },
+                (data) {
+                  final roleName = data[0] as String;
+                  final idx = cnt.roles.indexWhere((r) => r.name == roleName);
+                  if (idx == -1) return const SizedBox();
+                  final role = cnt.roles[idx];
+
+                  return ActionIconButton(
+                    icon: Icons.delete_outline,
+                    color: AppColors.get.red,
+                    onTap: () async {
+                      final confirmed = await Get.dialog<bool>(
+                        AlertDialog(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                          title: const CustomText('Delete Role', fontSize: 16, fontWeight: FW.bold),
+                          content: CustomText('Are you sure you want to permanently delete role "${role.name}"?', fontSize: 13),
+                          actions: [
+                            TextButton(onPressed: () => Get.back(result: false), child: const Text('Cancel')),
+                            ElevatedButton(
+                              onPressed: () => Get.back(result: true),
+                              style: ElevatedButton.styleFrom(backgroundColor: Colors.red, foregroundColor: Colors.white),
+                              child: const Text('Delete'),
+                            ),
+                          ],
+                        ),
+                      );
+                      if (confirmed == true) {
+                        cnt.roles.removeAt(idx);
+                        cnt.update();
+                        Get.snackbar('Success', 'Role removed successfully.', backgroundColor: Colors.green, colorText: Colors.white);
+                      }
+                    },
+                    tooltipMessage: 'Delete Role',
+                  );
+                },
               ],
             ),
           );

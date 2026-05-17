@@ -110,21 +110,20 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        _isMobileView = constraints.maxWidth < 900;
-
-        return AppContentWrapper(
-          title: 'System Settings',
-          breadcrumb: const AppBreadcrumb(
-            items: [
-              BreadcrumbItem(label: 'Dashboard', route: '/dashboard'),
-              BreadcrumbItem(label: 'Settings'),
-            ],
-          ),
-          child: _isMobileView ? _buildMobileLayout() : _buildDesktopLayout(),
-        );
-      },
+    return AppContentWrapper(
+      title: 'System Settings',
+      breadcrumb: const AppBreadcrumb(
+        items: [
+          BreadcrumbItem(label: 'Dashboard', route: '/dashboard'),
+          BreadcrumbItem(label: 'Settings'),
+        ],
+      ),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          _isMobileView = constraints.maxWidth < 900;
+          return _isMobileView ? _buildMobileLayout() : _buildDesktopLayout();
+        },
+      ),
     );
   }
 

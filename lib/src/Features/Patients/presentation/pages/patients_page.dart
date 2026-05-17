@@ -332,6 +332,7 @@ class PatientsPage extends StatelessWidget {
   // ─────────────────── TABLE ───────────────────
   Widget _buildTableContainer(PatientsController cnt, BuildContext context) {
     return Container(
+      width: double.infinity,
       key: ValueKey(cnt.patients.length),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -552,8 +553,8 @@ class PatientsPage extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 42.toRad(),
-            height: 42.toRad(),
+            width: 30.toRad(),
+            height: 30.toRad(),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [AppColors.get.primary, AppColors.get.primaryDark],
@@ -570,7 +571,7 @@ class PatientsPage extends StatelessWidget {
             ),
             child: Center(
               child: CustomText(p.initials,
-                  fontSize: 13, fontWeight: FW.bold, color: Colors.white),
+                  fontSize: 8, fontWeight: FW.bold, color: Colors.white),
             ),
           ),
           14.ESW(),
@@ -578,15 +579,17 @@ class PatientsPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomText(p.name,
-                  fontSize: 13.5,
-                  fontWeight: FW.bold,
+                  fontSize: 11,
+                  fontWeight: FW.semiBold,
+                  isOverFlow: true,
+                  maxLines: 1,
                   color: AppColors.get.textPrimary),
               4.ESH(),
               CustomText(
                 '#PT-${p.id.toString().padLeft(4, '0')}',
-                fontSize: 11,
+                fontSize: 12,
                 color: AppColors.get.primary.withValues(alpha: 0.7),
-                fontWeight: FW.semiBold,
+                fontWeight: FW.regular,
               ),
             ],
           ),
@@ -652,18 +655,28 @@ class PatientsPage extends StatelessWidget {
         Row(
           children: [
             Icon(Icons.phone_rounded, size: 15, color: AppColors.get.info),
-            5.ESW(),
-            CustomText(p.phone ?? 'No Phone',
-                fontSize: 12, fontWeight: FW.medium),
+            3.ESW(),
+            CustomText(
+              p.phone ?? 'No Phone',
+              fontSize: 10,
+              fontWeight: FW.medium,
+              isOverFlow: true,
+              maxLines: 1,
+            ),
           ],
         ),
         5.ESH(),
         Row(
           children: [
             Icon(Icons.email_outlined, size: 15, color: Colors.grey.shade400),
-            5.ESW(),
-            CustomText(p.email ?? 'No Email',
-                fontSize: 11.5, color: AppColors.get.textSecondary),
+            3.ESW(),
+            CustomText(
+              p.email ?? 'No Email',
+              fontSize: 10,
+              color: AppColors.get.textSecondary,
+              isOverFlow: true,
+              maxLines: 1,
+            ),
           ],
         ),
       ],

@@ -19,6 +19,7 @@ class DynamicTable extends StatefulWidget {
   final Function(int)? onEdit;
   final Function(int)? onDelete;
   final Function(int)? onView;
+
   final Function(int)? onPageChanged;
   final int currentPage;
   final int totalPages;
@@ -49,7 +50,7 @@ class _DynamicTableState extends State<DynamicTable> {
       width += col.width;
     }
     // Actions column width + extra buffer
-    width += 100; 
+    width += 100;
 
     final screenWidth = MediaQuery.of(context).size.width;
     if (width < screenWidth) {
@@ -92,7 +93,7 @@ class _DynamicTableState extends State<DynamicTable> {
                     children: [
                       // Sticky Header
                       TableHeader(columns: widget.columns),
-                      
+
                       // Scrollable Rows
                       Expanded(
                         child: CustomScrollbar(
@@ -103,18 +104,21 @@ class _DynamicTableState extends State<DynamicTable> {
                             child: widget.rows.isEmpty
                                 ? SizedBox(
                                     height: 400,
-                                    child: Center(child: IllustrationEmptyData()),
+                                    child:
+                                        Center(child: IllustrationEmptyData()),
                                   )
                                 : Column(
-                                    children: widget.rows.map(
-                                      (row) => DynamicTableRow(
-                                        row: row,
-                                        columns: widget.columns,
-                                        onEdit: widget.onEdit,
-                                        onDelete: widget.onDelete,
-                                        onView: widget.onView,
-                                      ),
-                                    ).toList(),
+                                    children: widget.rows
+                                        .map(
+                                          (row) => DynamicTableRow(
+                                            row: row,
+                                            columns: widget.columns,
+                                            onEdit: widget.onEdit,
+                                            onDelete: widget.onDelete,
+                                            onView: widget.onView,
+                                          ),
+                                        )
+                                        .toList(),
                                   ),
                           ),
                         ),
@@ -131,7 +135,8 @@ class _DynamicTableState extends State<DynamicTable> {
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border(
-                top: BorderSide(color: AppColors.get.border.withValues(alpha: 0.5)),
+                top: BorderSide(
+                    color: AppColors.get.border.withValues(alpha: 0.5)),
               ),
               borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(16),

@@ -3,6 +3,8 @@ import 'package:care_desk/src/Features/Auth/presentation/pages/imports_auth.dart
 import 'package:care_desk/src/Features/Auth/presentation/manger/auth_controller.dart';
 import 'package:care_desk/src/Features/Dashboard/presentation/pages/dashboard_page.dart';
 import 'package:care_desk/src/Features/Appointments/presentation/pages/appointments_page.dart';
+import 'package:care_desk/src/Features/Appointments/presentation/pages/appointment_form_page.dart';
+import 'package:care_desk/src/Features/Appointments/presentation/pages/appointments_calendar_page.dart';
 import 'package:care_desk/src/Features/Patients/presentation/pages/patients_page.dart';
 import 'package:care_desk/src/Features/Patients/presentation/pages/patient_form_page.dart';
 import 'package:care_desk/src/Features/Patients/presentation/pages/patient_details_page.dart';
@@ -107,6 +109,26 @@ class AppGoRouter {
             path: '/appointments',
             name: 'appointments',
             builder: (context, state) => const AppointmentsPage(),
+            routes: [
+              GoRoute(
+                path: 'create',
+                name: 'create-appointment',
+                builder: (context, state) => const AppointmentFormPage(isEdit: false),
+              ),
+              GoRoute(
+                path: 'edit/:id',
+                name: 'edit-appointment',
+                builder: (context, state) {
+                  final id = int.tryParse(state.pathParameters['id'] ?? '') ?? 0;
+                  return AppointmentFormPage(isEdit: true, appointmentId: id);
+                },
+              ),
+              GoRoute(
+                path: 'calendar',
+                name: 'appointments-calendar',
+                builder: (context, state) => const AppointmentsCalendarPage(),
+              ),
+            ],
           ),
           GoRoute(
             path: '/users',

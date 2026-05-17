@@ -33,8 +33,10 @@ class UsersListPage extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.get.primary,
             foregroundColor: Colors.white,
-            padding: EdgeInsets.symmetric(horizontal: 20.toW(), vertical: 12.toH()),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.toRad())),
+            padding:
+                EdgeInsets.symmetric(horizontal: 20.toW(), vertical: 12.toH()),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.toRad())),
             elevation: 0,
           ),
         ),
@@ -52,9 +54,12 @@ class UsersListPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 40.toH()),
                 child: Column(
                   children: [
-                    Icon(Icons.person_off_outlined, size: 64.toRad(), color: AppColors.get.textSecondary.withOpacity(0.5)),
+                    Icon(Icons.person_off_outlined,
+                        size: 64.toRad(),
+                        color: AppColors.get.textSecondary.withOpacity(0.5)),
                     16.ESH(),
-                    CustomText('No users found', fontSize: 16, color: AppColors.get.textSecondary),
+                    CustomText('No users found',
+                        fontSize: 16, color: AppColors.get.textSecondary),
                   ],
                 ),
               ),
@@ -69,35 +74,133 @@ class UsersListPage extends StatelessWidget {
             ),
             child: CustomTable(
               columnNames: const ['User', 'Email', 'Role', 'Status'],
-              data: cnt.users.map((u) => [
-                _buildUserCell(u.name, u.avatar),
-                u.email,
-                _buildRoleBadge(u.userTypeId.toString()), 
-                _buildStatusBadge(u.isActive ==true? "Active":"Inactive"),
-              ]).toList(),
+              data: cnt.users
+                  .map((u) => [
+                        _buildUserCell(u.name, u.avatar),
+                        u.email,
+                        _buildRoleBadge(u.userTypeId.toString()),
+                        _buildStatusBadge(
+                            u.isActive == true ? "Active" : "Inactive"),
+                      ])
+                  .toList(),
               customRowActions: [
                 (data) {
+                  final email = data[1] as String;
+                  final idx =
+                      controller.users.indexWhere((u) => u.email == email);
+                  if (idx == -1) return const SizedBox();
+                  final user = controller.users[idx];
+
                   return ActionIconButton(
                     icon: Icons.visibility_outlined,
                     color: AppColors.get.textSecondary,
-                    onTap: () {},
+                    onTap: () {
+                      Get.dialog(
+                        AlertDialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16)),
+                          title: Row(
+                            children: [
+                              Icon(Icons.badge_rounded,
+                                  color: AppColors.get.primary, size: 24),
+                              const SizedBox(width: 12),
+                              const CustomText('User Details',
+                                  fontSize: 16, fontWeight: FW.bold),
+                            ],
+                          ),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomText('Full Name: ${user.name}',
+                                  fontSize: 13, fontWeight: FW.bold),
+                              const SizedBox(height: 8),
+                              CustomText('Email Address: ${user.email}',
+                                  fontSize: 12.5),
+                              const SizedBox(height: 8),
+                              CustomText('Role Level ID: ${user.userTypeId}',
+                                  fontSize: 12.5),
+                              const SizedBox(height: 8),
+                              CustomText(
+                                  'Status: ${user.isActive == true ? "Active" : "Inactive"}',
+                                  fontSize: 12.5,
+                                  color: user.isActive == true
+                                      ? Colors.green
+                                      : Colors.red,
+                                  fontWeight: FW.bold),
+                            ],
+                          ),
+                          actions: [
+                            TextButton(
+                                onPressed: () => Get.back(),
+                                child: const Text('Close')),
+                          ],
+                        ),
+                      );
+                    },
                     tooltipMessage: 'View Details',
                   );
                 },
                 (data) {
+                  final email = data[1] as String;
+                  final idx =
+                      controller.users.indexWhere((u) => u.email == email);
+                  if (idx == -1) return const SizedBox();
+                  final user = controller.users[idx];
+
                   return ActionIconButton(
                     icon: Icons.edit_outlined,
                     color: AppColors.get.primary,
-                    onTap: () => context.go('/users/edit/1'),
+                    onTap: () => context.go('/users/edit/${user.id}'),
                     tooltipMessage: 'Edit User',
                   );
                 },
-                (data) => ActionIconButton(
-                  icon: Icons.delete_outline,
-                  color: AppColors.get.red,
-                  onTap: () {},
-                  tooltipMessage: 'Delete User',
-                ),
+                (data) {
+                  final email = data[1] as String;
+                  final idx =
+                      controller.users.indexWhere((u) => u.email == email);
+                  if (idx == -1) return const SizedBox();
+                  final user = controller.users[idx];
+
+                  return ActionIconButton(
+                    icon: Icons.delete_outline,
+                    color: AppColors.get.red,
+                    onTap: () async {
+                      final confirmed = await Get.dialog<bool>(
+                        AlertDialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16)),
+                          title: const CustomText('Delete User',
+                              fontSize: 16, fontWeight: FW.bold),
+                          content: CustomText(
+                              'Are you sure you want to permanently delete ${user.name} from staff list?',
+                              fontSize: 13),
+                          actions: [
+                            TextButton(
+                                onPressed: () => Get.back(result: false),
+                                child: const Text('Cancel')),
+                            ElevatedButton(
+                              onPressed: () => Get.back(result: true),
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.red,
+                                  foregroundColor: Colors.white),
+                              child: const Text('Delete'),
+                            ),
+                          ],
+                        ),
+                      );
+                      if (confirmed == true) {
+                        controller.users.removeAt(idx);
+                        controller.update();
+                        Get.snackbar('Success',
+                            'User deleted successfully from system registries.',
+                            backgroundColor: Colors.green,
+                            colorText: Colors.white);
+                      }
+                    },
+                    tooltipMessage: 'Delete User',
+                  );
+                },
               ],
             ),
           );
