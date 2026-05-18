@@ -32,7 +32,7 @@ class ImageNetwork extends StatelessWidget {
           ),
           fit: options?.fit,
           errorWidget: (context, url, error) {
-            printDM(error.toString(), name: 'ImageNetwork');
+            // printDM(error.toString(), name: 'ImageNetwork');
 
             return Center(
               child: Image.asset(

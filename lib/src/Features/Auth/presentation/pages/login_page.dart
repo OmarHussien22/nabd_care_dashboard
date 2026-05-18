@@ -16,7 +16,8 @@ class LoginPage extends StatelessWidget {
           final isWide = screenWidth > 900;
           final formMaxWidth = 480.0;
 
-          final loginForm = _LoginForm(logic: logic, node: node, maxWidth: formMaxWidth);
+          final loginForm =
+              _LoginForm(logic: logic, node: node, maxWidth: formMaxWidth);
 
           if (!isWide) {
             return Container(
@@ -49,7 +50,8 @@ class LoginPage extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: AppColors.get.background,
                     image: const DecorationImage(
-                      image: NetworkImage('https://www.transparenttextures.com/patterns/cubes.png'),
+                      image: NetworkImage(
+                          'https://www.transparenttextures.com/patterns/cubes.png'),
                       opacity: 0.05,
                     ),
                   ),
@@ -91,7 +93,7 @@ class LoginPage extends StatelessWidget {
                       ),
                       SizedBox(height: 40.toH()),
                       CustomText(
-                        "CareDesk Pro",
+                        "caredesk_pro",
                         fontSize: 32,
                         fontWeight: FW.bold,
                         color: Colors.white,
@@ -100,7 +102,7 @@ class LoginPage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 64.toW()),
                         child: CustomText(
-                          "The complete ecosystem for modern healthcare management. Experience the future of clinic operations.",
+                          "the_complete_ecosystem_for_modern_healthcare_management_experience_the_future_of_clinic_operations",
                           fontSize: 15,
                           textAlign: TextAlign.center,
                           color: Colors.white.withOpacity(0.8),
@@ -165,7 +167,6 @@ class _LoginForm extends StatelessWidget {
               color: AppColors.get.textSecondary,
             ),
             SizedBox(height: 40.toH()),
-            
             PhoneFormField(
               width: double.infinity,
               controller: logic.phoneController,
@@ -173,7 +174,6 @@ class _LoginForm extends StatelessWidget {
               onComplete: node.nextFocus,
             ),
             SizedBox(height: 24.toH()),
-
             AppPasswordField(
               width: double.infinity,
               hint: "••••••••",
@@ -183,18 +183,18 @@ class _LoginForm extends StatelessWidget {
                 logic.login();
               },
             ),
-
             SizedBox(height: 16.toH()),
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {},
-                child: CustomText("Forgot Password?", color: AppColors.get.primary, fontSize: 13, fontWeight: FW.semiBold),
+                child: CustomText("Forgot Password?",
+                    color: AppColors.get.primary,
+                    fontSize: 13,
+                    fontWeight: FW.semiBold),
               ),
             ),
-
             SizedBox(height: 32.toH()),
-
             ButtonDefault(
               height: 56.toH(),
               width: double.infinity,
@@ -204,15 +204,19 @@ class _LoginForm extends StatelessWidget {
               onPressed: logic.login,
               color: AppColors.get.primary,
             ),
-
             SizedBox(height: 32.toH()),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomText("New to CareDesk?", color: AppColors.get.textSecondary, fontSize: 14),
+                CustomText("New to CareDesk?",
+                    color: AppColors.get.textSecondary, fontSize: 14),
                 TextButton(
-                  onPressed: () => NavigationService.instance.replace('/register'),
-                  child: CustomText("Create Account", fontWeight: FW.bold, color: AppColors.get.primary, fontSize: 14),
+                  onPressed: () =>
+                      NavigationService.instance.replace('/register'),
+                  child: CustomText("Create Account",
+                      fontWeight: FW.bold,
+                      color: AppColors.get.primary,
+                      fontSize: 14),
                 ),
               ],
             ),

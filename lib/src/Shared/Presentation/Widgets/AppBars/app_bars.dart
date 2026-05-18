@@ -1,3 +1,5 @@
+import 'package:care_desk/src/Core/Utils/Extensions/extract_string.dart';
+import 'package:care_desk/src/Shared/Caches/user_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:care_desk/src/Core/Constants/Strings/Assets/app_basic_icons.dart';
@@ -16,7 +18,8 @@ class AppBars extends StatelessWidget implements PreferredSizeWidget {
   final double? toolbarHeight;
   final double? bottomHeight;
 
-  const AppBars._(this._appBar, {
+  const AppBars._(
+    this._appBar, {
     super.key,
     this.toolbarHeight,
     this.bottomHeight,
@@ -29,7 +32,6 @@ class AppBars extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(70);
-
 
   factory AppBars.logo({
     double? toolbarHeight,
@@ -84,7 +86,7 @@ class AppBars extends StatelessWidget implements PreferredSizeWidget {
         elevation: elevation ?? 0,
         backgroundColor: AppColors.get.background,
         leading:
-        isBack ? ButtonBack(color: arrowBackColor) : leading ?? 0.ESH(),
+            isBack ? ButtonBack(color: arrowBackColor) : leading ?? 0.ESH(),
       ),
       toolbarHeight: (toolbarHeight ?? kToolbarHeight).toH(),
     );
@@ -122,14 +124,14 @@ class AppBars extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: AppColors.get.secondaryColor,
         leading: isBack
             ? IconButton(
-          onPressed: () => NavigationService.instance.pop(),
-          splashRadius: 20.toRad(),
-          icon: Icon(
-            Icons.arrow_back_outlined,
-            size: 24.toRad(),
-          ),
-          color: AppColors.get.opposite,
-        )
+                onPressed: () => NavigationService.instance.pop(),
+                splashRadius: 20.toRad(),
+                icon: Icon(
+                  Icons.arrow_back_outlined,
+                  size: 24.toRad(),
+                ),
+                color: AppColors.get.opposite,
+              )
             : leading ?? 0.ESH(),
       ),
       toolbarHeight: (toolbarHeight ?? kToolbarHeight).toH(),
@@ -166,20 +168,21 @@ class CustomContainerIcons extends StatelessWidget {
   }
 }
 
-
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final VoidCallback? onLogout;
-
-  const MainAppBar({super.key, this.onLogout});
+  const MainAppBar({super.key});
 
   @override
   Size get preferredSize => Size.fromHeight(80.toH());
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
+    final isWide = screenWidth >= 900;
+
     return Container(
       height: preferredSize.height,
-      padding: EdgeInsets.symmetric(horizontal: 32.toW()),
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 12.toW() : 24.toW()),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border(
@@ -192,17 +195,25 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             id: 'main_layout',
             builder: (cnt) {
               return IconButton(
-                onPressed: cnt.toggleCollapse,
+                onPressed: () {
+                  if (isWide) {
+                    cnt.toggleCollapse();
+                  } else {
+                    Scaffold.of(context).openDrawer();
+                  }
+                },
                 icon: Icon(
-                  cnt.isCollapsed ? Icons.menu_open : Icons.menu,
-                  color: AppColors.get.textPrimary,
+                  isWide
+                      ? (cnt.isCollapsed ? Icons.menu : Icons.menu_open)
+                      : Icons.menu,
+                  color: AppColors.get.black,
                   size: 26.toRad(),
                 ),
-                tooltip: 'Toggle Sidebar',
+                tooltip: 'toggle_sidebar'.tr,
               );
             },
           ),
-          24.ESW(),
+          if (isMobile) 8.ESW() else 16.ESW(),
           Expanded(
             child: GlobalSearchField(
               items: const [
@@ -214,37 +225,55 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
               ],
             ),
           ),
-          32.ESW(),
-          _buildActionIcon(Icons.notifications_none_outlined, 'Notifications', 5),
-          16.ESW(),
-          _buildActionIcon(Icons.chat_bubble_outline_rounded, 'Messages', null),
-          32.ESW(),
-          _buildUserProfile(),
+          if (isMobile) 8.ESW() else 20.ESW(),
+          _buildActionIcon(
+            Icons.notifications_none_outlined,
+            'Notifications',
+            3,
+            size: isMobile ? 22.toRad() : 24.toRad(),
+          ),
+          if (!isMobile) ...[
+            12.ESW(),
+            _buildActionIcon(
+              Icons.chat_bubble_outline_rounded,
+              'Messages',
+              null,
+              size: 22.toRad(),
+            ),
+          ],
+          if (isMobile) 8.ESW() else 20.ESW(),
+          _buildUserProfile(isMobile),
         ],
       ),
     );
   }
 
-  Widget _buildActionIcon(IconData icon, String tooltip, int? badgeCount) {
+  Widget _buildActionIcon(IconData icon, String tooltip, int? badgeCount,
+      {double? size}) {
     return Stack(
       children: [
         IconButton(
           onPressed: () {},
-          icon: Icon(icon, color: AppColors.get.textSecondary, size: 24),
+          icon:
+              Icon(icon, color: AppColors.get.textSecondary, size: size ?? 20),
           tooltip: tooltip,
         ),
         if (badgeCount != null)
           Positioned(
-            top: 10,
+            top: 1,
             right: 10,
             child: Container(
               padding: const EdgeInsets.all(4),
-              decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
-              constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+              decoration: const BoxDecoration(
+                  color: Colors.red, shape: BoxShape.circle),
+              constraints: const BoxConstraints(minWidth: 12, minHeight: 14),
               child: Center(
                 child: Text(
                   badgeCount.toString(),
-                  style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -253,7 +282,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  Widget _buildUserProfile() {
+  Widget _buildUserProfile(bool isMobile) {
+    final name = UserCache().data?.name ?? 'User Name';
     return InkWell(
       onTap: () => NavigationService.instance.go('/profile'),
       borderRadius: BorderRadius.circular(12.toRad()),
@@ -261,19 +291,25 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
         padding: EdgeInsets.all(4.toRad()),
         child: Row(
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                CustomText('Omar Hussien', fontWeight: FW.bold, fontSize: 14),
-                CustomText('Administrator', color: AppColors.get.textSecondary, fontSize: 11),
-              ],
-            ),
-            16.ESW(),
+            if (!isMobile) ...[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText(name, fontWeight: FW.bold, fontSize: 12),
+                ],
+              ),
+              12.ESW(),
+            ],
             CircleAvatar(
-              radius: 20.toRad(),
+              radius: 18.toRad(),
               backgroundColor: AppColors.get.primary.withOpacity(0.1),
-              child: CustomText('OH', fontSize: 4, fontWeight: FW.bold, color: AppColors.get.primary),
+              child: CustomText(
+                ExtractString.getInitials(name),
+                fontSize: 11,
+                fontWeight: FW.bold,
+                color: AppColors.get.primary,
+              ),
             ),
           ],
         ),

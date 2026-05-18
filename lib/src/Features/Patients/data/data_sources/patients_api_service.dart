@@ -9,7 +9,7 @@ class PatientsApiService extends ServicesInterface {
   @override
   Future<Response> applyService({Params? params}) async {
     return await call(
-      'patients', // Dummy URL
+      urlFetchPatients,
       type: CrudType.get,
       params: params,
     );
@@ -23,7 +23,7 @@ class AddPatientApiService extends ServicesInterface {
   @override
   Future<Response> applyService({Params? params}) async {
     return await call(
-      'patients',
+      urlAddPatient,
       type: CrudType.post,
       params: params,
     );
@@ -37,7 +37,7 @@ class DeletePatientApiService extends ServicesInterface {
   @override
   Future<Response> applyService({Params? params}) async {
     return await call(
-      'patients/delete',
+      urlDeletePatient,
       type: CrudType.post,
       params: params,
     );

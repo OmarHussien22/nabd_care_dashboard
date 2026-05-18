@@ -1,4 +1,5 @@
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/AppBars/app_bars.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/Layout/presentation/manager/main_layout_controller.dart';
 import 'package:flutter/material.dart';
@@ -8,17 +9,17 @@ import 'package:get/get.dart';
 
 class MainLayout extends StatelessWidget {
   final Widget child;
-  final VoidCallback? onLogout;
+  // final VoidCallback? onLogout;
 
   const MainLayout({
     super.key,
     required this.child,
-    this.onLogout,
+    // this.onLogout,
   });
 
   @override
   Widget build(BuildContext context) {
-  final cnt=  Get.put(MainLayoutController());
+    Get.put(MainLayoutController());
     return GetBuilder<MainLayoutController>(
       id: 'main_layout',
       builder: (cnt) {
@@ -28,8 +29,9 @@ class MainLayout extends StatelessWidget {
         if (!isWide) {
           return Scaffold(
             backgroundColor: AppColors.get.background,
-            appBar: MainAppBar(onLogout: onLogout),
+            appBar: const MainAppBar(),
             drawer: const Sidebar(),
+            drawerEnableOpenDragGesture: true,
             body: child,
           );
         }
@@ -42,7 +44,7 @@ class MainLayout extends StatelessWidget {
               Expanded(
                 child: Column(
                   children: [
-                    MainAppBar(onLogout: onLogout),
+                    const MainAppBar(),
                     Expanded(child: child),
                   ],
                 ),
@@ -54,8 +56,3 @@ class MainLayout extends StatelessWidget {
     );
   }
 }
-
-
-
-
-

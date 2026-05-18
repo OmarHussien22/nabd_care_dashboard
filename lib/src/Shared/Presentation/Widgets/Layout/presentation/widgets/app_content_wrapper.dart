@@ -22,28 +22,26 @@ class AppContentWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: Column(
-          children: [
-            if (title != null ||
-                breadcrumb != null ||
-                (actions?.isNotEmpty ?? false))
-              _buildHeader(context),
-            Expanded(
-              child: scrollable
-                  ? SingleChildScrollView(
-                      padding: padding ?? EdgeInsets.all(24.toRad()),
-                      child: child,
-                    )
-                  : Padding(
-                      padding: padding ?? EdgeInsets.all(24.toRad()),
-                      child: child,
-                    ),
-            ),
-          ],
-        ),
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: Column(
+        children: [
+          if (title != null ||
+              breadcrumb != null ||
+              (actions?.isNotEmpty ?? false))
+            _buildHeader(context),
+          Expanded(
+            child: scrollable
+                ? SingleChildScrollView(
+                    padding: padding ?? EdgeInsets.all(24.toRad()),
+                    child: child,
+                  )
+                : Padding(
+                    padding: padding ?? EdgeInsets.all(24.toRad()),
+                    child: child,
+                  ),
+          ),
+        ],
       ),
     );
   }

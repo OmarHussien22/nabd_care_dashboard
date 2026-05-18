@@ -15,8 +15,10 @@ mixin ApiNames {
   final String uRLLogout = '${baseUrl}logout';
   final String uRLDeleteAccount = '${baseUrl}delete_account';
 
+  //=================statics & reports ==============
+  final String urlFetchStatics = "${baseUrl}fetch_statics";
+
   //==================Search===================//
-  final String urlSearch = "${baseUrl}seach_products";
   final String urlGlobalSearch = "${baseUrl}global_search";
 
   // =================Profile Screen================//

@@ -1,8 +1,12 @@
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+import 'package:care_desk/src/Shared/Caches/user_cache.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/Animation/animated_wrapper.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/dialogs/animate_dialogs.dart';
 
 import '../../../../Core/Utils/Extensions/screen_spaces_extension.dart';
 import '../widgets/dashboard_header.dart';
@@ -51,8 +55,10 @@ class _DashboardPageState extends State<DashboardPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 DashboardHeader(
-                  title: "Welcome Back, Omar!",
-                  subtitle: "Here's what's happening at your clinic today.",
+                  title:
+                      "${'welcome_back'.toTr()}, ${UserCache.instance.data?.name}",
+                  subtitle:
+                      'Here\'s_what\'s_happening_at_your_clinic_today'.toTr(),
                   actions: [
                     if (!isSmall) _buildActionButtons(),
                   ],
@@ -67,7 +73,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     _buildResponsiveStat(
                       constraints: constraints,
                       child: const StatCard(
-                        title: "Total Patients",
+                        title: "total_patients",
                         value: "1,248",
                         icon: Icons.people_outline,
                         color: Colors.blue,
@@ -77,7 +83,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     _buildResponsiveStat(
                       constraints: constraints,
                       child: const StatCard(
-                        title: "Appointments Today",
+                        title: "appointments_today",
                         value: "42",
                         icon: Icons.calendar_today_outlined,
                         color: Colors.orange,
@@ -87,8 +93,8 @@ class _DashboardPageState extends State<DashboardPage> {
                     _buildResponsiveStat(
                       constraints: constraints,
                       child: const StatCard(
-                        title: "Total Revenue",
-                          value: "\$12,450",
+                        title: "total_revenue",
+                        value: "\$12,450",
                         icon: Icons.attach_money,
                         color: Colors.green,
                         trend: "+18.2%",
@@ -97,7 +103,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     _buildResponsiveStat(
                       constraints: constraints,
                       child: const StatCard(
-                        title: "Active Doctors",
+                        title: "active_doctors",
                         value: "18",
                         icon: Icons.medical_services_outlined,
                         color: Colors.purple,
@@ -137,7 +143,8 @@ class _DashboardPageState extends State<DashboardPage> {
                     children: [
                       const Expanded(flex: 3, child: DashboardAppointments()),
                       24.ESW(),
-                      const Expanded(flex: 2, child: DoctorsAvailabilityWidget()),
+                      const Expanded(
+                          flex: 2, child: DoctorsAvailabilityWidget()),
                     ],
                   ),
 
@@ -184,7 +191,8 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  Widget _buildResponsiveStat({required BoxConstraints constraints, required Widget child}) {
+  Widget _buildResponsiveStat(
+      {required BoxConstraints constraints, required Widget child}) {
     double width;
     if (constraints.maxWidth < 600) {
       width = constraints.maxWidth;
@@ -200,24 +208,35 @@ class _DashboardPageState extends State<DashboardPage> {
     return Row(
       children: [
         OutlinedButton.icon(
-          onPressed: () {},
+          onPressed: () {
+            Dialogs.animatedDialog(
+              context: context,
+              child: const _ExportReportDialog(),
+            );
+          },
           icon: const Icon(Icons.download_outlined, size: 18),
-          label: const Text("Export Report"),
+          label: CustomText("export_report".toTr()),
           style: OutlinedButton.styleFrom(
-            padding: EdgeInsets.symmetric(horizontal: 16.toW(), vertical: 12.toH()),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.toRad())),
+            padding:
+                EdgeInsets.symmetric(horizontal: 16.toW(), vertical: 12.toH()),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.toRad())),
           ),
         ),
         16.ESW(),
         ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: () {
+            context.go('/appointments/create');
+          },
           icon: const Icon(Icons.add, size: 18),
-          label: const Text("New Appointment"),
+          label: CustomText("new_appointment".toTr()),
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.get.primary,
             foregroundColor: Colors.white,
-            padding: EdgeInsets.symmetric(horizontal: 20.toW(), vertical: 12.toH()),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.toRad())),
+            padding:
+                EdgeInsets.symmetric(horizontal: 20.toW(), vertical: 12.toH()),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.toRad())),
             elevation: 0,
           ),
         ),
@@ -227,7 +246,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _buildAppointmentsTrend() {
     return DashboardSection(
-      title: "Weekly Appointments Trend",
+      title: "weekly_appointments_trend".toTr(),
       child: DashboardCard(
         height: 350.toH(),
         child: BarChart(
@@ -241,25 +260,48 @@ class _DashboardPageState extends State<DashboardPage> {
                 sideTitles: SideTitles(
                   showTitles: true,
                   getTitlesWidget: (double value, TitleMeta meta) {
-                    const style = TextStyle(color: Colors.grey, fontWeight: FontWeight.w500, fontSize: 12);
+                    const style = TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12);
                     String text;
                     switch (value.toInt()) {
-                      case 0: text = 'Mon'; break;
-                      case 1: text = 'Tue'; break;
-                      case 2: text = 'Wed'; break;
-                      case 3: text = 'Thu'; break;
-                      case 4: text = 'Fri'; break;
-                      case 5: text = 'Sat'; break;
-                      case 6: text = 'Sun'; break;
-                      default: text = '';
+                      case 0:
+                        text = 'Mon'.toTr();
+                        break;
+                      case 1:
+                        text = 'Tue'.toTr();
+                        break;
+                      case 2:
+                        text = 'Wed'.toTr();
+                        break;
+                      case 3:
+                        text = 'Thu'.toTr();
+                        break;
+                      case 4:
+                        text = 'Fri'.toTr();
+                        break;
+                      case 5:
+                        text = 'Sat'.toTr();
+                        break;
+                      case 6:
+                        text = 'Sun'.toTr();
+                        break;
+                      default:
+                        text = '';
                     }
-                    return SideTitleWidget(axisSide: meta.axisSide, child: Text(text, style: style));
+                    return SideTitleWidget(
+                        axisSide: meta.axisSide,
+                        child: Text(text, style: style));
                   },
                 ),
               ),
-              leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-              topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-              rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+              leftTitles:
+                  const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+              topTitles:
+                  const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+              rightTitles:
+                  const AxisTitles(sideTitles: SideTitles(showTitles: false)),
             ),
             gridData: const FlGridData(show: false),
             borderData: FlBorderData(show: false),
@@ -280,7 +322,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _buildRevenueChart() {
     return DashboardSection(
-      title: "Revenue Overview",
+      title: "revenue_overview".toTr(),
       child: DashboardCard(
         height: 350.toH(),
         child: LineChart(
@@ -326,9 +368,27 @@ class _DashboardPageState extends State<DashboardPage> {
             sectionsSpace: 4,
             centerSpaceRadius: 40,
             sections: [
-              PieChartSectionData(color: AppColors.get.primary, value: 45, title: '45%', radius: 50, titleStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-              PieChartSectionData(color: Colors.orange, value: 30, title: '30%', radius: 50, titleStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-              PieChartSectionData(color: Colors.amber, value: 25, title: '25%', radius: 50, titleStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+              PieChartSectionData(
+                  color: AppColors.get.primary,
+                  value: 45,
+                  title: '45%',
+                  radius: 50,
+                  titleStyle: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
+              PieChartSectionData(
+                  color: Colors.orange,
+                  value: 30,
+                  title: '30%',
+                  radius: 50,
+                  titleStyle: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
+              PieChartSectionData(
+                  color: Colors.amber,
+                  value: 25,
+                  title: '25%',
+                  radius: 50,
+                  titleStyle: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
             ],
           ),
         ),
@@ -338,14 +398,17 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _buildQuickActions() {
     return DashboardSection(
-      title: "Quick Actions",
+      title: "quick_actions".toTr(),
       child: Column(
         children: [
-          _buildActionButton("Add New Patient", Icons.person_add_outlined, Colors.blue),
+          _buildActionButton(
+              "add_new_patient".toTr(), Icons.person_add_outlined, Colors.blue),
           12.ESH(),
-          _buildActionButton("Create Invoice", Icons.receipt_long_outlined, Colors.green),
+          _buildActionButton("create_invoice".toTr(),
+              Icons.receipt_long_outlined, Colors.green),
           12.ESH(),
-          _buildActionButton("Manage Schedule", Icons.schedule_outlined, Colors.orange),
+          _buildActionButton(
+              "manage_schedule".toTr(), Icons.schedule_outlined, Colors.orange),
         ],
       ),
     );
@@ -375,7 +438,8 @@ class _DashboardPageState extends State<DashboardPage> {
             16.ESW(),
             CustomText(title, fontWeight: FW.medium, fontSize: 14),
             const Spacer(),
-            Icon(Icons.chevron_right, size: 18, color: AppColors.get.textSecondary),
+            Icon(Icons.chevron_right,
+                size: 18, color: AppColors.get.textSecondary),
           ],
         ),
       ),
@@ -384,7 +448,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _buildRecentActivity() {
     return DashboardSection(
-      title: "Recent Activity",
+      title: "recent_activity",
       child: DashboardCard(
         child: Column(
           children: List.generate(4, (index) => _buildActivityItem(index)),
@@ -408,13 +472,16 @@ class _DashboardPageState extends State<DashboardPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomText("New appointment scheduled", fontWeight: FW.semiBold, fontSize: 14),
+                CustomText("new_appointment_scheduled".toTr(),
+                    fontWeight: FW.semiBold, fontSize: 14),
                 4.ESH(),
-                CustomText("Dr. Sarah with Patient Ahmed Ali", color: AppColors.get.textSecondary, fontSize: 12),
+                CustomText("Dr. Sarah with Patient Ahmed Ali",
+                    color: AppColors.get.textSecondary, fontSize: 12),
               ],
             ),
           ),
-          CustomText("2m ago", color: AppColors.get.textSecondary, fontSize: 12),
+          CustomText("2m ${"ago".toTr()}",
+              color: AppColors.get.textSecondary, fontSize: 12),
         ],
       ),
     );
@@ -436,6 +503,216 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _ExportReportDialog extends StatefulWidget {
+  const _ExportReportDialog();
+
+  @override
+  State<_ExportReportDialog> createState() => _ExportReportDialogState();
+}
+
+class _ExportReportDialogState extends State<_ExportReportDialog> {
+  bool _isExporting = false;
+  String _selectedFormat = '';
+  double _progress = 0.0;
+
+  void _startExport(String format) async {
+    setState(() {
+      _isExporting = true;
+      _selectedFormat = format;
+      _progress = 0.0;
+    });
+
+    for (int i = 1; i <= 10; i++) {
+      await Future.delayed(const Duration(milliseconds: 180));
+      if (!mounted) return;
+      setState(() {
+        _progress = i * 0.1;
+      });
+    }
+
+    if (mounted) {
+      Navigator.pop(context); // Close dialog
+      Dialogs.customToast(
+        text: 'clinic_report_exported_successfully_as'.toTr() + _selectedFormat,
+        context: context,
+        isSuccess: true,
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.toRad())),
+      elevation: 0,
+      backgroundColor: Colors.white,
+      child: Container(
+        padding: EdgeInsets.all(28.toRad()),
+        width: 380.toW(),
+        child: _isExporting ? _buildExportingView() : _buildSelectionView(),
+      ),
+    );
+  }
+
+  Widget _buildSelectionView() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Container(
+              padding: EdgeInsets.all(10.toRad()),
+              decoration: BoxDecoration(
+                color: AppColors.get.primary.withOpacity(0.08),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(Icons.download_outlined,
+                  color: AppColors.get.primary, size: 24),
+            ),
+            16.ESW(),
+            const CustomText(
+              'export_report',
+              fontSize: 18,
+              fontWeight: FW.bold,
+            ),
+          ],
+        ),
+        20.ESH(),
+        CustomText(
+          'select_your_preferred_document_format_to_download_the_comprehensive_clinic_performance_report',
+          fontSize: 13,
+          color: AppColors.get.textSecondary,
+        ),
+        24.ESH(),
+        _buildFormatOption(
+          title: 'PDF Document (.pdf)',
+          subtitle: 'perfect_for_printing_and_sharing_official_reports',
+          icon: Icons.picture_as_pdf_outlined,
+          color: Colors.red,
+          onTap: () => _startExport('PDF'),
+        ),
+        12.ESH(),
+        _buildFormatOption(
+          title: 'Excel Spreadsheet (.xlsx)',
+          subtitle: 'ideal_for_detailed_custom_data_analysis',
+          icon: Icons.table_view_outlined,
+          color: Colors.green,
+          onTap: () => _startExport('Excel'),
+        ),
+        12.ESH(),
+        _buildFormatOption(
+          title: 'CSV File (.csv)',
+          subtitle: 'lightweight_format_for_database_imports',
+          icon: Icons.insert_drive_file_outlined,
+          color: Colors.blueGrey,
+          onTap: () => _startExport('CSV'),
+        ),
+        24.ESH(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: CustomText(
+                'cancel',
+                color: AppColors.get.textSecondary,
+                fontWeight: FW.medium,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildExportingView() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        20.ESH(),
+        SizedBox(
+          width: 70.toW(),
+          height: 70.toH(),
+          child: CircularProgressIndicator(
+            value: _progress,
+            strokeWidth: 5,
+            backgroundColor: AppColors.get.border.withOpacity(0.5),
+            color: AppColors.get.primary,
+          ),
+        ),
+        24.ESH(),
+        CustomText(
+          '${'generating'.toTr()} $_selectedFormat ${'report'.toTr()}...',
+          fontSize: 16,
+          fontWeight: FW.bold,
+        ),
+        10.ESH(),
+        CustomText(
+          '${(_progress * 100).toInt()}% ${'completed'.toTr()}',
+          fontSize: 14,
+          color: AppColors.get.textSecondary,
+          fontWeight: FW.medium,
+        ),
+        16.ESH(),
+        CustomText(
+          'Please do not close this window.',
+          fontSize: 12,
+          color: AppColors.get.textDisabled,
+        ),
+        10.ESH(),
+      ],
+    );
+  }
+
+  Widget _buildFormatOption({
+    required String title,
+    required String subtitle,
+    required IconData icon,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12.toRad()),
+      child: Container(
+        padding: EdgeInsets.all(12.toRad()),
+        decoration: BoxDecoration(
+          border: Border.all(color: AppColors.get.border.withOpacity(0.5)),
+          borderRadius: BorderRadius.circular(12.toRad()),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: EdgeInsets.all(8.toRad()),
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8.toRad()),
+              ),
+              child: Icon(icon, color: color, size: 22),
+            ),
+            16.ESW(),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText(title, fontWeight: FW.semiBold, fontSize: 14),
+                  4.ESH(),
+                  CustomText(subtitle,
+                      fontSize: 11, color: AppColors.get.textSecondary),
+                ],
+              ),
+            ),
+            Icon(Icons.chevron_right,
+                size: 16, color: AppColors.get.textSecondary),
+          ],
+        ),
+      ),
     );
   }
 }

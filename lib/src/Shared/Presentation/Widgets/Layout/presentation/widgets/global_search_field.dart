@@ -3,7 +3,6 @@ import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFie
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:care_desk/src/Features/GlobalSearch/presentation/manager/global_search_controller.dart';
-import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/src/imports_text_field.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
@@ -76,7 +75,8 @@ class _GlobalSearchFieldState extends State<GlobalSearchField> {
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16.toRad()),
-                border: Border.all(color: AppColors.get.border.withOpacity(0.5)),
+                border:
+                    Border.all(color: AppColors.get.border.withOpacity(0.5)),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.05),
@@ -105,9 +105,12 @@ class _GlobalSearchFieldState extends State<GlobalSearchField> {
                       padding: EdgeInsets.all(20.toRad()),
                       child: Row(
                         children: [
-                          Icon(Icons.error_outline, color: AppColors.get.red, size: 20),
+                          Icon(Icons.error_outline,
+                              color: AppColors.get.red, size: 20),
                           10.ESW(),
-                          Expanded(child: CustomText(cnt.state.error?.title ?? 'Search failed')),
+                          Expanded(
+                              child: CustomText(
+                                  cnt.state.error?.title ?? 'Search failed')),
                         ],
                       ),
                     );
@@ -115,15 +118,20 @@ class _GlobalSearchFieldState extends State<GlobalSearchField> {
 
                   final categories = cnt.state.data?.categories ?? [];
 
-                  if (cnt.query.isNotEmpty && categories.isEmpty && cnt.state is! DataInitial) {
+                  if (cnt.query.isNotEmpty &&
+                      categories.isEmpty &&
+                      cnt.state is! DataInitial) {
                     return Padding(
                       padding: EdgeInsets.all(30.toRad()),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.search_off, size: 40.toRad(), color: AppColors.get.textDisabled),
+                          Icon(Icons.search_off,
+                              size: 40.toRad(),
+                              color: AppColors.get.textDisabled),
                           10.ESH(),
-                          CustomText('No results found for "${cnt.query}"', color: AppColors.get.textSecondary),
+                          CustomText('No results found for "${cnt.query}"',
+                              color: AppColors.get.textSecondary),
                         ],
                       ),
                     );
@@ -144,7 +152,8 @@ class _GlobalSearchFieldState extends State<GlobalSearchField> {
                         children: [
                           Container(
                             width: double.infinity,
-                            padding: EdgeInsets.fromLTRB(16.toW(), 12.toH(), 16.toW(), 8.toH()),
+                            padding: EdgeInsets.fromLTRB(
+                                16.toW(), 12.toH(), 16.toW(), 8.toH()),
                             color: AppColors.get.background,
                             child: CustomText(
                               category.name.toUpperCase(),
@@ -154,36 +163,50 @@ class _GlobalSearchFieldState extends State<GlobalSearchField> {
                               letterSpacing: 1.2,
                             ),
                           ),
-                          ...category.items.map((item) => ListTile(
-                            contentPadding: EdgeInsets.symmetric(horizontal: 16.toW(), vertical: 4.toH()),
-                            leading: Container(
-                              width: 40.toRad(),
-                              height: 40.toRad(),
-                              decoration: BoxDecoration(
-                                color: AppColors.get.primary.withOpacity(0.05),
-                                shape: BoxShape.circle,
-                              ),
-                              child: item.avatar != null 
-                                ? ClipRRect(
-                                    borderRadius: BorderRadius.circular(20),
-                                    child: ImageGeneric.network(url: item.avatar!),
-                                  )
-                                : Icon(Icons.person_outline, color: AppColors.get.primary, size: 20),
-                            ),
-                            title: CustomText(item.title, fontWeight: FW.semiBold, fontSize: 14),
-                            subtitle: CustomText(item.subtitle, fontSize: 12, color: AppColors.get.textSecondary),
-                            onTap: () {
-                              _hideOverlay();
-                              _focusNode.unfocus();
-                              _textController.clear();
-                              _controller.onSearchChanged('');
-                              NavigationService.instance.go(item.route);
-                            },
-                          )).toList(),
+                          ...category.items
+                              .map((item) => ListTile(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 16.toW(),
+                                        vertical: 4.toH()),
+                                    leading: Container(
+                                      width: 40.toRad(),
+                                      height: 40.toRad(),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.get.primary
+                                            .withOpacity(0.05),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: item.avatar != null
+                                          ? ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              child: ImageGeneric.network(
+                                                  url: item.avatar!),
+                                            )
+                                          : Icon(Icons.person_outline,
+                                              color: AppColors.get.primary,
+                                              size: 20),
+                                    ),
+                                    title: CustomText(item.title,
+                                        fontWeight: FW.semiBold, fontSize: 14),
+                                    subtitle: CustomText(item.subtitle,
+                                        fontSize: 12,
+                                        color: AppColors.get.textSecondary),
+                                    onTap: () {
+                                      _hideOverlay();
+                                      _focusNode.unfocus();
+                                      _textController.clear();
+                                      _controller.onSearchChanged('');
+                                      NavigationService.instance.go(item.route);
+                                    },
+                                  ))
+                              .toList(),
                           if (index < categories.length - 1)
                             Padding(
                               padding: EdgeInsets.symmetric(vertical: 4.toH()),
-                              child: Divider(height: 1, color: AppColors.get.border.withOpacity(0.5)),
+                              child: Divider(
+                                  height: 1,
+                                  color: AppColors.get.border.withOpacity(0.5)),
                             ),
                         ],
                       );
@@ -202,30 +225,34 @@ class _GlobalSearchFieldState extends State<GlobalSearchField> {
   Widget build(BuildContext context) {
     return CompositedTransformTarget(
       link: _layerLink,
-      child: TextFieldDefault(
-        controller: _textController,
-        focusNode: _focusNode,
-        hint: TFFHint(title: 'Search patients, doctors...'),
-        inputDecoration: InputDecorationWithBorder(
-          enableBorderRadius: 12,
-          enableBorderColor: AppColors.get.border,
-          focusBorderRadius: 12,
-          focusBorderColor: AppColors.get.primary,
-          filledColor: AppColors.get.background,
+      child: Padding(
+        padding: EdgeInsets.only(top: 10.toH()),
+        child: TextFieldDefault(
+          controller: _textController,
+          focusNode: _focusNode,
+          hint: TFFHint(title: 'search_patients_doctors...'),
+          inputDecoration: InputDecorationWithBorder(
+            enableBorderRadius: 12,
+            enableBorderColor: AppColors.get.border,
+            focusBorderRadius: 12,
+            focusBorderColor: AppColors.get.primary,
+            filledColor: AppColors.get.background,
+          ),
+          prefix: PrefixWithIconData(
+            iconData: Icons.search,
+            color: AppColors.get.textSecondary,
+            size: 30,
+            scale: .8,
+          ),
+          onChanged: (value) {
+            _controller.onSearchChanged(value);
+            if (value.isNotEmpty) {
+              _showOverlay();
+            } else {
+              _hideOverlay();
+            }
+          },
         ),
-        prefix: PrefixWithIconData(
-          iconData: Icons.search,
-          color: AppColors.get.textSecondary,
-          size: 20,
-        ),
-        onChanged: (value) {
-          _controller.onSearchChanged(value);
-          if (value.isNotEmpty) {
-            _showOverlay();
-          } else {
-            _hideOverlay();
-          }
-        },
       ),
     );
   }

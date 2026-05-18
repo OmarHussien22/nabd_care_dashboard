@@ -6,6 +6,8 @@ import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import 'package:care_desk/src/Features/Auth/presentation/manger/auth_controller.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/dialogs/animate_dialogs.dart';
+import 'package:go_router/go_router.dart';
 import 'package:get/get.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -58,6 +60,10 @@ class _ProfilePageState extends State<ProfilePage> {
           _buildNavItem(1, Icons.lock_outline, 'Login & Security'),
           _buildNavItem(2, Icons.notifications_none, 'Notifications'),
           _buildNavItem(3, Icons.language_outlined, 'Display Language'),
+          16.ESH(),
+          Divider(color: AppColors.get.border.withOpacity(0.5)),
+          8.ESH(),
+          _buildLogoutItem(),
         ],
       ),
     );
@@ -73,7 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
               radius: 45.toRad(),
               backgroundColor: AppColors.get.primary.withOpacity(0.1),
               child: CustomText(
-                user?.name?[0].toUpperCase() ?? 'U',
+                user?.name[0].toUpperCase() ?? 'U',
                 fontSize: 32,
                 fontWeight: FW.bold,
                 color: AppColors.get.primary,
@@ -89,15 +95,23 @@ class _ProfilePageState extends State<ProfilePage> {
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.white, width: 2),
                 ),
-                child: const Icon(Icons.camera_alt_outlined, color: Colors.white, size: 16),
+                child: GestureDetector(
+                  onTap: () {
+                    // upload profile image
+                  },
+                  child: const Icon(Icons.camera_alt_outlined,
+                      color: Colors.white, size: 16),
+                ),
               ),
             ),
           ],
         ),
         16.ESH(),
-        CustomText(user?.name ?? 'User Name', fontWeight: FW.bold, fontSize: 18),
+        CustomText(user?.name ?? 'User Name',
+            fontWeight: FW.bold, fontSize: 18),
         4.ESH(),
-        CustomText(user?.email ?? 'email@example.com', color: AppColors.get.textSecondary, fontSize: 13),
+        CustomText(user?.email ?? 'email@example.com',
+            color: AppColors.get.textSecondary, fontSize: 13),
       ],
     );
   }
@@ -111,20 +125,26 @@ class _ProfilePageState extends State<ProfilePage> {
         margin: EdgeInsets.only(bottom: 8.toH()),
         padding: EdgeInsets.symmetric(horizontal: 16.toW(), vertical: 14.toH()),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.get.primary.withOpacity(0.08) : Colors.transparent,
+          color: isSelected
+              ? AppColors.get.primary.withOpacity(0.08)
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(12.toRad()),
         ),
         child: Row(
           children: [
-            Icon(icon, color: isSelected ? AppColors.get.primary : AppColors.get.textSecondary, size: 22),
+            Icon(icon,
+                color: isSelected
+                    ? AppColors.get.primary
+                    : AppColors.get.textSecondary,
+                size: 22),
             16.ESW(),
-            Expanded(
-              child: CustomText(
-                title,
-                fontWeight: isSelected ? FW.bold : FW.medium,
-                color: isSelected ? AppColors.get.primary : AppColors.get.textPrimary,
-                fontSize: 14,
-              ),
+            CustomText(
+              title,
+              fontWeight: isSelected ? FW.bold : FW.medium,
+              color: isSelected
+                  ? AppColors.get.primary
+                  : AppColors.get.textPrimary,
+              fontSize: 14,
             ),
             if (isSelected)
               Icon(Icons.chevron_right, color: AppColors.get.primary, size: 18),
@@ -164,9 +184,11 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomText('Personal Information', fontSize: 20, fontWeight: FW.bold),
+          const CustomText('Personal Information',
+              fontSize: 20, fontWeight: FW.bold),
           8.ESH(),
-          CustomText('Update your profile details and public identity', color: AppColors.get.textSecondary),
+          CustomText('Update your profile details and public identity',
+              color: AppColors.get.textSecondary),
           32.ESH(),
           Row(
             children: [
@@ -174,7 +196,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: TextFieldDefault(
                   header: const TFFHeader(title: 'Display Name'),
                   hint: const TFFHint(title: 'Your name'),
-                  prefix:  PrefixWithIconData(iconData: Icons.person_outline),
+                  prefix: PrefixWithIconData(iconData: Icons.person_outline),
                 ),
               ),
               24.ESW(),
@@ -182,7 +204,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: TextFieldDefault(
                   header: const TFFHeader(title: 'Phone Number'),
                   hint: const TFFHint(title: 'e.g. +1 234 567 890'),
-                  prefix:  PrefixWithIconData(iconData: Icons.phone_outlined),
+                  prefix: PrefixWithIconData(iconData: Icons.phone_outlined),
                 ),
               ),
             ],
@@ -190,7 +212,8 @@ class _ProfilePageState extends State<ProfilePage> {
           24.ESH(),
           TextFieldDefault(
             header: const TFFHeader(title: 'Professional Bio'),
-            hint: const TFFHint(title: 'A short description of your role and experience'),
+            hint: const TFFHint(
+                title: 'A short description of your role and experience'),
             maxLines: 4,
           ),
           40.ESH(),
@@ -202,8 +225,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.get.primary,
                   foregroundColor: Colors.white,
-                  padding: EdgeInsets.symmetric(horizontal: 40.toW(), vertical: 18.toH()),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.toRad())),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 40.toW(), vertical: 18.toH()),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.toRad())),
                   elevation: 0,
                 ),
                 child: const Text('Update Profile'),
@@ -226,15 +251,17 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomText('Security Settings', fontSize: 20, fontWeight: FW.bold),
+          const CustomText('Security Settings',
+              fontSize: 20, fontWeight: FW.bold),
           8.ESH(),
-          CustomText('Manage your password and account security', color: AppColors.get.textSecondary),
+          CustomText('Manage your password and account security',
+              color: AppColors.get.textSecondary),
           32.ESH(),
           TextFieldDefault(
             header: const TFFHeader(title: 'Current Password'),
             hint: const TFFHint(title: '••••••••'),
             secureType: SecureType.always,
-            prefix:  PrefixWithIconData(iconData: Icons.lock_outline),
+            prefix: PrefixWithIconData(iconData: Icons.lock_outline),
           ),
           24.ESH(),
           Row(
@@ -244,7 +271,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   header: const TFFHeader(title: 'New Password'),
                   hint: const TFFHint(title: '••••••••'),
                   secureType: SecureType.always,
-                  prefix:  PrefixWithIconData(iconData: Icons.vpn_key_outlined),
+                  prefix: PrefixWithIconData(iconData: Icons.vpn_key_outlined),
                 ),
               ),
               24.ESW(),
@@ -253,7 +280,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   header: const TFFHeader(title: 'Confirm New Password'),
                   hint: const TFFHint(title: '••••••••'),
                   secureType: SecureType.always,
-                  prefix:  PrefixWithIconData(iconData: Icons.check_circle_outline),
+                  prefix:
+                      PrefixWithIconData(iconData: Icons.check_circle_outline),
                 ),
               ),
             ],
@@ -267,8 +295,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.get.primary,
                   foregroundColor: Colors.white,
-                  padding: EdgeInsets.symmetric(horizontal: 40.toW(), vertical: 18.toH()),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.toRad())),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 40.toW(), vertical: 18.toH()),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.toRad())),
                   elevation: 0,
                 ),
                 child: const Text('Change Password'),
@@ -276,6 +306,135 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildLogoutItem() {
+    return InkWell(
+      onTap: () => _showLogoutDialog(context),
+      borderRadius: BorderRadius.circular(12.toRad()),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16.toW(), vertical: 14.toH()),
+        decoration: BoxDecoration(
+          color: Colors.red.withOpacity(0.05),
+          borderRadius: BorderRadius.circular(12.toRad()),
+          border: Border.all(color: Colors.red.withOpacity(0.1)),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.logout_rounded, color: Colors.red, size: 22),
+            16.ESW(),
+            const CustomText(
+              'Sign Out',
+              fontWeight: FW.bold,
+              color: Colors.red,
+              fontSize: 14,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showLogoutDialog(BuildContext context) {
+    Dialogs.animatedDialog(
+      context: context,
+      child: Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.toRad()),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        child: Container(
+          padding: EdgeInsets.all(32.toRad()),
+          width: 400.toW(),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: EdgeInsets.all(20.toRad()),
+                decoration: BoxDecoration(
+                  color: Colors.red.withOpacity(0.08),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.logout_rounded,
+                  color: Colors.red,
+                  size: 40,
+                ),
+              ),
+              24.ESH(),
+              const CustomText(
+                'Sign Out',
+                fontSize: 20,
+                fontWeight: FW.bold,
+              ),
+              12.ESH(),
+              CustomText(
+                'Are you sure you want to sign out of your CareDesk account?',
+                fontSize: 14,
+                color: AppColors.get.textSecondary,
+                textAlign: TextAlign.center,
+              ),
+              32.ESH(),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => context.pop(),
+                      style: OutlinedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(vertical: 16.toH()),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.toRad()),
+                        ),
+                        side: BorderSide(
+                          color: AppColors.get.border,
+                        ),
+                      ),
+                      child: CustomText(
+                        'Cancel',
+                        fontWeight: FW.medium,
+                        color: AppColors.get.textSecondary,
+                      ),
+                    ),
+                  ),
+                  16.ESW(),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        // Dismiss dialog
+                        context.pop();
+
+                        // Clear authentication
+                        await AuthController.instance.clearAuthentication();
+
+                        // Navigate back to login
+                        if (context.mounted) {
+                          context.go('/login');
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        foregroundColor: Colors.white,
+                        elevation: 0,
+                        padding: EdgeInsets.symmetric(vertical: 16.toH()),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.toRad()),
+                        ),
+                      ),
+                      child: const CustomText(
+                        'Sign Out',
+                        fontWeight: FW.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

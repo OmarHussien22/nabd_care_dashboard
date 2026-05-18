@@ -44,8 +44,8 @@ class LoginController extends GetControllerInterface<UserModel> {
         if (IntalizeAppSource.currentSource == AppSource.dev) {
           ClientSnacks.loginSuccess();
           // We use 'go' instead of 'push' to replace the stack and remove the login page
-            await AuthController.instance.setAuthenticatedUser(UserModel.devUser);
-            UserController.get.updateUser(UserModel.devUser);
+          await AuthController.instance.setAuthenticatedUser(UserModel.devUser);
+          UserController.get.updateUser(UserModel.devUser);
           NavigationService.instance.go('/dashboard');
           return;
         }

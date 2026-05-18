@@ -1,6 +1,8 @@
 import 'package:care_desk/src/Shared/Presentation/Widgets/Layout/presentation/widgets/siderbar/side_bar_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:get/get.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/Layout/presentation/manager/main_layout_controller.dart';
 
 import '../../../../../../../Core/Styles/Colors/app_colors.dart';
 import '../../../../../../../Core/Utils/Extensions/screen_spaces_extension.dart';
@@ -13,9 +15,10 @@ class Sidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final location = GoRouterState.of(context).uri.toString();
-
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isWide = screenWidth >= 900;
     return Container(
-      width: 260.toW(),
+      width: isWide ? 230.toW() : 500.toW(),
       decoration: BoxDecoration(
         color: AppColors.get.surface,
         border: Border(
@@ -32,7 +35,7 @@ class Sidebar extends StatelessWidget {
       child: Column(
         children: [
           32.ESH(),
-          _buildLogo(),
+          _buildLogo(context),
           40.ESH(),
           Expanded(
             child: ListView.separated(
@@ -40,7 +43,8 @@ class Sidebar extends StatelessWidget {
               itemBuilder: (context, index) {
                 final item = SideBarItemEntity.defaultItems[index];
                 final selected = location == item.route ||
-                    (item.route != '/dashboard' && location.startsWith(item.route));
+                    (item.route != '/dashboard' &&
+                        location.startsWith(item.route));
                 return SidebarTile(item: item, selected: selected);
               },
               separatorBuilder: (_, __) => 8.ESH(),
@@ -54,7 +58,7 @@ class Sidebar extends StatelessWidget {
     );
   }
 
-  Widget _buildLogo() {
+  Widget _buildLogo(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.toW()),
       child: Row(
@@ -64,7 +68,10 @@ class Sidebar extends StatelessWidget {
             width: 42.toH(),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [AppColors.get.primary, AppColors.get.primary.withRed(50)],
+                colors: [
+                  AppColors.get.primary,
+                  AppColors.get.primary.withRed(50)
+                ],
               ),
               borderRadius: BorderRadius.circular(12.toRad()),
               boxShadow: [
@@ -75,14 +82,38 @@ class Sidebar extends StatelessWidget {
                 ),
               ],
             ),
-            child: const Icon(Icons.local_hospital_rounded, color: Colors.white, size: 24),
+            child: const Icon(Icons.local_hospital_rounded,
+                color: Colors.white, size: 24),
           ),
           16.ESW(),
-          CustomText(
-            'CareDesk',
-            fontSize: 20.toFS(),
-            fontWeight: FW.bold,
-            color: AppColors.get.textPrimary,
+          Expanded(
+            child: CustomText(
+              'CareDesk',
+              fontSize: 20.toFS(),
+              fontWeight: FW.bold,
+              color: AppColors.get.textPrimary,
+            ),
+          ),
+          GetBuilder<MainLayoutController>(
+            id: 'main_layout',
+            builder: (cnt) {
+              final screenWidth = MediaQuery.of(context).size.width;
+              final isWide = screenWidth >= 900;
+              if (isWide && cnt.isCollapsed) {
+                return IconButton(
+                  onPressed: () {
+                    cnt.toggleCollapse();
+                    if (Scaffold.of(context).isDrawerOpen) {
+                      context.pop();
+                    }
+                  },
+                  icon: Icon(Icons.push_pin_outlined,
+                      color: AppColors.get.textSecondary, size: 20.toRad()),
+                  tooltip: 'Pin Sidebar',
+                );
+              }
+              return const SizedBox();
+            },
           ),
         ],
       ),
@@ -101,9 +132,13 @@ class Sidebar extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText('Upgrade to Pro', fontWeight: FW.bold, fontSize: 14, color: AppColors.get.textPrimary),
+          CustomText('Upgrade to Pro',
+              fontWeight: FW.bold,
+              fontSize: 14,
+              color: AppColors.get.textPrimary),
           8.ESH(),
-          CustomText('Get more features and support.', fontSize: 12, color: AppColors.get.textSecondary),
+          CustomText('Get more features and support.',
+              fontSize: 12, color: AppColors.get.textSecondary),
           16.ESH(),
           SizedBox(
             width: double.infinity,
@@ -113,7 +148,8 @@ class Sidebar extends StatelessWidget {
                 backgroundColor: AppColors.get.primary,
                 foregroundColor: Colors.white,
                 elevation: 0,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.toRad())),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.toRad())),
               ),
               child: const Text('Upgrade Now'),
             ),
