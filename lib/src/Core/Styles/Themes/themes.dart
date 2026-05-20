@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 
 abstract class Themes {
@@ -22,8 +21,11 @@ abstract class Themes {
       surfaceContainerHighest: AppColors.get.surfaceContainer,
     ),
 
+    fontFamily: 'Cairo',
+
     // Typography
-    textTheme: GoogleFonts.interTextTheme().apply(
+    textTheme: const TextTheme().apply(
+      fontFamily: 'Cairo',
       bodyColor: AppColors.get.textPrimary,
       displayColor: AppColors.get.textPrimary,
     ),
@@ -35,7 +37,8 @@ abstract class Themes {
       scrolledUnderElevation: 1,
       centerTitle: false,
       iconTheme: IconThemeData(color: AppColors.get.textPrimary),
-      titleTextStyle: GoogleFonts.inter(
+      titleTextStyle: TextStyle(
+        fontFamily: 'Cairo',
         fontSize: 18,
         fontWeight: FontWeight.w600,
         color: AppColors.get.textPrimary,
@@ -93,7 +96,7 @@ abstract class Themes {
         elevation: 0,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        textStyle: GoogleFonts.inter(fontWeight: FontWeight.w600),
+        textStyle: const TextStyle(fontFamily: 'Cairo', fontWeight: FontWeight.w600),
       ),
     ),
     
@@ -103,7 +106,7 @@ abstract class Themes {
         side: BorderSide(color: AppColors.get.border),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        textStyle: GoogleFonts.inter(fontWeight: FontWeight.w600),
+        textStyle: const TextStyle(fontFamily: 'Cairo', fontWeight: FontWeight.w600),
       ),
     ),
 

@@ -21,10 +21,10 @@ class DashboardAppointments extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText("Today's Appointments",
+                CustomText("todays_appointments",
                     fontSize: 16, fontWeight: FW.bold),
                 ViewAllButton(
-                  label: "View All",
+                  label: "view_all",
                   onTap: () => NavigationService.instance.push('/appointments'),
                 ),
               ],
@@ -62,11 +62,11 @@ class DashboardAppointments extends StatelessWidget {
       "Dr. Mike Ross"
     ];
     final statuses = [
-      "Confirmed",
-      "Pending",
-      "Confirmed",
-      "Waiting",
-      "Confirmed"
+      "confirmed",
+      "pending",
+      "confirmed",
+      "waiting",
+      "confirmed"
     ];
     final statusColors = [
       Colors.green,

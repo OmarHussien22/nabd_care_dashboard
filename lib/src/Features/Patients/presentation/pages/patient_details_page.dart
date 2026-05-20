@@ -1,3 +1,8 @@
+import 'dart:io';
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:file_picker/file_picker.dart';
+import 'package:care_desk/src/Core/Services/Launcher/launcher_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -9,6 +14,7 @@ import 'package:care_desk/src/Shared/Presentation/Widgets/Layout/presentation/wi
 import 'package:care_desk/src/Shared/Presentation/Widgets/Layout/presentation/widgets/app_breadcrumb.dart';
 import 'package:care_desk/src/Features/Patients/presentation/manager/patients_controller.dart';
 import 'package:care_desk/src/Features/Patients/domain/entities/patient_entity.dart';
+
 
 class PatientDetailsPage extends StatefulWidget {
   final int patientId;
@@ -34,13 +40,25 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
     );
   }
 
+  void _showSnackBar(String title, String message, {Color? backgroundColor}) {
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: CustomText('$title: $message', color: Colors.white, fontSize: 13),
+          backgroundColor: backgroundColor ?? AppColors.get.primary,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppContentWrapper(
-      title: 'Patient Medical Record',
+      title: 'patient_medical_record'.toTr(),
       breadcrumb: AppBreadcrumb(
         items: [
-          const BreadcrumbItem(label: 'Patients', route: '/patients'),
+          BreadcrumbItem(label: 'patients'.toTr(), route: '/patients'),
           BreadcrumbItem(label: patient.name),
         ],
       ),
@@ -48,7 +66,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
         OutlinedButton.icon(
           onPressed: () => context.go('/patients'),
           icon: const Icon(Icons.arrow_back_rounded, size: 18),
-          label: const CustomText('Back to List', fontWeight: FW.bold),
+          label: CustomText('back_to_list'.toTr(), fontWeight: FW.bold),
           style: OutlinedButton.styleFrom(
             padding: EdgeInsets.symmetric(horizontal: 16.toW(), vertical: 14.toH()),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.toRad())),
@@ -59,7 +77,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
         ElevatedButton.icon(
           onPressed: () => context.go('/patients/edit/${patient.id}'),
           icon: const Icon(Icons.edit_outlined, size: 18),
-          label: const CustomText('Edit Profile', fontWeight: FW.bold, color: Colors.white),
+          label: CustomText('edit_profile'.toTr(), fontWeight: FW.bold, color: Colors.white),
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.get.primary,
             foregroundColor: Colors.white,
@@ -147,11 +165,11 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                 8.ESH(),
                 Row(
                   children: [
-                    _buildHeaderMetaItem(Icons.wc_rounded, patient.gender ?? 'Unknown'),
+                    _buildHeaderMetaItem(Icons.wc_rounded, (patient.gender ?? 'not_specified').toLowerCase().toTr()),
                     24.ESW(),
-                    _buildHeaderMetaItem(Icons.cake_outlined, '${patient.age ?? '?'} years old'),
+                    _buildHeaderMetaItem(Icons.cake_outlined, '${patient.age ?? '?'} ${'yrs'.toTr()}'),
                     24.ESW(),
-                    _buildHeaderMetaItem(Icons.bloodtype_rounded, 'Blood Type: ${patient.bloodType ?? 'N/A'}', color: Colors.red),
+                    _buildHeaderMetaItem(Icons.bloodtype_rounded, '${'blood_type'.toTr()}: ${patient.bloodType ?? 'not_specified'.toTr()}', color: Colors.red),
                   ],
                 ),
               ],
@@ -166,9 +184,9 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
             ),
             child: Column(
               children: [
-                CustomText('LAST VISIT', fontSize: 10.5, fontWeight: FW.bold, color: AppColors.get.textSecondary),
+                CustomText('last_visit'.toTr().toUpperCase(), fontSize: 10.5, fontWeight: FW.bold, color: AppColors.get.textSecondary),
                 6.ESH(),
-                CustomText(patient.lastVisit ?? 'Never Visited', fontSize: 13, fontWeight: FW.bold, color: AppColors.get.primary),
+                CustomText(patient.lastVisit ?? 'never_visited'.toTr(), fontSize: 13, fontWeight: FW.bold, color: AppColors.get.primary),
               ],
             ),
           ),
@@ -189,7 +207,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
 
   Widget _buildStatusBadge(bool active) {
     final color = active ? AppColors.get.success : AppColors.get.red;
-    final label = active ? 'Active Chart' : 'Inactive';
+    final label = active ? 'active_chart'.toTr() : 'inactive'.toTr();
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -225,14 +243,14 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildCardHeader('Personal Information', Icons.badge_outlined, Colors.teal),
+          _buildCardHeader('personal_information'.toTr(), Icons.badge_outlined, Colors.teal),
           20.ESH(),
-          _buildDetailRow('Full Name', patient.name),
-          _buildDetailRow('Gender', patient.gender ?? 'Not set'),
-          _buildDetailRow('Date of Birth', patient.dateOfBirth ?? 'Not set'),
-          _buildDetailRow('Phone Number', patient.phone ?? 'Not set'),
-          _buildDetailRow('Email Address', patient.email ?? 'Not set'),
-          _buildDetailRow('Home Address', patient.address ?? 'Not set'),
+          _buildDetailRow('full_name'.toTr(), patient.name),
+          _buildDetailRow('gender'.toTr(), (patient.gender ?? 'not_specified').toLowerCase().toTr()),
+          _buildDetailRow('date_of_birth'.toTr(), patient.dateOfBirth ?? 'not_specified'.toTr()),
+          _buildDetailRow('phone_number'.toTr(), patient.phone ?? 'not_specified'.toTr()),
+          _buildDetailRow('email_address'.toTr(), patient.email ?? 'not_specified'.toTr()),
+          _buildDetailRow('home_address'.toTr(), patient.address ?? 'not_specified'.toTr()),
         ],
       ),
     );
@@ -250,11 +268,11 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildCardHeader('Emergency Contact Details', Icons.contact_emergency_outlined, Colors.orange),
+          _buildCardHeader('emergency_contact_name'.toTr(), Icons.contact_emergency_outlined, Colors.orange),
           20.ESH(),
-          _buildDetailRow('Contact Name', patient.emergencyContact ?? 'Not specified'),
-          _buildDetailRow('Phone Number', patient.emergencyPhone ?? 'Not specified'),
-          _buildDetailRow('Relationship', 'Family Representative'),
+          _buildDetailRow('full_name'.toTr(), patient.emergencyContact ?? 'not_specified'.toTr()),
+          _buildDetailRow('phone_number'.toTr(), patient.emergencyPhone ?? 'not_specified'.toTr()),
+          _buildDetailRow('relationship'.toTr(), 'family_representative'.toTr()),
         ],
       ),
     );
@@ -272,14 +290,14 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildCardHeader('Medical Summary', Icons.monitor_heart_outlined, Colors.red.shade400),
+          _buildCardHeader('medical_summary'.toTr(), Icons.monitor_heart_outlined, Colors.red.shade400),
           20.ESH(),
 
           // Chronic diseases list
-          CustomText('Chronic Conditions', fontSize: 13, fontWeight: FW.bold, color: AppColors.get.textPrimary),
+          CustomText('chronic_conditions'.toTr(), fontSize: 13, fontWeight: FW.bold, color: AppColors.get.textPrimary),
           12.ESH(),
           if (patient.chronicDiseases == null || patient.chronicDiseases!.isEmpty)
-            _buildNoDataBox('No chronic diseases recorded on this chart.')
+            _buildNoDataBox('no_chronic_recorded'.toTr())
           else
             Wrap(
               spacing: 8,
@@ -300,10 +318,10 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
           24.ESH(),
 
           // Medications
-          CustomText('Current Active Medications', fontSize: 13, fontWeight: FW.bold, color: AppColors.get.textPrimary),
+          CustomText('current_active_medications'.toTr(), fontSize: 13, fontWeight: FW.bold, color: AppColors.get.textPrimary),
           12.ESH(),
           if (patient.medications == null || patient.medications!.isEmpty)
-            _buildNoDataBox('No active medications registered.')
+            _buildNoDataBox('no_active_medications'.toTr())
           else
             Column(
               children: patient.medications!.map((m) => Container(
@@ -328,7 +346,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                         children: [
                           CustomText(m['name'] ?? '', fontSize: 13, fontWeight: FW.bold),
                           4.ESH(),
-                          CustomText('Notes: ${m['notes'] ?? 'None'}', fontSize: 11.5, color: AppColors.get.textSecondary),
+                          CustomText('${'notes'.toTr()}: ${m['notes'] ?? 'no_notes'.toTr()}', fontSize: 11.5, color: AppColors.get.textSecondary),
                         ],
                       ),
                     ),
@@ -346,7 +364,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
             24.ESH(),
             const Divider(),
             24.ESH(),
-            CustomText('General Medical Logs', fontSize: 13, fontWeight: FW.bold, color: AppColors.get.textPrimary),
+            CustomText('general_medical_logs'.toTr(), fontSize: 13, fontWeight: FW.bold, color: AppColors.get.textPrimary),
             12.ESH(),
             Container(
               width: double.infinity,
@@ -378,12 +396,12 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildCardHeader('Medical Scans & Attachments', Icons.attach_file_rounded, Colors.blue),
+          _buildCardHeader('medical_scans_docs'.toTr(), Icons.attach_file_rounded, Colors.blue),
           20.ESH(),
           if (docs.isEmpty)
-            _buildNoDataBox('No laboratory test scans, PDFs, or invoices attached.')
+            _buildNoDataBox('no_attachments_recorded'.toTr())
           else ...[
-            CustomText('Files Grid:', fontSize: 13, fontWeight: FW.bold, color: AppColors.get.textPrimary),
+            CustomText('files_grid'.toTr(), fontSize: 13, fontWeight: FW.bold, color: AppColors.get.textPrimary),
             12.ESH(),
             GridView.builder(
               shrinkWrap: true,
@@ -440,7 +458,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                             children: [
                               CustomText(name, fontSize: 12.5, fontWeight: FW.bold, isOverFlow: true, maxLines: 1),
                               4.ESH(),
-                              CustomText(type, fontSize: 10.5, color: AppColors.get.textSecondary, fontWeight: FW.medium),
+                              CustomText(type.toLowerCase().toTr(), fontSize: 10.5, color: AppColors.get.textSecondary, fontWeight: FW.medium),
                             ],
                           ),
                         ),
@@ -458,20 +476,30 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
   }
 
   // ─────────────────── TASK 13: ATTACHMENT VIEWER TRIGGER ───────────────────
-  void _handleAttachmentTap(Map<String, String> file) {
+  void _handleAttachmentTap(Map<String, String> file) async {
     final type = file['type'] ?? 'IMAGE';
     final name = file['name'] ?? '';
+    final path = file['path'] ?? '';
 
-    if (type == 'IMAGE') {
-      _showPremiumPhotoViewer(name);
-    } else if (type == 'PDF') {
-      _showDocumentViewerDialog(name, 'PDF Document Viewer', Colors.red.shade600);
-    } else if (type == 'EXCEL') {
-      _showDocumentViewerDialog(name, 'Excel Spreadsheet Action', Colors.green.shade600);
+    if (path.isNotEmpty) {
+      final dummyFile = PlatformFile(
+        name: name,
+        size: 0,
+        path: path,
+      );
+      await LauncherServices.instance.openFile(dummyFile);
+    } else {
+      if (type == 'IMAGE') {
+        _showPremiumPhotoViewer(name, path);
+      } else if (type == 'PDF') {
+        _showDocumentViewerDialog(name, path, 'PDF Document Viewer', Colors.red.shade600);
+      } else if (type == 'EXCEL') {
+        _showDocumentViewerDialog(name, path, 'Excel Spreadsheet Action', Colors.green.shade600);
+      }
     }
   }
 
-  void _showPremiumPhotoViewer(String fileName) {
+  void _showPremiumPhotoViewer(String fileName, String path) {
     Get.dialog(
       Dialog(
         backgroundColor: Colors.black,
@@ -495,7 +523,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                     12.ESW(),
                     Expanded(
                       child: CustomText(
-                        'Viewer: $fileName',
+                        '${'viewer'.toTr()}: $fileName',
                         fontSize: 14,
                         fontWeight: FW.bold,
                         color: Colors.white,
@@ -507,8 +535,17 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                     ),
                     IconButton(
                       icon: const Icon(Icons.download_rounded, color: Colors.white),
-                      onPressed: () {
-                        Get.snackbar('Download Completed', 'Successfully saved $fileName locally.');
+                      onPressed: () async {
+                        if (path.isNotEmpty) {
+                          final dummyFile = PlatformFile(
+                            name: fileName,
+                            size: 0,
+                            path: path,
+                          );
+                          await LauncherServices.instance.openFile(dummyFile);
+                        } else {
+                          _showSnackBar('Download Completed', 'Successfully saved $fileName locally.');
+                        }
                       },
                     ),
                     IconButton(
@@ -522,7 +559,11 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
               Expanded(
                 child: ClipRect(
                   child: PhotoView(
-                    imageProvider: const AssetImage('assets/images/chest_xray.png'), // Seeding standard mock asset
+                    imageProvider: (path.isNotEmpty && (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('blob:')))
+                        ? NetworkImage(path) as ImageProvider
+                        : (!kIsWeb && path.isNotEmpty && File(path).existsSync())
+                            ? FileImage(File(path)) as ImageProvider
+                            : const AssetImage('assets/images/chest_xray.png') as ImageProvider,
                     errorBuilder: (context, error, stackTrace) {
                       return Center(
                         child: Column(
@@ -531,7 +572,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                             Icon(Icons.broken_image_rounded, size: 64, color: Colors.grey.shade700),
                             12.ESH(),
                             CustomText(
-                              'Visual scan simulation active.',
+                              'visual_scan_simulation'.toTr(),
                               fontSize: 13,
                               color: Colors.grey.shade400,
                               fontWeight: FW.medium,
@@ -540,7 +581,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                               decoration: BoxDecoration(color: Colors.blue.withOpacity(0.12), borderRadius: BorderRadius.circular(6)),
-                              child: const CustomText('Clicking "Download" simulates files fetching.', fontSize: 11, color: Colors.blue),
+                              child: CustomText('click_download_simulation'.toTr(), fontSize: 11, color: Colors.blue),
                             ),
                           ],
                         ),
@@ -559,7 +600,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
     );
   }
 
-  void _showDocumentViewerDialog(String name, String viewerTitle, Color titleColor) {
+  void _showDocumentViewerDialog(String name, String path, String viewerTitle, Color titleColor) {
     Get.dialog(
       AlertDialog(
         title: Row(
@@ -573,7 +614,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomText('Document Name:', fontSize: 11, color: AppColors.get.textSecondary),
+            CustomText('document_name'.toTr(), fontSize: 11, color: AppColors.get.textSecondary),
             4.ESH(),
             CustomText(name, fontSize: 13, fontWeight: FW.bold),
             20.ESH(),
@@ -586,7 +627,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                   12.ESW(),
                   Expanded(
                     child: CustomText(
-                      'SaaS Simulation: Document opening, editing, and downloading is enabled.',
+                      'saas_simulation_desc'.toTr(),
                       fontSize: 12,
                     ),
                   )
@@ -598,15 +639,24 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
         actions: [
           TextButton(
             onPressed: () => Get.back(),
-            child: const CustomText('Close', fontWeight: FW.bold, color: Colors.grey),
+            child: CustomText('close'.toTr(), fontWeight: FW.bold, color: Colors.grey),
           ),
           ElevatedButton.icon(
-            onPressed: () {
+            onPressed: () async {
               Get.back();
-              Get.snackbar('File Downloaded', 'Successfully retrieved $name.');
+              if (path.isNotEmpty) {
+                final dummyFile = PlatformFile(
+                  name: name,
+                  size: 0,
+                  path: path,
+                );
+                await LauncherServices.instance.openFile(dummyFile);
+              } else {
+                _showSnackBar('file_downloaded'.toTr(), '${'retrieved_successfully'.toTr()} $name.');
+              }
             },
             icon: const Icon(Icons.download, size: 16),
-            label: const CustomText('Open/Download', fontWeight: FW.bold, color: Colors.white),
+            label: CustomText('open_download'.toTr(), fontWeight: FW.bold, color: Colors.white),
             style: ElevatedButton.styleFrom(
               backgroundColor: titleColor,
               foregroundColor: Colors.white,
@@ -629,7 +679,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildCardHeader('Visits History Timeline', Icons.history_rounded, Colors.purple),
+          _buildCardHeader('visits_history_timeline'.toTr(), Icons.history_rounded, Colors.purple),
           20.ESH(),
           _buildTimelineItem(
             date: '10 May 2026',
@@ -708,7 +758,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                           color: AppColors.get.primary.withOpacity(0.12),
                           borderRadius: BorderRadius.circular(4),
                         ),
-                        child: CustomText('Latest Visit', fontSize: 10.5, fontWeight: FW.bold, color: AppColors.get.primary),
+                        child: CustomText('latest_visit'.toTr(), fontSize: 10.5, fontWeight: FW.bold, color: AppColors.get.primary),
                       ),
                     ],
                   ],
@@ -716,7 +766,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                 8.ESH(),
                 CustomText(doctor, fontSize: 13, fontWeight: FW.bold, color: AppColors.get.textPrimary),
                 6.ESH(),
-                CustomText('Reason: $reason', fontSize: 12, color: AppColors.get.textSecondary),
+                CustomText('${'reason'.toTr()}: $reason', fontSize: 12, color: AppColors.get.textSecondary),
                 8.ESH(),
                 Row(
                   children: [

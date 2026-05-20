@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:care_desk/src/Core/Services/Storage/storage_service.dart';
 import 'package:care_desk/src/Super/Controllers/Resources/get/get_controller_interface.dart';
 import 'package:get/get.dart';
+import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
+
 class ThemeController extends GetControllerInterface {
 
   final _storage = StorageService<String>();
@@ -21,6 +23,7 @@ class ThemeController extends GetControllerInterface {
     } else {
       themeMode = ThemeMode.light;
     }
+    AppColors.changeColor(isDark: themeMode == ThemeMode.dark, update: () {});
     Get.changeThemeMode(themeMode);
   }
 
@@ -34,6 +37,7 @@ class ThemeController extends GetControllerInterface {
     }
 
     _storage.save(_themeKey, value: themeMode == ThemeMode.dark ? 'dark' : 'light');
+    AppColors.changeColor(isDark: themeMode == ThemeMode.dark, update: () {});
     Get.changeThemeMode(themeMode);
 
     update();

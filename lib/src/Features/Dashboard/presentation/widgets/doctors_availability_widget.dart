@@ -19,7 +19,7 @@ class DoctorsAvailabilityWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText("Doctors Availability", fontSize: 16, fontWeight: FW.bold),
+                CustomText("doctors_availability", fontSize: 16, fontWeight: FW.bold),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
@@ -34,7 +34,7 @@ class DoctorsAvailabilityWidget extends StatelessWidget {
                         decoration: const BoxDecoration(color: Colors.green, shape: BoxShape.circle),
                       ),
                       8.ESW(),
-                      const CustomText("12 Online", fontSize: 11, color: Colors.green, fontWeight: FW.bold),
+                      const CustomText("online_count", fontSize: 11, color: Colors.green, fontWeight: FW.bold),
                     ],
                   ),
                 ),
@@ -58,8 +58,8 @@ class DoctorsAvailabilityWidget extends StatelessWidget {
 
   Widget _buildDoctorItem(int index) {
     final names = ["Dr. Sarah Jones", "Dr. Mike Ross", "Dr. Emily Blunt", "Dr. David Smith"];
-    final specialties = ["Cardiologist", "Neurologist", "Pediatrician", "General Surgeon"];
-    final statuses = ["Available", "Busy", "Available", "On Break"];
+    final specialties = ["cardiologist", "neurologist", "pediatrician", "general_surgeon"];
+    final statuses = ["available", "busy", "available", "on_break"];
     final statusColors = [Colors.green, Colors.red, Colors.green, Colors.orange];
 
     return Padding(

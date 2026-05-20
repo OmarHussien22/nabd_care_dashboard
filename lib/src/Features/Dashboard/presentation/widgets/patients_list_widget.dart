@@ -21,9 +21,9 @@ class DashboardRecentPatients extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText("Recent Patients", fontSize: 16, fontWeight: FW.bold),
+                CustomText("recent_patients", fontSize: 16, fontWeight: FW.bold),
                 ViewAllButton(
-                  label: "See All",
+                  label: "see_all",
                   onTap: () => NavigationService.instance.push('/patients'),
                 ),
               ],
@@ -74,7 +74,7 @@ class DashboardRecentPatients extends StatelessWidget {
             children: [
               CustomText(dates[index], fontWeight: FW.medium, fontSize: 13),
               4.ESH(),
-              CustomText("Last Visit", color: AppColors.get.textSecondary, fontSize: 11),
+              CustomText("last_visit", color: AppColors.get.textSecondary, fontSize: 11),
             ],
           ),
         ],

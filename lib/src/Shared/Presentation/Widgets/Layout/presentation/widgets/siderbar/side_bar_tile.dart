@@ -10,7 +10,8 @@ class SidebarTile extends StatelessWidget {
   final SideBarItemEntity item;
   final bool selected;
 
-  const SidebarTile({super.key,
+  const SidebarTile({
+    super.key,
     required this.item,
     required this.selected,
   });
@@ -24,7 +25,9 @@ class SidebarTile extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         padding: EdgeInsets.symmetric(horizontal: 16.toW(), vertical: 12.toH()),
         decoration: BoxDecoration(
-          color: selected ? AppColors.get.primary.withOpacity(0.08) : Colors.transparent,
+          color: selected
+              ? AppColors.get.primary.withOpacity(0.08)
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(12.toRad()),
         ),
         child: Row(
@@ -32,15 +35,19 @@ class SidebarTile extends StatelessWidget {
             Icon(
               item.icon,
               size: 22.toRad(),
-              color: selected ? AppColors.get.primary : AppColors.get.textSecondary,
+              color: selected
+                  ? AppColors.get.primary
+                  : AppColors.get.textSecondary,
             ),
             16.ESW(),
             Expanded(
               child: CustomText(
                 item.label,
-                fontSize: 14,
+                fontSize: selected ? 13 : 12,
                 fontWeight: selected ? FW.bold : FW.medium,
-                color: selected ? AppColors.get.primary : AppColors.get.textSecondary,
+                color: selected
+                    ? AppColors.get.primary
+                    : AppColors.get.textSecondary,
               ),
             ),
             if (selected)

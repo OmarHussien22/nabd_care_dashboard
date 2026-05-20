@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:care_desk/src/Core/routers/go_router/app_go_router.dart';
 import 'package:care_desk/src/Core/Constants/Enums/app_source.dart';
 import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
 import 'package:care_desk/src/Super/Controllers/Resources/get/get_controller_interface.dart';
@@ -25,6 +26,22 @@ class PatientsController extends GetControllerInterface<List<PatientEntity>> {
 
   // --- Search debounce ---
   Timer? _searchDebounce;
+
+  void _showSafeSnackBar(String title, String message, {Color? backgroundColor, Color? textColor}) {
+    final context = AppGoRouter.rootNavigatorKey.currentContext;
+    if (context != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            '$title: $message',
+            style: TextStyle(color: textColor ?? Colors.white),
+          ),
+          backgroundColor: backgroundColor ?? const Color(0xFF2196F3),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
+  }
 
   @override
   void onInit() {
@@ -126,12 +143,13 @@ class PatientsController extends GetControllerInterface<List<PatientEntity>> {
 
     if (result is DataSuccess) {
       await fetchPatients(refresh: true);
-      Get.snackbar('✓ Success', 'Patient saved successfully',
+      _showSafeSnackBar('✓ Success', 'Patient saved successfully',
           backgroundColor: const Color(0xFF22C55E),
-          colorText: const Color(0xFFFFFFFF));
+          textColor: const Color(0xFFFFFFFF));
       return true;
     } else if (result is DataFailed) {
-      Get.snackbar('Error', result.error?.title ?? 'Failed to save patient');
+      _showSafeSnackBar('Error', result.error?.title ?? 'Failed to save patient',
+          backgroundColor: Colors.redAccent);
       return false;
     }
     return false;
@@ -158,8 +176,9 @@ class PatientsController extends GetControllerInterface<List<PatientEntity>> {
         patients = updated;
         update(['patients_table']);
       }
-      Get.snackbar(
-          'Patient Deactivated', '${patient.name} has been deactivated.');
+      _showSafeSnackBar(
+          'Patient Deactivated', '${patient.name} has been deactivated.',
+          backgroundColor: Colors.orange);
     }
   }
 

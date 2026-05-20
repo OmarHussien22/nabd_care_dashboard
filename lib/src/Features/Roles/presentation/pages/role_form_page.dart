@@ -9,6 +9,7 @@ import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/cu
 import 'package:get/get.dart';
 import '../manager/role_controller.dart';
 import '../../../Users/domain/entities/auth_entities.dart';
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 
 class RoleFormPage extends StatelessWidget {
   final bool isEdit;
@@ -19,12 +20,12 @@ class RoleFormPage extends StatelessWidget {
     final controller = Get.put(RoleController());
 
     return AppContentWrapper(
-      title: isEdit ? 'Edit Role' : 'Define Role',
+      title: isEdit ? 'edit_role'.toTr() : 'define_role'.toTr(),
       breadcrumb: AppBreadcrumb(
         items: [
-          const BreadcrumbItem(label: 'Dashboard', route: '/dashboard'),
-          const BreadcrumbItem(label: 'Roles', route: '/roles'),
-          BreadcrumbItem(label: isEdit ? 'Edit' : 'Create'),
+          BreadcrumbItem(label: 'dashboard'.toTr(), route: '/dashboard'),
+          BreadcrumbItem(label: 'roles'.toTr(), route: '/roles'),
+          BreadcrumbItem(label: isEdit ? 'edit'.toTr() : 'create'.toTr()),
         ],
       ),
       child: GetBuilder<RoleController>(
@@ -41,12 +42,12 @@ class RoleFormPage extends StatelessWidget {
                 child: Column(
                   children: [
                     _buildFormSection(
-                      title: 'Role Identity',
-                      subtitle: 'Give this role a name and description',
+                      title: 'role_identity'.toTr(),
+                      subtitle: 'role_identity_subtitle'.toTr(),
                       child: TextFieldDefault(
                         controller: cnt.nameController,
-                        header: const TFFHeader(title: 'Role Name'),
-                        hint: const TFFHint(title: 'e.g. Senior Doctor'),
+                        header: TFFHeader(title: 'role_name'.toTr()),
+                        hint: TFFHint(title: 'role_name_hint'.toTr()),
                         isRequired: true,
                         prefix:
                             PrefixWithIconData(iconData: Icons.badge_outlined),
@@ -54,16 +55,16 @@ class RoleFormPage extends StatelessWidget {
                     ),
                     24.ESH(),
                     _buildFormSection(
-                      title: 'Permissions Matrix',
-                      subtitle: 'Select which actions this role can perform',
+                      title: 'permissions_matrix'.toTr(),
+                      subtitle: 'permissions_matrix_subtitle'.toTr(),
                       child: Column(
                         children: cnt.groupedPermissions.entries.map((entry) {
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 32.0),
                             child: _buildPermissionCategory(
-                              cnt,
-                              entry.key,
-                              entry.value,
+                                cnt,
+                                entry.key,
+                                entry.value,
                             ),
                           );
                         }).toList(),
@@ -75,7 +76,7 @@ class RoleFormPage extends StatelessWidget {
                       children: [
                         TextButton(
                           onPressed: () => context.pop(),
-                          child: CustomText('Cancel',
+                          child: CustomText('cancel'.toTr(),
                               color: AppColors.get.textSecondary),
                         ),
                         24.ESW(),
@@ -91,7 +92,8 @@ class RoleFormPage extends StatelessWidget {
                                     BorderRadius.circular(10.toRad())),
                             elevation: 0,
                           ),
-                          child: Text(isEdit ? 'Save Role' : 'Create Role'),
+                          child: CustomText(isEdit ? 'save_role'.toTr() : 'create_role'.toTr(),
+                              color: Colors.white, fontWeight: FW.bold),
                         ),
                       ],
                     ),
@@ -152,7 +154,7 @@ class RoleFormPage extends StatelessWidget {
           children: [
             Icon(Icons.folder_open, size: 20, color: AppColors.get.primary),
             12.ESW(),
-            CustomText(category, fontWeight: FW.semiBold, fontSize: 15),
+            CustomText(category.toLowerCase().toTr(), fontWeight: FW.semiBold, fontSize: 15),
           ],
         ),
         16.ESH(),
@@ -189,7 +191,7 @@ class RoleFormPage extends StatelessWidget {
           children: [
             Expanded(
               child: CustomText(
-                permission.name,
+                permission.name.toLowerCase().replaceAll(' ', '_').toTr(),
                 fontSize: 13,
                 color: isSelected
                     ? AppColors.get.primary

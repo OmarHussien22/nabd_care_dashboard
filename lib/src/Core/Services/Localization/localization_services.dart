@@ -12,6 +12,7 @@ class LocalizationServices extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         "ar_AE": arEG,
+        "ar_AR": arEG,
         "en_US": enUS,
       };
 }

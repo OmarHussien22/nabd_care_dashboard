@@ -7,6 +7,8 @@ import 'package:care_desk/src/Core/Services/Localization/localization_services.d
 import 'package:care_desk/src/Core/Styles/Themes/imports_themes.dart';
 import 'package:care_desk/src/Core/Styles/Themes/theme_controller.dart';
 import 'package:care_desk/src/Core/Utils/utils.dart';
+import 'package:care_desk/src/Shared/Managers/check_network_controller.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/no_internet_screen.dart';
 
 class AppMaterial extends StatelessWidget {
   const AppMaterial({super.key});
@@ -30,7 +32,16 @@ class AppMaterial extends StatelessWidget {
           theme: ThemeManager.light,
           darkTheme: ThemeManager.dark,
           themeMode: controller.themeMode,
-          builder: (context, child) => child!,
+          builder: (context, child) {
+            final checkNetworkController = Get.find<CheckNetworkController>();
+            return Obx(() {
+              if (checkNetworkController.isOnline.value) {
+                return child!;
+              } else {
+                return const NoInternetScreen();
+              }
+            });
+          },
         );
       },
     );

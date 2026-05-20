@@ -9,6 +9,7 @@ import 'package:care_desk/src/Core/App/app_layout.dart';
 import 'package:care_desk/src/Core/LocalDataBaseStructure/helper/data_base_helper.dart';
 import 'package:care_desk/src/Core/Services/Storage/storage_service.dart';
 import 'package:care_desk/src/Core/Services/Navigation/navigation_service.dart';
+import 'package:care_desk/src/Shared/Managers/check_network_controller.dart';
 import 'package:get/get.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
@@ -29,6 +30,7 @@ class AppInitializer {
 
     /// * Storage Service Initialization
     await StorageService().init();
+    Get.put(CheckNetworkController(), permanent: true);
     Get.put(NavigationService.instance, permanent: true);
     Get.put(AuthController.instance, permanent: true);
     Get.put(ThemeController(), permanent: true);

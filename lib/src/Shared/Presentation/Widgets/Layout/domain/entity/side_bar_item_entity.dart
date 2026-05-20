@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:flutter/material.dart';
 
 class SideBarItemEntity {
@@ -13,32 +14,32 @@ class SideBarItemEntity {
 
   static List<SideBarItemEntity> get defaultItems => [
         SideBarItemEntity(
-          label: 'Dashboard',
+          label: 'dashboard'.toTr(),
           icon: Icons.dashboard_outlined,
           route: '/dashboard',
         ),
         SideBarItemEntity(
-          label: 'Patients',
+          label: 'patients'.toTr(),
           icon: Icons.people_outline,
           route: '/patients',
         ),
         SideBarItemEntity(
-          label: 'Appointments',
+          label: 'appointments'.toTr(),
           icon: Icons.calendar_today_outlined,
           route: '/appointments',
         ),
         SideBarItemEntity(
-          label: 'Users',
+          label: 'users'.toTr(),
           icon: Icons.person_search_outlined,
           route: '/users',
         ),
         SideBarItemEntity(
-          label: 'Roles',
+          label: 'roles'.toTr(),
           icon: Icons.security_outlined,
           route: '/roles',
         ),
         SideBarItemEntity(
-          label: 'Settings',
+          label: 'settings'.toTr(),
           icon: Icons.settings_outlined,
           route: '/settings',
         ),

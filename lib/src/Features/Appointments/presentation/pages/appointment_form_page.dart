@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -34,6 +35,22 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
   final _formKey = GlobalKey<FormState>();
   final AppointmentsController controller = Get.put(AppointmentsController());
   final PatientsController patientsController = Get.put(PatientsController());
+
+  String _translateVisitType(String type) {
+    final lower = type.toLowerCase().replaceAll('-', '').replaceAll(' ', '_');
+    if (lower == 'consultation' || lower == 'followup' || lower == 'emergency' || lower == 'checkup') {
+      return lower.toTr();
+    }
+    return type;
+  }
+
+  String _translateStatus(String status) {
+    final lower = status.toLowerCase();
+    if (lower == 'scheduled' || lower == 'completed' || lower == 'cancelled' || lower == 'pending' || lower == 'confirmed') {
+      return lower.toTr();
+    }
+    return status;
+  }
 
   String? selectedPatient;
   String? selectedDoctor;
@@ -124,11 +141,11 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
   @override
   Widget build(BuildContext context) {
     return AppContentWrapper(
-      title: widget.isEdit ? 'Reschedule Appointment' : 'Book New Appointment',
+      title: widget.isEdit ? 'reschedule_appointment'.toTr() : 'book_new_appointment'.toTr(),
       breadcrumb: AppBreadcrumb(
         items: [
-          const BreadcrumbItem(label: 'Appointments', route: '/appointments'),
-          BreadcrumbItem(label: widget.isEdit ? 'Reschedule' : 'Booking'),
+          BreadcrumbItem(label: 'appointments'.toTr(), route: '/appointments'),
+          BreadcrumbItem(label: widget.isEdit ? 'reschedule'.toTr() : 'booking'.toTr()),
         ],
       ),
       child: Form(
@@ -164,7 +181,7 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
   Widget _buildSummaryPanel() {
     final initials = selectedPatient == null
         ? '?'
-        : selectedPatient!.split(' ').map((e) => e[0]).take(2).join().toUpperCase();
+        : selectedPatient!.split(' ').map((e) => e.isEmpty ? '' : e[0]).take(2).join().toUpperCase();
 
     return Container(
       padding: EdgeInsets.all(24.toRad()),
@@ -194,7 +211,7 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
           24.ESH(),
           Center(
             child: CustomText(
-              selectedPatient ?? 'Select Patient',
+              selectedPatient ?? 'select_patient'.toTr(),
               fontSize: 16,
               fontWeight: FW.bold,
               color: AppColors.get.textPrimary,
@@ -209,7 +226,7 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
                 borderRadius: BorderRadius.circular(6),
               ),
               child: CustomText(
-                selectedVisitType ?? 'Consultation',
+                _translateVisitType(selectedVisitType ?? 'Consultation'),
                 fontSize: 11.5,
                 fontWeight: FW.bold,
                 color: Colors.blue.shade700,
@@ -220,14 +237,14 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
           const Divider(),
           20.ESH(),
 
-          _buildSummaryRow(Icons.medical_services_outlined, 'Attending Doctor', selectedDoctor ?? 'Not assigned'),
+          _buildSummaryRow(Icons.medical_services_outlined, 'attending_doctor'.toTr(), selectedDoctor ?? 'not_assigned'.toTr()),
           14.ESH(),
-          _buildSummaryRow(Icons.calendar_today_outlined, 'Slotted Date', dateController.text),
+          _buildSummaryRow(Icons.calendar_today_outlined, 'slotted_date'.toTr(), dateController.text),
           14.ESH(),
-          _buildSummaryRow(Icons.access_time_rounded, 'Slotted Time', timeController.text),
+          _buildSummaryRow(Icons.access_time_rounded, 'slotted_time'.toTr(), timeController.text),
           if (widget.isEdit) ...[
             14.ESH(),
-            _buildSummaryRow(Icons.circle_outlined, 'Current Status', selectedStatus ?? 'Confirmed', statusColor: true),
+            _buildSummaryRow(Icons.circle_outlined, 'current_status'.toTr(), _translateStatus(selectedStatus ?? 'Confirmed'), statusColor: true),
           ],
 
           28.ESH(),
@@ -244,8 +261,8 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
               children: [
                 const Icon(Icons.info_outline_rounded, color: Colors.blue, size: 22),
                 8.ESH(),
-                const CustomText(
-                  'Make sure there are no schedule conflicts for the chosen doctor at this time.',
+                CustomText(
+                  'conflict_warning'.toTr(),
                   fontSize: 11.5,
                   color: Colors.grey,
                   textAlign: TextAlign.center,
@@ -318,14 +335,14 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  widget.isEdit ? 'Reschedule Clinical Appointment' : 'Book a New Clinical Consultation',
+                  widget.isEdit ? 'reschedule_banner_title'.toTr() : 'book_banner_title'.toTr(),
                   fontSize: 18,
                   fontWeight: FW.bold,
                   color: Colors.white,
                 ),
                 4.ESH(),
                 CustomText(
-                  'Set visit type, assign specialist doctors, and reserve slots instantly in real-time.',
+                  'banner_subtitle'.toTr(),
                   fontSize: 12.5,
                   color: Colors.white.withOpacity(0.85),
                 ),
@@ -354,28 +371,28 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
             children: [
               Expanded(
                 child: _buildLabelDropdown(
-                  label: 'Choose Patient *',
+                  label: 'choose_patient'.toTr(),
                   icon: Icons.person_outline_rounded,
                   child: DropdownButtonFormField<String>(
                     value: selectedPatient,
                     decoration: _buildInputDecoration(),
                     items: _availablePatients.map((p) => DropdownMenuItem(value: p.name, child: Text(p.name))).toList(),
                     onChanged: (v) => setState(() => selectedPatient = v),
-                    validator: (v) => v == null ? 'Patient selection is required' : null,
+                    validator: (v) => v == null ? 'patient_required'.toTr() : null,
                   ),
                 ),
               ),
               20.ESW(),
               Expanded(
                 child: _buildLabelDropdown(
-                  label: 'Assign Specialist Doctor *',
+                  label: 'assign_doctor'.toTr(),
                   icon: Icons.badge_outlined,
                   child: DropdownButtonFormField<String>(
                     value: selectedDoctor,
                     decoration: _buildInputDecoration(),
                     items: _doctors.map((d) => DropdownMenuItem(value: d, child: Text(d))).toList(),
                     onChanged: (v) => setState(() => selectedDoctor = v),
-                    validator: (v) => v == null ? 'Doctor selection is required' : null,
+                    validator: (v) => v == null ? 'doctor_required'.toTr() : null,
                   ),
                 ),
               ),
@@ -388,11 +405,11 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
             children: [
               Expanded(
                 child: _buildLabelDropdown(
-                  label: 'Appointment Date *',
+                  label: 'appointment_date'.toTr(),
                   icon: Icons.calendar_month_outlined,
                   child: TextFieldDefault(
                     controller: dateController,
-                    hint: const TFFHint(title: 'Choose Date'),
+                    hint: TFFHint(title: 'choose_date'.toTr()),
                     prefix: PrefixWithIconData(iconData: Icons.cake_outlined),
                     readOnly: true,
                     onTap: _pickDate,
@@ -402,11 +419,11 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
               20.ESW(),
               Expanded(
                 child: _buildLabelDropdown(
-                  label: 'Time Slot *',
+                  label: 'time_slot'.toTr(),
                   icon: Icons.access_time_rounded,
                   child: TextFieldDefault(
                     controller: timeController,
-                    hint: const TFFHint(title: 'Select Time Slot'),
+                    hint: TFFHint(title: 'select_time_slot'.toTr()),
                     prefix: PrefixWithIconData(iconData: Icons.more_time_rounded),
                     readOnly: true,
                     onTap: _pickTime,
@@ -428,13 +445,13 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
 
           // Row 4: Notes
           _buildLabelDropdown(
-            label: 'Administrative Notes / Consultation Reasons',
+            label: 'admin_notes'.toTr(),
             icon: Icons.notes_rounded,
             child: TextField(
               controller: notesController,
               maxLines: 3,
               style: const TextStyle(fontSize: 13),
-              decoration: _buildInputDecoration(hint: 'Describe the main cause, specific allergies or details...'),
+              decoration: _buildInputDecoration(hint: 'notes_hint'.toTr()),
             ),
           ),
         ],
@@ -478,7 +495,7 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
           children: [
             Icon(Icons.style_outlined, size: 16, color: AppColors.get.textSecondary),
             8.ESW(),
-            CustomText('Visit Type *', fontSize: 13, fontWeight: FW.bold, color: AppColors.get.textSecondary),
+            CustomText('visit_type_label'.toTr(), fontSize: 13, fontWeight: FW.bold, color: AppColors.get.textSecondary),
           ],
         ),
         10.ESH(),
@@ -499,7 +516,7 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
                   ),
                   child: Center(
                     child: CustomText(
-                      vt,
+                      _translateVisitType(vt),
                       fontSize: 12.5,
                       fontWeight: isSelected ? FW.bold : FW.medium,
                       color: isSelected ? Colors.blue.shade700 : Colors.grey.shade600,
@@ -522,7 +539,7 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
           children: [
             Icon(Icons.circle_outlined, size: 16, color: AppColors.get.textSecondary),
             8.ESW(),
-            CustomText('Appointment Status *', fontSize: 13, fontWeight: FW.bold, color: AppColors.get.textSecondary),
+            CustomText('appointment_status_label'.toTr(), fontSize: 13, fontWeight: FW.bold, color: AppColors.get.textSecondary),
           ],
         ),
         10.ESH(),
@@ -548,7 +565,7 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
                   ),
                   child: Center(
                     child: CustomText(
-                      st,
+                      _translateStatus(st),
                       fontSize: 12.5,
                       fontWeight: isSelected ? FW.bold : FW.medium,
                       color: isSelected ? statusColor : Colors.grey.shade600,
@@ -609,7 +626,7 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
         OutlinedButton.icon(
           onPressed: () => Navigator.pop(context),
           icon: Icon(Icons.close_rounded, size: 18, color: Colors.grey.shade500),
-          label: CustomText('Discard', fontWeight: FW.bold, color: Colors.grey.shade600, fontSize: 13),
+          label: CustomText('discard'.toTr(), fontWeight: FW.bold, color: Colors.grey.shade600, fontSize: 13),
           style: OutlinedButton.styleFrom(
             padding: EdgeInsets.symmetric(horizontal: 28.toW(), vertical: 18.toH()),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.toRad())),
@@ -634,11 +651,11 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
               child: ElevatedButton.icon(
                 onPressed: cnt.isLoading.value ? null : _submit,
                 icon: cnt.isLoading.value
-                    ? const SizedBox(
-                        width: 18,
-                        height: 18,
-                        child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5),
-                      )
+                     ? const SizedBox(
+                         width: 18,
+                         height: 18,
+                         child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5),
+                       )
                     : Icon(
                         widget.isEdit ? Icons.save_rounded : Icons.check_circle_rounded,
                         size: 20,
@@ -646,10 +663,10 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
                       ),
                 label: CustomText(
                   cnt.isLoading.value
-                      ? 'Saving...'
+                      ? 'saving'.toTr()
                       : widget.isEdit
-                          ? 'Reschedule'
-                          : 'Book Appointment',
+                          ? 'reschedule'.toTr()
+                          : 'book_appointment'.toTr(),
                   fontWeight: FW.bold,
                   color: Colors.white,
                   fontSize: 13,
@@ -673,7 +690,16 @@ class _AppointmentFormPageState extends State<AppointmentFormPage> {
   void _submit() async {
     if (!_formKey.currentState!.validate()) return;
     if (selectedPatient == null || selectedDoctor == null) {
-      Get.snackbar('Input Error', 'Please complete all required fields (*)');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: CustomText('fields_required'.toTr(), color: Colors.white),
+            backgroundColor: Colors.redAccent,
+            behavior: SnackBarBehavior.floating,
+            width: 400.toW(),
+          ),
+        );
+      }
       return;
     }
 

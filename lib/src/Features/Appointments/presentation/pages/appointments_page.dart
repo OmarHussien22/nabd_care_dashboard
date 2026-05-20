@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -17,18 +18,18 @@ class AppointmentsPage extends StatelessWidget {
     final controller = Get.put(AppointmentsController());
 
     return AppContentWrapper(
-      title: 'Appointments Schedule',
-      breadcrumb: const AppBreadcrumb(
+      title: 'appointments_schedule'.toTr(),
+      breadcrumb: AppBreadcrumb(
         items: [
-          BreadcrumbItem(label: 'Dashboard', route: '/dashboard'),
-          BreadcrumbItem(label: 'Appointments'),
+          BreadcrumbItem(label: 'dashboard'.toTr(), route: '/dashboard'),
+          BreadcrumbItem(label: 'appointments'.toTr()),
         ],
       ),
       actions: [
         OutlinedButton.icon(
           onPressed: () => context.go('/appointments/calendar'),
           icon: const Icon(Icons.calendar_month_outlined, size: 20),
-          label: const CustomText('View Calendar', fontWeight: FW.bold),
+          label: CustomText('view_calendar'.toTr(), fontWeight: FW.bold),
           style: OutlinedButton.styleFrom(
             padding:
                 EdgeInsets.symmetric(horizontal: 20.toW(), vertical: 12.toH()),
@@ -41,7 +42,7 @@ class AppointmentsPage extends StatelessWidget {
         ElevatedButton.icon(
           onPressed: () => context.go('/appointments/create'),
           icon: const Icon(Icons.add_task_rounded, size: 20),
-          label: const CustomText('New Appointment',
+          label: CustomText('new_appointment'.toTr(),
               fontWeight: FW.bold, color: Colors.white),
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.get.primary,
@@ -65,17 +66,16 @@ class AppointmentsPage extends StatelessWidget {
           ),
           child: CustomTable(
             isLoading: controller.isLoading.value,
-            emptyTitle: 'No Appointments Slotted',
-            emptyDescription:
-                'Keep track of patient consultations. Book a new time slot to get started.',
+            emptyTitle: 'no_appointments_slotted'.toTr(),
+            emptyDescription: 'no_appointments_desc'.toTr(),
             emptyAction: () => context.go('/appointments/create'),
-            emptyActionLabel: 'Book Appointment',
-            columnNames: const [
-              'Patient',
-              'Time',
-              'Doctor',
-              'Visit Type',
-              'Status'
+            emptyActionLabel: 'book_appointment'.toTr(),
+            columnNames: [
+              'patient'.toTr(),
+              'time'.toTr(),
+              'doctor'.toTr(),
+              'visit_type'.toTr(),
+              'status'.toTr()
             ],
             data: list
                 .map((appt) => [
@@ -113,8 +113,8 @@ class AppointmentsPage extends StatelessWidget {
                     }
                   },
                   tooltipMessage: isCompleted
-                      ? 'Cancel Appointment'
-                      : 'Complete Appointment',
+                      ? 'cancel_appointment'.toTr()
+                      : 'complete_appointment'.toTr(),
                 );
               },
               (data) {
@@ -131,7 +131,7 @@ class AppointmentsPage extends StatelessWidget {
                   icon: Icons.edit_calendar_rounded,
                   color: AppColors.get.primary,
                   onTap: () => context.go('/appointments/edit/${appt.id}'),
-                  tooltipMessage: 'Reschedule Slot',
+                  tooltipMessage: 'reschedule_slot'.toTr(),
                 );
               },
               (data) {
@@ -148,7 +148,7 @@ class AppointmentsPage extends StatelessWidget {
                   icon: Icons.delete_outline_rounded,
                   color: Colors.grey.shade700,
                   onTap: () => controller.deleteAppointment(appt.id),
-                  tooltipMessage: 'Remove Log',
+                  tooltipMessage: 'remove_log'.toTr(),
                 );
               },
             ],
@@ -178,6 +178,22 @@ class AppointmentsPage extends StatelessWidget {
     );
   }
 
+  String _translateVisitType(String type) {
+    final lower = type.toLowerCase().replaceAll('-', '').replaceAll(' ', '_');
+    if (lower == 'consultation' || lower == 'followup' || lower == 'routine') {
+      return lower.toTr();
+    }
+    return type;
+  }
+
+  String _translateStatus(String status) {
+    final lower = status.toLowerCase();
+    if (lower == 'scheduled' || lower == 'completed' || lower == 'cancelled' || lower == 'pending') {
+      return lower.toTr();
+    }
+    return status;
+  }
+
   Widget _buildTypeBadge(String type) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.toW(), vertical: 4.toH()),
@@ -187,7 +203,7 @@ class AppointmentsPage extends StatelessWidget {
         border: Border.all(color: AppColors.get.border.withOpacity(0.5)),
       ),
       child: Center(
-        child: CustomText(type,
+        child: CustomText(_translateVisitType(type),
             fontSize: 12,
             color: AppColors.get.textSecondary,
             fontWeight: FW.medium),
@@ -204,7 +220,7 @@ class AppointmentsPage extends StatelessWidget {
         border: Border.all(color: color.withOpacity(0.2)),
       ),
       child: Center(
-        child: CustomText(status,
+        child: CustomText(_translateStatus(status),
             fontSize: 12, color: color, fontWeight: FW.semiBold),
       ),
     );

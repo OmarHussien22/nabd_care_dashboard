@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Buttons/Basic/custom_rounded_button.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +21,11 @@ class PatientsPage extends StatelessWidget {
     Get.put(PatientsController());
 
     return AppContentWrapper(
-      title: 'Patients Directory',
+      title: 'patients_directory',
       breadcrumb: const AppBreadcrumb(
         items: [
-          BreadcrumbItem(label: 'Dashboard', route: '/dashboard'),
-          BreadcrumbItem(label: 'Patients'),
+          BreadcrumbItem(label: 'dashboard', route: '/dashboard'),
+          BreadcrumbItem(label: 'patients'),
         ],
       ),
       actions: [
@@ -61,18 +62,18 @@ class PatientsPage extends StatelessWidget {
 
   // ─────────────────── ADD BUTTON ───────────────────
   Widget _buildAddButton(BuildContext context) {
-    return ElevatedButton.icon(
-      onPressed: () => context.go('/patients/create'),
-      icon: const Icon(Icons.person_add_rounded, size: 20),
-      label: const Text('New Patient'),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.get.primary,
-        foregroundColor: Colors.white,
-        padding: EdgeInsets.symmetric(horizontal: 20.toW(), vertical: 12.toH()),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.toRad())),
-        elevation: 0,
-      ),
+    return ButtonDefault.icon(
+      height: 50.toH(),
+      width: 180.toW(),
+      label: "add_patient".toTr(),
+      titleSize: 22,
+      elevation: 1,
+      icon: Icons.add_outlined,
+      onPressed: () {
+        context.go('/patients/create');
+      },
+      backgroundColor: AppColors.get.primary,
+      borderRadius: 8.toRad(),
     );
   }
 
@@ -85,37 +86,37 @@ class PatientsPage extends StatelessWidget {
     return Row(
       children: [
         _buildStatCard(
-          label: 'Total Patients',
+          label: 'total_patients',
           value: '$total',
           icon: Icons.groups_rounded,
           color: AppColors.get.primary,
-          subtitle: 'All registered',
+          subtitle: 'all_registered',
         ),
         16.ESW(),
         _buildStatCard(
-          label: 'Active Patients',
+          label: 'active_patients',
           value: '$active',
           icon: Icons.check_circle_outline_rounded,
           color: AppColors.get.success,
-          subtitle: 'Currently active',
+          subtitle: 'currently_active',
         ),
         16.ESW(),
         _buildStatCard(
-          label: 'Inactive',
+          label: 'inactive',
           value: '$inactive',
           icon: Icons.pause_circle_outline_rounded,
           color: AppColors.get.warning,
-          subtitle: 'Deactivated',
+          subtitle: 'deactivated',
         ),
         16.ESW(),
         _buildStatCard(
-          label: 'New This Month',
+          label: 'new_this_month',
           value: cnt.patients.isEmpty
               ? '0'
               : '${(cnt.patients.length * 0.3).ceil()}',
           icon: Icons.trending_up_rounded,
           color: AppColors.get.info,
-          subtitle: 'vs last month ↑',
+          subtitle: 'vs_last_month_up',
           //  isHighlight: true,
         ),
       ],
@@ -218,7 +219,7 @@ class PatientsPage extends StatelessWidget {
             child: TextField(
               onChanged: cnt.onSearch,
               decoration: InputDecoration(
-                hintText: 'Search by name or phone...',
+                hintText: 'search_by_name_or_phone'.toTr(),
                 hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 13),
                 prefixIcon: Icon(Icons.search_rounded,
                     color: AppColors.get.primary, size: 20),
@@ -257,10 +258,10 @@ class PatientsPage extends StatelessWidget {
       child: Row(
         children: [
           _buildFilterItem(
-              'All', cnt.filterActive == null, () => cnt.setActiveFilter(null)),
-          _buildFilterItem('Active', cnt.filterActive == true,
+              'all', cnt.filterActive == null, () => cnt.setActiveFilter(null)),
+          _buildFilterItem('active', cnt.filterActive == true,
               () => cnt.setActiveFilter(true)),
-          _buildFilterItem('Inactive', cnt.filterActive == false,
+          _buildFilterItem('inactive', cnt.filterActive == false,
               () => cnt.setActiveFilter(false)),
         ],
       ),
@@ -298,7 +299,7 @@ class PatientsPage extends StatelessWidget {
   Widget _buildPerPageSelector(PatientsController cnt) {
     return Row(
       children: [
-        CustomText('Show:', color: Colors.grey.shade600, fontSize: 12),
+        CustomText('show_label', color: Colors.grey.shade600, fontSize: 12),
         8.ESW(),
         Container(
           padding:
@@ -353,12 +354,12 @@ class PatientsPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20.toRad()),
                   child: CustomTable(
                     columnNames: const [
-                      'Patient',
-                      'Medical Info',
-                      'Contact',
-                      'Last Visit',
-                      'Status',
-                      'Actions',
+                      'patient',
+                      'medical_info',
+                      'contact',
+                      'last_visit',
+                      'status',
+                      'actions',
                     ],
                     // Actions embedded per-row so each row has its own patient reference
                     data: List.generate(cnt.patients.length, (index) {
@@ -391,7 +392,7 @@ class PatientsPage extends StatelessWidget {
         _buildRowAction(
           Icons.visibility_rounded,
           AppColors.get.info,
-          'View Record',
+          'view_record',
           () => context.go('/patients/details/${patient.id}'),
         ),
         6.ESW(),
@@ -399,7 +400,7 @@ class PatientsPage extends StatelessWidget {
         _buildRowAction(
           Icons.edit_rounded,
           AppColors.get.primary,
-          'Edit Patient',
+          'edit_patient',
           () => context.go('/patients/edit/${patient.id}'),
         ),
         6.ESW(),
@@ -411,7 +412,7 @@ class PatientsPage extends StatelessWidget {
 
   Widget _buildMoreMenu(PatientsController cnt, dynamic patient) {
     return PopupMenuButton<String>(
-      tooltip: 'More options',
+      tooltip: 'more_options'.toTr(),
       offset: const Offset(0, 36),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.toRad())),
@@ -437,8 +438,8 @@ class PatientsPage extends StatelessWidget {
                 children: [
                   CustomText(
                     patient.isActive
-                        ? 'Deactivate Patient'
-                        : 'Already Inactive',
+                        ? 'deactivate_patient'
+                        : 'already_inactive',
                     fontSize: 12,
                     fontWeight: FW.semiBold,
                     color:
@@ -495,7 +496,7 @@ class PatientsPage extends StatelessWidget {
               ),
             ),
             20.ESH(),
-            CustomText('Loading patients...',
+            CustomText('loading_patients',
                 color: AppColors.get.textSecondary, fontSize: 10),
           ],
         ),
@@ -520,25 +521,24 @@ class PatientsPage extends StatelessWidget {
                   color: AppColors.get.primary.withValues(alpha: 0.4)),
             ),
             28.ESH(),
-            const CustomText('No Patients Found',
+            const CustomText('no_patients_found',
                 fontSize: 10, fontWeight: FW.bold),
             10.ESH(),
-            CustomText('Try adjusting your search or filters',
+            CustomText('try_adjusting_search_or_filters',
                 color: AppColors.get.textSecondary, fontSize: 12),
             28.ESH(),
-            ElevatedButton.icon(
-              onPressed: () => context.go('/patients/create'),
-              icon: const Icon(Icons.person_add_rounded, size: 18),
-              label: const CustomText('Add First Patient',
-                  fontWeight: FW.bold, color: Colors.white),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.get.primary,
-                foregroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(
-                    horizontal: 24.toW(), vertical: 14.toH()),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.toRad())),
-              ),
+            ButtonDefault.icon(
+              height: 50.toH(),
+              width: 180.toW(),
+              label: "add_patient".toTr(),
+              titleSize: 22,
+              elevation: 1,
+              icon: Icons.person_add_rounded,
+              onPressed: () {
+                context.go('/patients/create');
+              },
+              backgroundColor: AppColors.get.primary,
+              borderRadius: 8.toRad(),
             ),
           ],
         ),
@@ -637,7 +637,7 @@ class PatientsPage extends StatelessWidget {
             ),
             4.ESW(),
             CustomText(
-              '${p.age ?? '?'} yrs • ${p.gender ?? 'Unknown'}',
+              '${p.age ?? '?'} ${'yrs'.toTr()} • ${p.gender != null ? p.gender!.toLowerCase().toTr() : 'unknown'.toTr()}',
               fontSize: 12,
               color: AppColors.get.textSecondary,
             ),
@@ -657,7 +657,7 @@ class PatientsPage extends StatelessWidget {
             Icon(Icons.phone_rounded, size: 15, color: AppColors.get.info),
             3.ESW(),
             CustomText(
-              p.phone ?? 'No Phone',
+              p.phone ?? 'no_phone'.toTr(),
               fontSize: 10,
               fontWeight: FW.medium,
               isOverFlow: true,
@@ -671,7 +671,7 @@ class PatientsPage extends StatelessWidget {
             Icon(Icons.email_outlined, size: 15, color: Colors.grey.shade400),
             3.ESW(),
             CustomText(
-              p.email ?? 'No Email',
+              p.email ?? 'no_email'.toTr(),
               fontSize: 10,
               color: AppColors.get.textSecondary,
               isOverFlow: true,
@@ -689,7 +689,7 @@ class PatientsPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(
-          hasVisit ? p.lastVisit! : 'Never Visited',
+          hasVisit ? p.lastVisit! : 'never_visited',
           fontSize: 12,
           fontWeight: FW.semiBold,
           color: hasVisit
@@ -704,7 +704,7 @@ class PatientsPage extends StatelessWidget {
               color: AppColors.get.success.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(6),
             ),
-            child: CustomText('Recent visit',
+            child: CustomText('recent_visit',
                 fontSize: 11,
                 color: AppColors.get.success,
                 fontWeight: FW.semiBold),
@@ -715,7 +715,7 @@ class PatientsPage extends StatelessWidget {
 
   Widget _buildStatusBadge(bool isActive) {
     final color = isActive ? AppColors.get.success : Colors.grey.shade500;
-    final label = isActive ? 'Active' : 'Inactive';
+    final label = isActive ? 'active' : 'inactive';
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.toW(), vertical: 6.toH()),
       decoration: BoxDecoration(
@@ -741,7 +741,7 @@ class PatientsPage extends StatelessWidget {
   Widget _buildRowAction(
       IconData icon, Color color, String tooltip, VoidCallback onTap) {
     return Tooltip(
-      message: tooltip,
+      message: tooltip.toTr(),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(8.toRad()),
@@ -774,7 +774,7 @@ class PatientsPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.toRad()),
             ),
             child: CustomText(
-              'Showing ${cnt.patients.length} of ${cnt.totalPages * cnt.perPage} results',
+              '${'showing'.toTr()} ${cnt.patients.length} ${'of'.toTr()} ${cnt.totalPages * cnt.perPage} ${'results'.toTr()}',
               color: AppColors.get.textSecondary,
               fontSize: 12,
             ),

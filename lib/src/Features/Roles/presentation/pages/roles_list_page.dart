@@ -9,6 +9,7 @@ import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/custom_text_lib.dart';
 import '../../../../Core/network_structure/resources/data_state/data_state.dart';
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 
 class RolesListPage extends StatelessWidget {
   const RolesListPage({super.key});
@@ -18,18 +19,18 @@ class RolesListPage extends StatelessWidget {
     final controller = Get.put(RolesListController());
 
     return AppContentWrapper(
-      title: 'Roles & Permissions',
-      breadcrumb: const AppBreadcrumb(
+      title: 'roles_permissions'.toTr(),
+      breadcrumb: AppBreadcrumb(
         items: [
-          BreadcrumbItem(label: 'Dashboard', route: '/dashboard'),
-          BreadcrumbItem(label: 'Roles'),
+          BreadcrumbItem(label: 'dashboard'.toTr(), route: '/dashboard'),
+          BreadcrumbItem(label: 'roles'.toTr()),
         ],
       ),
       actions: [
         ElevatedButton.icon(
           onPressed: () => context.go('/roles/create'),
           icon: const Icon(Icons.security, size: 20),
-          label: const Text('Define New Role'),
+          label: Text('define_new_role'.toTr()),
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.get.primary,
             foregroundColor: Colors.white,
@@ -53,7 +54,7 @@ class RolesListPage extends StatelessWidget {
               border: Border.all(color: AppColors.get.border.withOpacity(0.5)),
             ),
             child: CustomTable(
-              columnNames: const ['Role Name', 'Permissions Count', 'Actions'],
+              columnNames: ['role_name'.toTr(), 'permissions_count'.toTr(), 'actions'.toTr()],
               data: cnt.roles.map((role) => [
                 role.name,
                 role.permissions.length.toString(),
@@ -70,7 +71,7 @@ class RolesListPage extends StatelessWidget {
                     icon: Icons.edit_outlined,
                     color: AppColors.get.primary,
                     onTap: () => context.go('/roles/edit/${role.id}'),
-                    tooltipMessage: 'Edit Role',
+                    tooltipMessage: 'edit_role'.toTr(),
                   );
                 },
                 (data) {
@@ -86,14 +87,14 @@ class RolesListPage extends StatelessWidget {
                       final confirmed = await Get.dialog<bool>(
                         AlertDialog(
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                          title: const CustomText('Delete Role', fontSize: 16, fontWeight: FW.bold),
-                          content: CustomText('Are you sure you want to permanently delete role "${role.name}"?', fontSize: 13),
+                          title: CustomText('delete_role'.toTr(), fontSize: 16, fontWeight: FW.bold),
+                          content: CustomText('delete_role_confirmation'.toTr().replaceAll('@role', role.name), fontSize: 13),
                           actions: [
-                            TextButton(onPressed: () => Get.back(result: false), child: const Text('Cancel')),
+                            TextButton(onPressed: () => Get.back(result: false), child: Text('cancel'.toTr())),
                             ElevatedButton(
                               onPressed: () => Get.back(result: true),
                               style: ElevatedButton.styleFrom(backgroundColor: Colors.red, foregroundColor: Colors.white),
-                              child: const Text('Delete'),
+                              child: Text('delete'.toTr()),
                             ),
                           ],
                         ),
@@ -101,10 +102,10 @@ class RolesListPage extends StatelessWidget {
                       if (confirmed == true) {
                         cnt.roles.removeAt(idx);
                         cnt.update();
-                        Get.snackbar('Success', 'Role removed successfully.', backgroundColor: Colors.green, colorText: Colors.white);
+                        Get.snackbar('success'.toTr(), 'role_removed_success'.toTr(), backgroundColor: Colors.green, colorText: Colors.white);
                       }
                     },
-                    tooltipMessage: 'Delete Role',
+                    tooltipMessage: 'delete_role'.toTr(),
                   );
                 },
               ],

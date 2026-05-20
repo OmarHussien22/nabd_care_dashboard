@@ -12,6 +12,9 @@ import '../GeneralWidgets/Buttons/Customizable/imports_customizable.dart';
 import '../Layout/presentation/manager/main_layout_controller.dart';
 import '../Layout/presentation/widgets/global_search_field.dart';
 import 'package:get/get.dart';
+import 'package:care_desk/src/Core/Services/lang_service/change_lang_service.dart';
+import 'package:care_desk/src/Shared/Entities/language.dart';
+import 'package:care_desk/src/Shared/Presentation/Widgets/dialogs/animate_dialogs.dart';
 
 class AppBars extends StatelessWidget implements PreferredSizeWidget {
   final AppBar _appBar;
@@ -202,12 +205,25 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                     Scaffold.of(context).openDrawer();
                   }
                 },
-                icon: Icon(
-                  isWide
-                      ? (cnt.isCollapsed ? Icons.menu : Icons.menu_open)
-                      : Icons.menu,
-                  color: AppColors.get.black,
-                  size: 26.toRad(),
+                icon: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder: (Widget child, Animation<double> animation) {
+                    return ScaleTransition(
+                      scale: animation,
+                      child: RotationTransition(
+                        turns: animation,
+                        child: child,
+                      ),
+                    );
+                  },
+                  child: Icon(
+                    isWide
+                        ? (cnt.isCollapsed ? Icons.menu : Icons.menu_open)
+                        : Icons.menu,
+                    key: ValueKey<bool>(cnt.isCollapsed),
+                    color: AppColors.get.black,
+                    size: 26.toRad(),
+                  ),
                 ),
                 tooltip: 'toggle_sidebar'.tr,
               );
@@ -241,6 +257,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
               size: 22.toRad(),
             ),
           ],
+          if (isMobile) 8.ESW() else 20.ESW(),
+          _buildLanguageDropdown(context, isMobile),
           if (isMobile) 8.ESW() else 20.ESW(),
           _buildUserProfile(isMobile),
         ],
@@ -314,6 +332,50 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildLanguageDropdown(BuildContext context, bool isMobile) {
+    return PopupMenuButton<int>(
+      icon: Icon(
+        Icons.translate,
+        color: AppColors.get.textSecondary,
+        size: isMobile ? 22.toRad() : 24.toRad(),
+      ),
+      tooltip: 'display_language'.tr,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.toRad()),
+      ),
+      onSelected: (int id) {
+        ChangeLangService.instance.changeLang(id: id, context: context);
+        Dialogs.customToast(
+          text: 'language_changed_successfully'.tr,
+          context: context,
+          isSuccess: true,
+        );
+      },
+      itemBuilder: (BuildContext context) => [
+        PopupMenuItem<int>(
+          value: 2,
+          child: Row(
+            children: [
+              Text('🇺🇸', style: TextStyle(fontSize: 18.toFS())),
+              12.ESW(),
+              const CustomText('English', fontWeight: FW.medium),
+            ],
+          ),
+        ),
+        PopupMenuItem<int>(
+          value: 1,
+          child: Row(
+            children: [
+              Text('🇸🇦', style: TextStyle(fontSize: 18.toFS())),
+              12.ESW(),
+              const CustomText('العربية', fontWeight: FW.medium),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

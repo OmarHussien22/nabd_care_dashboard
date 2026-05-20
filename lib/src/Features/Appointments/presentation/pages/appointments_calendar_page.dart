@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/extract_string.dart';
 import 'package:care_desk/src/Core/utils/general_utils.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Dialogs/app_dialogs.dart';
@@ -22,6 +23,22 @@ class AppointmentsCalendarPage extends StatefulWidget {
 class _AppointmentsCalendarPageState extends State<AppointmentsCalendarPage> {
   final AppointmentsController controller = Get.put(AppointmentsController());
 
+  String _translateStatus(String status) {
+    final lower = status.toLowerCase();
+    if (lower == 'scheduled' || lower == 'completed' || lower == 'cancelled' || lower == 'pending' || lower == 'confirmed') {
+      return lower.toTr();
+    }
+    return status;
+  }
+
+  String _translateDocStatus(String status) {
+    final lower = status.toLowerCase().replaceAll(' ', '_');
+    if (lower == 'active' || lower == 'on_call') {
+      return lower.toTr();
+    }
+    return status;
+  }
+
   // View States: 'month', 'week', 'day'
   String _activeView = 'month';
   DateTime _currentDate = DateTime(2026, 5, 17); // Set to simulated timestamp
@@ -39,18 +56,18 @@ class _AppointmentsCalendarPageState extends State<AppointmentsCalendarPage> {
   @override
   Widget build(BuildContext context) {
     return AppContentWrapper(
-      title: 'Appointments Calendar',
+      title: 'appointments_calendar'.toTr(),
       breadcrumb: AppBreadcrumb(
         items: [
-          BreadcrumbItem(label: 'Appointments', route: '/appointments'),
-          BreadcrumbItem(label: 'Calendar View'),
+          BreadcrumbItem(label: 'appointments'.toTr(), route: '/appointments'),
+          BreadcrumbItem(label: 'calendar_view'.toTr()),
         ],
       ),
       actions: [
         OutlinedButton.icon(
           onPressed: () => context.go('/appointments'),
           icon: const Icon(Icons.table_rows_rounded, size: 18),
-          label: const CustomText('Table List View', fontWeight: FW.bold),
+          label: CustomText('table_list_view'.toTr(), fontWeight: FW.bold),
           style: OutlinedButton.styleFrom(
             padding:
                 EdgeInsets.symmetric(horizontal: 16.toW(), vertical: 14.toH()),
@@ -63,7 +80,7 @@ class _AppointmentsCalendarPageState extends State<AppointmentsCalendarPage> {
         ElevatedButton.icon(
           onPressed: () => context.go('/appointments/create'),
           icon: const Icon(Icons.add_rounded, size: 20),
-          label: const CustomText('Book Slot',
+          label: CustomText('book_slot'.toTr(),
               fontWeight: FW.bold, color: Colors.white),
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.get.primary,
@@ -167,9 +184,9 @@ class _AppointmentsCalendarPageState extends State<AppointmentsCalendarPage> {
             ),
             child: Row(
               children: [
-                _buildViewToggleTab('month', 'Month'),
-                _buildViewToggleTab('week', 'Week'),
-                _buildViewToggleTab('day', 'Day'),
+                _buildViewToggleTab('month', 'month_label'.toTr()),
+                _buildViewToggleTab('week', 'week_label'.toTr()),
+                _buildViewToggleTab('day', 'day_label'.toTr()),
               ],
             ),
           ),
@@ -209,18 +226,18 @@ class _AppointmentsCalendarPageState extends State<AppointmentsCalendarPage> {
 
   String _getToolbarTitle() {
     final months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December'
+      'january'.toTr(),
+      'february'.toTr(),
+      'march'.toTr(),
+      'april'.toTr(),
+      'may'.toTr(),
+      'june'.toTr(),
+      'july'.toTr(),
+      'august'.toTr(),
+      'september'.toTr(),
+      'october'.toTr(),
+      'november'.toTr(),
+      'december'.toTr()
     ];
     if (_activeView == 'month') {
       return '${months[_currentDate.month - 1]} ${_currentDate.year}';
@@ -275,7 +292,7 @@ class _AppointmentsCalendarPageState extends State<AppointmentsCalendarPage> {
               children: _weekdays
                   .map((w) => Expanded(
                         child: Center(
-                          child: CustomText(w,
+                          child: CustomText(w.toLowerCase().toTr(),
                               fontSize: 13,
                               fontWeight: FW.bold,
                               color: Colors.grey.shade600),
@@ -415,7 +432,7 @@ class _AppointmentsCalendarPageState extends State<AppointmentsCalendarPage> {
                 return Expanded(
                   child: Column(
                     children: [
-                      CustomText(_weekdays[index],
+                      CustomText(_weekdays[index].toLowerCase().toTr(),
                           fontSize: 11,
                           fontWeight: FW.bold,
                           color: Colors.grey),
@@ -539,7 +556,7 @@ class _AppointmentsCalendarPageState extends State<AppointmentsCalendarPage> {
                     color: AppColors.get.primary),
                 12.ESW(),
                 CustomText(
-                    'Agenda for selected date (${dayAppointments.length} slots booked)',
+                    'agenda_slots_booked'.toTr().replaceAll('@count', dayAppointments.length.toString()),
                     fontSize: 13.5,
                     fontWeight: FW.bold),
               ],
@@ -617,7 +634,7 @@ class _AppointmentsCalendarPageState extends State<AppointmentsCalendarPage> {
                   CustomText(appt.patientName,
                       fontSize: 13, fontWeight: FW.bold),
                   4.ESH(),
-                  CustomText('Doctor: ${appt.doctorName}',
+                  CustomText('${'doctor'.toTr()}: ${appt.doctorName}',
                       fontSize: 11.5, color: AppColors.get.textSecondary),
                 ],
               ),
@@ -628,7 +645,7 @@ class _AppointmentsCalendarPageState extends State<AppointmentsCalendarPage> {
                 color: appt.statusColor.withOpacity(0.12),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: CustomText(appt.status,
+              child: CustomText(_translateStatus(appt.status),
                   fontSize: 11.5, fontWeight: FW.bold, color: appt.statusColor),
             ),
             20.ESW(),
@@ -652,7 +669,7 @@ class _AppointmentsCalendarPageState extends State<AppointmentsCalendarPage> {
           const Icon(Icons.add_circle_outline_rounded,
               color: Colors.grey, size: 16),
           8.ESW(),
-          const CustomText('No consultations booked. Click to reserve.',
+          CustomText('no_consultations_booked'.toTr(),
               fontSize: 11.5, color: Colors.grey),
         ],
       ),
@@ -680,8 +697,13 @@ class _AppointmentsCalendarPageState extends State<AppointmentsCalendarPage> {
                   CustomText(appt.patientName,
                       fontSize: 14, fontWeight: FW.bold),
                   4.ESH(),
-                  CustomText('With ${appt.doctorName} at ${appt.time}',
-                      fontSize: 11.5, color: Colors.grey),
+                  CustomText(
+                      'with_doctor_at_time'
+                          .toTr()
+                          .replaceAll('@doctor', appt.doctorName)
+                          .replaceAll('@time', appt.time),
+                      fontSize: 11.5,
+                      color: Colors.grey),
                 ],
               ),
             ),
@@ -690,21 +712,21 @@ class _AppointmentsCalendarPageState extends State<AppointmentsCalendarPage> {
         children: [
           const Divider(),
           _buildActionItem(Icons.edit_calendar_rounded,
-              'Reschedule Appointment', AppColors.get.primary, () {
+              'reschedule_appointment'.toTr(), AppColors.get.primary, () {
             Get.back();
             context.go('/appointments/edit/${appt.id}');
           }),
           _buildActionItem(Icons.check_circle_outline_rounded,
-              'Mark as Completed', Colors.green, () {
+              'mark_as_completed'.toTr(), Colors.green, () {
             Get.back();
             controller.completeAppointment(appt.id);
           }),
-          _buildActionItem(Icons.cancel_outlined, 'Cancel Slot', Colors.red,
+          _buildActionItem(Icons.cancel_outlined, 'cancel_slot'.toTr(), Colors.red,
               () {
             Get.back();
             controller.cancelAppointment(appt.id);
           }),
-          _buildActionItem(Icons.delete_outline_rounded, 'Remove Permanently',
+          _buildActionItem(Icons.delete_outline_rounded, 'remove_permanently'.toTr(),
               Colors.grey.shade700, () {
             Get.back();
             controller.deleteAppointment(appt.id);
@@ -752,7 +774,7 @@ class _AppointmentsCalendarPageState extends State<AppointmentsCalendarPage> {
             children: [
               Icon(Icons.insights_rounded, color: Colors.teal),
               10.ESW(),
-              CustomText('Specialist Insights',
+              CustomText('specialist_insights'.toTr(),
                   fontSize: 14, fontWeight: FW.bold),
             ],
           ),
@@ -760,19 +782,19 @@ class _AppointmentsCalendarPageState extends State<AppointmentsCalendarPage> {
 
           // Stats Rows
           _buildInsightStatCard(
-              'Total Scheduled',
+              'total_scheduled'.toTr(),
               '${controller.appointments.length}',
               Colors.teal.shade50,
               Colors.teal),
           12.ESH(),
           _buildInsightStatCard(
-              'Confirmed Slots',
+              'confirmed_slots'.toTr(),
               '${controller.appointments.where((element) => element.status == 'Confirmed').length}',
               Colors.blue.shade50,
               Colors.blue),
           12.ESH(),
           _buildInsightStatCard(
-              'Completed Vis.',
+              'completed_vis'.toTr(),
               '${controller.appointments.where((element) => element.status == 'Completed').length}',
               Colors.green.shade50,
               Colors.green),
@@ -782,7 +804,7 @@ class _AppointmentsCalendarPageState extends State<AppointmentsCalendarPage> {
           24.ESH(),
 
           // Doctor schedules status
-          const CustomText('Physician Availability Today',
+          CustomText('physician_availability'.toTr(),
               fontSize: 13, fontWeight: FW.bold),
           12.ESH(),
           _buildDoctorAvailabilityRow('Dr. Sarah Bennett',
@@ -847,7 +869,7 @@ class _AppointmentsCalendarPageState extends State<AppointmentsCalendarPage> {
                     BoxDecoration(color: statusColor, shape: BoxShape.circle),
               ),
               6.ESW(),
-              CustomText(status,
+              CustomText(_translateDocStatus(status),
                   fontSize: 10, fontWeight: FW.bold, color: statusColor),
             ],
           ),

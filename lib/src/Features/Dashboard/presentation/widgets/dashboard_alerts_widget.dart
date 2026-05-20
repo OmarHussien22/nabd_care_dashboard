@@ -11,26 +11,26 @@ class DashboardAlertsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DashboardSection(
-      title: "System Alerts",
+      title: "system_alerts",
       child: Column(
         children: [
           _buildAlert(
-            "Missed Appointments",
-            "3 patients missed their scheduled time today.",
+            "missed_appointments",
+            "missed_appointments_desc",
             Icons.warning_amber_rounded,
             Colors.red,
           ),
           12.ESH(),
           _buildAlert(
-            "Pending Invoices",
-            "There are 5 overdue payments requiring attention.",
+            "pending_invoices_temp", // We use pending_invoices_temp to avoid conflict with existing pending_invoices key if any, or just use pending_invoices
+            "pending_invoices_desc",
             Icons.account_balance_wallet_outlined,
             Colors.orange,
           ),
           12.ESH(),
           _buildAlert(
-            "Inventory Low",
-            "Medical supplies for Room 4 are running low.",
+            "inventory_low",
+            "inventory_low_desc",
             Icons.inventory_2_outlined,
             Colors.blue,
           ),

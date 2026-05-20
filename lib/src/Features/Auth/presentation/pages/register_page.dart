@@ -74,7 +74,7 @@ class RegisterPage extends StatelessWidget {
                       ),
                       SizedBox(height: 40.toH()),
                       CustomText(
-                        "Start Your Journey",
+                        "start_your_journey",
                         fontSize: 32,
                         fontWeight: FW.bold,
                         color: Colors.white,
@@ -83,7 +83,7 @@ class RegisterPage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 64.toW()),
                         child: CustomText(
-                          "Create your professional healthcare workspace in minutes. Join thousands of clinics scaling with CareDesk.",
+                          "register_desc",
                           fontSize: 15,
                           textAlign: TextAlign.center,
                           color: Colors.white.withOpacity(0.8),
@@ -154,14 +154,14 @@ class _RegisterForm extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             CustomText(
-              "Create Account",
+              "create_account",
               fontSize: 24,
               fontWeight: FW.bold,
               color: AppColors.get.textPrimary,
             ),
             SizedBox(height: 12.toH()),
             CustomText(
-              "Join our community and manage your clinic better.",
+              "register_sub_desc",
               fontSize: 14,
               color: AppColors.get.textSecondary,
             ),
@@ -170,8 +170,8 @@ class _RegisterForm extends StatelessWidget {
             AppFillTextFieldField(
               width: double.infinity,
               controller: logic.nameController,
-              hint: "Full Name",
-              header: "Display Name",
+              hint: "full_name".toTr(),
+              header: "display_name".toTr(),
               prefixAsset: AppIcons.user,
               keyboardType: TextInputType.name,
               validation: AppValidator.defaultValidator.validate,
@@ -199,7 +199,7 @@ class _RegisterForm extends StatelessWidget {
               height: 56.toH(),
               width: double.infinity,
               isDisabled: logic.isButtonDisabled,
-              title: "Create Account",
+              title: "create_account",
               titleSize: 16.toFS(),
               onPressed: logic.register,
               color: AppColors.get.primary,
@@ -209,10 +209,10 @@ class _RegisterForm extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomText("Already have an account?", color: AppColors.get.textSecondary, fontSize: 14),
+                CustomText("already_have_account", color: AppColors.get.textSecondary, fontSize: 14),
                 TextButton(
                   onPressed: () => NavigationService.instance.replace('/login'),
-                  child: CustomText("Sign In", fontWeight: FW.bold, color: AppColors.get.primary, fontSize: 14),
+                  child: CustomText("sign_in", fontWeight: FW.bold, color: AppColors.get.primary, fontSize: 14),
                 ),
               ],
             ),

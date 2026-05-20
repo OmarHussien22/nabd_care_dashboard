@@ -155,14 +155,14 @@ class _LoginForm extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             CustomText(
-              "Login to Dashboard",
+              "login_to_dashboard",
               fontSize: 24,
               fontWeight: FW.bold,
               color: AppColors.get.textPrimary,
             ),
             SizedBox(height: 12.toH()),
             CustomText(
-              "Welcome back! Please enter your details.",
+              "login_sub_desc",
               fontSize: 14,
               color: AppColors.get.textSecondary,
             ),
@@ -188,7 +188,7 @@ class _LoginForm extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {},
-                child: CustomText("Forgot Password?",
+                child: CustomText("forgot_password",
                     color: AppColors.get.primary,
                     fontSize: 13,
                     fontWeight: FW.semiBold),
@@ -199,7 +199,7 @@ class _LoginForm extends StatelessWidget {
               height: 56.toH(),
               width: double.infinity,
               isDisabled: logic.isButtonDisabled,
-              title: "Sign In",
+              title: "sign_in",
               titleSize: 16.toFS(),
               onPressed: logic.login,
               color: AppColors.get.primary,
@@ -208,12 +208,12 @@ class _LoginForm extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomText("New to CareDesk?",
+                CustomText("new_to_caredesk",
                     color: AppColors.get.textSecondary, fontSize: 14),
                 TextButton(
                   onPressed: () =>
                       NavigationService.instance.replace('/register'),
-                  child: CustomText("Create Account",
+                  child: CustomText("create_account",
                       fontWeight: FW.bold,
                       color: AppColors.get.primary,
                       fontSize: 14),

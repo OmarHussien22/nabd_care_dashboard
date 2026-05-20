@@ -2,6 +2,7 @@ import 'package:care_desk/src/Core/Styles/Colors/app_colors.dart';
 import 'package:care_desk/src/Core/Utils/general_utils.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/AppBars/app_bars.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/Layout/presentation/manager/main_layout_controller.dart';
+import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/siderbar/side_bar.dart';
@@ -40,7 +41,19 @@ class MainLayout extends StatelessWidget {
           backgroundColor: AppColors.get.background,
           body: Row(
             children: [
-              if (!cnt.isCollapsed) const Sidebar(),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                width: cnt.isCollapsed ? 0 : 230.toW(),
+                child: ClipRect(
+                  child: OverflowBox(
+                    minWidth: 230.toW(),
+                    maxWidth: 230.toW(),
+                    alignment: Alignment.centerLeft,
+                    child: const Sidebar(),
+                  ),
+                ),
+              ),
               Expanded(
                 child: Column(
                   children: [

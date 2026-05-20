@@ -20,24 +20,26 @@ class DashboardHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomText(
-              title,
-              fontSize: 24,
-              fontWeight: FW.bold,
-              color: AppColors.get.textPrimary,
-            ),
-            if (subtitle != null) ...[
-              8.ESH(),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               CustomText(
-                subtitle!,
-                color: AppColors.get.textSecondary,
-                fontSize: 14,
+                title,
+                fontSize: 24,
+                fontWeight: FW.bold,
+                color: AppColors.get.textPrimary,
               ),
+              if (subtitle != null) ...[
+                8.ESH(),
+                CustomText(
+                  subtitle!,
+                  color: AppColors.get.textSecondary,
+                  fontSize: 14,
+                ),
+              ],
             ],
-          ],
+          ),
         ),
         if (actions != null) Row(children: actions!),
       ],

@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:care_desk/src/Core/Utils/Extensions/screen_spaces_extension.dart';
 import 'package:care_desk/src/Core/network_structure/resources/data_state/data_state.dart';
 import 'package:flutter/material.dart';
@@ -18,18 +19,18 @@ class UsersListPage extends StatelessWidget {
     final controller = Get.put(UsersListController());
 
     return AppContentWrapper(
-      title: 'Users Management',
-      breadcrumb: const AppBreadcrumb(
+      title: 'users_management'.toTr(),
+      breadcrumb: AppBreadcrumb(
         items: [
-          BreadcrumbItem(label: 'Dashboard', route: '/dashboard'),
-          BreadcrumbItem(label: 'Users'),
+          BreadcrumbItem(label: 'dashboard'.toTr(), route: '/dashboard'),
+          BreadcrumbItem(label: 'users'.toTr()),
         ],
       ),
       actions: [
         ElevatedButton.icon(
           onPressed: () => context.go('/users/create'),
           icon: const Icon(Icons.add, size: 20),
-          label: const Text('Add New User'),
+          label: Text('add_new_user'.toTr()),
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.get.primary,
             foregroundColor: Colors.white,
@@ -58,7 +59,7 @@ class UsersListPage extends StatelessWidget {
                         size: 64.toRad(),
                         color: AppColors.get.textSecondary.withOpacity(0.5)),
                     16.ESH(),
-                    CustomText('No users found',
+                    CustomText('no_users_found'.toTr(),
                         fontSize: 16, color: AppColors.get.textSecondary),
                   ],
                 ),
@@ -73,14 +74,14 @@ class UsersListPage extends StatelessWidget {
               border: Border.all(color: AppColors.get.border.withOpacity(0.5)),
             ),
             child: CustomTable(
-              columnNames: const ['User', 'Email', 'Role', 'Status'],
+              columnNames: ['user'.toTr(), 'email'.toTr(), 'role'.toTr(), 'status'.toTr()],
               data: cnt.users
                   .map((u) => [
                         _buildUserCell(u.name, u.avatar),
                         u.email,
                         _buildRoleBadge(u.userTypeId.toString()),
                         _buildStatusBadge(
-                            u.isActive == true ? "Active" : "Inactive"),
+                            u.isActive == true ? 'active'.toTr() : 'inactive'.toTr()),
                       ])
                   .toList(),
               customRowActions: [
@@ -104,7 +105,7 @@ class UsersListPage extends StatelessWidget {
                               Icon(Icons.badge_rounded,
                                   color: AppColors.get.primary, size: 24),
                               const SizedBox(width: 12),
-                              const CustomText('User Details',
+                              CustomText('user_details'.toTr(),
                                   fontSize: 16, fontWeight: FW.bold),
                             ],
                           ),
@@ -112,17 +113,17 @@ class UsersListPage extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              CustomText('Full Name: ${user.name}',
+                              CustomText('${'full_name'.toTr()}: ${user.name}',
                                   fontSize: 13, fontWeight: FW.bold),
                               const SizedBox(height: 8),
-                              CustomText('Email Address: ${user.email}',
+                              CustomText('${'email_address'.toTr()}: ${user.email}',
                                   fontSize: 12.5),
                               const SizedBox(height: 8),
-                              CustomText('Role Level ID: ${user.userTypeId}',
+                              CustomText('${'role_level_id'.toTr()}: ${user.userTypeId}',
                                   fontSize: 12.5),
                               const SizedBox(height: 8),
                               CustomText(
-                                  'Status: ${user.isActive == true ? "Active" : "Inactive"}',
+                                  '${'status'.toTr()}: ${user.isActive == true ? 'active'.toTr() : 'inactive'.toTr()}',
                                   fontSize: 12.5,
                                   color: user.isActive == true
                                       ? Colors.green
@@ -133,12 +134,12 @@ class UsersListPage extends StatelessWidget {
                           actions: [
                             TextButton(
                                 onPressed: () => Get.back(),
-                                child: const Text('Close')),
+                                child: Text('close'.toTr())),
                           ],
                         ),
                       );
                     },
-                    tooltipMessage: 'View Details',
+                    tooltipMessage: 'view_details'.toTr(),
                   );
                 },
                 (data) {
@@ -152,7 +153,7 @@ class UsersListPage extends StatelessWidget {
                     icon: Icons.edit_outlined,
                     color: AppColors.get.primary,
                     onTap: () => context.go('/users/edit/${user.id}'),
-                    tooltipMessage: 'Edit User',
+                    tooltipMessage: 'edit_user'.toTr(),
                   );
                 },
                 (data) {
@@ -170,21 +171,21 @@ class UsersListPage extends StatelessWidget {
                         AlertDialog(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16)),
-                          title: const CustomText('Delete User',
+                          title: CustomText('delete_user'.toTr(),
                               fontSize: 16, fontWeight: FW.bold),
                           content: CustomText(
-                              'Are you sure you want to permanently delete ${user.name} from staff list?',
+                              'delete_user_confirm'.toTr().replaceAll('@name', user.name),
                               fontSize: 13),
                           actions: [
                             TextButton(
                                 onPressed: () => Get.back(result: false),
-                                child: const Text('Cancel')),
+                                child: Text('cancel'.toTr())),
                             ElevatedButton(
                               onPressed: () => Get.back(result: true),
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.red,
                                   foregroundColor: Colors.white),
-                              child: const Text('Delete'),
+                              child: Text('delete'.toTr()),
                             ),
                           ],
                         ),
@@ -192,13 +193,22 @@ class UsersListPage extends StatelessWidget {
                       if (confirmed == true) {
                         controller.users.removeAt(idx);
                         controller.update();
-                        Get.snackbar('Success',
-                            'User deleted successfully from system registries.',
-                            backgroundColor: Colors.green,
-                            colorText: Colors.white);
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: CustomText(
+                                'user_deleted_success'.toTr(),
+                                color: Colors.white,
+                                fontSize: 13,
+                              ),
+                              backgroundColor: Colors.green,
+                              behavior: SnackBarBehavior.floating,
+                            ),
+                          );
+                        }
                       }
                     },
-                    tooltipMessage: 'Delete User',
+                    tooltipMessage: 'delete_user'.toTr(),
                   );
                 },
               ],

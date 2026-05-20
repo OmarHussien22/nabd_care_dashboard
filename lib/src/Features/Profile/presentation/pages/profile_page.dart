@@ -9,6 +9,10 @@ import 'package:care_desk/src/Features/Auth/presentation/manger/auth_controller.
 import 'package:care_desk/src/Shared/Presentation/Widgets/dialogs/animate_dialogs.dart';
 import 'package:go_router/go_router.dart';
 import 'package:get/get.dart';
+import 'package:care_desk/src/Core/Services/lang_service/change_lang_service.dart';
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
+import 'package:care_desk/src/Core/Utils/utils.dart';
+import 'package:care_desk/src/Core/Styles/Themes/theme_controller.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -23,11 +27,11 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return AppContentWrapper(
-      title: 'Account Settings',
-      breadcrumb: const AppBreadcrumb(
+      title: 'account_settings'.toTr(),
+      breadcrumb: AppBreadcrumb(
         items: [
-          BreadcrumbItem(label: 'Dashboard', route: '/dashboard'),
-          BreadcrumbItem(label: 'Profile Settings'),
+          BreadcrumbItem(label: 'dashboard'.toTr(), route: '/dashboard'),
+          BreadcrumbItem(label: 'profile_settings'.toTr()),
         ],
       ),
       child: Row(
@@ -56,10 +60,10 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           _buildProfileHeader(),
           24.ESH(),
-          _buildNavItem(0, Icons.person_outline, 'Personal Information'),
-          _buildNavItem(1, Icons.lock_outline, 'Login & Security'),
-          _buildNavItem(2, Icons.notifications_none, 'Notifications'),
-          _buildNavItem(3, Icons.language_outlined, 'Display Language'),
+          _buildNavItem(0, Icons.person_outline, 'personal_information'.toTr()),
+          _buildNavItem(1, Icons.lock_outline, 'login_security'.toTr()),
+          _buildNavItem(2, Icons.dark_mode_outlined, 'appearance'.toTr()),
+          _buildNavItem(3, Icons.language_outlined, 'display_language'.toTr()),
           16.ESH(),
           Divider(color: AppColors.get.border.withOpacity(0.5)),
           8.ESH(),
@@ -160,6 +164,10 @@ class _ProfilePageState extends State<ProfilePage> {
         return _buildPersonalInfoForm();
       case 1:
         return _buildSecurityForm();
+      case 2:
+        return _buildThemeSettings();
+      case 3:
+        return _buildLanguageSettings();
       default:
         return Container(
           padding: EdgeInsets.all(40.toRad()),
@@ -184,26 +192,26 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomText('Personal Information',
+          CustomText('personal_information'.toTr(),
               fontSize: 20, fontWeight: FW.bold),
           8.ESH(),
-          CustomText('Update your profile details and public identity',
+          CustomText('personal_information_sub'.toTr(),
               color: AppColors.get.textSecondary),
           32.ESH(),
           Row(
             children: [
               Expanded(
                 child: TextFieldDefault(
-                  header: const TFFHeader(title: 'Display Name'),
-                  hint: const TFFHint(title: 'Your name'),
+                  header: TFFHeader(title: 'display_name'.toTr()),
+                  hint: TFFHint(title: 'your_name'.toTr()),
                   prefix: PrefixWithIconData(iconData: Icons.person_outline),
                 ),
               ),
               24.ESW(),
               Expanded(
                 child: TextFieldDefault(
-                  header: const TFFHeader(title: 'Phone Number'),
-                  hint: const TFFHint(title: 'e.g. +1 234 567 890'),
+                  header: TFFHeader(title: 'phone_number'.toTr()),
+                  hint: TFFHint(title: 'phone_hint'.toTr()),
                   prefix: PrefixWithIconData(iconData: Icons.phone_outlined),
                 ),
               ),
@@ -211,9 +219,9 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           24.ESH(),
           TextFieldDefault(
-            header: const TFFHeader(title: 'Professional Bio'),
-            hint: const TFFHint(
-                title: 'A short description of your role and experience'),
+            header: TFFHeader(title: 'professional_bio'.toTr()),
+            hint: TFFHint(
+                title: 'professional_bio_hint'.toTr()),
             maxLines: 4,
           ),
           40.ESH(),
@@ -231,7 +239,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       borderRadius: BorderRadius.circular(10.toRad())),
                   elevation: 0,
                 ),
-                child: const Text('Update Profile'),
+                child: Text('update_profile'.toTr()),
               ),
             ],
           ),
@@ -251,14 +259,14 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomText('Security Settings',
+          CustomText('security_settings'.toTr(),
               fontSize: 20, fontWeight: FW.bold),
           8.ESH(),
-          CustomText('Manage your password and account security',
+          CustomText('security_settings_sub'.toTr(),
               color: AppColors.get.textSecondary),
           32.ESH(),
           TextFieldDefault(
-            header: const TFFHeader(title: 'Current Password'),
+            header: TFFHeader(title: 'current_password'.toTr()),
             hint: const TFFHint(title: '••••••••'),
             secureType: SecureType.always,
             prefix: PrefixWithIconData(iconData: Icons.lock_outline),
@@ -268,7 +276,7 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               Expanded(
                 child: TextFieldDefault(
-                  header: const TFFHeader(title: 'New Password'),
+                  header: TFFHeader(title: 'new_password'.toTr()),
                   hint: const TFFHint(title: '••••••••'),
                   secureType: SecureType.always,
                   prefix: PrefixWithIconData(iconData: Icons.vpn_key_outlined),
@@ -277,7 +285,7 @@ class _ProfilePageState extends State<ProfilePage> {
               24.ESW(),
               Expanded(
                 child: TextFieldDefault(
-                  header: const TFFHeader(title: 'Confirm New Password'),
+                  header: TFFHeader(title: 'confirm_new_password'.toTr()),
                   hint: const TFFHint(title: '••••••••'),
                   secureType: SecureType.always,
                   prefix:
@@ -301,7 +309,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       borderRadius: BorderRadius.circular(10.toRad())),
                   elevation: 0,
                 ),
-                child: const Text('Change Password'),
+                child: Text('change_password'.toTr()),
               ),
             ],
           ),
@@ -325,8 +333,8 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             const Icon(Icons.logout_rounded, color: Colors.red, size: 22),
             16.ESW(),
-            const CustomText(
-              'Sign Out',
+            CustomText(
+              'sign_out'.toTr(),
               fontWeight: FW.bold,
               color: Colors.red,
               fontSize: 14,
@@ -365,14 +373,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               24.ESH(),
-              const CustomText(
-                'Sign Out',
+              CustomText(
+                'sign_out'.toTr(),
                 fontSize: 20,
                 fontWeight: FW.bold,
               ),
               12.ESH(),
               CustomText(
-                'Are you sure you want to sign out of your CareDesk account?',
+                'sign_out_confirm'.toTr(),
                 fontSize: 14,
                 color: AppColors.get.textSecondary,
                 textAlign: TextAlign.center,
@@ -393,7 +401,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       child: CustomText(
-                        'Cancel',
+                        'cancel'.toTr(),
                         fontWeight: FW.medium,
                         color: AppColors.get.textSecondary,
                       ),
@@ -423,8 +431,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           borderRadius: BorderRadius.circular(12.toRad()),
                         ),
                       ),
-                      child: const CustomText(
-                        'Sign Out',
+                      child: CustomText(
+                        'sign_out'.toTr(),
                         fontWeight: FW.bold,
                         color: Colors.white,
                       ),
@@ -434,6 +442,298 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+  Widget _buildLanguageSettings() {
+    final currentLangCode = Get.locale?.languageCode ?? Utils.cachedLocale.languageCode;
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return Container(
+      padding: EdgeInsets.all(40.toRad()),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16.toRad()),
+        border: Border.all(color: AppColors.get.border.withOpacity(0.5)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomText('display_language'.toTr(), fontSize: 20, fontWeight: FW.bold),
+          8.ESH(),
+          CustomText('select_app_language'.toTr(), color: AppColors.get.textSecondary),
+          32.ESH(),
+          screenWidth < 600
+              ? Column(
+                  children: [
+                    _buildLanguageCard(
+                      id: 2,
+                      title: 'English',
+                      subtitle: 'English (US)',
+                      flagCode: '🇺🇸',
+                      isSelected: currentLangCode == 'en',
+                    ),
+                    16.ESH(),
+                    _buildLanguageCard(
+                      id: 1,
+                      title: 'العربية',
+                      subtitle: 'Arabic (AE/AR)',
+                      flagCode: '🇸🇦',
+                      isSelected: currentLangCode == 'ar',
+                    ),
+                  ],
+                )
+              : Row(
+                  children: [
+                    Expanded(
+                      child: _buildLanguageCard(
+                        id: 2,
+                        title: 'English',
+                        subtitle: 'English (US)',
+                        flagCode: '🇺🇸',
+                        isSelected: currentLangCode == 'en',
+                      ),
+                    ),
+                    24.ESW(),
+                    Expanded(
+                      child: _buildLanguageCard(
+                        id: 1,
+                        title: 'العربية',
+                        subtitle: 'Arabic (AE/AR)',
+                        flagCode: '🇸🇦',
+                        isSelected: currentLangCode == 'ar',
+                      ),
+                    ),
+                  ],
+                ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLanguageCard({
+    required int id,
+    required String title,
+    required String subtitle,
+    required String flagCode,
+    required bool isSelected,
+  }) {
+    return InkWell(
+      onTap: () {
+        ChangeLangService.instance.changeLang(id: id, context: context);
+        setState(() {});
+        Dialogs.customToast(
+          text: 'language_changed_successfully'.toTr(),
+          context: context,
+          isSuccess: true,
+        );
+      },
+      borderRadius: BorderRadius.circular(16.toRad()),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeInOut,
+        padding: EdgeInsets.all(24.toRad()),
+        decoration: BoxDecoration(
+          color: isSelected ? AppColors.get.primary.withOpacity(0.03) : Colors.white,
+          border: Border.all(
+            color: isSelected ? AppColors.get.primary : AppColors.get.border.withOpacity(0.6),
+            width: isSelected ? 2 : 1,
+          ),
+          borderRadius: BorderRadius.circular(16.toRad()),
+          boxShadow: isSelected
+              ? [
+                  BoxShadow(
+                    color: AppColors.get.primary.withOpacity(0.08),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
+                  ),
+                ]
+              : null,
+        ),
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(12.toRad()),
+              decoration: BoxDecoration(
+                color: isSelected ? AppColors.get.primary.withOpacity(0.1) : AppColors.get.background,
+                shape: BoxShape.circle,
+              ),
+              child: Text(
+                flagCode,
+                style: TextStyle(fontSize: 32.toFS()),
+              ),
+            ),
+            16.ESH(),
+            CustomText(
+              title,
+              fontSize: 16,
+              fontWeight: FW.bold,
+              color: isSelected ? AppColors.get.primary : AppColors.get.textPrimary,
+            ),
+            8.ESH(),
+            CustomText(
+              subtitle,
+              fontSize: 12,
+              color: AppColors.get.textSecondary,
+            ),
+            if (isSelected) ...[
+              16.ESH(),
+              Icon(
+                Icons.check_circle,
+                color: AppColors.get.primary,
+                size: 20.toRad(),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildThemeSettings() {
+    final themeController = Get.find<ThemeController>();
+    final isDark = themeController.isDark;
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return Container(
+      padding: EdgeInsets.all(40.toRad()),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16.toRad()),
+        border: Border.all(color: AppColors.get.border.withOpacity(0.5)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomText('appearance'.toTr(), fontSize: 20, fontWeight: FW.bold),
+          8.ESH(),
+          CustomText('select_theme_mode'.toTr(), color: AppColors.get.textSecondary),
+          32.ESH(),
+          screenWidth < 600
+              ? Column(
+                  children: [
+                    _buildThemeCard(
+                      title: 'light_mode'.toTr(),
+                      icon: Icons.light_mode_outlined,
+                      isSelected: !isDark,
+                      onTap: () {
+                        if (isDark) {
+                          themeController.toggleTheme();
+                          setState(() {});
+                        }
+                      },
+                    ),
+                    16.ESH(),
+                    _buildThemeCard(
+                      title: 'dark_mode'.toTr(),
+                      icon: Icons.dark_mode_outlined,
+                      isSelected: isDark,
+                      onTap: () {
+                        if (!isDark) {
+                          themeController.toggleTheme();
+                          setState(() {});
+                        }
+                      },
+                    ),
+                  ],
+                )
+              : Row(
+                  children: [
+                    Expanded(
+                      child: _buildThemeCard(
+                        title: 'light_mode'.toTr(),
+                        icon: Icons.light_mode_outlined,
+                        isSelected: !isDark,
+                        onTap: () {
+                          if (isDark) {
+                            themeController.toggleTheme();
+                            setState(() {});
+                          }
+                        },
+                      ),
+                    ),
+                    24.ESW(),
+                    Expanded(
+                      child: _buildThemeCard(
+                        title: 'dark_mode'.toTr(),
+                        icon: Icons.dark_mode_outlined,
+                        isSelected: isDark,
+                        onTap: () {
+                          if (!isDark) {
+                            themeController.toggleTheme();
+                            setState(() {});
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildThemeCard({
+    required String title,
+    required IconData icon,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(16.toRad()),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeInOut,
+        padding: EdgeInsets.all(24.toRad()),
+        decoration: BoxDecoration(
+          color: isSelected ? AppColors.get.primary.withOpacity(0.03) : Colors.white,
+          border: Border.all(
+            color: isSelected ? AppColors.get.primary : AppColors.get.border.withOpacity(0.6),
+            width: isSelected ? 2 : 1,
+          ),
+          borderRadius: BorderRadius.circular(16.toRad()),
+          boxShadow: isSelected
+              ? [
+                  BoxShadow(
+                    color: AppColors.get.primary.withOpacity(0.08),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
+                  ),
+                ]
+              : null,
+        ),
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(16.toRad()),
+              decoration: BoxDecoration(
+                color: isSelected ? AppColors.get.primary.withOpacity(0.1) : AppColors.get.background,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                icon,
+                size: 32.toRad(),
+                color: isSelected ? AppColors.get.primary : AppColors.get.textSecondary,
+              ),
+            ),
+            16.ESH(),
+            CustomText(
+              title,
+              fontSize: 16,
+              fontWeight: FW.bold,
+              color: isSelected ? AppColors.get.primary : AppColors.get.textPrimary,
+            ),
+            if (isSelected) ...[
+              16.ESH(),
+              Icon(
+                Icons.check_circle,
+                color: AppColors.get.primary,
+                size: 20.toRad(),
+              ),
+            ],
+          ],
         ),
       ),
     );

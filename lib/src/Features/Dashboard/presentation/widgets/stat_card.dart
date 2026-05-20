@@ -40,9 +40,11 @@ class StatCard extends StatelessWidget {
                 child: Icon(icon, color: color, size: 24),
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 8.toW(), vertical: 4.toH()),
+                padding: EdgeInsets.symmetric(
+                    horizontal: 8.toW(), vertical: 4.toH()),
                 decoration: BoxDecoration(
-                  color: (isPositive ? Colors.green : Colors.red).withOpacity(0.1),
+                  color:
+                      (isPositive ? Colors.green : Colors.red).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(6.toRad()),
                 ),
                 child: CustomText(
@@ -57,8 +59,8 @@ class StatCard extends StatelessWidget {
           24.ESH(),
           CustomText(
             value,
-            fontSize: 28,
-            fontWeight: FW.bold,
+            fontSize: 22,
+            fontWeight: FW.semiBold,
             color: AppColors.get.textPrimary,
           ),
           4.ESH(),

@@ -16,8 +16,8 @@ class Utils {
   Utils._();
   static final StorageService<int> _box = StorageService<int>();
   static Locale get cachedLocale {
-    return LanguageData.locale(2
-        //_box.read(stgLang) ?? 1,
+    return LanguageData.locale(
+        _box.read(stgLang) ?? 2,
         );
   }
 

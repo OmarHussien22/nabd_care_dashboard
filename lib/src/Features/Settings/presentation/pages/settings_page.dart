@@ -4,6 +4,7 @@ import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/Text/cu
 import 'package:care_desk/src/Shared/Presentation/Widgets/Layout/presentation/widgets/app_content_wrapper.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/Layout/presentation/widgets/app_breadcrumb.dart';
 import 'package:flutter/material.dart';
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -40,58 +41,58 @@ class _SettingsPageState extends State<SettingsPage> {
   bool _maintenanceMode = false;
 
   // Selection states
-  String _selectedTheme = 'Light';
-  String _selectedAccentColor = 'Blue';
-  String _selectedLanguage = 'English';
+  String _selectedTheme = 'light_mode';
+  String _selectedAccentColor = 'blue';
+  String _selectedLanguage = 'english';
   String _selectedTimezone = 'Cairo (GMT+2)';
   String _selectedCurrency = 'EGP';
 
-  final List<Map<String, dynamic>> _categories = [
+  List<Map<String, dynamic>> get _categories => [
     {
-      'title': 'Profile Settings',
-      'subtitle': 'Manage your personal info & bio',
+      'title': 'profile_settings'.toTr(),
+      'subtitle': 'profile_settings_sub'.toTr(),
       'icon': Icons.person_outline_rounded,
       'color': Colors.blue,
     },
     {
-      'title': 'Account Settings',
-      'subtitle': 'Update password & active sessions',
+      'title': 'account_settings'.toTr(),
+      'subtitle': 'account_settings_sub'.toTr(),
       'icon': Icons.manage_accounts_outlined,
       'color': Colors.indigo,
     },
     {
-      'title': 'General Settings',
-      'subtitle': 'Clinic details & localizations',
+      'title': 'general_settings'.toTr(),
+      'subtitle': 'general_settings_sub'.toTr(),
       'icon': Icons.business_outlined,
       'color': Colors.teal,
     },
     {
-      'title': 'Notifications',
-      'subtitle': 'Configure system notification alerts',
+      'title': 'notifications'.toTr(),
+      'subtitle': 'notifications_sub'.toTr(),
       'icon': Icons.notifications_active_outlined,
       'color': Colors.orange,
     },
     {
-      'title': 'Security',
-      'subtitle': 'Two-factor auth & credential safety',
+      'title': 'security'.toTr(),
+      'subtitle': 'security_sub'.toTr(),
       'icon': Icons.shield_outlined,
       'color': Colors.red,
     },
     {
-      'title': 'Theme Settings',
-      'subtitle': 'Light, dark & color themes',
+      'title': 'theme_settings'.toTr(),
+      'subtitle': 'theme_settings_sub'.toTr(),
       'icon': Icons.palette_outlined,
       'color': Colors.pink,
     },
     {
-      'title': 'Language',
-      'subtitle': 'Choose interface language & region',
+      'title': 'language'.toTr(),
+      'subtitle': 'language_sub'.toTr(),
       'icon': Icons.translate_rounded,
       'color': Colors.amber,
     },
     {
-      'title': 'System Settings',
-      'subtitle': 'Advanced debug & platform config',
+      'title': 'system_settings'.toTr(),
+      'subtitle': 'system_settings_sub'.toTr(),
       'icon': Icons.settings_suggest_outlined,
       'color': Colors.purple,
     },
@@ -111,11 +112,11 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return AppContentWrapper(
-      title: 'System Settings',
-      breadcrumb: const AppBreadcrumb(
+      title: 'system_settings'.toTr(),
+      breadcrumb: AppBreadcrumb(
         items: [
-          BreadcrumbItem(label: 'Dashboard', route: '/dashboard'),
-          BreadcrumbItem(label: 'Settings'),
+          BreadcrumbItem(label: 'dashboard'.toTr(), route: '/dashboard'),
+          BreadcrumbItem(label: 'settings'.toTr()),
         ],
       ),
       child: LayoutBuilder(
@@ -312,8 +313,8 @@ class _SettingsPageState extends State<SettingsPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSectionHeader(
-          'Personal Profile',
-          'Manage how your public profile details appear in the CareDesk system.',
+          'personal_profile'.toTr(),
+          'personal_profile_sub'.toTr(),
         ),
         24.ESH(),
         Center(
@@ -346,11 +347,11 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
         ),
         28.ESH(),
-        _buildInputField('Full Name', _userNameController, Icons.person_outline),
+        _buildInputField('full_name'.toTr(), _userNameController, Icons.person_outline),
         20.ESH(),
-        _buildInputField('Email Address', _userEmailController, Icons.email_outlined, keyboardType: TextInputType.emailAddress),
+        _buildInputField('email_address'.toTr(), _userEmailController, Icons.email_outlined, keyboardType: TextInputType.emailAddress),
         20.ESH(),
-        _buildInputField('Professional Title', _userTitleController, Icons.medical_services),
+        _buildInputField('professional_title'.toTr(), _userTitleController, Icons.medical_services),
         32.ESH(),
         _buildSaveButton(),
       ],
@@ -367,23 +368,23 @@ class _SettingsPageState extends State<SettingsPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSectionHeader(
-          'Account Security',
-          'Change password or manage current authenticated sessions.',
+          'account_security'.toTr(),
+          'account_security_sub'.toTr(),
         ),
         24.ESH(),
-        _buildInputField('Current Password', currentPassword, Icons.lock_outline, isPassword: true),
+        _buildInputField('current_password'.toTr(), currentPassword, Icons.lock_outline, isPassword: true),
         20.ESH(),
-        _buildInputField('New Password', newPassword, Icons.lock_open_outlined, isPassword: true),
+        _buildInputField('new_password'.toTr(), newPassword, Icons.lock_open_outlined, isPassword: true),
         20.ESH(),
-        _buildInputField('Confirm Password', confirmPassword, Icons.lock_outline, isPassword: true),
+        _buildInputField('confirm_password'.toTr(), confirmPassword, Icons.lock_outline, isPassword: true),
         28.ESH(),
         Divider(color: AppColors.get.border),
         20.ESH(),
-        CustomText('Active Sessions', fontSize: 13, fontWeight: FW.bold),
+        CustomText('active_sessions'.toTr(), fontSize: 13, fontWeight: FW.bold),
         12.ESH(),
-        _buildSessionItem('macOS Chrome', 'Cairo, Egypt • Active now', true),
+        _buildSessionItem('macOS Chrome', 'Cairo, Egypt • ${'active_now'.toTr()}', true),
         12.ESH(),
-        _buildSessionItem('iPhone 15 Pro', 'Giza, Egypt • 2 hours ago', false),
+        _buildSessionItem('iPhone 15 Pro', 'Giza, Egypt • ${'two_hours_ago'.toTr()}', false),
         32.ESH(),
         _buildSaveButton(),
       ],
@@ -396,21 +397,21 @@ class _SettingsPageState extends State<SettingsPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSectionHeader(
-          'General Settings',
-          'Configure primary identity details and localization defaults for the clinic.',
+          'general_settings'.toTr(),
+          'general_settings_sub'.toTr(),
         ),
         24.ESH(),
-        _buildInputField('Clinic Name', _clinicNameController, Icons.business_outlined),
+        _buildInputField('clinic_name'.toTr(), _clinicNameController, Icons.business_outlined),
         20.ESH(),
-        _buildInputField('Contact Phone', _clinicPhoneController, Icons.phone_outlined),
+        _buildInputField('contact_phone'.toTr(), _clinicPhoneController, Icons.phone_outlined),
         20.ESH(),
-        _buildInputField('Address', _clinicAddressController, Icons.location_on_outlined),
+        _buildInputField('address'.toTr(), _clinicAddressController, Icons.location_on_outlined),
         20.ESH(),
         Row(
           children: [
             Expanded(
               child: _buildDropdownField(
-                'Default Timezone',
+                'default_timezone'.toTr(),
                 _selectedTimezone,
                 ['Cairo (GMT+2)', 'Riyadh (GMT+3)', 'UTC (GMT)'],
                 (v) => setState(() => _selectedTimezone = v!),
@@ -419,7 +420,7 @@ class _SettingsPageState extends State<SettingsPage> {
             20.ESW(),
             Expanded(
               child: _buildDropdownField(
-                'Currency Symbol',
+                'currency_symbol'.toTr(),
                 _selectedCurrency,
                 ['EGP', 'SAR', 'USD', 'EUR'],
                 (v) => setState(() => _selectedCurrency = v!),
@@ -439,34 +440,34 @@ class _SettingsPageState extends State<SettingsPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSectionHeader(
-          'Notification Controls',
-          'Toggle specific notification channels on or off according to preference.',
+          'notification_controls'.toTr(),
+          'notification_controls_sub'.toTr(),
         ),
         24.ESH(),
         _buildToggleItem(
-          'Push Notifications',
-          'Show desktop and mobile real-time push alerts',
+          'push_notifications'.toTr(),
+          'push_notifications_sub'.toTr(),
           _pushNotifications,
           (v) => setState(() => _pushNotifications = v),
         ),
         16.ESH(),
         _buildToggleItem(
-          'Email Alerts',
-          'Receive medical logs and daily shift digests via email',
+          'email_alerts'.toTr(),
+          'email_alerts_sub'.toTr(),
           _emailAlerts,
           (v) => setState(() => _emailAlerts = v),
         ),
         16.ESH(),
         _buildToggleItem(
-          'Appointment Reminders',
-          'Send automated reminders to patients 24 hours prior',
+          'appointment_reminders'.toTr(),
+          'appointment_reminders_sub'.toTr(),
           _appointmentReminders,
           (v) => setState(() => _appointmentReminders = v),
         ),
         16.ESH(),
         _buildToggleItem(
-          'Maintenance Updates',
-          'Get notifications on upcoming scheduled system updates',
+          'maintenance_updates'.toTr(),
+          'maintenance_updates_sub'.toTr(),
           _maintenanceUpdates,
           (v) => setState(() => _maintenanceUpdates = v),
         ),
@@ -482,27 +483,27 @@ class _SettingsPageState extends State<SettingsPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSectionHeader(
-          'Security Safeguards',
-          'Activate strict compliance controls to protect critical healthcare data.',
+          'security_safeguards'.toTr(),
+          'security_safeguards_sub'.toTr(),
         ),
         24.ESH(),
         _buildToggleItem(
-          'Two-Factor Authentication (2FA)',
-          'Requires OTP verification code during login sessions',
+          'two_factor_auth'.toTr(),
+          'two_factor_auth_sub'.toTr(),
           _twoFactorAuth,
           (v) => setState(() => _twoFactorAuth = v),
         ),
         16.ESH(),
         _buildToggleItem(
-          'Biometric Credentials',
-          'Allows fingerprint or face unlock on compatible mobile platforms',
+          'biometric_credentials'.toTr(),
+          'biometric_credentials_sub'.toTr(),
           _biometricLogin,
           (v) => setState(() => _biometricLogin = v),
         ),
         16.ESH(),
         _buildToggleItem(
-          'Auto-Lock Inactive Session',
-          'Automatically locks active session after 15 minutes of inactivity',
+          'auto_lock_session'.toTr(),
+          'auto_lock_session_sub'.toTr(),
           _autoLock,
           (v) => setState(() => _autoLock = v),
         ),
@@ -518,21 +519,21 @@ class _SettingsPageState extends State<SettingsPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSectionHeader(
-          'Theme Customization',
-          'Change the visual look of CareDesk by switching styles or accent colors.',
+          'theme_customization'.toTr(),
+          'theme_customization_sub'.toTr(),
         ),
         24.ESH(),
         _buildDropdownField(
-          'Display Mode',
+          'display_mode'.toTr(),
           _selectedTheme,
-          ['Light', 'Dark', 'System Default'],
+          ['light_mode', 'dark_mode', 'system_default'],
           (v) => setState(() => _selectedTheme = v!),
         ),
         20.ESH(),
         _buildDropdownField(
-          'Primary Accent Color',
+          'primary_accent_color'.toTr(),
           _selectedAccentColor,
-          ['Blue', 'Green', 'Purple', 'Teal', 'Orange'],
+          ['blue', 'green', 'purple', 'teal', 'orange'],
           (v) => setState(() => _selectedAccentColor = v!),
         ),
         32.ESH(),
@@ -547,14 +548,14 @@ class _SettingsPageState extends State<SettingsPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSectionHeader(
-          'System Language',
-          'Switch localized text displays across all navigation modules.',
+          'system_language'.toTr(),
+          'system_language_sub'.toTr(),
         ),
         24.ESH(),
         _buildDropdownField(
-          'Primary Language',
+          'primary_language'.toTr(),
           _selectedLanguage,
-          ['English', 'Arabic (العربية)', 'French (Français)'],
+          ['english', 'arabic', 'french'],
           (v) => setState(() => _selectedLanguage = v!),
         ),
         32.ESH(),
@@ -569,20 +570,20 @@ class _SettingsPageState extends State<SettingsPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSectionHeader(
-          'Advanced Developer Settings',
-          'Fine-tune system variables, configure server APIs or toggle maintenance states.',
+          'advanced_developer_settings'.toTr(),
+          'advanced_developer_settings_sub'.toTr(),
         ),
         24.ESH(),
         _buildToggleItem(
-          'Debug Log Mode',
-          'Output verbose warnings and execution logs to inspector consoles',
+          'debug_log_mode'.toTr(),
+          'debug_log_mode_sub'.toTr(),
           _debugMode,
           (v) => setState(() => _debugMode = v),
         ),
         16.ESH(),
         _buildToggleItem(
-          'Platform Maintenance Mode',
-          'locks system for standard receptionists, allows only administrators',
+          'platform_maintenance_mode'.toTr(),
+          'platform_maintenance_mode_sub'.toTr(),
           _maintenanceMode,
           (v) => setState(() => _maintenanceMode = v),
         ),
@@ -674,7 +675,7 @@ class _SettingsPageState extends State<SettingsPage> {
               items: items.map((String item) {
                 return DropdownMenuItem<String>(
                   value: item,
-                  child: Text(item),
+                  child: Text(item.toTr()),
                 );
               }).toList(),
             ),
@@ -749,7 +750,7 @@ class _SettingsPageState extends State<SettingsPage> {
               borderRadius: BorderRadius.circular(6),
             ),
             child: CustomText(
-              'Active',
+              'active'.toTr(),
               fontSize: 10,
               color: AppColors.get.success,
               fontWeight: FW.bold,
@@ -758,7 +759,7 @@ class _SettingsPageState extends State<SettingsPage> {
         else
           TextButton(
             onPressed: () {},
-            child: const CustomText('Revoke', fontSize: 11, color: Colors.red),
+            child: CustomText('revoke'.toTr(), fontSize: 11, color: Colors.red),
           ),
       ],
     );
@@ -771,11 +772,11 @@ class _SettingsPageState extends State<SettingsPage> {
         onPressed: () {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: const Row(
+              content: Row(
                 children: [
-                  Icon(Icons.check_circle_rounded, color: Colors.white),
-                  SizedBox(width: 12),
-                  Text('Settings saved successfully!'),
+                  const Icon(Icons.check_circle_rounded, color: Colors.white),
+                  const SizedBox(width: 12),
+                  Text('settings_saved_success'.toTr()),
                 ],
               ),
               backgroundColor: AppColors.get.success,
@@ -785,7 +786,7 @@ class _SettingsPageState extends State<SettingsPage> {
           );
         },
         icon: const Icon(Icons.check_circle_outline_rounded, size: 18),
-        label: const CustomText('Save Settings', fontWeight: FW.bold, color: Colors.white),
+        label: CustomText('save_settings'.toTr(), fontWeight: FW.bold, color: Colors.white),
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.get.primary,
           foregroundColor: Colors.white,

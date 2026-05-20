@@ -215,7 +215,7 @@ class _CustomTableState extends State<CustomTable> {
             const SizedBox(
               width: 140,
               child: CustomText(
-                'Actions',
+                'actions',
                 fontSize: 13,
                 fontWeight: FW.bold,
                 textAlign: TextAlign.center,

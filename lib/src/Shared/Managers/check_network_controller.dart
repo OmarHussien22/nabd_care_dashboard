@@ -1,43 +1,59 @@
-// import 'package:connectivity_plus/connectivity_plus.dart';
+import 'dart:async';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:get/get.dart';
 
-import '../../Super/Controllers/Resources/get/get_controller_interface.dart';
+class CheckNetworkController extends GetxController {
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<List<ConnectivityResult>> _subscription;
+  
+  final RxBool isOnline = true.obs;
+  final RxBool isChecking = false.obs;
 
-class CheckNetworkController extends GetControllerInterface {
-  // Map _source = {ConnectivityResult.none: false};
-  // final NetworkConnectionService _networkConnectivity = Helper.connectivity;
-  // String _connectionString = '';
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   _networkConnectivity.initialise();
-  //   _networkConnectivity.myStream.listen((source) {
-  //     _source = source;
-  //     printDM('source $_source');
-  //     // 1.
-  //     switch (_source.keys.toList()[0]) {
-  //       case ConnectivityResult.mobile:
-  //         _connectionString =
-  //             _source.values.toList()[0] ? 'Mobile: Online' : 'Mobile: Offline';
-  //         break;
-  //       case ConnectivityResult.wifi:
-  //         _connectionString =
-  //             _source.values.toList()[0] ? 'WiFi: Online' : 'WiFi: Offline';
-  //         break;
-  //       case ConnectivityResult.none:
-  //       default:
-  //         _connectionString = 'Offline';
-  //     }
-  //     // 2.
-  //     update();
-  //     // 3.
-  //     AppSnacks().showSnack(title: _connectionString, state: UtilState.none);
-  //   });
-  // }
-  //
-  // @override
-  // void dispose() {
-  //   _networkConnectivity.disposeStream();
-  //   // TODO: implement dispose
-  //   super.dispose();
-  // }
+  @override
+  void onInit() {
+    super.onInit();
+    _checkInitialConnection();
+    _subscription = _connectivity.onConnectivityChanged.listen((List<ConnectivityResult> results) {
+      _updateConnectionStatus(results);
+    });
+  }
+
+  Future<void> _checkInitialConnection() async {
+    try {
+      final results = await _connectivity.checkConnectivity();
+      _updateConnectionStatus(results);
+    } catch (_) {
+      isOnline.value = false;
+    }
+  }
+
+  void _updateConnectionStatus(List<ConnectivityResult> results) {
+    if (results.isEmpty || results.contains(ConnectivityResult.none)) {
+      isOnline.value = false;
+    } else {
+      isOnline.value = true;
+    }
+  }
+
+  Future<bool> forceRecheck() async {
+    isChecking.value = true;
+    update();
+    await Future.delayed(const Duration(milliseconds: 800)); // simulated check delay
+    try {
+      final results = await _connectivity.checkConnectivity();
+      _updateConnectionStatus(results);
+    } catch (_) {
+      isOnline.value = false;
+    } finally {
+      isChecking.value = false;
+      update();
+    }
+    return isOnline.value;
+  }
+
+  @override
+  void onClose() {
+    _subscription.cancel();
+    super.onClose();
+  }
 }

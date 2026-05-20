@@ -1,3 +1,4 @@
+import 'package:care_desk/src/Core/Services/lang_service/translate_extension.dart';
 import 'package:care_desk/src/Shared/Presentation/Widgets/GeneralWidgets/TextFields/Default/default_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,12 +19,12 @@ class UserFormPage extends StatelessWidget {
     final controller = Get.put(UserController());
 
     return AppContentWrapper(
-      title: isEdit ? 'Edit User' : 'Create New User',
+      title: isEdit ? 'edit_user'.toTr() : 'create_new_user'.toTr(),
       breadcrumb: AppBreadcrumb(
         items: [
-          const BreadcrumbItem(label: 'Dashboard', route: '/dashboard'),
-          const BreadcrumbItem(label: 'Users', route: '/users'),
-          BreadcrumbItem(label: isEdit ? 'Edit' : 'Create'),
+          BreadcrumbItem(label: 'dashboard'.toTr(), route: '/dashboard'),
+          BreadcrumbItem(label: 'users'.toTr(), route: '/users'),
+          BreadcrumbItem(label: isEdit ? 'edit'.toTr() : 'create'.toTr()),
         ],
       ),
       child: GetBuilder<UserController>(
@@ -36,8 +37,8 @@ class UserFormPage extends StatelessWidget {
                 child: Column(
                   children: [
                     _buildFormSection(
-                      title: 'Basic Information',
-                      subtitle: 'Personal details and contact information',
+                      title: 'basic_information'.toTr(),
+                      subtitle: 'personal_details_subtitle'.toTr(),
                       child: Column(
                         children: [
                           Row(
@@ -45,7 +46,7 @@ class UserFormPage extends StatelessWidget {
                               Expanded(
                                 child: TextFieldDefault(
                                   controller: cnt.nameController,
-                                  header: const TFFHeader(title: 'Full Name'),
+                                  header: TFFHeader(title: 'full_name'.toTr()),
                                   hint: const TFFHint(title: 'e.g. John Doe'),
                                   isRequired: true,
                                   prefix: PrefixWithIconData(iconData: Icons.person_outline),
@@ -55,7 +56,7 @@ class UserFormPage extends StatelessWidget {
                               Expanded(
                                 child: TextFieldDefault(
                                   controller: cnt.emailController,
-                                  header: const TFFHeader(title: 'Email Address'),
+                                  header: TFFHeader(title: 'email_address'.toTr()),
                                   hint: const TFFHint(title: 'e.g. john@example.com'),
                                   isRequired: true,
                                   prefix: PrefixWithIconData(iconData: Icons.email_outlined),
@@ -69,7 +70,7 @@ class UserFormPage extends StatelessWidget {
                               Expanded(
                                 child: TextFieldDefault(
                                   controller: cnt.phoneController,
-                                  header: const TFFHeader(title: 'Phone Number'),
+                                  header: TFFHeader(title: 'phone_number'.toTr()),
                                   hint: const TFFHint(title: '+1 234 567 890'),
                                   prefix: PrefixWithIconData(iconData: Icons.phone_outlined),
                                 ),
@@ -83,8 +84,8 @@ class UserFormPage extends StatelessWidget {
                     ),
                     24.ESH(),
                     _buildFormSection(
-                      title: 'Account Settings',
-                      subtitle: 'Assign roles and management permissions',
+                      title: 'account_settings'.toTr(),
+                      subtitle: 'assign_roles_subtitle'.toTr(),
                       child: Column(
                         children: [
                           Row(
@@ -114,7 +115,7 @@ class UserFormPage extends StatelessWidget {
                           style: TextButton.styleFrom(
                             padding: EdgeInsets.symmetric(horizontal: 24.toW(), vertical: 16.toH()),
                           ),
-                          child: CustomText('Discard Changes', color: AppColors.get.textSecondary),
+                          child: CustomText('discard_changes'.toTr(), color: AppColors.get.textSecondary),
                         ),
                         16.ESW(),
                         ElevatedButton(
@@ -126,7 +127,7 @@ class UserFormPage extends StatelessWidget {
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.toRad())),
                             elevation: 0,
                           ),
-                          child: Text(isEdit ? 'Save Changes' : 'Create Account'),
+                          child: Text(isEdit ? 'save_changes'.toTr() : 'create_account'.toTr()),
                         ),
                       ],
                     ),
